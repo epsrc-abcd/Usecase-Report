@@ -1,44 +1,67 @@
 \section{Introduction}
 
-The discipline of session types was emerged during the last
-two decades, as a framework for enforcing a series of
-{\em good} properties in concurrent implementations of programs.
+
+
+
+
+The session types discipline emerged during the last two decades,
+as a framework for enforcing a number of {\em good} and desirable properties
+in concurrent programs.
 Since their original inception in the
 the seminal paper by Honda et.~al.~\cite{Honda.Vasconcelos.Kubo},
-there was a broad research effort to study the properties of
+there has been a broad research effort to study the properties of
 session types and at the same time apply session types to different
 frameworks and paradigms. This subsequently lead to the development
 of tools and technologies that use session types as part of the 
 software development process.
-This research procedure was strongly motivated and driven by the
-need to demonstrate that session types principles can be used
-to capture different patterns in general concurrency.
-On the other hand, every work on its own is presented in isolation
-in the sense that it deals with specific problems, making the world
-of session types a series of partial results.
 
-In this paper we draw motivation from the need to present a comprehensive
-survey of session types, using the means of demonstration. A broad spectrum
-of technologies are currently used to research on session types and as
-a result there are many implementations of different usecases available
-to the research community.
-As part of the ABCD\footnote{From Data Types to Session Types: A Basis for Concurrency and Distribution}
-we have compiled a representative set of usecases in session type research
-and practice.
-The first point we aim at is to use session types to overview a diversity
-of usecases in different domains.
-A second aim is to use scenarios in order to demonstrate the different
-frameworks and paradigms and different technologies that use
-session types to develop software. Furthermore, we aim to show implementation
-techniques that arise when session types are applied to particular domains.
+On the one hand, research on session types is strongly motivated and
+driven by the need to demonstrate that session types principles can
+to capture arbitrary patterns in concurrency,
+i.e.~patterns that are not restricted to particular cases.
+On the other hand, research on session types%, and especially motivation and conclusion,
+is often presented in isolation with respect to other results.
+Furthermore, research on session types is strongly connected
+with a detailed theoretical study.
+Subsequently, a wider audience would need to study a series
+of partial results and at the same time filter out any
+unnecessary information in order to understand session types.
 
-Another characteristic of the current line of session type research is
-the fact that research so far is tightly coupled with formal terminology
-that is less accessible to a wider research community. We believe that
-now is the right time to lift the session types terminology to a terminology
-used in the software and system engineering discipline.
+% Huge volume of info
+% theoretical results
+% 
 
-\paragraph{Session Types as Protocols/Scribble}
+In this paper we identify the problem of accessibility of session
+types. We draw motivation by the need to demonstrate session
+types in terms that are easier to understand by a wider audience.
+The method we use is the method of demonstrating our practical
+experience in session types that is reflected by a set of
+usecase scenarios~\cite{online_repository} that we have implemented as part of 
+%In this paper we draw motivation from the need to present a comprehensive
+%survey of session types, using the means of demonstration. A broad spectrum
+%of technologies are currently used to research on session types and as
+%a result there are many implementations of different usecases available
+%to the research community. As part of
+the ABCD project~\cite{abcd_webpage}\footnote{From Data Types to Session Types: A Basis for Concurrency and Distribution}.
+
+More concretely we aim to:
+\begin{itemize}
+	\item	Demonstrate the robustness, functionality and overall applicability of session types
+			through an overview of the diversity of usecases in different domains
+			and paradigms.
+
+	\item	Use usecase scenarios to demonstrate tools and technologies that
+			use session types in the software development process.
+
+	\item	Share our experience in using session types for the
+			implementation of different usecase scenarios.
+
+	\item	Develop the ways and the session types terminology to
+			present practical results.
+\end{itemize}
+
+\paragraph{Session Types as Protocols}
+A basic 
 
 \paragraph{Contribution}
 

@@ -1,0 +1,78 @@
+\section{Preliminaries}
+
+Before we proceed with the demonstration of the main thesis
+of this paper, we identify the basic notions and set the basic
+terminology that we are going to use throughout the paper.
+
+\subsection{Session Types: Terminology and Properties}
+
+Session types are used to express communication
+{\em protocols} in terms of {\em structured communication}.
+A {\em global} communication structure is expressed 
+as a sequence of send-{\em message}/receive-{\em message}
+interactions between the {\em participants} of the protocol.
+We use the term {\em local} protocol to describe
+the communication structure at the level of a single participant.
+As session types is a type discipline with the requirement to
+be enforced on a program, we may sometimes refer to a session type
+protocol as communication {\em specification}.
+
+For example Scribble code:
+%
+\begin{lstlisting}
+  msg(int) from A to B;
+\end{lstlisting}
+%
+describes the global protocol between participants \lstinline|A| and \lstinline|B|,
+where participant \lstinline|A| sends message of type \lstinline|msg(int)|
+to participant \lstinline|B|. From the local perspective of participant
+\lstinline|A| the protocol would be:
+%
+\begin{lstlisting}
+  msg(int) to B;
+\end{lstlisting}
+%
+where it describes the sending of message \lstinline|msg(int)|
+to participant \lstinline|B|.
+
+There is a tight relation between a global protocol and the
+local protocols of its participants, that is expressed
+through an automated procedure called {\em projection}.
+Typically, a protocol is first expressed globally and then
+projected locally on the protocol participants. Participants
+correspond to the computation processes of the scenario
+that are expected to implement their corresponding local type.
+We use the term {\em session fidelity} to express the fact
+that a protocol participant implements its corresponding local type.
+
+In terms of properties, session types can ensure, it is proven
+that session types ensure
+
+send/receive {\em duality}
+{\em deadlock freedom}
+{\em type soundness} on the message being passed
+
+
+\subsection{Session Type Disciplines and Technologies}
+
+\dk{Just presentation and references}
+
+{\em Binary} session types - present it just for academic reasons
+
+{\em Multiparty session types} - overcomes limitation and subsumes binary
+
+{\em Parametric session types} - number of participants as parameter - network topologies
+
+{\em Dynamic session types} - ...
+
+{\em Eventful session types} - ...
+
+{\em Functional session types} - Gay Vasconcelos paper, linear logic interpretation
+
+{\em Typestate and session types} - ...
+
+{\em Actors} - Python, erlanf
+
+{\em Monitors}
+
+\subsection{Scribble}
