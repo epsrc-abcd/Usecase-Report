@@ -40,9 +40,22 @@ to present the Scribble syntax and the terminology for session types.
 
 Session types are used to express communication
 {\em protocols} in terms of {\em structured communication}.
+In line 1 of \figref{scribble_bs} we can see the definition 
+of global protocol \lstinline|Bookstore| that defines 
+the global interactions between roles \lstinline|Buyer1|,
+\lstinline|Buyer2| and \lstinline|Seller|.
 A {\em global} communication structure is expressed 
 as a sequence of {\em endpoint} to endpoint {\em message passing}
-interactions between the {\em roles} of the protocol.
+interactions between the {\em roles} of the protocol. Messages
+are structures that use a {\em label} to annotate the list
+of the {\em types} of the values that compose the message.
+Line 2 gives an example of the simplest endpoint-to-endpoint message
+passing interaction,
+where role \lstinline|Buyer1| {\em sends} a message with
+label \lstinline|book| and type \lstinline|title| to role
+\lstinline{Seller}.
+
+
 We use the term {\em local} protocol to describe
 the communication structure at the level of a single participant.
 As session types is a type discipline with the requirement to
