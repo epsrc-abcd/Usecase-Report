@@ -6,16 +6,42 @@ terminology that we are going to use throughout the paper.
 
 \subsection{Session Types as Protocols: The Scribble Language}
 
-Scribble~\cite{} is a protocol description language with its design
-drawn directly from the principles of session types. We use Scribble
+In this section we use Scribble~\cite{scribble} as the core
+medium to develop a terminology for presenting session types.
+The terminology we use is defined in a non mathematical terms,
+as it was the case until now. Instead we use general terms
+that are used by a wider computer science community.
+Scribble is a protocol description language with its design
+drawn directly from the principles of session types.
 
-\subsection{Session Types: Terminology and Properties}
+In \figref{scribble_bs}, we use the Scribble protocol for the
+Bookstore usecase in the online repository~\cite{usecase_repository},
+to present the Scribble syntax and the terminology for session types.
+
+
+\begin{figure}[t]
+\begin{lstlisting}
+  global protocol Bookstore(role Buyer1, role Buyer2, role Seller) {
+    book(title) from Buyer1 to Seller;
+    book(price) from Seller to Buyer1;
+    quote(contribution) from Buyer1 to Buyer2;
+    choice at Buyer2 {
+      agree() fom Buyer2 to Buyer1, Seller;
+      transfer(money) from Buyer1 to Seller;
+      transfer(money) from Buyer2 to Seller;
+    } or {
+      quit() from Buyer2 to Buyer1, Seller;
+    }
+  }
+\end{lstlisting}
+\caption{Scribble: Global protocol for the Bookstore usecase}
+\end{figure}
 
 Session types are used to express communication
 {\em protocols} in terms of {\em structured communication}.
 A {\em global} communication structure is expressed 
-as a sequence of send-{\em message}/receive-{\em message}
-interactions between the {\em participants} of the protocol.
+as a sequence of {\em endpoint} to endpoint {\em message passing}
+interactions between the {\em roles} of the protocol.
 We use the term {\em local} protocol to describe
 the communication structure at the level of a single participant.
 As session types is a type discipline with the requirement to
@@ -28,7 +54,7 @@ For example Scribble code:
   msg(int) from A to B;
 \end{lstlisting}
 %
-describes the global protocol between participants \lstinline|A| and \lstinline|B|,
+describes the global protocol between role \lstinline|A| and \lstinline|B|,
 where participant \lstinline|A| sends message of type \lstinline|msg(int)|
 to participant \lstinline|B|. From the local perspective of participant
 \lstinline|A| the protocol would be:
@@ -41,10 +67,10 @@ where it describes the sending of message \lstinline|msg(int)|
 to participant \lstinline|B|.
 
 There is a tight relation between a global protocol and the
-local protocols of its participants, that is expressed
+local protocols of its roles, that is expressed
 through an automated procedure called {\em projection}.
 Typically, a protocol is first expressed globally and then
-projected locally on the protocol participants. Participants
+projected locally on the protocol roles. Roles
 correspond to the computation processes of the scenario
 that are expected to implement their corresponding local type.
 We use the term {\em session fidelity} to express the fact
