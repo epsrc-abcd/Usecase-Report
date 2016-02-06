@@ -1,51 +1,73 @@
 \section{Introduction}
 
-
-
-
-
-The session types discipline emerged during the last two decades,
-as a framework for enforcing a number of {\em good} and desirable properties
-in concurrent programs.
-Since their original inception in the
-the seminal paper by Honda et.~al.~\cite{Honda.Vasconcelos.Kubo},
+The session types discipline emerged during the last
+two decades, as a framework for enforcing a number
+of {\em good} and desirable properties in concurrent
+programs.
+Since their original inception in the the seminal paper by
+Honda et.~al.~\cite{honda.vasconcelos.kubo:language-primitives},
 there has been a broad research effort to study the properties of
 session types and at the same time apply session types to different
 frameworks and paradigms. This subsequently lead to the development
 of tools and technologies that use session types as part of the 
 software development process.
 
-On the one hand, research on session types is strongly motivated and
-driven by the need to demonstrate that session types principles can
-to capture arbitrary patterns in concurrency,
+Research on session types is strongly motivated and driven by
+the need to demonstrate that session types principles can
+capture arbitrary patterns in concurrency,
 i.e.~patterns that are not restricted to particular cases.
-On the other hand, research on session types%, and especially motivation and conclusion,
-is often presented in isolation with respect to other results.
-Furthermore, research on session types is strongly connected
-with a detailed theoretical study.
-Subsequently, a wider audience would need to study a series
-of partial results and at the same time filter out any
-unnecessary information in order to understand session types.
+A typical work on session types, identifies a problem
+in terms of a practical usecase and proposes session types
+in a mathematical form, which enables a further
+theoretical study of session types properties. The development
+of technologies that use session types also usually rely on
+theoretical results and are demonstrated through the means
+of usecase scenarios.
 
-% Huge volume of info
-% theoretical results
-% 
+As a consequence, someone, not necessarily academic,
+interested in acquiring knowledge on the session type discipline
+will face three main challenges:
+%
+\begin{enumerate}%[$\bullet$]
+	\item	There is a huge volume of research information on
+			session types, which is associated with different
+			research domains and objectives. In other words
+			there is no uniform way of approaching session types.
+
+	\item	Results are often presented in isolation with
+			respect to other results from session types.
+			A researcher will have to perform research
+			following a series of publications and
+			technical reports.
+
+	\item	A lot of the results are tightly coupled with
+			a high level of technicality making the
+			comprehension of session types by non experts
+			more difficult.
+\end{enumerate}
+%
+Subsequently, a wider audience would need to study a series
+of partial results and at the same time filter out a huge
+amount of unnecessary details in order to understand session types
+as a whole.
+The three problems identified above, will not only present
+difficulties to a session types newcomer, it might also
+discourage his or her efforts in understanding session types.
 
 In this paper we identify the problem of accessibility of session
-types. We draw motivation by the need to demonstrate session
-types in terms that are easier to understand by a wider audience.
-The method we use is the method of demonstrating our practical
-experience in session types that is reflected by a set of
-usecase scenarios~\cite{online_repository} that we have implemented as part of 
-%In this paper we draw motivation from the need to present a comprehensive
-%survey of session types, using the means of demonstration. A broad spectrum
-%of technologies are currently used to research on session types and as
-%a result there are many implementations of different usecases available
-%to the research community. As part of
-the ABCD project~\cite{abcd_webpage}\footnote{From Data Types to Session Types: A Basis for Concurrency and Distribution}.
+types to a wider academic and industrial audience.
+We draw motivation by the need to demonstrate session
+types in a comprehensive way and in terms that are easier to
+understand by less experts in the domain of session types.
+The method we use is the method of demonstrating the practical
+experience we gained in session types that is reflected by a set of
+usecase scenarios~\cite{usecase_repository} that we have implemented as part of 
+the ABCD project~\cite{ABCD}\footnote{From Data Types to Session Types:
+A Basis for Concurrency and Distribution}.
 
 More concretely we aim to:
-\begin{itemize}
+%
+\begin{enumerate}%[$\bullet$]
 	\item	Demonstrate the robustness, functionality and overall applicability of session types
 			through an overview of the diversity of usecases in different domains
 			and paradigms.
@@ -58,7 +80,7 @@ More concretely we aim to:
 
 	\item	Develop the ways and the session types terminology to
 			present practical results.
-\end{itemize}
+\end{enumerate}
 
 \paragraph{Session Types as Protocols}
 A basic 
