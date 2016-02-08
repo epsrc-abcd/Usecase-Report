@@ -18,7 +18,6 @@ In \figref{scribble_bs}, we use the Scribble protocol for the
 Bookstore usecase in the online repository~\cite{usecase_repository},
 to present the Scribble syntax and the terminology for session types.
 
-
 \begin{figure}[t]
 \begin{lstlisting}
   global protocol Bookstore(role Buyer1, role Buyer2, role Seller) {
@@ -38,6 +37,10 @@ to present the Scribble syntax and the terminology for session types.
 \label{fig:scribble_bs}
 \end{figure}
 
+\dk{Make explicit that session types is message passing communication}
+
+\dk{use consistently term program for local implementation, term system for the concurrent implementation}
+
 Session types are used to express communication
 {\em protocols} in terms of {\em structured communication}.
 In line 1 of \figref{scribble_bs} we can see the definition 
@@ -46,15 +49,17 @@ the global interactions between roles \lstinline|Buyer1|,
 \lstinline|Buyer2| and \lstinline|Seller|.
 A {\em global} communication structure is expressed 
 as a sequence of {\em endpoint} to endpoint {\em message passing}
-interactions between the {\em roles} of the protocol. Messages
-are structures that use a {\em label} to annotate the list
-of the {\em types} of the values that compose the message.
+interactions between the {\em roles} of the protocol.
+Messages are described in terms of a {\em message type},
+where  a {\em label} is used to annotate a list
+of {\em types}.
 Line 2 gives an example of the simplest endpoint-to-endpoint message
 passing interaction,
 where role \lstinline|Buyer1| {\em sends} a message with
 label \lstinline|book| and type \lstinline|title| to role
 \lstinline{Seller}.
 
+\dk{describe the choice and the recursion construct}
 
 We use the term {\em local} protocol to describe
 the communication structure at the level of a single participant.
@@ -84,13 +89,40 @@ to participant \lstinline|B|.
 
 There is a tight relation between a global protocol and the
 local protocols of its roles, that is expressed
-through an automated procedure called {\em projection}.
+through called {\em projection}.
+Projection to a role is a procedure that can be done automatically;
+given the global protocol and a role, the projection 
+procedure returns as a local protocol only the
+interactions of the global protocol that are concerned with
+the role.
+
+The reverse procedure from projection is called {\em synthesis},
+where a set of local protocols are composed together in a global
+protocol.
+
 Typically, a protocol is first expressed globally and then
-projected locally on the protocol roles. Roles
-correspond to the computation processes of the scenario
-that are expected to implement their corresponding local type.
+projected locally on the protocol roles.
+The local specification of a role is then
+implemented by the program that implements the role
 We use the term {\em session fidelity} to express the fact
-that a protocol participant implements its corresponding local type.
+that a role implements its corresponding local protocol.
+
+If we can ensure session fidelity among all the roles of a
+global protocol that implement their corresponding local protocol,
+then a number of communication properties can be ensured
+for the communication behaviour of the whole concurrent
+system:
+\begin{itemize}
+	\item	{\em }:	For every send operation there is a matching receive operation.
+	\begin{itemize}
+		\item	{\em }: The type of the message being send matches the type of
+						the message expected to be received.
+		\item	{\em }:	Every message send will be eventually received.
+		\item	{\em }: There are no communication deadlocks.
+	\end{itemize}
+
+\end{itemize}
+
 
 In terms of properties, session types can ensure, it is proven
 that session types ensure
@@ -100,7 +132,38 @@ send/receive {\em duality}
 {\em type soundness} on the message being passed
 
 
-\subsection{Session Type Disciplines and Technologies}
+
+
+\subsection{Domain Classification of Usecases}
+
+One of the goals of this paper is to present a diversity
+of application of session types from different domains, as
+part of our aim to demonstrate the robustness, functionality
+and adaptability of session types. Here we present the particular
+communication characteristics for every domain.
+
+\dk{Layers of computation: Each domain uses technologies from the previous layers}
+
+\begin{enumerate}
+	\item	Network Application/Business Logic:
+
+	\item	Systems
+
+	\item	Network Protocols
+
+	\item	Applications
+
+	\item	Operating System
+
+	\item	Data Structures and Algorithms
+
+	\item	Hardware
+
+	\item	\dk{Security}
+\end{enumerate}
+
+
+\subsection{Usecase Classification on Technologies used}
 
 \dk{Just presentation and references}
 
@@ -114,7 +177,7 @@ send/receive {\em duality}
 
 {\em Eventful session types} - ...
 
-{\em Functional session types} - Gay Vasconcelos paper, linear logic interpretation
+{\em Functional session types} - Gay Vasconcelos paper, linear logic interpretation LINKS SILL
 
 {\em Typestate and session types} - ...
 
@@ -122,13 +185,11 @@ send/receive {\em duality}
 
 {\em Monitors}
 
-\subsection{Classification of Usecases}
+{\em Hybrid}
 
-{\em domain taxonomy}
-
-{\em technologies} used
-
+\subsection{Fine/coarse grain representation}
 {\em  fine/coarse grain} representation of a scenario
+\dk{put an example}
 
 {\em Concurrency patterns} e.g. network topology, client/server, race condition, etc. (maybe I am writing nonsense here)
 
