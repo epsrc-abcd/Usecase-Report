@@ -24,9 +24,11 @@ of technologies that use session types also usually rely on
 theoretical results and are demonstrated through the means
 of usecase scenarios.
 
-As a consequence, someone, not necessarily academic,
-interested in acquiring knowledge on the session type discipline
-will face the following challenges:
+
+As a consequence, we identify difficulties in the process
+of knowledge transfer between someone expert in session types and
+someone, not necessarily academic, interested in session types.
+The main difficulties we identify are:
 %
 \begin{enumerate}%[$\bullet$]
 	\item	There is a huge volume of research information on
@@ -52,7 +54,7 @@ Subsequently, a wider audience would need to study a series
 of partial results and at the same time filter out a huge
 amount of unnecessary details in order to understand session types
 as a whole.
-The three problems identified above, will not only present
+The problems identified above, will not only present
 difficulties to a session types newcomer, it might also
 discourage his or her efforts in understanding session types.
 
@@ -70,9 +72,11 @@ A Basis for Concurrency and Distribution} project~\cite{ABCD}.
 More concretely we aim to:
 %
 \begin{enumerate}%[$\bullet$]
-	\item	Demonstrate the robustness, functionality and overall applicability of session types
-			through an overview of the diversity of usecases in different domains
-			and paradigms.
+	\item	Demonstrate the robustness, functionality and overall applicability of
+			session types through an overview of the diversity of usecases in
+			different domains and paradigms. Session types can be interpreted
+			in many different ways depending on the domain, the computational
+			model, or even the technology contexts session types are used.
 
 	\item	Use usecase scenarios to demonstrate tools and technologies that
 			use session types in the software development process.
@@ -88,8 +92,38 @@ More concretely we aim to:
 			science disciplines.
 \end{enumerate}
 
-\paragraph{Session Types as Protocols}
-A basic 
+Session types exhibit robustness in a diverse universe of applications.
+We start from the rigorous analysis techniques that are developed theoretically,
+and ensure a number of desirable properties in concurrent programs and we go
+to the interpretation of session types into different programming paradigms
+and to the usage of session types as design techniques.
+The way session types can be presented plays an important role in their
+overall understanding by different groups of people and the information
+community in general. Below we give some basic perspective on what
+is a session type.
+
+\paragraph{Session types as protocols}
+The simplest view on what is a session type is the view of a
+structured protocol, that describes the communication between
+a system of multiple participants.
+The structure of a protocol offers an understanding of the
+communication specification of the entire system.
+In this paper all of the usecases we present are describe
+in terms of a structure protocol using Scribble~\cite{scribble}
+as the protocol language. We believe that Scribble plays a
+central role in the applicability of session types, due
+to the fact that it bridges the gap between a communication
+specification and the implementation of the specification.
+
+
+\paragraph{Session types as a software design technique}
+A session type can also be seen as a technique for designing
+software, no matter if this is a top down or a bottom up approach.
+
+
+\paragraph{Session types as an software analysis technique}
+Another approach to session types is to be used for the analysis
+of properties inside a module of software.
 
 \paragraph{Contribution}
 
