@@ -109,6 +109,12 @@ More concretely, the aim of the paper is to:
 			The terms are then used to describe the practical usecases
 			that are exhibited in this paper.
 
+	\item	Demonstrate the methods that are currently used to present,
+			analyse, and express an application in session types terms.
+			The method includes the Scribble~\cite{scribble}
+			protocol description language and tool chain and different
+			diagrammatic languages.
+
 	\item	Demonstrate the robustness, functionality, and overall applicability
 			of session types through a diverse overview of usecases in
 			different domains that exhibit different computational needs.
@@ -137,38 +143,50 @@ More concretely, the aim of the paper is to:
 			and can be used as a reference point for future work.
 \end{enumerate}
 
-Overall this paperat can be used by experts and non experts
+Overall this paper can be used by experts and non experts
 to: i) exchange knowledge on the overall discipline of session types,
 and ii) to enable future work on the application of session types.
 
 
 \subsection{Overview of the paper}
 
+The paper begins in \secref{preliminaries}
+with the definition of the basic terms and notions
+that are used throughout the paper for the exhibition of the usecase
+results.
 
-A basic notion to understand is the notion of session types
-as types that describe behaviour.
-Typically, a type is broadly understood
-as a concept that carries meta-information to describe a class of a data.
-Structures of types are used to describe data structures.
-When types are structured as input/output requirements they
-can be used to describe functionality. The combination of
-functionality and data structures give rise to the concept
-of classes of objects.
-%
-A session type extends the above approaches of
-the notion of a type to capture the specifics of communication and concurrency.
-A session type is a type structure that describes a communication
-behaviour in terms of a series of send and receive interactions between
-communicating entities.
-In simpler words a session type is a formal specification of a
-communication protocol, defined as a structure of send and receive
-operations.
+The usecases that are presented in the paper are compiled by the researchers
+working on the ABCD project and can be found in the ABCD online repository~\cite{usecase_repository}.
+In \secref{usecases} there is a summary presentation
+of the usecases in the online repository that gives an overview
+for each usecase and discusses its design and implementation specifics
+as well as the features that are being demonstrated.
 
-The above definition is used as a basis in \secref{preliminaries}
-to set the basic notions that are used for the presentation of the results
-throughout the paper. Further terminology is being introduced together with
-the introduction of Scribble~\cite{scribble} as a core tool for the definition
-of a session type.
+In \secref{presentation} there is the selection of two
+usecases from the online repository in order to demonstrate
+some of the basic notions of the application of session types.
+The first example is an example of an online book-store,
+where two buyers want to share the expenses to buy a book.
+The online book-store is consider in the bibliography as the
+standard example for the presentation session types.
+It first demonstrates the basic send receive operations
+between multiple entities in a concurrent protocol. A second
+feature is the fact that it demonstrate in a comprehensive
+way the interaction logic between the entities.
+The implementation of the book-store usecase using different
+technologies gives a further insight to the applicability of
+session types.
+The second usecase presented in full is the design and implementation
+of the Simple Mail Transfer Protocol~\cite{citation_needed} (SMTP),
+as a way to demonstrate how session types cope with real network
+protocols. SMTP is a protocol based on states. The increased complexity
+of states makes the design and implementation of the SMTP a demanding
+procedure. The paper claims that the use of session types can reduce
+the demands of the implementation of SMTP.
+
+\secref{engineering} makes a summary of the software engineering
+practices that are identified... \dk{put more}
+
 
 
 \begin{comment}
