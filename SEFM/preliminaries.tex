@@ -1,15 +1,14 @@
 \section{Preliminaries}
 \label{sec:preliminaries}
 
-Before we proceed with the demonstration of the main thesis
-of this paper, we identify the basic notions and set the basic
-terminology that we are going to use throughout the paper.
+In this section the basic notions and terms that are used throughout
+the paper, are defined and discussed.
 
 \subsection{Session Types: Notions and Terminology}
 
 Session types can be seen as types that describe behaviour.
 Typically, a type is broadly understood
-as a concept that carries meta-information to describe a class of a data.
+as a meta-information concept, which is used describe a class of a data.
 Structures of types are used to describe data structures.
 When types are structured as input/output requirements they
 can be used to describe functionality. The combination of
@@ -18,33 +17,83 @@ of classes of objects.
 %
 A session type extends the above approaches of
 the notion of a type to capture the specifics of communication and concurrency.
-A session type is a type structure that describes a communication
-behaviour in terms of a series of send and receive interactions between
-communicating entities.
-In simpler words a session type is a formal specification of a
-communication protocol, defined as a structure of send and receive
-operations.
+% definition of session types
+{\em A session type is a type structure that describes a communication
+behaviour in terms of a series of send and receive message passing
+interactions between a set of concurrent entities.}
+%
 
-%The above definition is used as a basis in \secref{preliminaries}
-%to set the basic notions that are used for the presentation of the results
-%throughout the paper. Further terminology is being introduced together with
-%the introduction of Scribble~\cite{scribble} as a core tool for the definition
-%of a session type.
+On a more practical perspective a session type may be seen as a
+{\em specification} of a communication {\em protocol} among concurrent {\em roles},
+that is described in a formal syntax.
+The syntax for session types is defined on {\em send} and {\em receive}, and {\em select} and {\em branch}
+operators.
+Sending and receiving data gives rise to the notion of {\em message passing}.
+Messages passed are described via their types.
+The case where a data with a session typed is passed as a message
+is called {\em session delegation}.
+Select and branch define a single interaction called {\em choice}.
+Choice requires for a role to use a value called {\em label}
+to select a communication behaviour out of a set of behaviours, called {\em branch},
+offered by another role.
 
+Session types assume a {\em global} protocol that describes the
+communication interaction of all the roles inside a system.
+Session types also assume a {\em local} protocol that describes the
+communication interaction of a single role with all other roles within the system.
 
-\subsection{Session Types as Protocols: The Scribble Language}
+The relation between a global protocol and the
+local protocols of its roles, is expressed
+through a procedure called {\em projection}.
+Projection to a role
+%is a procedure that can be done
+automatically;
+given the global protocol and a role, the projection 
+procedure returns as a local protocol only the
+interactions of the global protocol that are concerned with
+the role.
 
-In this section we use Scribble~\cite{scribble} as the core
-medium to develop a terminology for presenting session types.
-The terminology we use is defined in a non mathematical terms,
-as it was the case until now. Instead we use general terms
-that are used by a wider computer science community.
-Scribble is a protocol description language with its design
-drawn directly from the principles of session types.
+The reverse procedure from projection is called {\em synthesis},
+where a set of local protocols are composed together in a global
+protocol.
+
+Typically, a protocol is first expressed globally and then
+projected locally on the protocol roles.
+The local specification of a role is then
+implemented by the program that implements the role
+We use the term {\em session fidelity} to express
+the conformance of the implementation of a role to the role's
+local protocol.
+
+If all the roles inside a concurrent system ensure session
+fidelity,
+then a number of communication properties can be guaranteed
+for the communication behaviour of the system:
+\begin{enumerate}[label=$\bullet$]
+	\item	At any given time of the execution:
+	\begin{itemize}
+		\item	{\em Communication operator matching}: Every send (resp., select) operation has a corresponding receive (resp., branch) operation.
+		\item	{\em Message type matching}: The type of every received message matches the type of the message expected to be receive.
+		\item	{\em Deadlock-freedom}: Every sent messages will be eventually received.
+	\end{itemize}
+\end{enumerate}
+
+\subsection{Session Types as Protocols: The Scribble Tool-chain}
+
+This section presents the Scribble~\cite{scribble} tool-chain
+as the core tool for the application of session types. This section
+also uses Scribble to clarify the terminology developed in the
+previous section.
+
+The basic module of the Scribble tool-chain is the Scribble
+protocol description language, which is a syntax that
+expresses session type specifications.
+The design of the Scribble language draws directly from
+the principles of session types.
 
 In \figref{scribble_bs}, we use the Scribble protocol for the
 Bookstore usecase in the online repository~\cite{usecase_repository},
-to present the Scribble syntax and the terminology for session types.
+to present the Scribble syntax.
 
 \begin{figure}[t]
 \begin{lstlisting}
@@ -65,35 +114,47 @@ to present the Scribble syntax and the terminology for session types.
 \label{fig:scribble_bs}
 \end{figure}
 
-\dk{Make explicit that session types is message passing communication}
-
 \dk{use consistently term program for local implementation, term system for the concurrent implementation}
 
-Session types are used to express communication
-{\em protocols} in terms of {\em structured communication}.
-In line 1 of \figref{scribble_bs} we can see the definition 
-of global protocol \lstinline|Bookstore| that defines 
-the global interactions between roles \lstinline|Buyer1|,
-\lstinline|Buyer2| and \lstinline|Seller|.
-A {\em global} communication structure is expressed 
-as a sequence of {\em endpoint} to endpoint {\em message passing}
-interactions between the {\em roles} of the protocol.
-Messages are described in terms of a {\em message type},
-where  a {\em label} is used to annotate a list
-of {\em types}.
-Line 2 gives an example of the simplest endpoint-to-endpoint message
-passing interaction,
-where role \lstinline|Buyer1| {\em sends} a message with
+Line 1 of \figref{scribble_bs} defines the 
+of global protocol \lstinline|Bookstore| between
+roles \lstinline|Buyer1|, \lstinline|Buyer2| and \lstinline|Seller|.
+%The communication structure is expressed 
+%as a sequence of {\em endpoint} to endpoint message passing
+%interactions between the roles of the protocol.
+%Messages are described in terms of a message type,
+%where  a label is used to annotate a list
+%of types.
+Line 2 gives an example of the simplest endpoint-to-endpoint
+message passing interaction,
+where role \lstinline|Buyer1| is expected to sends a message with
 label \lstinline|book| and type \lstinline|title| to role
 \lstinline{Seller}.
+In general messages are described as a type structure
+consisted of a label and a list of message types.
 
 \dk{describe the choice and the recursion construct}
 
-We use the term {\em local} protocol to describe
-the communication structure at the level of a single participant.
-As session types is a type discipline with the requirement to
-be enforced on a program, we may sometimes refer to a session type
-protocol as communication {\em specification}.
+
+\begin{figure}[t]
+\begin{lstlisting}
+local protocol Bookstore at Buyer1(role Buyer1, role Buyer2, role Seller) {
+  book(title) to Seller;
+  book(price) from Seller;
+  quote(contribution) to Buyer2;
+  choice at Buyer2 { agree() fom Buyer2; transfer(money) to Seller; }
+  or               { quit() from Buyer2; }
+}
+\end{lstlisting}
+	\caption{Local Protocol for Role Buyer1}
+\end{figure}
+
+
+%We use the term {\em local} protocol to describe
+%the communication structure at the level of a single participant.
+%As session types is a type discipline with the requirement to
+%be enforced on a program, we may sometimes refer to a session type
+%protocol as communication {\em specification}.
 
 \begin{comment}
 For example Scribble code:
@@ -114,51 +175,6 @@ to participant \lstinline|B|. From the local perspective of participant
 where it describes the sending of message \lstinline|msg(int)|
 to participant \lstinline|B|.
 \end{comment}
-
-There is a tight relation between a global protocol and the
-local protocols of its roles, that is expressed
-through called {\em projection}.
-Projection to a role is a procedure that can be done automatically;
-given the global protocol and a role, the projection 
-procedure returns as a local protocol only the
-interactions of the global protocol that are concerned with
-the role.
-
-The reverse procedure from projection is called {\em synthesis},
-where a set of local protocols are composed together in a global
-protocol.
-
-Typically, a protocol is first expressed globally and then
-projected locally on the protocol roles.
-The local specification of a role is then
-implemented by the program that implements the role
-We use the term {\em session fidelity} to express the fact
-that a role implements its corresponding local protocol.
-
-If we can ensure session fidelity among all the roles of a
-global protocol that implement their corresponding local protocol,
-then a number of communication properties can be ensured
-for the communication behaviour of the whole concurrent
-system:
-\begin{itemize}
-	\item	{\em }:	For every send operation there is a matching receive operation.
-	\begin{itemize}
-		\item	{\em }: The type of the message being send matches the type of
-						the message expected to be received.
-		\item	{\em }:	Every message send will be eventually received.
-		\item	{\em }: There are no communication deadlocks.
-	\end{itemize}
-
-\end{itemize}
-
-
-In terms of properties, session types can ensure, it is proven
-that session types ensure
-
-send/receive {\em duality}
-{\em deadlock freedom}
-{\em type soundness} on the message being passed
-
 
 
 
@@ -192,32 +208,35 @@ communication characteristics for every domain.
 
 
 \subsection{Usecase Classification on Technologies used}
-
 \dk{Just presentation and references}
 
-{\em Binary} session types - present it just for academic reasons
 
-{\em Multiparty session types} - overcomes limitation and subsumes binary
+\begin{enumerate}
+	\item	Session Java - standard binary session types library with compiler support
+	\item	Eventful Session Java - event driven parafigm
+	\item	Multiparty Session C: a multiparty session type library for MPI  with compiler support
+	\item	Monitoring: Session fidelity at runtime. Implemented as a python library - no need for support
+	\item	The actors paradigm
+			\begin{itemize}
+				\item	Implemented in python using the monitor module
+				\item	Erlang
+			\end{itemize}
+	\item	Pabble - MPI: parametric Scribble used to express parametric algorithms and topologies.
+	\item	Mungo and StMungo:	based on the OO paradigm a tool that integrates session types and the 
+								typestate theory in Java. StMungo transforms Scribble into Mungo
+								specifications.
+	\item	GV:			A functional programming implementation of binary session types.
+	\item	LINKS:		Functional programming based on the linear logic interpretation of session types.
+	\item	SILL:		Functional programming based on the linear dual intuitionistic interpretation of session types.
 
-{\em Parametric session types} - number of participants as parameter - network topologies
+	\item	A state pattern implementation as a library. Uses Scribble to automatically
+			create an API for state pattern programming and uses runtime checks to
+			cope with linearity requirements.
 
-{\em Dynamic session types} - ...
-
-{\em Eventful session types} - ...
-
-{\em Functional session types} - Gay Vasconcelos paper, linear logic interpretation LINKS SILL
-
-{\em Typestate and session types} - ...
-
-{\em Actors} - Python, erlanf
-
-{\em Monitors}
-
-{\em Hybrid}
+\end{enumerate}
 
 \subsection{Fine/coarse grain representation}
-{\em  fine/coarse grain} representation of a scenario
-\dk{put an example}
+\dk{this should go as future work}
 
 {\em Concurrency patterns} e.g. network topology, client/server, race condition, etc. (maybe I am writing nonsense here)
 
