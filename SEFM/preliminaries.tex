@@ -6,50 +6,52 @@ the paper, are defined and discussed.
 
 \subsection{Session Types: Notions and Terminology}
 
-Session types can be seen as types that describe behaviour.
+%Session types can be seen as types that describe behaviour.
 Typically, a type is broadly understood
-as a meta-information concept, which is used describe a class of a data.
+as a meta-information concept, used describe a class of a data.
 Structures of types are used to describe data structures.
 When types are structured as input/output requirements they
-can be used to describe functionality. The combination of
-functionality and data structures give rise to the concept
-of classes of objects.
+are used to describe functionality.
+The combination of functionality and data structures give rise
+to the concepts of classes and interfaces.% of objects.
 %
-A session type extends the above approaches of
-the notion of a type to capture the specifics of communication and concurrency.
+A session type extends %the above approaches of
+the notion of a type to capture the communication behaviour in concurrent systems.
 % definition of session types
 {\em A session type is a type structure that describes a communication
-behaviour in terms of a series of send and receive message passing
+behaviour in terms of a series of send and receive %message passing
 interactions between a set of concurrent entities.}
-%
 
-On a more practical perspective a session type may be seen as a
-{\em specification} of a communication {\em protocol} among concurrent {\em roles},
-that is described in a formal syntax.
-The syntax for session types is defined on {\em send} and {\em receive}, and {\em select} and {\em branch}
-operators.
+A session type may also be seen as a
+formal {\em specification} of a communication {\em protocol} among concurrent {\em roles}.
+The syntax for session types is defined on {\em send} and {\em receive},
+and {\em select} and {\em branch} operators.
 Sending and receiving data gives rise to the notion of {\em message passing}.
-Messages passed are described via their types.
-The case where a data with a session typed is passed as a message
-is called {\em session delegation}.
-Select and branch define a single interaction called {\em choice}.
+In a session type messages are described via their types.
+The case where a session typed value is passed as a message is called {\em session delegation}.
+The interaction of select and branch defines the {\em choice} interaction.
 Choice requires for a role to use a value called {\em label}
 to select a communication behaviour out of a set of behaviours, called {\em branch},
 offered by another role.
 
 Session types assume a {\em global} protocol that describes the
-communication interaction of all the roles inside a system.
-Session types also assume a {\em local} protocol that describes the
-communication interaction of a single role with all other roles within the system.
+communication interaction of all the roles inside a concurrent system.
+The perspective of a global protocol through a single role
+is called {\em local} protocol. The local protocol describes
+the communication interaction of a single role with all other roles
+in the system.
+%Session types also assume a {\em local} protocol that describes the
+%communication interaction of a single role with all other roles within the system.
 
 The relation between a global protocol and the
 local protocols of its roles, is expressed
-through a procedure called {\em projection}.
-Projection to a role
+through the {\em projection} procedure;
+% called {\em projection}.
+%Projection to a role
 %is a procedure that can be done
-automatically;
-given the global protocol and a role, the projection 
-procedure returns as a local protocol only the
+%can be done automatically;
+given the global protocol and a role, projection 
+returns as a local protocol only the
 interactions of the global protocol that are concerned with
 the role.
 
@@ -57,66 +59,57 @@ The reverse procedure from projection is called {\em synthesis},
 where a set of local protocols are composed together in a global
 protocol.
 
+Below the term system is used to describe the whole concurrent
+system and the term \dk{program} is used for communication module
+inside the system.
+
 Typically, a protocol is first expressed globally and then
 projected locally on the protocol roles.
-The local specification of a role is then
-implemented by the program that implements the role
-We use the term {\em session fidelity} to express
-the conformance of the implementation of a role to the role's
-local protocol.
+Local specifications are then implemented by the corresponding
+\dk{programs}.
+The term {\em session fidelity} is used to express
+the conformance of a \dk{program}, to the local protocol of the
+corresponding role. Session fidelity can be checked mechanically,
+through techniques like type-checking and monitoring.
 
-If all the roles inside a concurrent system ensure session
-fidelity,
+If all the roles of a protocol are implemented by a
+system and session fidelity is ensured,
 then a number of communication properties can be guaranteed
 for the communication behaviour of the system:
+%
 \begin{enumerate}[label=$\bullet$]
-	\item	At any given time of the execution:
+	\item	Every execution state of the system has {\em safe} communication behaviour:
+	%	
 	\begin{itemize}
 		\item	{\em Communication operator matching}: Every send (resp., select) operation has a corresponding receive (resp., branch) operation.
-		\item	{\em Message type matching}: The type of every received message matches the type of the message expected to be receive.
-		\item	{\em Deadlock-freedom}: Every sent messages will be eventually received.
+		\item	{\em Message type matching}: The type of every message being send matches the type of the message expected to be receive.
+		\item	{\em Deadlock-freedom}: Consequently, every message send will be eventually received.
 	\end{itemize}
+	
+	\item	Every state of the protocol will {\em progress} to a safe state.
 \end{enumerate}
 
 \subsection{Session Types as Protocols: The Scribble Tool-chain}
 
 This section presents the Scribble~\cite{scribble} tool-chain
-as the core tool for the application of session types. This section
-also uses Scribble to clarify the terminology developed in the
-previous section.
+as the core tool for the application of session types.
+This section also uses Scribble to clarify the terminology
+developed in the previous section.
 
-The basic module of the Scribble tool-chain is the Scribble
-protocol description language, which is a syntax that
-expresses session type specifications.
+The basic module of the Scribble tool-chain is the
+Scribble protocol description language,
+which is a syntax that expresses session type specifications.
 The design of the Scribble language draws directly from
 the principles of session types.
 
-In \figref{scribble_bs}, we use the Scribble protocol for the
+
+
+\input{figures/fig-scribble_global_bookstore}
+
+In \figref{scribble_bs}, uses the Scribble protocol for the
 Bookstore usecase in the online repository~\cite{usecase_repository},
 to present the Scribble syntax.
-
-\begin{figure}[t]
-\begin{lstlisting}
-  global protocol Bookstore(role Buyer1, role Buyer2, role Seller) {
-    book(title) from Buyer1 to Seller;
-    book(price) from Seller to Buyer1;
-    quote(contribution) from Buyer1 to Buyer2;
-    choice at Buyer2 {
-      agree() fom Buyer2 to Buyer1, Seller;
-      transfer(money) from Buyer1 to Seller;
-      transfer(money) from Buyer2 to Seller;
-    } or {
-      quit() from Buyer2 to Buyer1, Seller;
-    }
-  }
-\end{lstlisting}
-\caption{Scribble: Global protocol for the Bookstore usecase}
-\label{fig:scribble_bs}
-\end{figure}
-
-\dk{use consistently term program for local implementation, term system for the concurrent implementation}
-
-Line 1 of \figref{scribble_bs} defines the 
+Line 1 defines the 
 of global protocol \lstinline|Bookstore| between
 roles \lstinline|Buyer1|, \lstinline|Buyer2| and \lstinline|Seller|.
 %The communication structure is expressed 
@@ -127,27 +120,26 @@ roles \lstinline|Buyer1|, \lstinline|Buyer2| and \lstinline|Seller|.
 %of types.
 Line 2 gives an example of the simplest endpoint-to-endpoint
 message passing interaction,
-where role \lstinline|Buyer1| is expected to sends a message with
-label \lstinline|book| and type \lstinline|title| to role
-\lstinline{Seller}.
-In general messages are described as a type structure
+where a message with
+label \lstinline|book| and type \lstinline|title| (notation \lstinline|book(title)|)
+is send from (keyword \lstinline|from|) role \lstinline|Buyer1| to (keyword \lstinline|to|)
+role \lstinline{Seller}.
+In Scribble messages are described as a type structure
 consisted of a label and a list of message types.
 
-\dk{describe the choice and the recursion construct}
+
+Line 5 of the protocol clarifies the choice interaction, where
+role \lstinline|Buyer2| selects a choice from two possible outcomes,
+expressed with the labels \lstinline|agree| or \lstinline|quit|. In 
+both cases roles \lstinline|Buyer1| and \lstinline|Seller| offer
+alternative branches.
 
 
-\begin{figure}[t]
-\begin{lstlisting}
-local protocol Bookstore at Buyer1(role Buyer1, role Buyer2, role Seller) {
-  book(title) to Seller;
-  book(price) from Seller;
-  quote(contribution) to Buyer2;
-  choice at Buyer2 { agree() fom Buyer2; transfer(money) to Seller; }
-  or               { quit() from Buyer2; }
-}
-\end{lstlisting}
-	\caption{Local Protocol for Role Buyer1}
-\end{figure}
+
+\dk{describe the recursion construct}
+
+
+\input{figures/fig-scribble_local_bookstore}
 
 
 %We use the term {\em local} protocol to describe
