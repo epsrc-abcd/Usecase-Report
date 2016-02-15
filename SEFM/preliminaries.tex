@@ -102,8 +102,6 @@ which is a syntax that expresses session type specifications.
 The design of the Scribble language draws directly from
 the principles of session types.
 
-
-
 \input{figures/fig-scribble_global_bookstore}
 
 In \figref{scribble_bs}, uses the Scribble protocol for the
@@ -172,30 +170,63 @@ to participant \lstinline|B|.
 
 \subsection{Domain Classification of Usecases}
 
-One of the goals of this paper is to present a diversity
-of application of session types from different domains, as
-part of our aim to demonstrate the robustness, functionality
-and adaptability of session types. Here we present the particular
-communication characteristics for every domain.
-
-\dk{Layers of computation: Each domain uses technologies from the previous layers}
+The paper presents a diversity of usecase scenarios of
+session types from different application domains, in order
+to demonstrate the fact that session types can capture
+a broad area of communication specifications.
+A taxonomy of domains are presented below with the main
+characteristic that each domain is using technologies from the
+previous domains in the taxonomy. This taxonomy also implies
+a stratification of the application of session types in different
+computation layers.
+%One of the goals of this paper is to present a diversity
+%of application of session types from different domains, as
+%part of our aim to demonstrate the robustness, functionality
+%and adaptability of session types. Here we present the particular
+%communication characteristics for every domain.
 
 \begin{enumerate}
-	\item	Network Application/Business Logic:
+	\item	{\em Network Application/Business Logic}.
+			Session types can be used to develop protocols for applications
+			that run inside a network.
+			A protocol given in a session type structure, apart from the
+			specification of the communication of the application, will
+			reveal a kind of business logic for the application.
 
-	\item	Systems
+	\item	{\em Network Protocols}.
+			Session types can be used to describe standard and non-standard network protocols.
+			Typically a standard network protocol should conform to
+			an informal RFC (request for comments specification. Session types
+			can present a network protocol formally its manipulation easier
+			by both engineers and machines.
+			Non-standard network protocols can also be developed.
 
-	\item	Network Protocols
 
-	\item	Applications
+	\item	{\em Systems/Applications}.
+			A session type may be used to describe the communication
+			specifics of an application that uses multiple resources
+			inside a computing machine.
 
-	\item	Operating System
+	\item	{\em Operating System}.
+			Another domain where session types can be applied to
+			is the description of the communication specifics
+			of operating system algorithms and routines, that
+			co-ordinate the usage of hardware resources.
 
-	\item	Data Structures and Algorithms
+	\item	{\em Data Structures and Algorithms}.
+			The above layers are using data structures and algorithms.
+			Session types can express the communication
+			concurrent algorithms are using. Furthermore, session types
+			can express the interaction with data structures.
 
-	\item	Hardware
+	\item	{\em Hardware}.
+			Hardware mechanisms complete the stratification of domains.
+			The communication of hardware modules may also be expressed
+			using session types.
 
-	\item	\dk{Security}
+	\item	\dk{\em Security}.
+			Session types can also find applications in the security domain,
+			which is a domain that supports all other domains in the above list.
 \end{enumerate}
 
 
