@@ -233,12 +233,28 @@ computation layers.
 \subsection{Usecase Classification on Technologies used}
 \dk{Just presentation and references}
 
-
+The technologies used to implement the demonstrated usecases are presented
+below:
+%
 \begin{enumerate}
-	\item	Session Java - standard binary session types library with compiler support
-	\item	Eventful Session Java - event driven parafigm
-	\item	Multiparty Session C: a multiparty session type library for MPI  with compiler support
-	\item	Monitoring: Session fidelity at runtime. Implemented as a python library - no need for support
+	\item	Session Java~\cite{HU07TYPE-SAFE} is the first tool
+			developed as a tool with a library that support binary session
+			types. The tool requires compiler support to perform session
+			type-check.
+
+	\item	The Eventful Session Java~\cite{event} is an extension
+			of session types to support asynchronous, event-driven programming.
+
+	\item	Multiparty Session C~\cite{NYH12}
+			is the first tool that implemented a
+			multiparty session type library for MPI.
+			The tool requires compiler support to perform session
+			type-check.
+
+
+	\item	Session fidelity can also be ensured using runtime monitoring.
+			Modules for monitoring were implemented in python and are presented in~\cite{DBLP:conf/rv/NeykovaYH13}.
+
 	\item	The actors paradigm
 			\begin{itemize}
 				\item	Implemented in python using the monitor module
