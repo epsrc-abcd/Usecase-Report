@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: main.aux
+The style file: plain.bst
+Database file #1: session.bib
+Warning--I didn't find a database entry for "citation_needed"
+Warning--to sort, need author or key in ABCD
+Warning--to sort, need author or key in usecase_repository
+You've used 4 entries,
+            2118 wiz_defined-function locations,
+            719 strings with 7114 characters,
+and the built_in function-call counts, 979 in all, are:
+= -- 95
+> -- 21
+< -- 2
++ -- 10
+- -- 6
+* -- 52
+:= -- 128
+add.period$ -- 10
+call.type$ -- 4
+change.case$ -- 16
+chr.to.int$ -- 0
+cite$ -- 6
+duplicate$ -- 43
+empty$ -- 110
+format.name$ -- 6
+if$ -- 231
+int.to.chr$ -- 0
+int.to.str$ -- 4
+missing$ -- 1
+newline$ -- 20
+num.names$ -- 2
+pop$ -- 33
+preamble$ -- 1
+purify$ -- 12
+quote$ -- 0
+skip$ -- 39
+stack$ -- 0
+substring$ -- 47
+swap$ -- 14
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 16
+warning$ -- 2
+while$ -- 5
+width$ -- 5
+write$ -- 36
+(There were 3 warnings)

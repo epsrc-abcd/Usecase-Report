@@ -1,0 +1,23 @@
+\begin{thebibliography}{1}
+
+\bibitem{usecase_repository}
+{ABCD}: {S}ession {T}ypes {U}secase {R}epository.
+\newblock \url{https://github.com/epsrc-abcd/session-types-use-cases}.
+
+\bibitem{ABCD}
+{F}rom {D}ata {T}ypes to {S}ession {T}ypes: {A} {B}asis for {C}oncurrency and
+  {Distribution}.
+\newblock \url{http://groups.inf.ed.ac.uk/abcd/}.
+
+\bibitem{honda.vasconcelos.kubo:language-primitives}
+Kohei Honda, Vasco~T. Vasconcelos, and Makoto Kubo.
+\newblock Language primitives and type disciplines for structured
+  communication-based programming.
+\newblock In {\em ESOP'98}, volume 1381 of {\em LNCS}, pages 22--138. Springer,
+  1998.
+
+\bibitem{scribble}
+{{S}cribble {P}roject homepage}.
+\newblock \url{www.scribble.org}.
+
+\end{thebibliography}
