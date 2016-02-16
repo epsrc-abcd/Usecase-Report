@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.20)  16 FEB 2016 15:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.20)  16 FEB 2016 17:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -279,20 +279,20 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
 
-LaTeX Warning: Reference `sec:usecases' on page 3 undefined on input line 170.
+LaTeX Warning: Reference `sec:usecases' on page 3 undefined on input line 182.
 
 
 LaTeX Warning: Reference `sec:presentation' on page 3 undefined on input line 1
-75.
+87.
 
 
-LaTeX Warning: Citation `citation_needed' on page 3 undefined on input line 190
+LaTeX Warning: Citation `citation_needed' on page 3 undefined on input line 202
 .
 
 [3]
 
-LaTeX Warning: Reference `sec:engineering' on page 4 undefined on input line 19
-7.
+LaTeX Warning: Reference `sec:engineering' on page 4 undefined on input line 20
+9.
 
 Excluding 'comment' comment. Excluding 'comment' comment.) (./preliminaries.tex
 [4] (./figures/fig-scribble_global_bookstore.tex) [5]
@@ -307,7 +307,7 @@ Overfull \hbox (4.78426pt too wide) in paragraph at lines 7--8
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-) Excluding 'comment' comment. [6] [7]) (./usecases.tex (./usecase_table.tex
+) Excluding 'comment' comment. [6]) (./usecases.tex [7] (./usecase_table.tex
 Underfull \hbox (badness 10000) in paragraph at lines 11--11
 []|\OT1/cmr/m/n/9 Mungo, Ses-sion
  []
@@ -394,10 +394,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 3733 strings out of 493089
- 50686 string characters out of 6134842
+ 3734 strings out of 493089
+ 50688 string characters out of 6134842
  169518 words of memory out of 5000000
- 7182 multiletter control sequences out of 15000+600000
+ 7183 multiletter control sequences out of 15000+600000
  8615 words of font info for 31 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  29i,9n,40p,1109b,1129s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -413,7 +413,7 @@ xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texl
 ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texli
 ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive
 /2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on main.pdf (9 pages, 170411 bytes).
+Output written on main.pdf (9 pages, 170633 bytes).
 PDF statistics:
  82 PDF objects out of 1000 (max. 8388607)
  58 compressed objects within 1 object stream
