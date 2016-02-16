@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.20)  16 FEB 2016 17:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.20)  16 FEB 2016 17:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -277,7 +277,18 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 23.
  (./abstract.tex) (./intro.tex [1
 
-{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
+{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+
+LaTeX Warning: Citation `ABCD' on page 2 undefined on input line 117.
+
+[2]
+
+LaTeX Warning: Citation `scribble' on page 3 undefined on input line 133.
+
+
+LaTeX Warning: Citation `usecase_repository' on page 3 undefined on input line 
+181.
+
 
 LaTeX Warning: Reference `sec:usecases' on page 3 undefined on input line 182.
 
@@ -295,8 +306,16 @@ LaTeX Warning: Reference `sec:engineering' on page 4 undefined on input line 20
 9.
 
 Excluding 'comment' comment. Excluding 'comment' comment.) (./preliminaries.tex
-[4] (./figures/fig-scribble_global_bookstore.tex) [5]
-(./figures/fig-scribble_local_bookstore.tex
+[4]
+
+LaTeX Warning: Citation `scribble' on page 5 undefined on input line 94.
+
+(./figures/fig-scribble_global_bookstore.tex)
+
+LaTeX Warning: Citation `usecase_repository' on page 5 undefined on input line 
+108.
+
+[5] (./figures/fig-scribble_local_bookstore.tex
 Overfull \hbox (35.38493pt too wide) in paragraph at lines 3--4
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][] 
@@ -307,68 +326,82 @@ Overfull \hbox (4.78426pt too wide) in paragraph at lines 7--8
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-) Excluding 'comment' comment. [6]) (./usecases.tex [7] (./usecase_table.tex
-Underfull \hbox (badness 10000) in paragraph at lines 11--11
+) Excluding 'comment' comment. [6]
+
+LaTeX Warning: Citation `HU07TYPE-SAFE' on page 7 undefined on input line 240.
+
+
+LaTeX Warning: Citation `event' on page 7 undefined on input line 245.
+
+
+LaTeX Warning: Citation `NYH12' on page 7 undefined on input line 248.
+
+
+LaTeX Warning: Citation `DBLP:conf/rv/NeykovaYH13' on page 7 undefined on input
+ line 256.
+
+[7]) (./usecases.tex (./usecase_table.tex
+Underfull \hbox (badness 10000) in paragraph at lines 10--10
 []|\OT1/cmr/m/n/9 Mungo, Ses-sion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 15--16
+Underfull \hbox (badness 10000) in paragraph at lines 18--19
 []|\OT1/cmr/m/n/9 Hyper-Text Trans-fer
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 16--18
+Underfull \hbox (badness 10000) in paragraph at lines 19--21
 []|\OT1/cmr/m/n/9 Request/Response
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 21--22
+Underfull \hbox (badness 10000) in paragraph at lines 24--25
 []|\OT1/cmr/m/n/9 Mungo and
  []
 
 
-Underfull \hbox (badness 6380) in paragraph at lines 32--33
+Underfull \hbox (badness 6380) in paragraph at lines 35--36
 []\OT1/cmr/m/n/9 Dinning Philoso-
  []
 
 
-Underfull \hbox (badness 3646) in paragraph at lines 39--39
+Underfull \hbox (badness 3646) in paragraph at lines 42--42
 []|\OT1/cmr/m/n/9 Eventful Ses-sion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 53--53
+Underfull \hbox (badness 10000) in paragraph at lines 56--56
 []|\OT1/cmr/m/n/9 Concurrent Al-go-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 62--63
+Underfull \hbox (badness 10000) in paragraph at lines 65--66
 []\OT1/cmr/m/n/9 Farm (Master-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 65--67
+Underfull \hbox (badness 10000) in paragraph at lines 68--70
 []|\OT1/cmr/m/n/9 Parametric al-go-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 68--69
+Underfull \hbox (badness 10000) in paragraph at lines 71--72
 []|\OT1/cmr/m/n/9 Concurrent Al-go-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 73--73
+Underfull \hbox (badness 10000) in paragraph at lines 76--76
 []|\OT1/cmr/m/n/9 Concurrent Al-go-
  []
 
 
-Overfull \hbox (11.51761pt too wide) in alignment at lines 2--80
+Overfull \hbox (11.51761pt too wide) in alignment at lines 2--83
  [] [] [] [] [] 
  []
 
 
-Underfull \vbox (badness 10000) detected at line 80
+Underfull \vbox (badness 10000) detected at line 83
  []
 
 )) (./engineering.tex
@@ -388,17 +421,19 @@ LaTeX Warning: Citation `citation_needed' on page 8 undefined on input line 27.
 LaTeX Warning: Citation `citation_needed' on page 8 undefined on input line 28.
 
 
-) (./main.bbl) [8] [9] (./main.aux)
+)
+No file main.bbl.
+[8] [9] (./main.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 3734 strings out of 493089
- 50688 string characters out of 6134842
- 169518 words of memory out of 5000000
- 7183 multiletter control sequences out of 15000+600000
- 8615 words of font info for 31 fonts, out of 8000000 for 9000
+ 3733 strings out of 493089
+ 50662 string characters out of 6134842
+ 171537 words of memory out of 5000000
+ 7185 multiletter control sequences out of 15000+600000
+ 8270 words of font info for 30 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  29i,9n,40p,1109b,1129s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
@@ -411,12 +446,11 @@ l/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/t
 exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/te
 xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texl
 ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texli
-ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive
-/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on main.pdf (9 pages, 170633 bytes).
+ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
+Output written on main.pdf (9 pages, 161077 bytes).
 PDF statistics:
- 82 PDF objects out of 1000 (max. 8388607)
- 58 compressed objects within 1 object stream
+ 78 PDF objects out of 1000 (max. 8388607)
+ 55 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
