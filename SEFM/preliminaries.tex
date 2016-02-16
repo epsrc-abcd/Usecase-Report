@@ -255,15 +255,26 @@ below:
 	\item	Session fidelity can also be ensured using runtime monitoring.
 			Modules for monitoring were implemented in python and are presented in~\cite{DBLP:conf/rv/NeykovaYH13}.
 
-	\item	The actors paradigm
+	\item	Session types are embedded in the Actors paradigm in the following technologies:
 			\begin{itemize}
-				\item	Implemented in python using the monitor module
-				\item	Erlang
+				\item	An implementation that uses the python monitoring module for session types to
+						monitor python threads that simulate actors~\cite{DBLP:conf/coordination/NeykovaY14}.
+				\item	An similar approach on monitoring session types is also used for the
+						Erlang programming language, which is a programming language for the Actors model.
 			\end{itemize}
-	\item	Pabble - MPI: parametric Scribble used to express parametric algorithms and topologies.
-	\item	Mungo and StMungo:	based on the OO paradigm a tool that integrates session types and the 
-								typestate theory in Java. StMungo transforms Scribble into Mungo
-								specifications.
+
+	\item	Pabble~\cite{DBLP:conf/pdp/NgY14,} is an extension to Scribble used to express
+			communication structures that have a parametrised number of roles.
+			Pabble protocols are implemented and type-checked for the MPI framework.
+
+	\item	Mungo~\cite{mungo} is a tool that integrates session types in the object-oriented
+			programming paradigm through the typestate structure; communication
+			interactions can be seen as an object interface with a behaviour.
+			Mungo uses a protocol description language for capturing typestate.
+			The tool Scribble to Mungo (StMungo) is used to transform Scribble
+			protocols into Mungo protocols.
+
+
 	\item	GV:			A functional programming implementation of binary session types.
 	\item	LINKS:		Functional programming based on the linear logic interpretation of session types.
 	\item	SILL:		Functional programming based on the linear dual intuitionistic interpretation of session types.
