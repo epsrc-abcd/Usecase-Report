@@ -6,6 +6,13 @@ the paper, are defined and discussed.
 
 \subsection{Session Types: Notions and Terminology}
 
+%describing communication protocols
+Communication \emph{protocols} are usually described and communicated among humans by using the most intuitive graphical form of sequence charts (see Fig.~\ref{fig:seqchart}). Sequence charts are used to depict communication flow as ordered sequence of communication \emph{message passing} among communication participants representing particular \emph{roles} in communication protocol. In figure \ref{fig:seqchart}, the case of Bookstore protocol is presented and specifies an interaction between two online Buyer roles that invoke a process of buying a book from an online Seller role. In sequence chart, each role is represented with vertical line and communication messages are represented with vertical directed arrows indicating direction of communication flow. Intuitively, the communication progress is downwards. Thus, visually the protocol behaviour is represented within the chart. However, sequence charts are not considered as formal tools because such described protocols can not be verified as being complete or ambiguous. 
+
+For example, in industrial practice, the communication protocols are usually described in natural language and discussed with help of the sequence charts. After that, the protocols are implemented within the distributed software systems that communicate with help of such specified communication protocol. Each software system participating in protocol communication has to implement its \emph{local} software role within the protocol. Usually the process of implementing the local implementation impose numerous possible solutions that are often hidden and omitted within sequence chart.
+
+Another limitation of sequence charts is to deal with complex communication protocols where complex communication interactions involving multiple parties become hard to follow and reason. As an solution to manage communication complexity is introducing a \emph{structure} within the communication protocol. Session types is aiming to define concepts for structured communication that should enable better mastering of communication complexity.
+
 %Session types can be seen as types that describe behaviour.
 Typically, a type is broadly understood
 as a meta-information concept, used describe a class of a data.
@@ -13,17 +20,17 @@ Structures of types are used to describe data structures.
 When types are structured as input/output requirements they
 are used to describe functionality.
 The combination of functionality and data structures give rise
-to the concepts of classes and interfaces.% of objects.
+to the \emph{object oriented} concepts of classes and interfaces.% of objects.
 %
 A session type extends %the above approaches of
 the notion of a type to capture the communication behaviour in concurrent systems.
 % definition of session types
 {\em A session type is a type structure that describes a communication
-behaviour in terms of a series of send and receive %message passing
-interactions between a set of concurrent entities.}
+	behaviour in terms of a series of send and receive %message passing
+	interactions between a set of concurrent \textbf{or communicating?} entities.}
 
 A session type may also be seen as a
-formal {\em specification} of a communication {\em protocol} among concurrent {\em roles}.
+formal {\em specification} of a communication {\em protocol} among concurrent \textbf{or communicating?} {\em roles}.
 The syntax for session types is defined on {\em send} and {\em receive},
 and {\em select} and {\em branch} operators.
 Sending and receiving data gives rise to the notion of {\em message passing}.
@@ -32,10 +39,10 @@ The case where a session typed value is passed as a message is called {\em sessi
 The interaction of select and branch defines the {\em choice} interaction.
 Choice requires for a role to use a value called {\em label}
 to select a communication behaviour out of a set of behaviours, called {\em branch},
-offered by another role.
+offered by another role. \textbf{Important is to note that branch and choice elements within the formal specification force the user to think among all possible cases that may happen within an session type. Comparing to sequence charts which are not formal and thus more error prone.}
 
 Session types assume a {\em global} protocol that describes the
-communication interaction of all the roles inside a concurrent system.
+communication interaction of all the roles inside \emph{viewing distributed system as one} a concurrent system.
 The perspective of a global protocol through a single role
 is called {\em local} protocol. The local protocol describes
 the communication interaction of a single role with all other roles
@@ -50,10 +57,10 @@ through the {\em projection} procedure;
 %Projection to a role
 %is a procedure that can be done
 %can be done automatically;
-given the global protocol and a role, projection 
+given the global protocol and a role, projection
 returns as a local protocol only the
 interactions of the global protocol that are concerned with
-the role.
+the role. \textbf{A figure for project and synthesis would be useful here!}
 
 The reverse procedure from projection is called {\em synthesis},
 where a set of local protocols are composed together in a global
@@ -61,10 +68,11 @@ protocol.
 
 Below the term system is used to describe the whole concurrent
 system and the term \dk{program} is used for communication module
-inside the system.
+inside the system. \textbf{Bellow the term system is used to describe whole local protocol implementation as a set of communication modules it is composed of? }
+
 
 Typically, a protocol is first expressed globally and then
-projected locally on the protocol roles.
+projected locally \textbf{on each protocol role, projecting one local protocol specification per each protocol role.}
 Local specifications are then implemented by the corresponding
 \dk{programs}.
 The term {\em session fidelity} is used to express
@@ -88,6 +96,7 @@ for the communication behaviour of the system:
 	
 	\item	Every state of the protocol will {\em progress} to a safe state.
 \end{enumerate}
+
 
 \subsection{Session Types as Protocols: The Scribble Tool-chain}
 
