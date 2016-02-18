@@ -1,0 +1,20 @@
+I revised the abstract and introduction.
+
+Tihana's paragraph (2nd paragraph of the introduction) is good, I
+think.
+
+Section 1.1, Overview, I haven't touched; we can complete it later.
+
+I wonder whether we should integrate part of section 2.2 into section
+2.1, so that the concept of session types are illustrated by the
+bookstore example. Section 2.2 can then describe the Scribble tool
+chain, which it doesn't describe at the moment.
+
+Taxonomy of application domains: I think we agreed not to link this to
+a layered model of systems. The list of domains doesn't form a strict
+hierarchy. I think we should try to be more specific about the
+examples that are in each domain. A lot of the text in the enumerated
+is rather generic.
+
+
+
