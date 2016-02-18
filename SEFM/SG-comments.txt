@@ -14,7 +14,7 @@ Taxonomy of application domains: I think we agreed not to link this to
 a layered model of systems. The list of domains doesn't form a strict
 hierarchy. I think we should try to be more specific about the
 examples that are in each domain. A lot of the text in the enumerated
-is rather generic.
+list is rather generic.
 
 
 
