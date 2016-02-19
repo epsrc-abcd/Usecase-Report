@@ -1,24 +1,24 @@
 
 \begin{figure}[t]
-\begin{sequencediagram}
+\begin{sequencediagram}[0.6]
 	\mythread{Buyer1}{\BuyerOne}
 	\mythread[3]{Buyer2}{\BuyerTwo}
 	\mythread[3]{Seller}{\Seller}
 
-	\mymess[near start]{Buyer1}{\code{book(title)}}{Seller}
-	\mymess[near start]{Seller}{\code{book(Price)}}{Buyer1}
-	\mymess{Buyer1}{\code{quote(Contribution)}}{Buyer2}
+	\mymess[near start]{Buyer1}{\smallcode{book(title)}}{Seller}
+	\mymess[near start]{Seller}{\smallcode{book(Price)}}{Buyer1}
+	\mymess{Buyer1}{\smallcode{quote(Contribution)}}{Buyer2}
 
-	\begin{sdblock}{alt}{Choice at \BuyerTwo}
-		\mymess{Buyer2}{\code{AGREE}}{Buyer1}
-		\mymess{Buyer2}{\code{AGREE}}{Seller}
-		\mymess[near start]{Buyer1}{\code{transfer(Money)}}{Seller}
-		\mymess{Buyer2}{\code{transfer(Money)}}{Seller}
+	\begin{sdblock}{alt}{{\scriptsize Choice at} \BuyerTwo}
+		\mymess{Buyer2}{\smallcode{AGREE}}{Buyer1}
+		\mymess{Buyer2}{\smallcode{AGREE}}{Seller}
+		\mymess[near start]{Buyer1}{\smallcode{transfer(Money)}}{Seller}
+		\mymess{Buyer2}{\smallcode{transfer(Money)}}{Seller}
 
 		\separateline{Buyer1}{Seller}
 
-		\mymess{Buyer2}{\code{QUIT}}{Buyer1}
-		\mymess{Buyer2}{\code{QUIT}}{Seller}
+		\mymess{Buyer2}{\smallcode{QUIT}}{Buyer1}
+		\mymess{Buyer2}{\smallcode{QUIT}}{Seller}
 	\end{sdblock}
 	 \stepcounter{seqlevel}
 \end{sequencediagram}

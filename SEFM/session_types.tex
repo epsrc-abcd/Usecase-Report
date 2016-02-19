@@ -2,21 +2,73 @@
 %\label{sec:preliminaries}
 \label{sec:session_types}
 
-%\subsection{Session Types: Notions and Terminology}
 
-Communication \emph{protocols} in software engineering are usually described and
-communicated among humans by using the most intuitive graphical form of sequence charts
-(see \figref{seqchart}). Sequence charts are used to depict communication flow as ordered sequence of communication \emph{message passing} among communication participants representing particular \emph{roles} in communication protocol. In figure \ref{fig:seqchart}, the case of Bookstore protocol is presented and specifies an interaction between two online Buyer roles that invoke a process of buying a book from an online Seller role. In sequence chart, each role is represented with vertical line and communication messages are represented with vertical directed arrows indicating direction of communication flow. Intuitively, the communication progress is downwards. Thus, visually the protocol behaviour is represented within the chart. However, sequence charts are not considered as formal tools because such described protocols can not be verified as being complete or ambiguous. 
+The section introduces session types through a
+a discussion about the need of session types in
+software engineering.
+It also presents the Scribble~\cite{scribble} protocol
+description language which is a formal language for describing
+protocols using session type principles.
+The overall discussion in this section identifies and sets
+a clear and distinctive terminology needed to
+for transferring to a wider audience the basic ideas of session
+types.
 
-For example, in industrial practice, the communication protocols are usually described in natural language and discussed with help of the sequence charts. After that, the protocols are implemented within the distributed software systems that communicate with help of such specified communication protocol. Each software system participating in protocol communication has to implement its \emph{local} software role within the protocol. Usually the process of implementing the local implementation impose numerous possible solutions that are often hidden and omitted within sequence chart.
+\subsection{Session Types and Software Engineering: Notions and Terminology}
 
-Another limitation of sequence charts is to deal with complex communication protocols where complex communication interactions involving multiple parties become hard to follow and reason. As an solution to manage communication complexity is introducing a \emph{structure} within the communication protocol. Session types is aiming to define concepts for structured communication that should enable better mastering of communication complexity.
+Communication \emph{protocols} in software engineering
+are usually described and communicated among humans
+by using the most intuitive graphical form of sequence charts
+(see \figref{seqchart}).
+Sequence charts are used to depict communication flow as ordered
+sequence of communication \emph{message passing} among communication
+participants that represent particular \emph{roles} in communication
+protocol.
+
+In \figref{seqchart}, the case of the Bookstore protocol, which is a usecase
+in the ABCD online repository~\cite{usecase_repository},  is presented.
+The Bookstore protocol specifies an interaction between two online Buyer roles
+that invoke a process of buying a book from an online Seller role, while
+sharing the expenses.
+In the sequence chart, each role is represented with vertical line and
+communication messages are represented with horizontal directed arrows
+indicating the direction of communication flow.
+Intuitively, the communication progress is proceeds downwards.
+Thus, visually the protocol behaviour is represented within the chart.
+However, sequence charts are not considered as formal tools because
+such described protocols can not be verified as being complete or unambiguous.
+
+For example, in industrial practice, the communication protocols for
+distributed software, are usually described in natural language and
+discussed with help of the sequence charts.
+%After that and with the help of sequence charts,
+%the protocols are implemented between the communication components
+%of the software.
+%within the distributed software
+%with specified communication protocol.
+With the help of sequence charts,
+each software module that participates in the
+protocol communication implements
+its \emph{local} software role within the protocol.
+Usually the process of implementing the local implementation
+impose numerous possible solutions that are often hidden and
+omitted from sequence chart.
+\dk{what is hidden? - overall structure of the protocol, logic on choices}
+Another limitation of sequence charts, is the inability to deal with complex
+communication protocols where complex communication interactions
+that involve multiple parties become hard to follow and reason.
+
+A solution to manage communication complexity
+is the introduction of \emph{structure} within the communication protocol.
+Session types describes communication in a structured and rigorous fashion,
+and is aiming to define concepts for structured communication
+that should enable better mastering of communication complexity.
 
 %describing communication protocols
 
 %Session types can be seen as types that describe behaviour.
 Typically, a type is broadly understood
-as a meta-information concept, used describe a class of a data.
+as a meta-information concept, that is used describe a class of a data.
 Structures of types are used to describe data structures.
 When types are structured as input/output requirements they
 are used to describe functionality.
@@ -28,22 +80,46 @@ the notion of a type to capture the communication behaviour in concurrent system
 % definition of session types
 {\em A session type is a type structure that describes a communication
 	behaviour in terms of a series of send and receive %message passing
-	interactions between a set of concurrent \textbf{or communicating?} entities.}
+	interactions between a set of communicating entities and it is used
+	to characterise data structures that are used to implement communication.}
 
-A session type may also be seen as a
-formal {\em specification} of a communication {\em protocol} among concurrent \textbf{or communicating?} {\em roles}.
-The syntax for session types is defined on {\em send} and {\em receive},
-and {\em select} and {\em branch} operators.
-Sending and receiving data gives rise to the notion of {\em message passing}.
-In a session type messages are described via their types.
-The case where a session typed value is passed as a message is called {\em session delegation}.
-The interaction of select and branch defines the {\em choice} interaction.
+Practically, a session type can be seen as a formal
+{\em specification} of a communication {\em protocol} among communicating {\em roles}.
+The syntax for session types is defined on pairs of operations:
+(i) the {\em send} and {\em receive} operation give rise to
+the {\em message passing} interaction; and
+(ii) the {\em select} and {\em branch} operators enable the
+{\em choice} interaction.
+
+Message passing is used for sending data from one role the another.
+The data that are passed are described in terms of their type. Session
+type can also assume for the case of {\em session delegation}
+where a session type value, i.e.~a structure that implements communication,
+is passed as a message.
 Choice requires for a role to use a value called {\em label}
-to select a communication behaviour out of a set of behaviours, called {\em branch},
-offered by another role. \textbf{Important is to note that branch and choice elements within the formal specification force the user to think among all possible cases that may happen within an session type. Comparing to sequence charts which are not formal and thus more error prone.}
+to select a communication behaviour among
+a set of behaviours, called {\em branch}, offered by another role.
+The choice interaction enables formal specifications that can
+cover a more complex structure of communication and among all possible
+cases that may happen, in contrast to the limiting structure of
+a sequence diagram.
+%The syntax for session types is defined on {\em send} and {\em receive},
+%and {\em select} and {\em branch} operators.
+%Sending and receiving data gives rise to the notion of {\em message passing}.
+%In a session type messages are described via their types.
+%The case where a session typed value is passed as a message is called {\em session delegation}.
+%The interaction of select and branch defines the {\em choice} interaction.
+%Choice requires for a role to use a value called {\em label}
+%to select a communication behaviour out of a set of behaviours, called {\em branch},
+%offered by another role.
+%\textbf{Important is to note that branch and choice elements within the formal specification force
+%the user to think among all possible cases that may happen within an session type.
+%Comparing to sequence charts which are not formal and thus more error prone.}
 
 Session types assume a {\em global} protocol that describes the
-communication interaction of all the roles inside \emph{viewing distributed system as one} a concurrent system.
+communication interaction of all the roles inside a concurrent system.
+A global type enables a unified view of a system, instead of the 
+approach that a concurrent system is a set of communicating modules.
 The perspective of a global protocol through a single role
 is called {\em local} protocol. The local protocol describes
 the communication interaction of a single role with all other roles
