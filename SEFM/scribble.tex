@@ -1,53 +1,113 @@
 \begin{tikzpicture}
-	\draw[dotted, help lines]		(0,0) grid (12, 8);
+%	\draw[dotted, help lines]		(0,0) grid (12, 8);
 	
-	 \coordinate (A)	at (6, 8);
+	 \coordinate (top)	at (6, 8);
 
-	\node[draw, circle, minimum size = 0.5cm]					(ScribbleIn)	at	(A)	{};
+	\node[draw, circle, minimum size = 0.5cm]					(ScribbleIn)	at	(top)	{};
 	\node[above = 0cm of ScribbleIn]													{Global Protocol};
-	
-	\node[draw, below = 0.5cm of ScribbleIn, minimum width = 2cm,minimum height = 0.5cm]	(Verify) {
+
+	\coordinate	(LeftTop)	at	(4, 8);
+	\node[draw, below = 0.5cm of LeftTop, minimum width = 2cm,minimum height = 0.5cm]	(Verify) {
 		\scriptsize verify
 	};
-
 
 	\draw[->]		(ScribbleIn) -- (Verify);
 	
 	\node[draw, below = 0.5cm of Verify, minimum width = 2cm,minimum height = 0.5cm]		(Project) {
 		\scriptsize project
 	};
-	
 	\draw[->]		(Verify) -- (Project);
 
+	\node[draw, minimum width = 2cm,minimum height = 0.5cm]	at	(8, 6.75)	(Synthesis) {
+		\scriptsize synthesis
+	};
+
+	\draw[->]		(Synthesis) -- (ScribbleIn);
+
+	\coordinate (middle)	at	(6, 5);
 	
-	\draw let
-		\p1 = (Project.west),
-		\p2 = (Project.east),
-		\p3 = (Project.south)
-	in
-		coordinate	(A)	at (\x1, \y3)
-		coordinate (B) at (\x2, \y3)
-		node[draw, circle, below = 0.5cm of Project, minimum size = 0.5cm]		(Local)		{}
-		node[draw, circle, below = 0.5cm of A, minimum size = 0.5cm]			(LocalL)	{}
-		node[draw, circle, below = 0.5cm of B, minimum size = 0.5cm]			(LocalR)	{};
+	\node[draw, circle, below = 1cm of middle, minimum size = 0.5cm]		(LocalC)		{};
+	\node[draw, circle, left = 0.5cm of LocalC, minimum size = 0.5cm]		(LocalL)		{};
+	\node[draw, circle, right = 0.5cm of LocalC, minimum size = 0.5cm]		(LocalR)		{};
+	\node[draw, below = 0.75cm of middle, minimum width = 3cm, minimum height = 1.25cm]	(Local)	{};
+	
+	
+%	\draw let
+%		\p1 = (Project.west),
+%		\p2 = (Project.east),
+%		\p3 = (Project.south)
+%	in
+%		coordinate	(A)	at (\x1, \y3)
+%		coordinate (B) at (\x2, \y3);
+
+%	\node[draw, circle, below = 1cm of Project, minimum size = 0.5cm]		(LocalC)		{};
+%	\node[draw, circle, below = 1cm of A, minimum size = 0.5cm]			(LocalL)		{};
+%	\node[draw, circle, below = 1cm of B, minimum size = 0.5cm]			(LocalR)		{};
+
+	\node[below = 0 of LocalC]		{\scriptsize Local Protocols};
 		
 	\draw[->]		(Project) -- (Local);
-	\draw[->]		(Project) -- (LocalL);
-	\draw[->]		(Project) -- (LocalR);
+	\draw[->]		(Local)	--	(Synthesis);
+%	\draw[->]		(Project) -- (LocalL);
+%	\draw[->]		(Project) -- (LocalR);
 
 	
-	\node[draw, left = 1.5cm of LocalL, minimum width = 0.5cm,minimum height =3cm]	(Typecheck) {};
+	\node[draw, left = 1.5cm of Local, minimum width = 0.5cm,minimum height =2cm]	(Typecheck) {};
 	\node[above = 0cm of Typecheck]	{\scriptsize typecheck};
 
-	\node[draw, right = 1.5cm of LocalR, minimum width = 3cm,minimum height =3cm]	(Monitor) {};
-	\node[above = 0cm of Monitor]	{\scriptsize monitor};
+%	\node[draw, right = 1.5cm of Local, minimum width = 3cm,minimum height =3.5cm]	(Monitor) {};
+%	\node[above = 0cm of Monitor]
+%	{
+%		\scriptsize
+%		\begin{tabular}{c}
+%			execute\\
+%			and monitor
+%		\end{tabular}
+%	};
+	\node[draw, right = 1.5cm of Local, minimum width = 1cm,minimum height =3cm]	(Monitor) {};
+	\node[above = 0cm of Monitor]
+	{
+		\scriptsize
+%		\begin{tabular}{c}
+%		execute\\
+%		and
+		monitor
+%		\end{tabular}
+	};
 
-	\node[draw, circle, below = 3cm of Local, minimum size = 0.5cm]				(Code)	{};
-	\node[draw, circle, below = 3cm of LocalL, minimum size = 0.5cm]			(CodeL)	{};
-	\node[draw, circle, below = 3cm of LocalR, minimum size = 0.5cm]			(CodeR)	{};%
+	\node[draw, right = 0.5cm of Monitor, minimum width = 1cm,minimum height =3cm]	(Run) {};
+	\node[above = 0cm of Run]
+	{
+		\scriptsize
+		%		\begin{tabular}{c}
+		%		execute\\
+		%		and
+		execute
+		%		\end{tabular}
+	};
+
+	\node[draw, circle, right = 1.75cm of Local, minimum size = 0.5cm]	(MonC)	{};
+	\node[draw, circle, above= 0.5cm of MonC, minimum size = 0.5cm]		(MonT)	{};
+	\node[draw, circle, below= 0.5cm of MonC, minimum size = 0.5cm]		(MonB)	{};
+
+	\node[draw, circle, right = 1cm of MonC, minimum size = 0.5cm]		(RunC)	{};
+	\node[draw, circle, above= 0.5cm of RunC, minimum size = 0.5cm]		(RunT)	{};
+	\node[draw, circle, below= 0.5cm of RunC, minimum size = 0.5cm]		(RunB)	{};
+
+	\draw[<->]	(MonC) -- (RunC);
+	\draw[<->]	(MonT) -- (RunT);
+	\draw[<->]	(MonB) -- (RunB);
+	
+%	\node[above = 0 of MonT]	{\scriptsize monitor};
+%	\node[above = 0 of RunT]	{\scriptsize execute};
+
+
+	\node[draw, circle, below = 2.5cm of LocalC, minimum size = 0.5cm]				(Code)	{};
+	\node[draw, circle, below = 2.5cm of LocalL, minimum size = 0.5cm]			(CodeL)	{};
+	\node[draw, circle, below = 2.5cm of LocalR, minimum size = 0.5cm]			(CodeR)	{};%
 	\node[below = 0 of Code]	{\scriptsize Source Code};
 	
-	\node[draw, below = 3cm of Project, minimum width = 4cm,minimum height = 0.5cm]	(Inference) {
+	\node[draw, below = 1cm of Local, minimum width = 4cm,minimum height = 0.5cm]	(Inference) {
 		\scriptsize inference
 	};
 	
@@ -59,9 +119,9 @@
 		coordinate	(TCNortheast)	at	(\x3, \y1)
 		coordinate	(TCSoutheast)	at	(\x3, \y2);
 		
-	\draw[->]	(LocalL)	--	(Typecheck.east);
-	\draw[->]	(LocalL)	--	(TCNortheast);
-	\draw[->]	(LocalL)	--	(TCSoutheast);
+	\draw[->]	(Local)	--	(Typecheck.east);
+%	\draw[->]	(Local)	--	(TCNortheast);
+%	\draw[->]	(Local)	--	(TCSoutheast);
 
 
 	\draw let
@@ -72,9 +132,9 @@
 		coordinate	(MNorthwest)	at	(\x3, \y1)
 		coordinate	(MSouthwest)	at	(\x3, \y2);
 	
-	\draw[->]	(LocalR)	--	(Monitor.west);
-	\draw[->]	(LocalR)	--	(MNorthwest);
-	\draw[->]	(LocalR)	--	(MSouthwest);
+	\draw[->]	(Local)	--	(Monitor.west);
+%	\draw[->]	(Local)	--	(MNorthwest);
+%	\draw[->]	(Local)	--	(MSouthwest);
 
 	\draw let
 		\p1	=	(LocalL),
@@ -86,8 +146,8 @@
 		
 	
 	\draw[->]	(Inference) -- (Local);
-	\draw[->]	(INorthLeft) -- (LocalL);
-	\draw[->]	(INorthRight) -- (LocalR);	
+%	\draw[->]	(INorthLeft) -- (LocalL);
+%	\draw[->]	(INorthRight) -- (LocalR);	
 	
 	\draw[->] let
 		\p1	=	(CodeL),
@@ -96,9 +156,20 @@
 		(CodeL)	--	(\x2, \y1)	--	(Typecheck);
 
 	\draw[->] let
-	\p1	=	(CodeR),
-	\p2	=	(Monitor)
+		\p1	=	(CodeR),
+%		\p2	=	(Monitor.south),
+		\p2	=	(Run)
 	in
-	(CodeR)	--	(\x2, \y1)	--	(Monitor);
+		(CodeR)	--	(\x2, \y1)	--	(Run);
+		
+	\draw[->]	(Code) -- (Inference);
+	
+	\node[draw, left = 1cm of Typecheck, minimum width = 1cm,minimum height =3cm]	(Executable) {};
+	\node[above = 0 of Executable]	{Verified Code};
+	\node[draw, circle, left = 1.25cm of Typecheck, minimum size = 0.5cm]	(ExecC)	{};
+	\node[draw, circle, above= 0.5cm of ExecC, minimum size = 0.5cm]		(ExecT)	{};
+	\node[draw, circle, below= 0.5cm of ExecC, minimum size = 0.5cm]		(ExecB)	{};
+	\draw[->]	(Typecheck)	--	(Executable);
+
 		
 \end{tikzpicture}
