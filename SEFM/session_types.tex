@@ -1,17 +1,18 @@
-\section{Preliminaries}
-\label{sec:preliminaries}
+\section{Session Types}
+%\label{sec:preliminaries}
+\label{sec:session_types}
 
-In this section the basic notions and terms that are used throughout
-the paper, are defined and discussed.
+%\subsection{Session Types: Notions and Terminology}
 
-\subsection{Session Types: Notions and Terminology}
-
-%describing communication protocols
-Communication \emph{protocols} are usually described and communicated among humans by using the most intuitive graphical form of sequence charts (see Fig.~\ref{fig:seqchart}). Sequence charts are used to depict communication flow as ordered sequence of communication \emph{message passing} among communication participants representing particular \emph{roles} in communication protocol. In figure \ref{fig:seqchart}, the case of Bookstore protocol is presented and specifies an interaction between two online Buyer roles that invoke a process of buying a book from an online Seller role. In sequence chart, each role is represented with vertical line and communication messages are represented with vertical directed arrows indicating direction of communication flow. Intuitively, the communication progress is downwards. Thus, visually the protocol behaviour is represented within the chart. However, sequence charts are not considered as formal tools because such described protocols can not be verified as being complete or ambiguous. 
+Communication \emph{protocols} in software engineering are usually described and
+communicated among humans by using the most intuitive graphical form of sequence charts
+(see \figref{seqchart}). Sequence charts are used to depict communication flow as ordered sequence of communication \emph{message passing} among communication participants representing particular \emph{roles} in communication protocol. In figure \ref{fig:seqchart}, the case of Bookstore protocol is presented and specifies an interaction between two online Buyer roles that invoke a process of buying a book from an online Seller role. In sequence chart, each role is represented with vertical line and communication messages are represented with vertical directed arrows indicating direction of communication flow. Intuitively, the communication progress is downwards. Thus, visually the protocol behaviour is represented within the chart. However, sequence charts are not considered as formal tools because such described protocols can not be verified as being complete or ambiguous. 
 
 For example, in industrial practice, the communication protocols are usually described in natural language and discussed with help of the sequence charts. After that, the protocols are implemented within the distributed software systems that communicate with help of such specified communication protocol. Each software system participating in protocol communication has to implement its \emph{local} software role within the protocol. Usually the process of implementing the local implementation impose numerous possible solutions that are often hidden and omitted within sequence chart.
 
 Another limitation of sequence charts is to deal with complex communication protocols where complex communication interactions involving multiple parties become hard to follow and reason. As an solution to manage communication complexity is introducing a \emph{structure} within the communication protocol. Session types is aiming to define concepts for structured communication that should enable better mastering of communication complexity.
+
+%describing communication protocols
 
 %Session types can be seen as types that describe behaviour.
 Typically, a type is broadly understood
