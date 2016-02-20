@@ -118,7 +118,7 @@ a sequence diagram.
 
 Session types assume a {\em global} protocol that describes the
 communication interaction of all the roles inside a concurrent system.
-A global type enables a unified view of a system, instead of the 
+A global type enables a view of a system as a whole, instead of the 
 approach that a concurrent system is a set of communicating modules.
 The perspective of a global protocol through a single role
 is called {\em local} protocol. The local protocol describes
@@ -126,6 +126,8 @@ the communication interaction of a single role with all other roles
 in the system.
 %Session types also assume a {\em local} protocol that describes the
 %communication interaction of a single role with all other roles within the system.
+
+\input{scribble}
 
 The relation between a global protocol and the
 local protocols of its roles, is expressed
@@ -143,10 +145,10 @@ The reverse procedure from projection is called {\em synthesis},
 where a set of local protocols are composed together in a global
 protocol.
 
-Below the term system is used to describe the whole concurrent
-system and the term \dk{program} is used for communication module
-inside the system. \textbf{Bellow the term system is used to describe whole local protocol implementation as a set of communication modules it is composed of? }
-
+%Below the term system is used to describe the whole concurrent
+%system and the term \dk{program} is used for communication module
+%inside the system. \textbf{Bellow the term system is used to describe whole local protocol
+%implementation as a set of communication modules it is composed of? }
 
 Typically, a protocol is first expressed globally and then
 projected locally \textbf{on each protocol role, projecting one local protocol specification per each protocol role.}

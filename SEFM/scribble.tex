@@ -1,3 +1,5 @@
+\begin{figure}[t]
+\begin{center}
 \begin{tikzpicture}
 %	\draw[dotted, help lines]		(0,0) grid (12, 8);
 
@@ -12,28 +14,28 @@
 	\node[above = 0cm of ScribbleIn]											{\scriptsize Global Protocol};
 
 	% Verify
-	\node[myshape, below = 0.5cm of ScribbleIn]		(Verify)				{};
+	\node[myshape, below = 0.3cm of ScribbleIn]		(Verify)				{};
 	\draw[->]		(ScribbleIn) -- node[left] {\scriptsize verify} (Verify);
 
 	% Local Protocols
-	\node[below = 0.75cm of Verify]					(LocalC)				{\dots};
+	\node[below = 0.5cm of Verify]					(LocalC)				{\dots};
 	\node[myshape, left = 0cm of LocalC]			(LocalL)				{};
 	\node[myshape, right = 0cm of LocalC]			(LocalR)				{};
 
-	\node[below = 0.5cm of Verify, minimum width = 2cm, minimum height = 1cm]	(Local)	{};
+	\node[below = 0.25cm of Verify, minimum width = 2cm, minimum height = 1cm]	(Local)	{};
 	\node[below = 0 of LocalC]											{\scriptsize Local Protocols};
-	
-	% TODO fix this
+
 	\draw[->]		(Verify)	--	node[left]	{\scriptsize project}	(LocalL);
 	\draw[->]		(LocalR)	--	node[right]	{\scriptsize synthesis}	(Verify);
 
 	% Typecheck
-	\node[vertrec, left = 1cm of Local]				(Exec)					{};
+	\node[vertrec, left = 1.25cm of Local]			(Exec)					{};
 	\node[above = 0 of Exec]												{\scriptsize Verified Code};
-	\node[left = 1.25cm of Local]					(ExecC)					{\vdots};
+	\node[left = 1.50cm of Local]					(ExecC)					{\vdots};
 	\node[myshape, above= 0cm of ExecC]				(ExecT)					{};
 	\node[myshape, below= 0cm of ExecC]				(ExecB)					{};
-	\draw[->]	(Local)	-- node[above] {\scriptsize typecheck}	(Exec);
+	
+	\draw[->]	(Local)	-- node[above]  (TLabel) {\scriptsize typecheck}	(Exec);
 
 	% Monitor
 	\node[vertrec, right = 0.75cm of Local]			(Monitor)				{};
@@ -56,7 +58,7 @@
 	\draw[<->]	(MonB) -- (RunB);
 
 	% Code
-	\node[below = 1cm of Local]						(Code)					{\dots};
+	\node[below = 0.75cm of Local]					(Code)					{\dots};
 	\node[myshape, left = 0cm of Code]				(CodeL)					{};
 	\node[myshape, right = 0cm of Code]				(CodeR)					{};
 	\node[below = 0.1 of Code]												{\scriptsize Source Code};
@@ -65,9 +67,9 @@
 	
 	\draw[->] let
 		\p1	=	(CodeL),
-		\p2	=	(Exec)
+		\p2	=	(TLabel)
 	in
-		(CodeL)	--	(\x2, \y1)	--	(Exec);
+		(CodeL)	--	(\x2, \y1)	--	(TLabel);
 
 	\draw[->] let
 		\p1	=	(CodeR),
@@ -77,3 +79,6 @@
 		
 	\draw[->]	(Code) -- node[right] {\scriptsize inference} (Local);
 \end{tikzpicture}
+\end{center}
+\caption{Use of Session Types in Software Development}
+\end{figure}
