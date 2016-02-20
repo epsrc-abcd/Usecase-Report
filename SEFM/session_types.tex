@@ -86,16 +86,23 @@ the notion of a type to capture the communication behaviour in concurrent system
 	interactions between a set of communicating entities and it is used
 	to characterise data structures that are used to implement communication.}
 
-\subsection{Sessions as Protocols: The Scribble Tool-chain}
+\subsection{Sessions as Protocols: The Scribble Protocol Description Language}
 \label{sec:sessions_scribble}
 
 The Scribble tool-chain~\cite{scribble} is a tool that indents
 to serve as a core element in the process of integrating
 the practical aspects of session types in the software
-design and development process. This section defines
+design and development process. The basic module of the Scribble
+tool-chain is the Scribble protocol description language,
+which is a syntax that expresses session type specifications.
+The design of the Scribble language draws directly from
+the principles of session types. For the sake of example
+consider part of the session type protocol for the Book-store
+usecase as in \figref{scribble_bs}. 
+This section defines
 the main terminology for session types and at the same
 time clarifies the notions through the presentation
-of the Scribble tool-chain.
+of the Scribble language.
 
 Practically, a session type can be seen as a formal
 {\em specification} of a communication {\em protocol} among communicating {\em roles}.
@@ -155,18 +162,11 @@ The reverse procedure from projection is called {\em synthesis},
 where a set of local protocols are composed together in a global
 protocol.
 
-The basic module of the Scribble tool-chain is the
-Scribble protocol description language,
-which is a syntax that expresses session type specifications.
-The design of the Scribble language draws directly from
-the principles of session types. For the sake of example
-consider part of the session type protocol for the Book-store
-usecase as in \figref{scribble_bs}. 
 
 \input{figures/fig-scribble_bookstore}
 
 Line 1 of the upper protocol in \figref{scribble_bs} shows the
-definition of the global protocol for the Book-store usecase.
+Scribble definition of the global protocol for the Book-store usecase.
 The communication takes place
 among roles the \BuyerOne, \BuyerTwo and \Seller. Line 2 demonstrates
 the syntax of a message passing interaction; a message
@@ -192,8 +192,13 @@ the local protocol for role \BuyerOne is derived automatically
 by stripping out all the irrelevant information with respect
 to \BuyerOne from the global protocol.
 
-\subsection{Integrating Session Types in Software Development}
+\subsection{Integrating Session Types in Software Development: The Scribble Tool-chain}
 \label{sec:sessions_integrate}
+
+Apart from a protocol description language,
+Scribble offers a tool-chain that 
+integrates session types in the software
+development process.
 
 \input{figures/fig-sessions_software}
 
@@ -204,21 +209,99 @@ to \BuyerOne from the global protocol.
 
 \figref{diagram} clarifies the terminology
 developed previously by showing the typical
-\mybf{usage} of session types in the software design and development. 
+\mybf{usage} of session types in the software
+design and development. Furthermore, it distinguishes
+the desirable properties that are offered by 
+session types.
 
-Typically, a protocol is first expressed globally and then
-projected locally \textbf{on each protocol role, projecting one local protocol specification per each protocol role.}
-Local specifications are then implemented by the corresponding
-\mybf{programs}.
-The term {\em session fidelity} is used to express
-the conformance of a \mybf{program}, to the local protocol of the
-corresponding role. Session fidelity can be checked mechanically,
-through techniques like type-checking and monitoring.
+In \figref{diagram} circles
+represent source code for either the software
+under development or for the definition
+of the session type protocols. The arrows
+represent automated procedures that ensure
+the desirable properties of session types
+in the development process. The Scribble
+tool-chain supports many of these automated
+procedures.
+An important assumption
+is that the software source code in the bottom
+of \figref{diagram} is developed using 
+a programming language that
+makes use of a communication interface
+that can be automatically identified.
 
-If all the roles of a protocol are implemented by a
-system and session fidelity is ensured,
+In a typical top-down approach, a developer will first develop a global protocol
+and express it syntactic form. This for example can be done
+using the Scribble protocol description language.
+The global protocol source code is shown
+on the top of \figref{diagram}.
+The next step is to run a procedure to verify the 
+global protocol correctness \dk{what does it verify?}.
+After the global protocol verification, a projection
+procedure takes place where a local protocol
+for each global protocol role is derived.
+Verification and projection are supported by the Scribble tool-chain.
+
+One way to use the set of local protocols is to ensure
+conformance between the source code of the
+software under development and the local protocols,
+by using a type-checker procedure.
+%To achieve this there is the assumption that
+%the programming language used to develop the
+%software source code, makes use of a communication
+%interface that can be identified by a type-checker
+%procedure.
+The type-checker takes as an input a software
+module, identifies its communication operations,
+and derives the communication behaviour of
+the module. 
+The type-checker also takes as an input the
+corresponding local protocol and checks
+whether the software module
+implements the corresponding role communication.
+Upon success, the result is verified software that
+enjoys the session types {\em safety} and {\em progress}
+properties.
+
+Another way of using the set of local protocol is
+for monitoring the execution of a concurrent set
+of communicating software modules. The local protocols
+are used to feed a set of local monitors. Essentially,
+the local monitors run a state machine that is derived
+out of the local protocol syntax. The monitor
+platform also requires for the concurrent software
+execution. The assumption to be made here is that
+monitor platform implements the communication interface
+on top of the monitoring interface.
+Scribble does support the procedure of deriving
+state machines out of local protocol syntax.
+
+In \figref{diagram} there is the bottom-up approach as well,
+were the communicating modules of a concurrent software
+are developed independently. Then an inference 
+procedure identifies the communication behaviour
+of each module that results in a set of local
+protocols. Then the synthesis procedure takes place
+where the derived local protocols are synthesised
+to create a global protocol. Upon success, the
+developed software is guaranteed to ensure
+the desirable session type properties.
+
+%Typically, a protocol is first expressed globally and then
+%projected locally \textbf{on each protocol role, projecting one local protocol specification per each protocol role.}
+%Local specifications are then implemented by the corresponding
+%\mybf{programs}.
+%The term {\em session fidelity} is used to express
+%the conformance of a \mybf{program}, to the local protocol of the
+%corresponding role. Session fidelity can be checked mechanically,
+%through techniques like type-checking and monitoring.
+
+The case where the local protocols of all the roles in a global protocol
+are implemented by the corresponding communicating modules of
+a system is called session fidelity. When session fidelity is
+ensured
 then a number of communication properties can be guaranteed
-for the communication behaviour of the system:
+for the concurrent software:
 %
 \begin{enumerate}[label=$\bullet$]
 	\item	Every execution state of the system has {\em safe} communication behaviour:
@@ -232,6 +315,13 @@ for the communication behaviour of the system:
 	\item	Every state of the protocol will {\em progress} to a safe state.
 \end{enumerate}
 
+As seen in \figref{diagram} Scribble and the procedures
+that manipulate session type protocols lie at the core
+of the software development process. This is also clarified
+by the experience in developing the usecases for the ABCD
+online repository. The Scribble platform and its procedures
+has an independent status next to the plethora of technologies and
+programming paradigms used in the case studies.
 
 %\subsection{Session Types as Protocols: The Scribble Tool-chain}
 %
