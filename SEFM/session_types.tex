@@ -14,7 +14,8 @@ a clear and distinctive terminology needed to
 for transferring to a wider audience the basic ideas of session
 types.
 
-\subsection{Session Types and Software Engineering: Notions and Terminology}
+\subsection{Session Types and Software Engineering}%: Notions and Terminology}
+\label{sec:sessions_software}
 
 Communication \emph{protocols} in software engineering
 are usually described and communicated among humans
@@ -83,6 +84,17 @@ the notion of a type to capture the communication behaviour in concurrent system
 	interactions between a set of communicating entities and it is used
 	to characterise data structures that are used to implement communication.}
 
+\subsection{Sessions as Protocols: The Scribble Tool-chain}
+\label{sec:sessions_scribble}
+
+The Scribble tool-chain~\cite{scribble} is a tool that indents
+to serve as a core element in the process of integrating
+the practical aspects of session types in the software
+design and development process. This section defines
+the main terminology for session types and at the same
+time clarifies the notions through the presentation
+of the Scribble tool-chain.
+
 Practically, a session type can be seen as a formal
 {\em specification} of a communication {\em protocol} among communicating {\em roles}.
 The syntax for session types is defined on pairs of operations:
@@ -93,7 +105,7 @@ the {\em message passing} interaction; and
 
 Message passing is used for sending data from one role the another.
 The data that are passed are described in terms of their type. Session
-type can also assume for the case of {\em session delegation}
+types can also support the case of {\em session delegation}
 where a session type value, i.e.~a structure that implements communication,
 is passed as a message.
 Choice requires for a role to use a value called {\em label}
@@ -124,10 +136,6 @@ The perspective of a global protocol through a single role
 is called {\em local} protocol. The local protocol describes
 the communication interaction of a single role with all other roles
 in the system.
-%Session types also assume a {\em local} protocol that describes the
-%communication interaction of a single role with all other roles within the system.
-
-\input{scribble}
 
 The relation between a global protocol and the
 local protocols of its roles, is expressed
@@ -139,16 +147,62 @@ through the {\em projection} procedure;
 given the global protocol and a role, projection
 returns as a local protocol only the
 interactions of the global protocol that are concerned with
-the role. \textbf{A figure for project and synthesis would be useful here!}
+the role.
 
 The reverse procedure from projection is called {\em synthesis},
 where a set of local protocols are composed together in a global
 protocol.
 
+The basic module of the Scribble tool-chain is the
+Scribble protocol description language,
+which is a syntax that expresses session type specifications.
+The design of the Scribble language draws directly from
+the principles of session types. For the sake of example
+consider part of the session type protocol for the Book-store
+usecase as in \figref{scribble_bs}. 
+
+\input{figures/fig-scribble_bookstore}
+
+Line 1 of the upper protocol in \figref{scribble_bs} shows the
+definition of the global protocol for the Book-store usecase.
+The communication takes place
+among roles the \BuyerOne, \BuyerTwo and \Seller. Line 2 demonstrates
+the syntax of a message passing interaction; a message
+of type \code{title} labelled with label \code{book} is send \lstinline|from|
+role \BuyerOne \lstinline|to| role \Seller. In Scribble messages are
+defined as a list of types annotated with a label.
+
+In line 5 of the protocol their the usage of a choice interaction,
+where role \BuyerTwo makes an internal decision and selects
+out a two possible outcomes, that are
+expressed with the labels \code{agree} in line 5 or \code{quit} in line 6.
+In  both cases roles \BuyerOne and \Seller respectively offer
+alternative branches. The choice interaction requires that
+Role \BuyerTwo informs roles \BuyerOne and role \Seller. All
+three roles will then synchronise on the same choice.
+
+\dk{describe the recursion construct?}
+
+Line 1 of the bottom protocol defines the local protocol 
+for \BuyerOne of the Book-store protocol. Role \BuyerOne
+interacts with roles \BuyerTwo and \Seller. In essence,
+the local protocol for role \BuyerOne is derived automatically
+by stripping out all the irrelevant information with respect
+to \BuyerOne from the global protocol.
+
+\subsection{Integrating Session Types in Software Development}
+\label{sec:sessions_integrate}
+
+\input{figures/fig-sessions_software}
+
 %Below the term system is used to describe the whole concurrent
 %system and the term \dk{program} is used for communication module
 %inside the system. \textbf{Bellow the term system is used to describe whole local protocol
 %implementation as a set of communication modules it is composed of? }
+
+\figref{diagram} clarifies the terminology
+developed previously by showing the typical
+\dk{usage} of session types in the software design and development. 
 
 Typically, a protocol is first expressed globally and then
 projected locally \textbf{on each protocol role, projecting one local protocol specification per each protocol role.}
@@ -177,56 +231,51 @@ for the communication behaviour of the system:
 \end{enumerate}
 
 
-\subsection{Session Types as Protocols: The Scribble Tool-chain}
+%\subsection{Session Types as Protocols: The Scribble Tool-chain}
+%
+%This section presents the Scribble~\cite{scribble} tool-chain
+%as the core tool for the application of session types.
+%This section also uses Scribble to clarify the terminology
+%developed in the previous section.
 
-This section presents the Scribble~\cite{scribble} tool-chain
-as the core tool for the application of session types.
-This section also uses Scribble to clarify the terminology
-developed in the previous section.
+%The basic module of the Scribble tool-chain is the
+%Scribble protocol description language,
+%which is a syntax that expresses session type specifications.
+%The design of the Scribble language draws directly from
+%the principles of session types.
 
-The basic module of the Scribble tool-chain is the
-Scribble protocol description language,
-which is a syntax that expresses session type specifications.
-The design of the Scribble language draws directly from
-the principles of session types.
+%\input{figures/fig-scribble_global_bookstore}
 
-\input{figures/fig-scribble_global_bookstore}
-
-In \figref{scribble_bs}, uses the Scribble protocol for the
-Bookstore usecase in the online repository~\cite{usecase_repository},
-to present the Scribble syntax.
-Line 1 defines the 
-of global protocol \lstinline|Bookstore| between
-roles \lstinline|Buyer1|, \lstinline|Buyer2| and \lstinline|Seller|.
-%The communication structure is expressed 
-%as a sequence of {\em endpoint} to endpoint message passing
-%interactions between the roles of the protocol.
-%Messages are described in terms of a message type,
-%where  a label is used to annotate a list
-%of types.
-Line 2 gives an example of the simplest endpoint-to-endpoint
-message passing interaction,
-where a message with
-label \lstinline|book| and type \lstinline|title| (notation \lstinline|book(title)|)
-is send from (keyword \lstinline|from|) role \lstinline|Buyer1| to (keyword \lstinline|to|)
-role \lstinline{Seller}.
-In Scribble messages are described as a type structure
-consisted of a label and a list of message types.
-
-
-Line 5 of the protocol clarifies the choice interaction, where
-role \lstinline|Buyer2| selects a choice from two possible outcomes,
-expressed with the labels \lstinline|agree| or \lstinline|quit|. In 
-both cases roles \lstinline|Buyer1| and \lstinline|Seller| offer
-alternative branches.
+%In \figref{scribble_bs}, uses the Scribble protocol for the
+%Bookstore usecase in the online repository~\cite{usecase_repository},
+%to present the Scribble syntax.
+%Line 1 defines the 
+%of global protocol \lstinline|Bookstore| between
+%roles \lstinline|Buyer1|, \lstinline|Buyer2| and \lstinline|Seller|.
+%%The communication structure is expressed 
+%%as a sequence of {\em endpoint} to endpoint message passing
+%%interactions between the roles of the protocol.
+%%Messages are described in terms of a message type,
+%%where  a label is used to annotate a list
+%%of types.
+%Line 2 gives an example of the simplest endpoint-to-endpoint
+%message passing interaction,
+%where a message with
+%label \lstinline|book| and type \lstinline|title| (notation \lstinline|book(title)|)
+%is send from (keyword \lstinline|from|) role \lstinline|Buyer1| to (keyword \lstinline|to|)
+%role \lstinline{Seller}.
+%In Scribble messages are described as a type structure
+%consisted of a label and a list of message types.
 
 
+%Line 5 of the protocol clarifies the choice interaction, where
+%role \lstinline|Buyer2| selects a choice from two possible outcomes,
+%expressed with the labels \lstinline|agree| or \lstinline|quit|. In 
+%both cases roles \lstinline|Buyer1| and \lstinline|Seller| offer
+%alternative branches.
 
-\dk{describe the recursion construct}
 
-
-\input{figures/fig-scribble_local_bookstore}
-
+%\input{figures/fig-scribble_local_bookstore}
 
 %We use the term {\em local} protocol to describe
 %the communication structure at the level of a single participant.
@@ -234,88 +283,23 @@ alternative branches.
 %be enforced on a program, we may sometimes refer to a session type
 %protocol as communication {\em specification}.
 
-\begin{comment}
-For example Scribble code:
-%
-\begin{lstlisting}
-  msg(int) from A to B;
-\end{lstlisting}
-%
-describes the global protocol between role \lstinline|A| and \lstinline|B|,
-where participant \lstinline|A| sends message of type \lstinline|msg(int)|
-to participant \lstinline|B|. From the local perspective of participant
-\lstinline|A| the protocol would be:
-%
-\begin{lstlisting}
-  msg(int) to B;
-\end{lstlisting}
-%
-where it describes the sending of message \lstinline|msg(int)|
-to participant \lstinline|B|.
-\end{comment}
-
-
-
-\subsection{Domain Classification of Usecases}
-
-The paper presents a diversity of usecase scenarios of
-session types from different application domains, in order
-to demonstrate the fact that session types can capture
-a broad area of communication specifications.
-A taxonomy of domains are presented below with the main
-characteristic that each domain is using technologies from the
-previous domains in the taxonomy. This taxonomy also implies
-a stratification of the application of session types in different
-computation layers.
-%One of the goals of this paper is to present a diversity
-%of application of session types from different domains, as
-%part of our aim to demonstrate the robustness, functionality
-%and adaptability of session types. Here we present the particular
-%communication characteristics for every domain.
-
-\begin{enumerate}
-	\item	{\em Network Application/Business Logic}.
-			Session types can be used to develop protocols for applications
-			that run inside a network.
-			A protocol given in a session type structure, apart from the
-			specification of the communication of the application, will
-			reveal a kind of business logic for the application.
-
-	\item	{\em Network Protocols}.
-			Session types can be used to describe standard and non-standard network protocols.
-			Typically a standard network protocol should conform to
-			an informal RFC (request for comments specification. Session types
-			can present a network protocol formally its manipulation easier
-			by both engineers and machines.
-			Non-standard network protocols can also be developed.
-
-
-	\item	{\em Systems/Applications}.
-			A session type may be used to describe the communication
-			specifics of an application that uses multiple resources
-			inside a computing machine.
-
-	\item	{\em Operating System}.
-			Another domain where session types can be applied to
-			is the description of the communication specifics
-			of operating system algorithms and routines, that
-			co-ordinate the usage of hardware resources.
-
-	\item	{\em Data Structures and Algorithms}.
-			The above layers are using data structures and algorithms.
-			Session types can express the communication
-			concurrent algorithms are using. Furthermore, session types
-			can express the interaction with data structures.
-
-	\item	{\em Hardware}.
-			Hardware mechanisms complete the stratification of domains.
-			The communication of hardware modules may also be expressed
-			using session types.
-
-	\item	\dk{\em Security}.
-			Session types can also find applications in the security domain,
-			which is a domain that supports all other domains in the above list.
-\end{enumerate}
+%For example Scribble code:
+%%
+%\begin{lstlisting}
+%  msg(int) from A to B;
+%\end{lstlisting}
+%%
+%describes the global protocol between role \lstinline|A| and \lstinline|B|,
+%where participant \lstinline|A| sends message of type \lstinline|msg(int)|
+%to participant \lstinline|B|. From the local perspective of participant
+%\lstinline|A| the protocol would be:
+%%
+%\begin{lstlisting}
+%  msg(int) to B;
+%\end{lstlisting}
+%%
+%where it describes the sending of message \lstinline|msg(int)|
+%to participant \lstinline|B|.
 
 
 \subsection{Usecase Classification on Technologies used}

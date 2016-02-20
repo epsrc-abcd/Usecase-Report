@@ -1,6 +1,5 @@
 \section{Usecases}
-
-\input{usecase_table}
+\label{sec:usecases}
 
 This section will give a summary of the usecases in
 the ABCD online repository~\cite{usecase_repository}. At the
@@ -10,6 +9,72 @@ usecase for a book-store, which is a standard example for introducing
 session types. It will also focus on the implementation of a session type
 Simple Mail Transfer Protocol, which is a standard network protocol.
 
+\input{figures/fig_usecases}
+
 A table summary for the usecases in the repository can be
 found in~\figref{usecases}.
 
+\subsection{Domain Classification of Usecases}
+
+The usecases are presented following a wide range of
+application domains, in order to demonstrate the fact that
+session types can capture
+a broad area of communication specifications. 
+For the implementation of the usecases in the online
+repository different technologies that integrate
+session types in different programming paradigms were used.
+
+%A taxonomy of domains are presented below with the main
+%characteristic that each domain is using technologies from the
+%previous domains in the taxonomy. This taxonomy also implies
+%a stratification of the application of session types in different
+%computation layers.
+%%One of the goals of this paper is to present a diversity
+%%of application of session types from different domains, as
+%%part of our aim to demonstrate the robustness, functionality
+%%and adaptability of session types. Here we present the particular
+%%communication characteristics for every domain.
+
+\begin{enumerate}
+	\item	{\em Network Application/Business Logic}.
+	Session types can be used to develop protocols for applications
+	that run inside a network.
+	A protocol given in a session type structure, apart from the
+	specification of the communication of the application, will
+	reveal a kind of business logic for the application.
+	
+	\item	{\em Network Protocols}.
+	Session types can be used to describe standard and non-standard network protocols.
+	Typically a standard network protocol should conform to
+	an informal RFC (request for comments specification. Session types
+	can present a network protocol formally its manipulation easier
+	by both engineers and machines.
+	Non-standard network protocols can also be developed.
+	
+	
+	\item	{\em Systems/Applications}.
+	A session type may be used to describe the communication
+	specifics of an application that uses multiple resources
+	inside a computing machine.
+	
+	\item	{\em Operating System}.
+	Another domain where session types can be applied to
+	is the description of the communication specifics
+	of operating system algorithms and routines, that
+	co-ordinate the usage of hardware resources.
+	
+	\item	{\em Data Structures and Algorithms}.
+	The above layers are using data structures and algorithms.
+	Session types can express the communication
+	concurrent algorithms are using. Furthermore, session types
+	can express the interaction with data structures.
+	
+	\item	{\em Hardware}.
+	Hardware mechanisms complete the stratification of domains.
+	The communication of hardware modules may also be expressed
+	using session types.
+	
+	\item	\dk{\em Security}.
+	Session types can also find applications in the security domain,
+	which is a domain that supports all other domains in the above list.
+\end{enumerate}
