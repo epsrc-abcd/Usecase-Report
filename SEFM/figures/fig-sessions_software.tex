@@ -3,9 +3,8 @@
 \begin{tikzpicture}
 %	\draw[dotted, help lines]		(0,0) grid (12, 8);
 
-%	\tikzset{myshape/.style={draw, minimum width = 1cm, minimum height = 0.5cm}}
+%	\tikzset{myshape/.style={draw, minimum width = 0.5cm, minimum height = 0.5cm}}
 	\tikzset{myshape/.style={draw, circle, minimum size = 0.5cm}}
-%	\tikzset{noshape/.style={draw}}
 	\tikzset{vertrec/.style={minimum width = 0.8cm,minimum height =2cm}}
 	\coordinate (top)	at (6, 8);
 
@@ -25,8 +24,19 @@
 	\node[below = 0.25cm of Verify, minimum width = 2cm, minimum height = 1cm]	(Local)	{};
 	\node[below = 0 of LocalC]											{\scriptsize Local Protocols};
 
-	\draw[->]		(Verify)	--	node[left]	{\scriptsize project}	(LocalL);
-	\draw[->]		(LocalR)	--	node[right]	{\scriptsize synthesis}	(Verify);
+	\draw[->] let
+		\p1	=	(LocalL.north),
+		\p2	=	(Verify.west),
+		\p3	=	(Verify.south)
+	in
+		(\x2, \y3)	--	node[left]	{\scriptsize project}	(\x2, \y1);
+		
+	\draw[<-] let
+		\p1	=	(LocalR.north),
+		\p2	=	(Verify.east),
+		\p3	=	(Verify.south)
+	in
+		(\x2, \y3)	--	node[right]	{\scriptsize synthesis}	(\x2, \y1);
 
 	% Typecheck
 	\node[vertrec, left = 1.25cm of Local]			(Exec)					{};
