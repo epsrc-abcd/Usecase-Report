@@ -3,9 +3,9 @@
 \begin{tikzpicture}
 %	\draw[dotted, help lines]		(0,0) grid (12, 8);
 
-%	\tikzset{myshape/.style={draw, minimum width = 0.5cm, minimum height = 0.5cm}}
-	\tikzset{myshape/.style={draw, circle, minimum size = 0.5cm}}
-	\tikzset{vertrec/.style={minimum width = 0.8cm,minimum height =2cm}}
+	\tikzset{myshape/.style={draw, rounded corners, minimum width = 0.7cm, minimum height = 0.5cm}}
+%	\tikzset{myshape/.style={draw, circle, minimum size = 0.5cm}}
+	\tikzset{vertrec/.style={minimum width = 1cm,minimum height =2cm}}
 	\coordinate (top)	at (6, 8);
 
 	% Global protocol
@@ -21,8 +21,8 @@
 	\node[myshape, left = 0cm of LocalC]			(LocalL)				{};
 	\node[myshape, right = 0cm of LocalC]			(LocalR)				{};
 
-	\node[below = 0.25cm of Verify, minimum width = 2cm, minimum height = 1cm]	(Local)	{};
-	\node[below = 0 of LocalC]											{\scriptsize Local Protocols};
+	\node[below = 0.25cm of Verify, minimum width = 2.4cm, minimum height = 1cm]	(Local)	{};
+	\node[below = 0.1 of LocalC]										{\scriptsize Local Protocols};
 
 	\draw[->] let
 		\p1	=	(LocalL.north),
@@ -39,9 +39,9 @@
 		(\x2, \y3)	--	node[right]	{\scriptsize synthesis}	(\x2, \y1);
 
 	% Typecheck
-	\node[vertrec, left = 1.25cm of Local]			(Exec)					{};
+	\node[vertrec, left = 1.40cm of Local]			(Exec)					{};
 	\node[above = 0 of Exec]												{\scriptsize Verified Code};
-	\node[left = 1.50cm of Local]					(ExecC)					{\vdots};
+	\node[left = 1.75cm of Local]					(ExecC)					{\vdots};
 	\node[myshape, above= 0cm of ExecC]				(ExecT)					{};
 	\node[myshape, below= 0cm of ExecC]				(ExecB)					{};
 	
@@ -51,7 +51,7 @@
 	\node[vertrec, right = 0.75cm of Local]			(Monitor)				{};
 	\node[above = 0cm of Monitor]											{ \scriptsize monitor };
 
-	\node[right = 1cm of Local]						(MonC)					{\vdots};
+	\node[right = 1.1cm of Local]						(MonC)					{\vdots};
 	\node[myshape, above= 0cm of MonC]				(MonT)					{};
 	\node[myshape, below= 0cm of MonC]				(MonB)					{};
 
@@ -59,7 +59,7 @@
 	\node[vertrec, right = 0.25cm of Monitor]		(Run)					{};
 	\node[above = 0cm of Run]												{ \scriptsize execute };
 
-	\node[right = 0.75cm of MonC]					(RunC)					{\vdots};
+	\node[right = 0.95cm of MonC]					(RunC)					{\vdots};
 	\node[myshape, above= 0cm of RunC]				(RunT)					{};
 	\node[myshape, below= 0cm of RunC]				(RunB)					{};
 
