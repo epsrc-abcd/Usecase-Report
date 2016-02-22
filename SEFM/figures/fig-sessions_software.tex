@@ -106,7 +106,7 @@
 	\draw[mybiarrow]	(MonB) -- (RunB);
 
 	% Code
-	\node[below = 1.2cm of Local]						(Code)					{\dots};
+	\node[below = 1.2cm of Local]					(Code)					{\dots};
 	\node[myshape, left = 0cm of Code]				(CodeL)					{};
 	\node[myshape, right = 0cm of Code]				(CodeR)					{};
 	\node[above = 0.1 of Code]						(CodeLabel)				{\scriptsize Software Source Code};
@@ -114,7 +114,12 @@
 	\draw[myarrow]	(CodeLabel) -- node[right] {\scriptsize inference} (Local);
 
 	\draw[myarrow]	(CodeL)	-|	(TLabel);
-	\draw[myarrow]	(CodeR)	-|	(Run);
+
+	\draw[myarrow]	let
+		\p1	=	(CodeR),
+		\p2	=	(Run)
+	in
+		(CodeR)	--	node[above left]	{\scriptsize compile} (\x2, \y1) --	(Run);
 
 \end{tikzpicture}
 \end{center}
