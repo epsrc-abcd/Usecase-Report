@@ -37,11 +37,34 @@ session types in different programming paradigms were used.
 
 \begin{enumerate}
 	\item	{\em Network Application/Business Logic}.
-	Session types can be used to develop protocols for applications
-	that run inside a network.
-	A protocol given in a session type structure, apart from the
-	specification of the communication of the application, will
-	reveal a kind of business logic for the application.
+			The first two applications in \figref{usecases}
+			come from the domain of network applications.
+
+			The first network application is the online book-store,
+			where its protocol and specifics are already discussed
+			in the paper. It is a standard usecase able to demonstrate
+			the basic practical features of session types.
+
+			The Book-store usecase is implemented following a
+			communication protocol that embeds an execution logic
+			for the application. This is a practical indication
+			that session types can be used to describe the
+			behavioural logic of an application.
+			The current development the usecase follows a
+			top-down design approach, where the projection
+			of the global protocol is used by different
+			implementing technologies.
+			The book-store is implemented in Session Java and Mungo.
+			\dk{need LINKS and the hybrid implementation}
+		
+
+%			is implemented in different technologies
+
+%	Session types can be used to develop protocols for applications
+%	that run inside a network.
+%	A protocol given in a session type structure, apart from the
+%	specification of the communication of the application, will
+%	reveal a kind of business logic for the application.
 	
 	\item	{\em Network Protocols}.
 	Session types can be used to describe standard and non-standard network protocols.
