@@ -10,27 +10,30 @@
 	\tikzset{topdown/.style={draw=blue}}
 	\tikzset{bottomup/.style={draw=red}}
 
+	\tikzset{mycode/.style={fill=gray}}
+	\tikzset{myscribble/.style={fill=white}}
+
 	\tikzset{myshape/.style={draw, rounded corners, minimum width = 0.7cm, minimum height = 0.5cm}}
 %	\tikzset{myshape/.style={draw, circle, minimum size = 0.5cm}}
 	\tikzset{vertrec/.style={minimum width = 1cm,minimum height =2cm}}
 	\coordinate (top)	at (6, 8);
 
 	% Global protocol
-	\node[myshape]									(ScribbleIn)	at	(top)	{};
-	\node[above = 0cm of ScribbleIn]				(ScribbleLabel)				{\scriptsize Global Protocol};
+	\node[myshape, myscribble]					(ScribbleIn)	at	(top)	{};
+	\node[above = 0cm of ScribbleIn]			(ScribbleLabel)				{\scriptsize Global Protocol};
 
 	% Verify
-	\node[myshape, below = 1cm of ScribbleIn]		(Verify)				{};
-	\node[above = 0 of Verify]						(VerifyLabel)				{\scriptsize Verified Global Protocol};
+	\node[myshape, myscribble, below = 1cm of ScribbleIn]		(Verify)				{};
+	\node[above = 0 of Verify]					(VerifyLabel)				{\scriptsize Verified Global Protocol};
 	\draw[myarrow, topdown]		(ScribbleIn) -- node[left] {\scriptsize verification} (VerifyLabel);
 
 	% Local Protocols
-	\node[below = 1.2cm of Verify]					(LocalC)				{\dots};
-	\node[myshape, left = 0cm of LocalC]			(LocalL)				{};
-	\node[myshape, right = 0cm of LocalC]			(LocalR)				{};
+	\node[below = 1.2cm of Verify]						(LocalC)			{\dots};
+	\node[myshape, myscribble, left = 0cm of LocalC]	(LocalL)			{};
+	\node[myshape, myscribble, right = 0cm of LocalC]	(LocalR)			{};
 
 	\node[below = 1.05cm of Verify, minimum width = 2.4cm, minimum height = 0.5cm]	(Local)	{};
-	\node[above = 0 of Local]						(LocalLabel)			{\scriptsize Local Protocols};
+	\node[above = 0 of Local]							(LocalLabel)		{\scriptsize Local Protocols};
 	
 	\draw[myarrow, topdown]	($(Verify.south) - (0.2, 0)$)	--
 							node[left]	{\scriptsize projection}
@@ -64,9 +67,9 @@
 			Source Code
 		\end{tabular}
 	};
-	\node[left = 2.35cm of Local]					(ExecC)					{\vdots};
-	\node[myshape, above= 0cm of ExecC]				(ExecT)					{};
-	\node[myshape, below= 0cm of ExecC]				(ExecB)					{};
+	\node[left = 2.35cm of Local]						(ExecC)				{\vdots};
+	\node[myshape, mycode, above= 0cm of ExecC]			(ExecT)				{};
+	\node[myshape, mycode, below= 0cm of ExecC]			(ExecB)				{};
 	
 	\draw[myarrow, topdown]	(Local)	--
 							node[above]  (TLabel) {
@@ -79,12 +82,12 @@
 							(Exec);
 
 	% Monitor
-	\node[vertrec, right = 2cm of Local]			(Monitor)				{};
+	\node[vertrec, right = 2cm of Local]				(Monitor)			{};
 	\node[above = 0cm of Monitor]											{ \scriptsize \begin{tabular}{c} monitor \end{tabular}};
 
-	\node[right = 2.35cm of Local]					(MonC)					{\vdots};
-	\node[myshape, above= 0cm of MonC]				(MonT)					{};
-	\node[myshape, below= 0cm of MonC]				(MonB)					{};
+	\node[right = 2.35cm of Local]						(MonC)				{\vdots};
+	\node[myshape, myscribble, above= 0cm of MonC]		(MonT)				{};
+	\node[myshape, myscribble, below= 0cm of MonC]		(MonB)				{};
 
 	\draw[myarrow, topdown]	(Local)	--
 							node[above] {
@@ -97,12 +100,12 @@
 							(Monitor.west);	
 
 	% Execute
-	\node[vertrec, right = 0.25cm of Monitor]		(Run)					{};
+	\node[vertrec, right = 0.25cm of Monitor]			(Run)				{};
 	\node[above = 0cm of Run]												{ \scriptsize execute };
 
-	\node[right = 0.95cm of MonC]					(RunC)					{\vdots};
-	\node[myshape, above= 0cm of RunC]				(RunT)					{};
-	\node[myshape, below= 0cm of RunC]				(RunB)					{};
+	\node[right = 0.95cm of MonC]						(RunC)				{\vdots};
+	\node[myshape, mycode, above= 0cm of RunC]			(RunT)				{};
+	\node[myshape, mycode, below= 0cm of RunC]			(RunB)				{};
 
 %	\draw[<->]	(MonC) -- (RunC);
 	\draw[mybiarrow]	(MonT) -- node (monitorarrow) {} (RunT);
@@ -118,10 +121,10 @@
 %			};
 
 	% Code
-	\node[below = 1.2cm of Local]					(Code)					{\dots};
-	\node[myshape, left = 0cm of Code]				(CodeL)					{};
-	\node[myshape, right = 0cm of Code]				(CodeR)					{};
-	\node[above = 0.1 of Code]						(CodeLabel)				{\scriptsize Source Code};
+	\node[below = 1.2cm of Local]						(Code)					{\dots};
+	\node[myshape, mycode, left = 0cm of Code]			(CodeL)					{};
+	\node[myshape, mycode, right = 0cm of Code]			(CodeR)					{};
+	\node[above = 0.1 of Code]							(CodeLabel)				{\scriptsize Source Code};
 
 	\draw[myarrow, bottomup]	($(CodeLabel.north) + (0.2, 0)$) -- node[right] {\scriptsize inference} ($(Local.south) + (0.2, 0)$);
 	\draw[myarrow, topdown]		($(Local.south) - (0.2, 0)$) --
