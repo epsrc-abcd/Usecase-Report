@@ -53,13 +53,15 @@ With the help of sequence charts,
 each software module that participates in the
 protocol communication implements
 its \emph{local} software role within the protocol.
-Usually the process of implementing the local implementation
-impose numerous possible solutions that are often hidden and
-omitted from sequence chart.
-\dk{what is hidden? - overall structure of the protocol, logic on choices}
+Usually the process of implementing the local specifications
+may follow different possible solutions that are not directly
+visible or they are even omitted from the sequence chart, due
+to the complexity they will introduce.
+%\dk{what is hidden? - overall structure of the protocol, logic on choices}
 Another limitation of sequence charts, is the inability to deal with complex
-communication protocols where complex communication interactions
-that involve multiple parties become hard to follow and reason.
+communication protocols, such as the case where some roles
+need to make subsequent choices between different communication behaviours
+for the entire protocol.
 
 A solution to manage communication complexity
 is the introduction of \emph{structure} within the communication protocol.
@@ -86,23 +88,53 @@ the notion of a type to capture the communication behaviour in concurrent system
 	interactions between a set of communicating entities and it is used
 	to characterise data structures that are used to implement communication.}
 
-\subsection{Sessions as Protocols: The Scribble Protocol Description Language}
+The formal nature of session types enables to rigorously
+reason about the communication properties of a system.
+Session types particularly focus in the properties:
+%
+\begin{enumerate}[label=$\bullet$]
+	\item	{\em Communication Safety}: Every execution state of the system has {\em safe} communication behaviour:
+	%	
+	\begin{itemize}
+		\item	{\em Communication interaction match}:
+				Every send (resp., select) operation has a corresponding receive (resp., branch) operation.
+		\item	{\em Message (\mybf{Payload?}) type match}:
+				The type of every message being send matches the type of the message expected to be receive.
+		\item	{\em Deadlock-freedom}:
+				Consequently, every message send will be eventually received.
+	\end{itemize}
+	
+	\item	{\em Communication Progress}: Every state of the system conforms to a terminated protocol, or
+			it will {\em progress} to a state with a safe communication behaviour.
+\end{enumerate}
+%
+In addition, the structured nature of session types enables
+a methodology of applying session types in the software 
+engineering process.
+
+\dk{make clear that it is a syntactic/static technique - in contrast to model checking}
+
+The Scribble tool-chain~\cite{scribble} is a platform
+that indents to serve as a core element in the process
+of integrating the practical aspects of session types
+in software engineering. The design of Scribble
+draws directly from the session type principles and the properties,
+as identified through rigorous study. The rest of the
+section introduces the main terminology for session types
+and, whenever appropriate, it presents these notions
+using the Scribble tool-chain.
+
+\subsection{Sessions as Protocols}%: The Scribble Protocol Description Language}
 \label{sec:sessions_scribble}
 
-The Scribble tool-chain~\cite{scribble} is a tool that indents
-to serve as a core element in the process of integrating
-the practical aspects of session types in software engineering.
-The basic module of the Scribble
-tool-chain is the Scribble protocol description language,
-which is a syntax that expresses session type specifications.
-The design of the Scribble language draws directly from
-the principles of session types. For the sake of example
-consider part of the session type protocol for the Book-store
-use-case as in \figref{scribble_bs}. 
-This section defines
-the main terminology for session types and at the same
-time clarifies the notions through the presentation
-of the Scribble language.
+%The Scribble tool-chain~\cite{scribble} is a tool that indents
+%to serve as a core element in the process of integrating
+%the practical aspects of session types in software engineering.
+%The basic module of the Scribble
+%tool-chain is the Scribble protocol description language,
+%which is a syntax that expresses session type specifications.
+%The design of the Scribble language draws directly from
+%the principles of session types.
 
 Practically, a session type can be seen as a formal
 {\em specification} of a communication {\em protocol} among communicating {\em roles}.
@@ -162,6 +194,14 @@ The reverse procedure from projection is called {\em synthesis},
 where a set of local protocols are composed together in a global
 protocol.
 
+\subsubsection{The Scribble Protocol Description Language}
+The notions explained above are supported by the
+Scribble protocol description language,
+which is a syntax used to express session type specifications.
+For the sake of example
+consider part of the session type protocol for the Book-store
+use-case as in \figref{scribble_bs}. 
+
 
 \input{figures/fig-scribble_bookstore}
 
@@ -175,7 +215,7 @@ role \BuyerOne \lstinline|to| role \Seller. In Scribble messages are
 defined as a list of types annotated with a label.
 
 In line 5 of the protocol 
-%their 
+%their properties
 the usage of a choice interaction is presented,
 where role \BuyerTwo makes an internal decision and selects
 out a two possible outcomes, that are
@@ -284,12 +324,14 @@ and checks whether the
 software source code
 implements the corresponding role of the specified communication behaviour.
 Upon success, the result is verified software that
-enjoys the session types {\em safety} and {\em progress}
+enjoys the session types {\em communication safety} and {\em communication progress}
 properties.
 
-\textbf{Here I would mention that local protocol can also be used as template for humans 
+\dk{Here I would mention that local protocol can also be used as template for humans 
 developing source code. In that case, at the end of development process one can again verify behaviour 
 of local implementation against the initial local specification.}
+
+\dk{I should also add automatic code/API generation}
 
 Another way of using the set of local protocols is
 for monitoring the execution of the communication
@@ -299,7 +341,7 @@ Essentially, the local monitors run a state machine that is derived
 out of the local protocol syntax.
 %The monitor platform also requires for
 %the concurrent software execution.
-It is assumed that the communication interations
+It is assumed that the communication interaction
 of the software under execution can be recognised
 and monitored by the monitor interface.
 %The assumption to be made here is that
@@ -325,7 +367,7 @@ Then an automatic synthesis procedure can take place,
 where the derived local protocols are synthesised
 to create a global protocol. Upon success, the
 developed software is guaranteed to ensure
-the desirable session type properties.
+the communication safety and progress.
 Furthermore, the obtained global and/or local protocols can be
 analysed and compared against athe intended communication
 behaviour, both formally with tools or informally with
@@ -347,23 +389,24 @@ The case where the implementation of all the communication
 processes inside a system conforms to the corresponding
 local protocols of all the roles in a global protocol 
 %are implemented by the corresponding communicating modules of
-is called session fidelity. When session fidelity is
-ensured
-then a number of communication properties can be guaranteed
-for the concurrent software:
-%
-\begin{enumerate}[label=$\bullet$]
-	\item	Every execution state of the system has {\em safe} communication behaviour:
-	%	
-	\begin{itemize}
-		\item	{\em Communication interaction match}: Every send (resp., select) operation has a corresponding receive (resp., branch) operation.
-		\item	{\em Message (\mybf{Payload?}) type match}: The type of every message being send matches the type of the message expected to be receive.
-		\item	{\em Deadlock-freedom}: Consequently, every message send will be eventually received.
-	\end{itemize}
-	
-	\item	Every state of the system conforms to a terminated protocol, or
-			it will {\em progress} to a state with a safe communication behaviour.
-\end{enumerate}
+is called {\em session fidelity}.
+When session fidelity is ensured then the communication safety
+and communication progress properties are ensured.
+%then a number of communication properties can be guaranteed
+%for the concurrent software:
+%%
+%\begin{enumerate}[label=$\bullet$]
+%	\item	Every execution state of the system has {\em safe} communication behaviour:
+%	%	
+%	\begin{itemize}
+%		\item	{\em Communication interaction match}: Every send (resp., select) operation has a corresponding receive (resp., branch) operation.
+%		\item	{\em Message (\mybf{Payload?}) type match}: The type of every message being send matches the type of the message expected to be receive.
+%		\item	{\em Deadlock-freedom}: Consequently, every message send will be eventually received.
+%	\end{itemize}
+%	
+%	\item	Every state of the system conforms to a terminated protocol, or
+%			it will {\em progress} to a state with a safe communication behaviour.
+%\end{enumerate}
 
 As seen in \figref{diagram} Scribble and the procedures
 that manipulate session type protocols lie at the core
