@@ -310,12 +310,13 @@ for the concurrent software:
 	\item	Every execution state of the system has {\em safe} communication behaviour:
 	%	
 	\begin{itemize}
-		\item	{\em Communication operator matching}: Every send (resp., select) operation has a corresponding receive (resp., branch) operation.
-		\item	{\em Message type matching}: The type of every message being send matches the type of the message expected to be receive.
+		\item	{\em Communication interaction match}: Every send (resp., select) operation has a corresponding receive (resp., branch) operation.
+		\item	{\em Message type match}: The type of every message being send matches the type of the message expected to be receive.
 		\item	{\em Deadlock-freedom}: Consequently, every message send will be eventually received.
 	\end{itemize}
 	
-	\item	Every state of the protocol will {\em progress} to a safe state.
+	\item	Every state of the execution will either be a terminal state or it will {\em progress}
+			to a state with a safe communication behaviour.
 \end{enumerate}
 
 As seen in \figref{diagram} Scribble and the procedures
