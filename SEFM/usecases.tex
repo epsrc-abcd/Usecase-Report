@@ -56,6 +56,11 @@ session types in different programming paradigms were used.
 			implementing technologies.
 			The book-store is implemented in Session Java and Mungo.
 			\dk{need LINKS and the hybrid implementation}
+
+			\mybf{- Book-store: Standard example, Communication Interaction shows business logic}
+
+			\mybf{- Chat-Server: Implement a server/client architecture, design an application protocol for the servers,
+				client implementations should conform to the protocol, Erlang monitoring implementation cite S. Fowler's Master Thesis.}
 		
 
 %			is implemented in different technologies
@@ -73,31 +78,79 @@ session types in different programming paradigms were used.
 	can present a network protocol formally its manipulation easier
 	by both engineers and machines.
 	Non-standard network protocols can also be developed.
+
+	\mybf{- HTTP: Request response standard RFC protocol, stateless,
+			assume different types for each request/response header (not just a text header)
+			request-response sequences can give a further structure
+			of interaction, it would be nice if we have a client to stream tree-structured data.
+			automatically generated API from the Scribble tool-chain} 
+
+	\mybf{- SMTP: Stateful standard RFC protocol. Expresses request/respond, 
+				Expresses specific data-structures streaming such as the data-structure
+				of an email,
+				need for translate between RFC text format to/from message/payload types
+				Complex state makes implementation difficult - session types
+				remove a burden from the developer because they automatically
+				verify that the state of the code follows the state of the protocol. }
 	
 	
 	\item	{\em Systems/Applications}.
 	A session type may be used to describe the communication
 	specifics of an application that uses multiple resources
 	inside a computing machine.
+
+	\mybf{- Do we have a system to describe }
 	
 	\item	{\em Operating System}.
 	Another domain where session types can be applied to
 	is the description of the communication specifics
 	of operating system algorithms and routines, that
 	co-ordinate the usage of hardware resources.
+
+	\mybf{- Locks: Basic OS structure basic for achieving resource utilisation. Its
+		usage implies race conditions that in turn imply asynchronous
+		and reactive communication. The implementation of locks in the
+		eventful session Java shows that session types can express deadlocks.}
+
+	\mybf{- Concurrency Algorithms: Classic concurrency problems expressed in Session types.
+		Implementing in the python monitored actors framework. }
 	
 	\item	{\em Data Structures and Algorithms}.
 	The above layers are using data structures and algorithms.
 	Session types can express the communication
 	concurrent algorithms are using. Furthermore, session types
 	can express the interaction with data structures.
-	
+
+	\mybf{- Collection: A stack client protocol. Used to control the put, get access
+		to a collection structure - when the stack is empty there is not get.
+		Session types describe the logic/properties that a data structure can have.}
+
+	\mybf{- File Access: Similarly used to control the access on a file. Cannot
+		read from a file if the file is not open first and if the file is empty.
+		The protocols ends by closing the file. Again access to resources
+		can be described using session types.}
+
+	\mybf{- Concurrent Fibonacci: Parallel algorithms require threads that communicate. Session
+		types can use describe the necessary underlying communication between threads that implement
+		parallel algorithms.}
+
+	\mybf{- Network Topologies: Topologies are scalable and thus parametrised. Pabble is
+		an extension to Scribble that allows us to describe and cope with parametrised protocols.}
+
+
 	\item	{\em Hardware}.
 	Hardware mechanisms complete the stratification of domains.
 	The communication of hardware modules may also be expressed
 	using session types.
-	
-	\item	\dk{\em Security}.
+
+	\mybf{- Memory Coherency: Hardware components communicate, here we have two memories
+		that need to be consistent with each other on a hardware level. Session types can
+		describe the hardware (signals/messages) interaction between hardware components.}
+
+	\item	\mybf{\em Security}.
 	Session types can also find applications in the security domain,
 	which is a domain that supports all other domains in the above list.
+
+	\mybf{- There are some security protocols in the SILL repository. We need to
+			be careful in the description because it is a reference to other people.}
 \end{enumerate}
