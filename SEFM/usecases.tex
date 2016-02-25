@@ -165,7 +165,7 @@ session types since it incorporates challenges that in principle
 software engineers face.
 
 The SMTP is a protocol that requires handling
-communication through a number of distinct states,
+communication through a number of distinct states (\mybf{see state machine diagram below}),
 which adds a degree of complexity to the implementation.
 With the help of session types and the methods and procedures
 session types support developers can reduce the effort
@@ -280,7 +280,8 @@ of the participant roles.
 %%
 The global protocol is used to project the communication
 behaviour of roles \lstinline|C| and \lstinline|S|.
-We focus on the projection of the client as we are interested in interacting with a real server.
+The focus is on the projection of the client
+since the interest is on interacting with a real server.
 
 This part of SMTP describes a loop (\lstinline|rec Z1|) where the client chooses
 among the messages \lstinline|SUBJECT|, to send the subject,
@@ -312,3 +313,37 @@ local protocol SMTP_C(role S, self C) {
 }
 \end{lstlisting}
 %
+
+The local type can be represented as a state
+machine:
+
+\begin{statemachine}[node distance=6cm, scale=0.5]
+	\node[initial,state]		(S0)							{\lstinline|State0|};
+	\node[state]				(S1)[right of=S0]				{\lstinline|State1|};
+	\node[state]				(S2)[below =2cm of S1]			{\lstinline|State2|};
+	\node[state]				(S3)[left of=S2]				{\lstinline|State3|};
+	\node[state]				(S29)[below = 2cm of S3]		{\lstinline|State29|};
+	\node[state]				(S30)[right of= S29]		{\lstinline|State30|};
+	\node[state]				(S32)[left = 3cm of S29]		{\lstinline|State32|};
+	\node[state]				(S31)[below = 2cm of S29]		{\lstinline|State31|};
+
+%	\node[state]				(S39)[right = 9cm of S31]		{\lstinline|State39|};
+	\node[state]				(S39)[above = 2cm of S32]		{\lstinline|State39|};
+%	\node[state,accepting]		(END)[below =2cm of S39]		{\lstinline|END|};
+	\node[state,accepting]		(END)[above =2cm of S39]		{\lstinline|END|};
+	\node[state]				(SX)[below = 2cm of S31]		{\lstinline|Other States|};
+
+	\path	(S0)		edgenode		{\lstinline|String receive_220StringFromS()|}	(S1)
+			(S1)		edgenode[left]	{\lstinline|void send_EHLOToS()|}	(S2)
+						edgenode[below= 0.4cm]	{\lstinline|void send_QUITToS()|}	(S39)
+			(S2)		edgenode		{\lstinline|void send_ehloStringToS(String)|}	(S3)
+			(S3)		edgenode		{\lstinline|...|}	(S29)
+			(S29)		edgenode 		{\lstinline|void send_SUBJECTToS()|}	(S30)
+						edgenode		{\lstinline|void send_DATALINEToS()|}	(S31)
+						edgenode[above]	{\lstinline|void send_ATADToS()|}	(S32)
+			(S32)		edgenode		{\lstinline|...|}	(SX)
+			(S31)		edgenode		{\lstinline|...|}	(SX)
+			(S30)		edgenode		{\lstinline|...|}	(SX)
+			(S39)		edgenode[right]	{\lstinline|void send_quitStringToS(String)|}	(END);
+\end{statemachine}
+%%
