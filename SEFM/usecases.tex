@@ -154,3 +154,161 @@ session types in different programming paradigms were used.
 	\mybf{- There are some security protocols in the SILL repository. We need to
 			be careful in the description because it is a reference to other people.}
 \end{enumerate}
+
+
+
+\subsection{The Simple Mail Transfer Protocol}
+
+This section gives a more detailed presentation of the SMTP
+usecase. SMTP is considered an important implementation for
+session types since it incorporates challenges that in principle
+software engineers face.
+
+The SMTP is a protocol that requires handling
+communication through a number of distinct states,
+which adds a degree of complexity to the implementation.
+With the help of session types and the methods and procedures
+session types support developers can reduce the effort
+needed to handle the complexity.
+
+Furthermore, SMTP introduces a structure on an email,
+which is composed by subject, main part and attachments
+as well as meta-data for the email. Streaming such 
+tree-structured data types over the network is a task that
+can be rigorously handled and ensured by session types,
+due to its structured natured. Transforming
+network data-structures (e.g.~text headers)
+to/from session types structures is an important
+procedure to understand when applying session types. 
+
+%In this report we describe the implementation of
+%an application layer communication protocol.
+
+SMTP is an application layer protocol.
+{SMTP} is an internet standard
+electronic mail transfer protocol which typically runs over a TCP
+(Transmission Control Protocol) connection.
+It was first defined in RFC
+821~\cite{SMTP-rfc} and later extended in RFC 5321~\cite{ESMTP-rfc},
+which is the version we consider here.
+
+
+An SMTP interaction consists of an exchange of text-based {commands}
+between the client and the server.
+For example, the client sends the
+\lstinline|EHLO| command to identify itself and open the connection with
+the server.
+%
+The commands \lstinline|MAIL FROM| : $<$address$>$ and \lstinline|RCPT TO| : $<$address$>$
+specify the e-mail address of the sender and the
+receiver of the e-mail.
+%
+The \lstinline|DATA| command allows the client to specify the text of
+the e-mail. The \lstinline|QUIT| command is used to terminate the
+session and close the connection. The responses from the server have the
+following format: three digits followed by an optional dash ``-'', such
+as \lstinline|250-|, and then some text, like OK. The server might reply
+to \lstinline|EHLO| with \lstinline|250| $<$text$>$ or to
+\lstinline|MAIL FROM| or \lstinline|RCPT TO| with \lstinline|250| OK.
+
+
+The implementation of the protocol implements an interaction between
+a Simple Mail Transfer Protocol (SMTP) client and a \lstinline|gmail| server.
+
+
+The global protocol for the SMTP is defined in Scribble, 
+based on Hu's work~\cite{HuR:smtp}.
+
+\begin{lstlisting}[numbers=left]
+global protocol SMTP(role S, role C) {
+ // Global interaction between server and client.
+  _220(String) from S to C;
+   choice at C {
+    ehlo(String) from C to S;
+    rec X {
+      choice at S {
+        _250dash(String) from S to C;
+         continue X;
+      } or {
+       _250(String) from S to C;
+        choice at C {
+         ...
+         rec X1 {
+           ...
+           choice at S {
+             _250dash(String) from S to C;
+             continue X1;
+          } or {
+            250(String) from S to C;
+            ...
+            rec Z1 {
+              ...
+              data(String) to S;
+              ...
+              rec Z3 {
+                choice at C {
+                  subject(String) from C to S;
+                  continue Z3;
+                } or {
+                  dataline(String) form C to S;
+                  continue Z3;
+                } or {
+                  atad(String) from C to S;
+                  _250(String) from S to C;
+                  continue Z1; }
+                }
+              }   ...  
+           }  
+           ... 
+        }
+      }
+    }
+  }
+ } or  { quit(String) from C to S; }
+}
+\end{lstlisting}
+
+
+The above Scribble protocol formally specifies
+the description in \secref{sec: smtp_description}.
+The global protocol \lstinline|SMTP| specifies
+an interaction between two roles being the client ant the server of the protocol.
+The protocol is then projected to the
+individual communication specifications of each 
+of the participant roles.
+
+%%
+The global protocol is used to project the communication
+behaviour of roles \lstinline|C| and \lstinline|S|.
+We focus on the projection of the client as we are interested in interacting with a real server.
+
+This part of SMTP describes a loop (\lstinline|rec Z1|) where the client chooses
+among the messages \lstinline|SUBJECT|, to send the subject,
+\lstinline|DATALINE|, to send a line of text, or \lstinline|ATAD| to terminate the e-mail by sending a dot.
+
+\begin{lstlisting}[numbers=left]
+local protocol SMTP_C(role S, self C) {
+  _220(String) from S;
+  choice at C{
+    ehlo(String) to S;
+    ...
+    rec Z1 {
+      ...
+      data(String) to S;
+      ...
+      rec Z3 {
+        choice at C {
+          subject(String) to S;
+          continue Z3;
+        } or {
+          dataline(String) to S;
+          continue Z3;
+        } or {
+          atad(String) to S;
+          _250(String) from S;
+          continue Z1; }}}
+      ...
+  } or { quit(String) to S; }
+}
+\end{lstlisting}
+%
