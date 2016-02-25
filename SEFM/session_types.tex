@@ -273,15 +273,10 @@ tool-chain supports many of these automated
 procedures.
 An important assumption
 is that the software source code in the
-bottom of \figref{diagram} is developed
-with the use of a communication interface,
-where its communication operations
-can be identified by automated procedures.
-%%using a programming language that
-%makes use of a communication interface
-%that can be automatically identified.
-%\textbf{Maybe we can define better here!}
-
+bottom of \figref{diagram} uses an interface
+for communication, where the communication
+operations can be identified by automated
+procedures.
 
 In a typical top-down approach, a developer will first develop a global protocol
 %and express it syntactic form. 
@@ -295,7 +290,7 @@ global protocol correctness \dk{what does it verify?}.
 After the global protocol verification, a projection
 procedure takes place where a local protocol
 for each global protocol role is derived.
-The obtain local protocols are also expressed
+The obtained local protocols are also expressed
 syntactically as session type specifications.
 Verification, projection and local specification
 syntax are supported by the Scribble tool-chain.
@@ -327,11 +322,22 @@ Upon success, the result is verified software that
 enjoys the session types {\em communication safety} and {\em communication progress}
 properties.
 
-\dk{Here I would mention that local protocol can also be used as template for humans 
-developing source code. In that case, at the end of development process one can again verify behaviour 
-of local implementation against the initial local specification.}
 
-\dk{I should also add automatic code/API generation}
+A second way to use the set of local protocols
+is for automatic code generation. The generated
+code might be in the form of APIs that implement
+communication behaviour or in the form of programming
+templates that implement communication behaviour and
+they further need attention by the developers for adding
+extra computational logic.
+Scribble supports the generation of a Java API out of
+every the set of Scribble local protocols.
+The generated API has a class for each state of the protocol
+that implements as methods all the available communication
+operations. A call to method returns an object of the class
+that corresponds to the next state of the protocol. A dynamic
+check ensures that each object (i.e.~state) is used once.
+
 
 Another way of using the set of local protocols is
 for monitoring the execution of the communication
@@ -368,10 +374,23 @@ where the derived local protocols are synthesised
 to create a global protocol. Upon success, the
 developed software is guaranteed to ensure
 the communication safety and progress.
-Furthermore, the obtained global and/or local protocols can be
-analysed and compared against athe intended communication
-behaviour, both formally with tools or informally with
-human reading techniques.
+
+
+In any of the above methodologies for using session types,
+session types can be used as requirements by humans means
+to drive the software development process. In the top-down
+approach local types can be used to give intuition and guide
+developers when implementing code.
+Furthermore, the bottom-up approach more agile development teams
+can analyse and compare the obtained global and/or local protocols
+against the intended communication behaviour using human
+reading techniques.
+
+\dk{how about diagrammatic languages?}
+
+
+
+
 %\textbf{Furthermore, thus obtained global protocol can be compared 
 %to the specifications of intended communication behaviour, 
 %formally with tools or informally with human reading technique.}
