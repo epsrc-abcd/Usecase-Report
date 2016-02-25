@@ -1,4 +1,4 @@
-\begin{figure}
+\begin{figure}[t]
 	\begin{longtable}{| c | p{3cm} | p{3cm} | p{2.5cm} | p{2.5cm} | }
 		\hline
 			&	\multicolumn{1}{c|}{Usecase}
@@ -7,10 +7,8 @@
 																					&	\multicolumn{1}{c|}{Description}
 		\\
 		\hline
-		1.	&	Book Store	&	Business Application	&	\begin{tabular}{l}
-																Mungo,\\
-																Session Java
-															\end{tabular}
+		1.	&	Book Store	&	Business Application	&	Mungo,
+															Scribble API
 																					&	Interaction Logic
 		\\
 
@@ -19,35 +17,40 @@
 		\\
 
 		\hline
-		3.	&	Hyper-Text Transfer Protocol
-							&	Network Protocol		&							&	Request / Response protocol
+		3.	&	HTTP %Hyper-Text Transfer Protocol
+							&	Network Protocol		&	Scribble API			&	Request/Response %pattern
 		\\
 
 		\hline
 		4.	&	Simple Mail Transfer Protocol
-							&	Network Protocol		&	Mungo/StMungo, Session Java, LINKS
+							&	Network Protocol		&	Mungo, Scribble API, LINKS
 																					&	Stateful protocol
 		\\
 		\hline
-		5.	&	Domain Name System
+		5.	&	DNS Server
 							&	Network Protocol 		&	Erlang
 																					&	
 		\\
 		\hline
 		6.	&	Concurrency
-				\begin{enumerate}[label=$\bullet$]
-					\item	Dinning Philosophers
-					\item	Sleeping Barber
-					\item	Cigarette Smokers
-				\end{enumerate}
-							&	Operating Systems		&	Python/Actors			&	Race conditions
+				\parbox{3cm}{
+					$\bullet$	Din. Philosophers\\
+					$\bullet$	Sleeping Barber\\
+					$\bullet$	Cigarette Smokers
+				}
+				%\begin{enumerate}[label=$\bullet$]
+				%	\item	Dinning Philosophers
+				%	\item	Sleeping Barber
+				%	\item	Cigarette Smokers
+				%\end{enumerate}
+							&	Operating Systems		&	Python Actors			&	Race conditions
 		\\
 		\hline
-		7.	&	Lock		&	Operating Systems		&	Eventful Session Java	&	Race conditions
+		7.	&	Lock		&	Operating Systems		&	Eventful SJ				&	Race conditions
 		\\
 
 		\hline
-		8.	&	Collection	&	Data Structures			&	Mungo					&	A stack client
+		8.	&	Collection	&	Data Structures			&	Mungo					&	Stack client
 		\\
 
 		\hline
@@ -55,28 +58,42 @@
 		\\
 
 		\hline
-		10.	&	Concurrent Fibonacci
-						&	Concurrent Algorithms		&	Mungo					&
+		10.	&	Fibonacci
+						&	Parallel Algorithms			&	Mungo					&
 		\\
 		\hline
 		11.	&	Network Topologies
-				\begin{enumerate}[label=$\bullet$]
-					\item	Ring
-					\item	Butterfly
-					\item	All to All
-					\item	Stencil
-					\item	Farm (Master-Worker)
-					\item	Map Reduce
-				\end{enumerate}
-						&	Parallel Algorithms		&	Pabble and MPI				&	Parametric algorithms
+				\parbox{3cm}{
+					$\bullet$	Ring\\
+					$\bullet$	Ring\\
+					$\bullet$	Butterfly\\
+					$\bullet$	All to All\\
+					$\bullet$	Stencil\\
+					$\bullet$	Master-Worker\\
+					$\bullet$	Map Reduce
+				}
+%				\begin{enumerate}[label=$\bullet$]
+%					\item	Ring
+%					\item	Butterfly
+%					\item	All to All
+%					\item	Stencil
+%					\item	Farm (Master-Worker)
+%					\item	Map Reduce
+%				\end{enumerate}
+						&	Parallel Algorithms		&	Pabble and MPI				&	Parametrised algorithms
 		\\
 		\hline
-		12.	&	Concurrent Algorithms
-				\begin{enumerate}[label=$\bullet$]
-					\item	Peano Numbers
-					\item	Add Server
-				\end{enumerate}
-						&	Concurrent Algorithms	&	Links, GV					&
+		12.	&	Functional Algor.
+				\parbox{3cm}{
+					$\bullet$	Peano Numbers\\
+					$\bullet$	Add Server
+				}
+
+%				\begin{enumerate}[label=$\bullet$]
+%					\item	Peano Numbers
+%					\item	Add Server
+%				\end{enumerate}
+						&	Parallel Algorithms		&	Links, GV					&
 		\\
 		\hline
 		13.	&	Memory Coherence
