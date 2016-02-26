@@ -11,10 +11,10 @@ Simple Mail Transfer Protocol, which is a standard network protocol.
 
 \input{figures/fig-usecases}
 
-Table ~\figref{usecases} summarizes the use case from the ABCD repository. 
+\rumi{Table ~\figref{usecases} summarises the use case from the ABCD repository. 
 The table presents the name of the use case, its original source, and the language that it is implemented. Full source code, 
 running examples and and detailed description of all use cases can be found in \cite{OnlineRepo}. 
-The use cases are organised into domains  and for each domain we have chosen representative examples.  
+The use cases are organised into domains  and for each domain we have chosen representative examples.} 
 
 \subsection{Domain Classification of Usecases}
 
@@ -117,7 +117,42 @@ session types in different programming paradigms were used.
 		eventful session Java shows that session types can express deadlocks.}
 
 	\mybf{- Concurrency Algorithms: Classic concurrency problems expressed in Session types.
-		Implementing in the python monitored actors framework. }
+		Implementing in the python monitored actors framework.}
+        \rumi{
+% We have implemented well-known synchronisation problems.   
+%We address a classical concurrency problems. 
+Classic concurrency problems require correct coordination among multiple components to avoid starvation and deadlock. 
+Preserving the causalities between the interactions is challenging since the communication often involves complex patterns, combining long sequence of interactions with recursive behaviour and nested choice branches. 
+Often precise message sequence should be followed. Moreover, it is not obvious if the components can be safely composed. Sending the wrong message type, sending to the wrong role or not sending in the correct message sequence may lead to deadlocks, errors which initial cause is hard to be identified or wrong computation results.
+Modelling the interactions between the components with session types ensures correct synchronisation and prevents deadlocks, unexpected termination and orphan messages.  \\
+
+Sleeping barber: A barber is waiting for customers to cut their hair. When there are no customers the barber sleeps. When a customer arrives, he wakes the barber or sits in one of the waiting chairs in the waiting room. If all chairs are occupied, the customer leaves. Customers repeatedly visit the barber shop until they get a
+haircut. The key element of the solution is to make sure that whenever a customer or a barber checks the state of the waiting room, they always see a valid state. The problem can be implemented using an additional Selector role that decides which is the next customer. \\
+
+Dining Philosophers: In this use case N philosophers are competing to eat while sitting
+around a round table. There is one fork between each two philosophers and a philosopher needs
+two forks to eat. The challenge is to avoid deadlock, where no one can eat, because everyone
+is possessing exactly one fork. The problem can be implemented with additional role Arbitrator. \\
+
+Cigarette Smoker: This problem involves N smokers and one arbiter. The arbiter puts resources
+on the table and smokers pick them. A smoker needs to collect k resources to start smoking. The
+challenge is to avoid deadlock by disallowing a competition between smokers from picking up
+resources. This is done by delegating the control to the arbiter, who decides (in a random manner)
+which smoker to send the resource to. The session types for this use case combines round-robin
+pattern, sending a random smoker a message to smoke, with multicast, iterating
+through all the smokers notifying them to exit). \\
+
+\mybf{Concurrent Fibonacci: Parallel algorithms require threads that communicate. Session
+		types can use describe the necessary underlying communication between threads that implement
+		parallel algorithms.}
+%three components, room, barber,and customer. A barber waits for customers in his shop, sleeping when there is nobody to serve. When a customer enters in the shop, he goes through a waiting room with n chairs: if all chairs are taken, he leaves; otherwise, he sits. If the barber is sleeping, he wakes up, serves all sitting customers (one a time), and sleeps again when nobody is waiting. We model this scenario with three components: the customer, the shop and the barber.
+
+% and is the key to achieving deadlock free communication.
+%To guarantee a valid synchronisation, precise message sequence should be followed. 
+%The communication structure these protocols requires long sequence of interactions, combined with recursive behaviour and multiple nested choice branches.  
+
+%While the use cases so far demonstrated succinct recursion and request-reply patterns, interleaved together, this one demonstrates a communication structure with long sequence of interactions, where preserving the causalities is the key to achieving deadlock free communication. The use of session types prevents potential deadlock, unexpected termination and orphan messages.    		
+		}
 	
 	\item	{\em Data Structures and Algorithms}.
 	The above layers are using data structures and algorithms.
@@ -158,10 +193,6 @@ session types in different programming paradigms were used.
 	\mybf{- There are some security protocols in the SILL repository. We need to
 			be careful in the description because it is a reference to other people.}
 \end{enumerate}
-
-\begin{comment}
-Sleeping barber: The use case presents another classic synchorisation problem. A barber is waiting for customers to cut their hair. When there are no customers the barber sleeps. When a customer arrives, he wakes the barber or sits in one of the waiting chairs in the waiting room. If all chairs are occupied, the customer leaves. Customers repeatedly visit the barber shop until they get a haircut. The key element of the solution is to make sure that whenever a customer or a barber checks the state of the waiting room, they always see a valid state. The problem is implemented using a Selector actor that decides which is the next customer, Customer actors, a Barber actor and a Room actor. Note that, differently from the previous use cases, the protocol between the Customers and the other actors is multiparty (not binary). To guarantee a valid synchronisation, precise message sequence should be followed. While the use cases so far demonstrated succinct recursion and request-reply patterns, interleaved together, this one demonstrates a communication structure with long sequence of interactions, where preserving the causalities is the key to achieving deadlock free communication. The use of session types prevents potential deadlock, unexpected termination and orphan messages. 
-\end{comment}
 
 \subsection{The Simple Mail Transfer Protocol}
 
