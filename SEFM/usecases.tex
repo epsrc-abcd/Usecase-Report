@@ -11,8 +11,10 @@ Simple Mail Transfer Protocol, which is a standard network protocol.
 
 \input{figures/fig-usecases}
 
-A table summary for the usecases in the repository can be
-found in~\figref{usecases}.
+Table ~\figref{usecases} summarizes the use case from the ABCD repository. 
+The table presents the name of the use case, its original source, and the language that it is implemented. Full source code, 
+running examples and and detailed description of all use cases can be found in \cite{OnlineRepo}. 
+The use cases are organised into domains  and for each domain we have chosen representative examples.  
 
 \subsection{Domain Classification of Usecases}
 
@@ -154,3 +156,9 @@ session types in different programming paradigms were used.
 	\mybf{- There are some security protocols in the SILL repository. We need to
 			be careful in the description because it is a reference to other people.}
 \end{enumerate}
+
+\begin{comment}
+Sleeping barber: The use case presents another classic synchorisation problem. A barber is waiting for customers to cut their hair. When there are no customers the barber sleeps. When a customer arrives, he wakes the barber or sits in one of the waiting chairs in the waiting room. If all chairs are occupied, the customer leaves. Customers repeatedly visit the barber shop until they get a haircut. The key element of the solution is to make sure that whenever a customer or a barber checks the state of the waiting room, they always see a valid state. The problem is implemented using a Selector actor that decides which is the next customer, Customer actors, a Barber actor and a Room actor. Note that, differently from the previous use cases, the protocol between the Customers and the other actors is multiparty (not binary). To guarantee a valid synchronisation, precise message sequence should be followed. While the use cases so far demonstrated succinct recursion and request-reply patterns, interleaved together, this one demonstrates a communication structure with long sequence of interactions, where preserving the causalities is the key to achieving deadlock free communication. The use of session types prevents potential deadlock, unexpected termination and orphan messages. 
+\end{comment}
+
+\subsection{Lessons Learned}
