@@ -365,6 +365,16 @@ Sequence Diagrams.]
   \draw[->,>=angle 60] (messbeg) -- (messend) node[#1, above=-0.05] {#3};
 }
 
+%% mostly used between altblocks
+%% \separateline[line style]{from}{to}
+\newcommand{\myseparateline}[3][dotted, color=black, very thick]{
+    \stepcounter{seqlevel}
+    \path
+    (#2)+(.1,-\theseqlevel*\unitfactor-.7*\unitfactor) node (from) {}
+    (#3)+(-.1,-\theseqlevel*\unitfactor-.7*\unitfactor) node (to) {};
+    \draw[#1] (from) -- (to);
+}
+
 %%% End of my pgf-umlsd extenstion
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
