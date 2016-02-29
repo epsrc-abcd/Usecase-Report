@@ -245,8 +245,8 @@ Sequence Diagrams.]
 }
 
 % the environment of sequence diagram
-\newenvironment{sequencediagram}[1][1]{
-  \begin{tikzpicture}[scale=#1]
+\newenvironment{sequencediagram}[1][]{
+  \begin{tikzpicture}[#1]
     \setlength{\unitlength}{1cm}
     \tikzstyle{sequence}=[coordinate]
     \tikzstyle{inststyle}=[rectangle, draw, anchor=west, minimum
@@ -362,7 +362,7 @@ Sequence Diagrams.]
   \path
   (#2)+(0,-\theseqlevel*\unitfactor-0.7*\unitfactor) node (messbeg) {}
   (#4)+(0,-\theseqlevel*\unitfactor-0.7*\unitfactor) node (messend) {};
-  \draw[->,>=angle 60] (messbeg) -- (messend) node[#1, above] {#3};
+  \draw[->,>=angle 60] (messbeg) -- (messend) node[#1, above=-0.05] {#3};
 }
 
 %%% End of my pgf-umlsd extenstion
