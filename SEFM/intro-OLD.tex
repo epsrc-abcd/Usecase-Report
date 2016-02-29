@@ -17,6 +17,50 @@ In order to take full advantage of the possibilities of session types,
 it is important to start a programme of technology transfer so that they can
 be integrated into broader approaches to software engineering.
 
+There are numerous formal approaches (\mybf{for example?}) proposed for describing communication protocols,
+in software development.
+Because of their ability to define clear and verifiable solutions, formal
+method for the description of communication are implemented within programming languages. (\mybf{What does this mean? Are we saying that programming languages already include formal methods for the description of communication?})
+Some programming languages are even standardised for specifying telecommunication systems,
+e.g.~the set of languages standardised for telecommunication systems within the
+ISO ITU-T Z.100 series.
+In the telecommunication (\mybf{complex system}) domain, many of the requirements
+usually limit the use of formal methods.
+Furthermore, there is an unexplored area on how to balance the use of formal methods
+and the complexity in industrial software systems. (\mybf{SG: I think we need to clarify what this paragraph is saying.})
+Research in session types exhibits some promising results that can
+help explore and fill in this gap.
+In addition, the problem of weak adoption of formal methods
+by the industry has been extensively studied.
+The main barriers recognised can be found in the lack
+of education, tool support and the cost of formal methods~\cite{Davis2013}.
+But even if these barriers are removed, there comes the importance of a 
+well defined improvement strategy, that managers within a software
+organisation have to follow while adopting formal methods~\cite{Ponsard2013}.
+It is therefore necessary for a wider engagement of software engineers 
+with formal method and formal method experts.
+
+
+%Because of their power to defining clear and verifiable solutions some formal methods are implemented within the languages that are even standardized for specifying and describing communication systems such are for example set of languages standardized for telecommunication systems within ISO ITU-T Z.100 series. In telecommunication domain, variety of requirements that complex telecommunication systems provide is usually limiting the use of formal methods and still, there is a huge unclear area, how to balance the use of formal methods and complexity of industrial software systems. Research of session types is exactly trying to find solutions to fill this gap.
+%Moreover, the problem of weak adoption of formal methods in industry has been extensively studied. The main barriers recognised are in lack of education, tool support and the cost of formal methods (cite: Study on the barriers to the industrial adoption of formal methods). Furthermore, even if these barriers are removed, the importance of well defined improvement strategy the managers within software organisations have to follow while adopting formal methods is stressed by some authors (cite: High-Level Guidance for Managers Deploying Formal Methods in Their Organisation). Therefore, a wider engagement of software engineering experts in formal method research and stronger collaboration among formal methods experts and software engineers are needed.
+
+
+%The session types discipline emerged during the last
+%two decades, as a framework for enforcing a number
+%of {\em good} and desirable properties in concurrent
+%programs.
+%Since their original inception in the the seminal paper by
+%Honda et.~al.~\cite{honda.vasconcelos.kubo:language-primitives},
+%there has been a broad research effort to study the properties
+%of session types and to apply the principles of session types
+%to different computational models and programming paradigms. 
+%At the moment, there is a research effort converging towards
+%the the development of tools and technologies that use session
+%types as part of the software development process.
+%It is therefore important to initiate a process that will
+%integrate the principles of session types in the broader context
+%of software and system development.
+
 Research on session types is mainly driven by the need to demonstrate that realistic,
 general patterns of concurrency and communication can be described.
 A typical research paper identifies a problem in terms of a real-world use-case and 
@@ -25,33 +69,21 @@ that applies the principles of session types to the solution of the problem.
 The development of session-typed tools and technologies is a consequence of this
 research process: tools are developed following the theory and are applied to real-world use-cases.
 
+%i.e.~concurrency patterns that are not artificial and restricted
+%to a narrow set of cases.
+%A typical research paper on session types identifies a problem
+%in terms of a real world usecase and proposes a session typed
+%framework, expressed in a strict mathematical form, that applies
+%the principles of session types for the solution of the problem.
+%The development of session typed tools and technologies is a
+%consequence of the above research process; tools are developed
+%following following the theory and are used to solve real
+%world usecases.
+
 This approach to presenting results about session types,
 although successful within the session types community,
 presents difficulties for the process of knowledge exchange
 between experts and interested practitioners.
-
-%There are numerous formal approaches (\mybf{for example?}) proposed for describing communication protocols,
-%in software development.
-%Because of their ability to define clear and verifiable solutions, formal
-%method for the description of communication are implemented within programming languages. (\mybf{What does this mean? Are we saying that programming languages already include formal methods for the description of communication?})
-%Some programming languages are even standardised for specifying telecommunication systems,
-%e.g.~the set of languages standardised for telecommunication systems within the
-%ISO ITU-T Z.100 series.
-%In the telecommunication (\mybf{complex system}) domain, many of the requirements
-%usually limit the use of formal methods.
-%Furthermore, there is an unexplored area on how to balance the use of formal methods
-%and the complexity in industrial software systems. (\mybf{SG: I think we need to clarify what this paragraph is saying.})
-%Research in session types exhibits some promising results that can
-%help explore and fill in this gap.
-%In addition, the problem of weak adoption of formal methods
-%by the industry has been extensively studied.
-%The main barriers recognised can be found in the lack
-%of education, tool support and the cost of formal methods~\cite{Davis2013}.
-%But even if these barriers are removed, there comes the importance of a 
-%well defined improvement strategy, that managers within a software
-%organisation have to follow while adopting formal methods~\cite{Ponsard2013}.
-%It is therefore necessary for a wider engagement of software engineers 
-%with formal method and formal method experts.
 
 %The above standard of presenting results on session types,
 %although successful within the session types community,
@@ -73,9 +105,10 @@ between experts and interested practitioners.
 			the same concepts within session types.
 			This may lead to confusion among less
 			expert readers.
-			An example is the use of the terms \emph{typestate},
+
+			\mybf{An example is the use of the terms \emph{typestate},
 			\emph{session type} and \emph{protocol} for essentially the same concept
-			in the context of object-oriented programming.
+			in the context of object-oriented programming.}
 
 	\item	Individual results about session types are often presented in
 			isolation and not placed in the context of the whole field.
@@ -98,18 +131,18 @@ between experts and interested practitioners.
 Summarising this discussion, we conclude that a wider
 audience would need to study a large series of partial
 results and at the same time filter out a huge amount
-of unnecessary technical detail in order to achieve a satisfactory
-level of understanding of session types. This situation is an obstacle for
+of unnecessary technical detail in order to achieve a satisfying
+level of understanding session types. This situation is an obstacle for
 the adoption of session types as part of practical software development.
 
-More generally, the problem of weak industrial adoption of formal methods has been extensively studied.
-The main barriers are lack
-of information, lack of tool support, cost~\cite{Davis2013}.
-Even if these barriers are removed, there is still the need for a 
-well-defined strategy for managers within a software
-organisation to follow while adopting formal methods~\cite{Ponsard2013}.
-It is therefore necessary to broaden the engagement of software engineers 
-with formal methods and formal methods experts.
+%A conclusion on the above discussion is that a wider
+%audience would need to study a large series of partial
+%results and at the same time filter out a huge amount
+%of unnecessary technical details in order to achieve a satisfying
+%level of understanding session types.
+%The problems identified above, are not just difficulties
+%to a newcomer, they might also discourage his or her
+%efforts in understanding session types.
 
 Motivated by the goal of integrating session types into
 the software development process, this paper identifies the problem of accessibility
@@ -120,24 +153,24 @@ terms that are easier to understand by non-experts; and
 (ii) to enable a process that will
 integrate session types into a broader context in computing.
 
-Our approach to meeting these objectives is to establish a common
+A way to meet these objectives is to establish a common
 ground that can be used for knowledge exchange between researchers.
 This paper identifies as a common means of communication the demonstration
-of practical scenarios from a broad area of application in computing.
+of practical scenarios from a broad area of application in computer science.
 Use-cases can bridge the communication gap between researchers and can help
 the wider promotion of the principles of session types.
 
-Furthermore, current research directions in session types are
+Furthermore, the current research directions on session types are
 pushing towards a dialectic between session types and disciplines
-such as software engineering and system design and implementation.
-Evidence for this trend comes from the research experience
-gained from the project
+like software engineering, and system design and implementation.
+Evidence on this direction comes from the he research experience
+gained by working on the project
 ``From Data Types to Session Types: A Basis for Concurrency and Distribution''
 (ABCD for short)~\cite{ABCD}.
-The goals of the ABCD project include (i)
-working with industrial partners towards integrating
+Part of the requirements of the ABCD project is to (i)
+work with industrial partners towards integrating
 session types in real world use-cases; and (ii)
-compiling a set of use-cases
+compile a set of usecases
 for session types that can be used for current and future research on
 the design and development of frameworks and technologies.
 %
@@ -164,11 +197,11 @@ More concretely, the aims of this paper are to:
 	\item	Demonstrate the robustness, functionality, and overall applicability
 			of session types through a diverse overview of use-cases (\secref{usecases})
 			that cover:
-			(i) a range of domains that exhibit different computational needs;
-			(ii) interpretations of session types in several
-			programming paradigms; and
+			(i) different domains that exhibit different computational needs;
+			(ii) different interpretations of session types in different
+			programming paradigms that are used to implement a usecase; and
 			(iii) current tools and technologies that integrate session types
-			into the software development process.
+			in the software development process.
 	%
 %			\begin{enumerate}[label=$\bullet$]
 %
@@ -244,7 +277,7 @@ More concretely, the aims of this paper are to:
 %\end{enumerate}
 
 
-This paper is intended to be used by experts and non-experts
+Overall this paper can be used by experts and non-experts
 to exchange knowledge about the overall discipline of session types,
 and to enable future work on the application of session types.
 
