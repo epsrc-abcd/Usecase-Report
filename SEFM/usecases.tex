@@ -1,30 +1,26 @@
-\section{Usecases}
+% !TeX root = main.tex
+
+\section{Use-Cases}
 \label{sec:usecases}
 
-This section will give a summary of the usecases in
-the ABCD online repository~\cite{usecase_repository}. At the
-same time it will give a more detail presentation on
-how session types are used in the implementation of the network application
-usecase for a book-store, which is a standard example for introducing
-session types. It will also focus on the implementation of a session type
-Simple Mail Transfer Protocol, which is a standard network protocol.
+This section summarises the use-cases in
+the ABCD online repository~\cite{usecase_repository}. It also gives more detailed presentations of two particular use-cases: (1) the bookstore, which was introduced in Section~\ref{sec:session_types} and is a standard example of session types; (2) Simple Mail Transfer Protocol (SMTP), which is a standard network protocol. 
 
 \input{figures/fig-usecases}
 
-\rumi{Table ~\figref{usecases} summarises the use case from the ABCD repository. 
-The table presents the name of the use case, its original source, and the language that it is implemented. Full source code, 
-running examples and and detailed description of all use cases can be found in \cite{OnlineRepo}. 
-The use cases are organised into domains  and for each domain we have chosen representative examples.} 
+Table~\ref{table:use_cases_all} lists the name of each use-case, its original source, and the language(s) and/or tool(s) that have been used to implement it. Full source code, 
+running examples and and detailed descriptiona of all of the use-cases can be found in the repository \cite{usecase_repository}. 
+The use-cases are organised into application domains and are intended to be representative examples for each domain.
 
-\subsection{Domain Classification of Usecases}
+\subsection{Application Domains Covered by the Use-Cases}
 
-The usecases are presented following a wide range of
-application domains, in order to demonstrate the fact that
+The use-cases are drawn from a wide range of
+application domains, in order to demonstrate that
 session types can capture
 a broad area of communication specifications. 
-For the implementation of the usecases in the online
-repository different technologies that integrate
-session types in different programming paradigms were used.
+%For the implementation of the usecases in the online
+%repository different technologies that integrate
+%session types in different programming paradigms were used.
 
 %A taxonomy of domains are presented below with the main
 %characteristic that each domain is using technologies from the
@@ -38,16 +34,16 @@ session types in different programming paradigms were used.
 %%communication characteristics for every domain.
 
 \begin{enumerate}
-	\item	{\em Network Application/Business Logic}.
-			The first two applications in \figref{usecases}
+	\item	\emph{Network Application / Business Logic}.
+			The first two applications in Table~\ref{table:use_cases_all}
 			come from the domain of network applications.
 
-			The first network application is the online book-store,
-			where its protocol and specifics are already discussed
-			in the paper. It is a standard usecase able to demonstrate
-			the basic practical features of session types.
+			The first is the online bookstore,
+			which was discussed
+			in Section~\ref{sec:session_types}. It is a standard use-case demonstrating
+			the basic features of session types. The communication protocol represents the execution logic of the application. The implementation of this use-case follows a top-down design approach, in which the global protocol is projected to local protocols. There are several versions of the bookstore, using different implementation languages: Session Java 
 
-			The Book-store usecase is implemented following a
+			The bookstore usecase is implemented following a
 			communication protocol that embeds an execution logic
 			for the application. This is a practical indication
 			that session types can be used to describe the
@@ -384,4 +380,4 @@ machine:
 			(S39)		edgenode[right]	{\lstinline|void send_quitStringToS(String)|}	(END);
 \end{statemachine}
 %%
->>>>>>> 7ae4313febf389ced7dd794120bf27495cd58faf
+
