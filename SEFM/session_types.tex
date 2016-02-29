@@ -5,8 +5,8 @@
 \label{sec:session_types}
 
 
-This section introduces session types through a
-a discussion of the need for session types in
+This section introduces session types through 
+a discussion of the need for them in
 software engineering.
 It also presents the Scribble~\cite{scribble} protocol
 description language, which is a formal language for describing
@@ -23,29 +23,29 @@ types to a wider audience.
 
 Communication \emph{protocols} in software engineering
 are usually described and communicated among humans
-by using the most intuitive graphical form of sequence charts \sg{Use consistent terminology: sequence diagram, or sequence chart?}
+by using the most intuitive graphical form of sequence diagrams 
 (\figref{seqchart}).
-Sequence charts are used to depict a communication flow as an ordered
+Sequence diagrams are used to depict a communication flow as an ordered
 sequence of \emph{message passing} among communicating
 participants that represent particular \emph{roles} in a communication
 protocol.
 
-\figref{seqchart} illustrates the Book-store protocol, which is a use-case
+\figref{seqchart} illustrates the bookstore protocol, which is a use-case
 in the ABCD online repository~\cite{usecase_repository}.
-The Book-store protocol specifies an interaction between two online Buyer roles
+The bookstore protocol specifies an interaction between two online Buyer roles
 that invoke a process of buying a book from an online Seller role, while
 sharing the expense.
-In the sequence chart, each role is represented by a vertical line and
+In the sequence diagram, each role is represented by a vertical line and
 communication messages are represented by horizontal directed arrows
 indicating the direction of communication flow.
 Intuitively, the communication progress proceeds downwards.
-Thus the protocol's behaviour is represented visually within the chart.
-However, sequence charts are not considered as formal tools because
+Thus the protocol's behaviour is represented visually within the diagram.
+However, sequence diagrams are not considered as formal tools because
 protocols described in this way cannot be verified as being complete or unambiguous.
 
 In industrial practice, communication protocols for
 distributed software are usually described in natural language and
-discussed with the help of sequence charts.
+discussed with the help of sequence diagrams.
 %After that and with the help of sequence charts,
 %the protocols are implemented between the communication components
 %of the software.
@@ -54,12 +54,12 @@ discussed with the help of sequence charts.
 Each software module that participates in the
 protocol implements
 its \emph{local} software role within the protocol.
-Usually the process of implementing the local specifications
-may follow different possible solutions that are not directly
-visible or are even omitted from the sequence chart, due
-to the complexity they will introduce. \sg{I'm not sure what this means.}
+%Usually the process of implementing the local specifications
+%may follow different possible solutions that are not directly
+%visible or are even omitted from the sequence diagram, due
+%to the complexity they will introduce. \sg{I'm not sure what this means.}
 %\dk{what is hidden? - overall structure of the protocol, logic on choices}
-Another limitation of sequence charts is the inability to deal with complex
+A limitation of sequence diagrams is the inability to deal with complex
 communication protocols, such as the case where one role
 can make a choice that affects the subsequent communication behaviour
 of the entire protocol.
@@ -79,15 +79,15 @@ Structured types are used to describe data structures.
 When types are structured as input/output requirements they
 are used to describe functionality.
 The combination of functionality and data structures give rise
-to the \emph{object oriented} concepts of classes and interfaces.% of objects.
+to the \emph{object-oriented} concepts of classes and interfaces. % of objects.
 %
 A session type extends %the above approaches of
 the notion of a type to capture the communication behaviour in concurrent systems.
 % definition of session types
 {\em A session type is a type structure that describes communication
 	behaviour in terms of a series of send and receive %message passing
-	interactions between a set of communicating entities, and it is used
-	to characterise data structures that are used to implement communication.} \sg{I'm not sure what we mean by characterising data structures. Is it just that the data type of each message is defined?}
+	interactions between a set of communicating entities.}  %, and it is used
+%	to characterise data structures that are used to implement communication.} \sg{I'm not sure what we mean by characterising data structures. Is it just that the data type of each message is defined?}
 
 The formal nature of session types enables rigorous
 reasoning about the communication properties of a system.
@@ -99,14 +99,15 @@ Session types particularly focus on the following properties:
 	\begin{itemize}
 		\item	{\em Communication interaction match}:
 				Every send (resp., select) operation has a corresponding receive (resp., branch) operation.
-		\item	{\em Message (\mybf{Payload?}) type match}:
+		\item	{\em Message type match}:
 				The type of every message being sent matches the type of the message expected to be received.
 		\item	{\em Deadlock-freedom}:
 				Consequently, every message sent will eventually be received.
 	\end{itemize}
 	
-	\item	{\em Communication Progress}: Every state of the system either represents a terminated protocol, or
-			will {\em progress} to a state with safe communication behaviour. \sg{Maybe this can be clearer?}
+	\item	{\em Communication Progress}: If the protocol has not yet terminated, then there is a pair of components that can communicate safely, leading to a system state that again satisfies the safety and progress properties.
+%Every state of the system either represents a terminated protocol, or
+%			will {\em progress} to a state with safe communication behaviour. \sg{Maybe this can be clearer?}
 \end{enumerate}
 %
 In addition, the structured nature of session types enables
@@ -229,7 +230,7 @@ three roles will then synchronise on the same choice.
 
 Scribble also provides a looping construct, which is needed for more realistic protocols but is not used in this simple example.
 
-\dk{describe the recursion construct?}
+%\dk{describe the recursion construct?}
 
 Line 1 of the lower protocol defines the local protocol 
 for \BuyerOne of the Book-store protocol. Role \BuyerOne
@@ -238,7 +239,7 @@ the local protocol for role \BuyerOne is derived automatically
 by stripping out all the irrelevant information with respect
 to \BuyerOne from the global protocol.
 
-\subsection{Sessions as Software Development Method}%: The Scribble Tool-chain}
+\subsection{Session Types as a Software Development Method}%: The Scribble Tool-chain}
 \label{sec:sessions_integrate}
 
 In addition to a protocol description language,
@@ -510,50 +511,7 @@ programming paradigms used in the case studies.
 %to participant \lstinline|B|.
 
 
-\subsection{Technologies based on Session Types}
-\dk{Just presentation and references. Move it to Section 3.}
 
-Several technologies and tools based on session types have been used to implement the use-cases that we describe in Section~\ref{sec:usecases}.
-%
-\begin{enumerate}
-	\item	Session Java~\cite{HU07TYPE-SAFE} is an extension of Java with binary session types for communication channels, supported by a runtime library. The compiler statically checks session types. 
-
-	\item	Eventful Session Java~\cite{event} supports asynchronous, event-driven programming, using session types to track progress through individual sessions.
-
-	\item	Multiparty Session C~\cite{NYH12} supports programming in C with the MPI library. The compiler statically checks session types. 
-
-	\item	SPY~\cite{DBLP:conf/rv/NeykovaYH13} uses session types as the basis for runtime monitoring of communication protocols in Python.
-
-	\item	Two technologies apply session types to the actors paradigm:
-			\begin{itemize}
-				\item	An implementation that uses SPY to
-						monitor python threads that simulate actors~\cite{DBLP:conf/coordination/NeykovaY14}.
-				\item	A similar approach on monitoring session types is also used for the
-						Erlang programming language. %, which is a programming language for the Actors model.
-\sg{Is this Erlang system one of ours? Simon Fowler's MSc}
-			\end{itemize}
-
-	\item	Pabble~\cite{DBLP:conf/pdp/NgY14} extends Scribble to express
-			communication structures that are parameterised by the number of roles.
-			Pabble protocols are implemented and typechecked for the C+MPI framework.
-
-	\item	Mungo~\cite{mungo} is a tool that integrates session types into the object-oriented
-			programming paradigm through the notion of typestate. Communication
-			operations on a channel are accessed via a state-dependent interface.
-			%Mungo uses a protocol description language for capturing typestate.
-			The Scribble to Mungo (StMungo) tool transforms Scribble
-			protocols into Mungo interfaces.
-
-
-	\item	GV:			A functional programming implementation of binary session types. \sg{Refer to Phil's paper.}
-	\item	The web programming language Links \cite{} includes static typechecking of protocols, using the linear logic interpretation of session types \cite{}. 
-	\item	SILL:		Functional programming based on the linear dual intuitionistic interpretation of session types. \sg{Separate this from the repository --- say something elsewhere.}
-
-	\item	A state pattern implementation as a library. Uses Scribble to automatically
-			create an API for state pattern programming and uses runtime checks to
-			cope with linearity requirements.
-
-\end{enumerate}
 
 \subsection{Fine/coarse grain representation}
 \dk{this should go as future work}
