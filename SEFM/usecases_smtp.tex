@@ -54,6 +54,16 @@ the streaming of tree data-structures.
 %%an application layer communication protocol.
 
 \paragraph{Implementation:}
+The implementation of the SMTP starts with
+the definition of a global protocol that describes
+the interaction between a client and the server.
+The global protocol can be found in \appref{}.
+
+An SMTP interaction is an exchange of text-based {commands}
+between a client and the server.
+For example, the client may send the
+\lstinline|EHLO| 
+
 An SMTP interaction consists of an exchange of text-based {commands}
 between the client and the server.
 For example, the client sends the
