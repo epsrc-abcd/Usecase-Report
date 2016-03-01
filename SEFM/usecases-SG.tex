@@ -12,51 +12,6 @@ Table~\ref{table:use_cases_all} lists the name of each use-case, its original so
 running examples and and detailed descriptiona of all of the use-cases can be found in the repository \cite{usecase_repository}. 
 The use-cases are organised into application domains and are intended to be representative examples for each domain.
 
-\subsection{Technologies based on Session Types}
-
-
-Several technologies and tools based on session types have been used to implement the use-cases that we describe in Section~\ref{sec:usecases}.
-%
-\begin{enumerate}
-	\item	Session Java~\cite{HU07TYPE-SAFE} is an extension of Java with binary session types for communication channels, supported by a runtime library. The compiler statically checks session types. 
-
-	\item	Eventful Session Java~\cite{event} supports asynchronous, event-driven programming, using session types to track progress through individual sessions.
-
-	\item	Multiparty Session C~\cite{NYH12} supports programming in C with the MPI library. The compiler statically checks session types. 
-
-	\item	SPY~\cite{DBLP:conf/rv/NeykovaYH13} uses session types as the basis for runtime monitoring of communication protocols in Python.
-
-	\item	Two technologies apply session types to the actors paradigm:
-			\begin{itemize}
-				\item	An implementation that uses SPY to
-						monitor python threads that simulate actors~\cite{DBLP:conf/coordination/NeykovaY14}.
-				\item	A similar approach on monitoring session types is also used for the
-						Erlang programming language. %, which is a programming language for the Actors model.
-\sg{Is this Erlang system one of ours? Simon Fowler's MSc}
-			\end{itemize}
-
-	\item	Pabble~\cite{DBLP:conf/pdp/NgY14} extends Scribble to express
-			communication structures that are parameterised by the number of roles.
-			Pabble protocols are implemented and typechecked for the C+MPI framework.
-
-	\item	Mungo~\cite{mungo} is a tool that integrates session types into the object-oriented
-			programming paradigm through the notion of typestate. Communication
-			operations on a channel are accessed via a state-dependent interface.
-			%Mungo uses a protocol description language for capturing typestate.
-			The Scribble to Mungo (StMungo) tool transforms Scribble
-			protocols into Mungo interfaces.
-
-
-	\item	GV:			A functional programming implementation of binary session types. \sg{Refer to Phil's paper.}
-	\item	The web programming language Links \cite{} includes static typechecking of protocols, using the linear logic interpretation of session types \cite{}. 
-	\item	SILL:		Functional programming based on the linear dual intuitionistic interpretation of session types. \sg{Separate this from the repository --- say something elsewhere.}
-
-	\item	A state pattern implementation as a library. Uses Scribble to automatically
-			create an API for state pattern programming and uses runtime checks to
-			cope with linearity requirements.
-
-\end{enumerate}
-
 \subsection{Application Domains Covered by the Use-Cases}
 
 The use-cases are drawn from a wide range of
@@ -216,8 +171,8 @@ through all the smokers notifying them to exit). \\
 
 	\mybf{- Network Topologies: Topologies are scalable and thus parametrised. Pabble is
 		an extension to Scribble that allows us to describe and cope with parametrised protocols.}
-Pattern-based structured parallel programming. Pabble can express all structured patterns in the HPC (High Performance Computing) Dwarf benchmark suit which capture common pattern of communication and computation.  A dwarf is an algorithmic method that captures a pattern of computation and communication. The Seven Dwarfs, constitute equivalence classes where membership in a class is defined by similarity in computation and data movement. The dwarfs are specified at a high level of abstraction to allow reasoning about their behavior across a broad range of applications. Programs that are members of a particular class can be implemented differently and the underlying numerical methods may change over time, but the claim is that the underlying patterns have persisted through generations of changes and will remain important into the future. The dwarfs present a method for capturing the common requirements of classes of
-applications while being reasonably divorced from individual implementations. The dwarfs present a method for capturing the common requirements of classes of applications while being reasonably divorced from individual implementations.Helps productivity, less LOC, clear description. Results show that our workflow saves development and debugging efforts for MPI parallel applications, especially for novice parallel programmers )
+
+
 	\item	{\em Hardware}.
 	Hardware mechanisms complete the stratification of domains.
 	The communication of hardware modules may also be expressed
@@ -297,7 +252,55 @@ a Simple Mail Transfer Protocol (SMTP) client and a \lstinline|gmail| server.
 The global protocol for the SMTP is defined in Scribble, 
 based on Hu's work~\cite{HuR:smtp}.
 
-\input{figures/fig-smtp_global}
+\begin{lstlisting}[numbers=left]
+global protocol SMTP(role S, role C) {
+ // Global interaction between server and client.
+  _220(String) from S to C;
+   choice at C {
+    ehlo(String) from C to S;
+    rec X {
+      choice at S {
+        _250dash(String) from S to C;
+         continue X;
+      } or {
+       _250(String) from S to C;
+        choice at C {
+         ...
+         rec X1 {
+           ...
+           choice at S {
+             _250dash(String) from S to C;
+             continue X1;
+          } or {
+            250(String) from S to C;
+            ...
+            rec Z1 {
+              ...
+              data(String) to S;
+              ...
+              rec Z3 {
+                choice at C {
+                  subject(String) from C to S;
+                  continue Z3;
+                } or {
+                  dataline(String) form C to S;
+                  continue Z3;
+                } or {
+                  atad(String) from C to S;
+                  _250(String) from S to C;
+                  continue Z1; }
+                }
+              }   ...  
+           }  
+           ... 
+        }
+      }
+    }
+  }
+ } or  { quit(String) from C to S; }
+}
+\end{lstlisting}
+
 
 The above Scribble protocol formally specifies
 the description in \secref{sec: smtp_description}.
@@ -317,9 +320,64 @@ This part of SMTP describes a loop (\lstinline|rec Z1|) where the client chooses
 among the messages \lstinline|SUBJECT|, to send the subject,
 \lstinline|DATALINE|, to send a line of text, or \lstinline|ATAD| to terminate the e-mail by sending a dot.
 
-\input{figures/fig-smtp_local}
+\begin{lstlisting}[numbers=left]
+local protocol SMTP_C(role S, self C) {
+  _220(String) from S;
+  choice at C{
+    ehlo(String) to S;
+    ...
+    rec Z1 {
+      ...
+      data(String) to S;
+      ...
+      rec Z3 {
+        choice at C {
+          subject(String) to S;
+          continue Z3;
+        } or {
+          dataline(String) to S;
+          continue Z3;
+        } or {
+          atad(String) to S;
+          _250(String) from S;
+          continue Z1; }}}
+      ...
+  } or { quit(String) to S; }
+}
+\end{lstlisting}
+%
 
 The local type can be represented as a state
 machine:
 
-\input{figures/fig-state_machine}
+\begin{statemachine}[node distance=6cm, scale=0.5]
+	\node[initial,state]		(S0)							{\lstinline|State0|};
+	\node[state]				(S1)[right of=S0]				{\lstinline|State1|};
+	\node[state]				(S2)[below =2cm of S1]			{\lstinline|State2|};
+	\node[state]				(S3)[left of=S2]				{\lstinline|State3|};
+	\node[state]				(S29)[below = 2cm of S3]		{\lstinline|State29|};
+	\node[state]				(S30)[right of= S29]		{\lstinline|State30|};
+	\node[state]				(S32)[left = 3cm of S29]		{\lstinline|State32|};
+	\node[state]				(S31)[below = 2cm of S29]		{\lstinline|State31|};
+
+%	\node[state]				(S39)[right = 9cm of S31]		{\lstinline|State39|};
+	\node[state]				(S39)[above = 2cm of S32]		{\lstinline|State39|};
+%	\node[state,accepting]		(END)[below =2cm of S39]		{\lstinline|END|};
+	\node[state,accepting]		(END)[above =2cm of S39]		{\lstinline|END|};
+	\node[state]				(SX)[below = 2cm of S31]		{\lstinline|Other States|};
+
+	\path	(S0)		edgenode		{\lstinline|String receive_220StringFromS()|}	(S1)
+			(S1)		edgenode[left]	{\lstinline|void send_EHLOToS()|}	(S2)
+						edgenode[below= 0.4cm]	{\lstinline|void send_QUITToS()|}	(S39)
+			(S2)		edgenode		{\lstinline|void send_ehloStringToS(String)|}	(S3)
+			(S3)		edgenode		{\lstinline|...|}	(S29)
+			(S29)		edgenode 		{\lstinline|void send_SUBJECTToS()|}	(S30)
+						edgenode		{\lstinline|void send_DATALINEToS()|}	(S31)
+						edgenode[above]	{\lstinline|void send_ATADToS()|}	(S32)
+			(S32)		edgenode		{\lstinline|...|}	(SX)
+			(S31)		edgenode		{\lstinline|...|}	(SX)
+			(S30)		edgenode		{\lstinline|...|}	(SX)
+			(S39)		edgenode[right]	{\lstinline|void send_quitStringToS(String)|}	(END);
+\end{statemachine}
+%%
+

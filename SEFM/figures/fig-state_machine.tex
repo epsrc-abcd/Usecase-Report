@@ -1,0 +1,65 @@
+%\begin{statemachine}[node distance=6cm, scale=0.5]
+%	\node[initial,state]		(S0)							{\lstinline|State0|};
+%	\node[state]				(S1)[right of=S0]				{\lstinline|State1|};
+%	\node[state]				(S2)[below =2cm of S1]			{\lstinline|State2|};
+%	\node[state]				(S3)[left of=S2]				{\lstinline|State3|};
+%	\node[state]				(S29)[below = 2cm of S3]		{\lstinline|State29|};
+%	\node[state]				(S30)[right of= S29]		{\lstinline|State30|};
+%	\node[state]				(S32)[left = 3cm of S29]		{\lstinline|State32|};
+%	\node[state]				(S31)[below = 2cm of S29]		{\lstinline|State31|};
+%
+%%	\node[state]				(S39)[right = 9cm of S31]		{\lstinline|State39|};
+%	\node[state]				(S39)[above = 2cm of S32]		{\lstinline|State39|};
+%%	\node[state,accepting]		(END)[below =2cm of S39]		{\lstinline|END|};
+%	\node[state,accepting]		(END)[above =2cm of S39]		{\lstinline|END|};
+%	\node[state]				(SX)[below = 2cm of S31]		{\lstinline|Other States|};
+%
+%	\path	(S0)		edgenode		{\lstinline|String receive_220StringFromS()|}	(S1)
+%			(S1)		edgenode[left]	{\lstinline|void send_EHLOToS()|}	(S2)
+%						edgenode[below= 0.4cm]	{\lstinline|void send_QUITToS()|}	(S39)
+%			(S2)		edgenode		{\lstinline|void send_ehloStringToS(String)|}	(S3)
+%			(S3)		edgenode		{\lstinline|...|}	(S29)
+%			(S29)		edgenode 		{\lstinline|void send_SUBJECTToS()|}	(S30)
+%						edgenode		{\lstinline|void send_DATALINEToS()|}	(S31)
+%						edgenode[above]	{\lstinline|void send_ATADToS()|}	(S32)
+%			(S32)		edgenode		{\lstinline|...|}	(SX)
+%			(S31)		edgenode		{\lstinline|...|}	(SX)
+%			(S30)		edgenode		{\lstinline|...|}	(SX)
+%			(S39)		edgenode[right]	{\lstinline|void send_quitStringToS(String)|}	(END);
+%\end{statemachine}
+%%%
+
+
+\begin{center}
+\scalebox{0.8}{
+\begin{statemachine}[node distance=4.5cm]
+	\node[initial,state]		(S0)							{\lstinline|S0|};
+	\node[state]				(S1)[right of=S0]				{\lstinline|S1|};
+	\node[state]				(S2)[below =0.5cm of S1]		{\lstinline|S2|};
+	\node[state]				(S3)[left of=S2]				{\lstinline|S3|};
+	\node[state]				(S29)[below = 1.5cm of S3]		{\lstinline|S29|};
+	\node[state]				(S32)[right of = S29]				{\lstinline|S32|};
+	\node[state]				(S30)[above = 0.5cm of S32]				{\lstinline|S30|};
+	\node[state]				(S31)[below = 0.5cm of S32]		{\lstinline|S31|};
+	
+	\node[state]				(S39)[right of = S1]			{\lstinline|S39|};
+	\node[state,accepting]		(END)[below =0.5cm of S39]		{\lstinline|END|};
+	\node[state]				(SX)[below = 1.5cm of END]		{\lstinline|Other|};
+	
+	\path
+	(S0)		edgenode			{\smallcode{receive\_220StringFromS()}}	(S1)
+	(S1)		edgenode[left]		{\smallcode{send\_EHLOToS()}}	(S2)
+				edgenode			{\smallcode{send\_QUITToS()}}	(S39)
+	(S2)		edgenode			{\smallcode{send\_ehloStringToS(String)}}	(S3)
+	(S3)		edgenode[left]		{\smallcode{...}}	(S29)
+	(S29)		edgenode[right]		{\smallcode{send\_SUBJECTToS()}}	(S30)
+				edgenode			{\smallcode{send\_DATALINEToS()}}	(S31)
+				edgenode			{\smallcode{send\_ATADToS()}}	(S32)
+	(S32)		edgenode			{\smallcode{...}}	(SX)
+	(S31)		edgenode[right]		{\smallcode{...}}	(SX)
+	(S30)		edgenode			{\smallcode{...}}	(SX)
+	(S39)		edgenode[left]		{\smallcode{send\_quitStringToS(String)}}	(END);
+\end{statemachine}
+}
+\end{center}
+%%

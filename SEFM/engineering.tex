@@ -1,30 +1,75 @@
 \section{Session types and Software Engineering}
 
-\begin{itemize}
-	\item	Session types protocols. Structures that describe
-			a behaviour on the communication interface.
 
-	\item	Top down design: The global type to local types via projection procedure as
-			\begin{itemize}
-				\item	a way for engineers to design
-				\item	a way to co-ordinate software developers.
-			\end{itemize}
+\mybf{Write here about the main parts of software life-cycle (requirements, specification, design, implementation, verification, testing, maintenance), and software management and organisation.
+	
+Support the text later with the discussion of section 2 and the results of Section 3.}
 
-	\item	Bottom up design: The inference/synthesis procedure as
-			a way for more agile independent teams to co-ordinate and
-			exchange the behaviour of interfaces as session type
-			specifications.
 
-	\item	Testing: Session typed modules can be used to test
-			a software in the development phase.
+Session types is a formal method that belongs to the class of type systems.
+On the one hand, types is a static analysis technique applied directly
+on the source code in order to verify a set of predefined properties.
+In the case of session types these properties derive
+from the fundamentals of {\em good} communication.
+On the other hand, types are subject to a syntax,
+and possibly a semantics, that describes an implementation structure.
+These two facts allow for the integration of session types both in-depth
+and in-breadth in the software development process. Furthermore,
+this integration is supported by automated procedures.
+Consequently, session types can drive the entire process of
+software development. The latter claim is supported by the
+experience gained from the repository presented in \secref{usecases}.
 
-	\item	Reverse engineering: inference/synthesis
+\mybf{Hint how session types can be used in the software life-cycle. e.g.
+	in a top-down approach:
+	specify communication requirements and build prototypes,
+	use session types to describe software structure,
+	type-checker/code generators/monitors can be used in implementation.
+	bottom-up approach:
+	design structures,
+	infer specification,
+	synthesis as a verification technique, etc...
+	}
 
-	\item	The relation of session types with diagrammatic languages
-			\begin{itemize}
-				\item	BPMN \cite{citation_needed}
-				\item	global graphs\cite{citation_needed}
-				\item	petri nets\cite{citation_needed}
-				\item	state machines \cite{citation_needed}
-			\end{itemize}
-\end{itemize}
+In contrast other formal methods, have restricted applications
+in specific software development phases.
+For example, model checking
+narrows down to verification/testing phase of software development.
+It requires specific expertise, to define
+of a complete model that approximates software and furthermore,
+perform semantic analysis based on non-predefined properties.
+Often in the case of error detection, results are hard to analyse
+and developers need to re-iterate through previous phases
+to fix errors.
+Another example is the usage of formal specification languages
+that do not find any usage after the specification phase.
+
+
+%\begin{itemize}
+%	\item	Session types protocols. Structures that describe
+%			a behaviour on the communication interface.
+%
+%	\item	Top down design: The global type to local types via projection procedure as
+%			\begin{itemize}
+%				\item	a way for engineers to design
+%				\item	a way to co-ordinate software developers.
+%			\end{itemize}
+%
+%	\item	Bottom up design: The inference/synthesis procedure as
+%			a way for more agile independent teams to co-ordinate and
+%			exchange the behaviour of interfaces as session type
+%			specifications.
+%
+%	\item	Testing: Session typed modules can be used to test
+%			a software in the development phase.
+%
+%	\item	Reverse engineering: inference/synthesis
+%
+%	\item	The relation of session types with diagrammatic languages
+%			\begin{itemize}
+%				\item	BPMN \cite{citation_needed}
+%				\item	global graphs\cite{citation_needed}
+%				\item	petri nets\cite{citation_needed}
+%				\item	state machines \cite{citation_needed}
+%			\end{itemize}
+%\end{itemize}

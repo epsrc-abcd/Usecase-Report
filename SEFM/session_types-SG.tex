@@ -5,8 +5,8 @@
 \label{sec:session_types}
 
 
-This section introduces session types through 
-a discussion of the need for them in
+This section introduces session types through a
+a discussion of the need for session types in
 software engineering.
 It also presents the Scribble~\cite{scribble} protocol
 description language, which is a formal language for describing
@@ -23,29 +23,29 @@ types to a wider audience.
 
 Communication \emph{protocols} in software engineering
 are usually described and communicated among humans
-by using the most intuitive graphical form of sequence diagrams 
+by using the most intuitive graphical form of sequence charts \sg{Use consistent terminology: sequence diagram, or sequence chart?}
 (\figref{seqchart}).
-Sequence diagrams are used to depict a communication flow as an ordered
+Sequence charts are used to depict a communication flow as an ordered
 sequence of \emph{message passing} among communicating
 participants that represent particular \emph{roles} in a communication
 protocol.
 
-\figref{seqchart} illustrates the bookstore protocol, which is a use-case
+\figref{seqchart} illustrates the Book-store protocol, which is a use-case
 in the ABCD online repository~\cite{usecase_repository}.
-The bookstore protocol specifies an interaction between two online Buyer roles
+The Book-store protocol specifies an interaction between two online Buyer roles
 that invoke a process of buying a book from an online Seller role, while
 sharing the expense.
-In the sequence diagram, each role is represented by a vertical line and
-communication messages are represented by horizontal arrows
+In the sequence chart, each role is represented by a vertical line and
+communication messages are represented by horizontal directed arrows
 indicating the direction of communication flow.
 Intuitively, the communication progress proceeds downwards.
-Thus the protocol's behaviour is represented visually within the diagram.
-However, sequence diagrams are not considered as formal tools because
+Thus the protocol's behaviour is represented visually within the chart.
+However, sequence charts are not considered as formal tools because
 protocols described in this way cannot be verified as being complete or unambiguous.
 
 In industrial practice, communication protocols for
 distributed software are usually described in natural language and
-discussed with the help of sequence diagrams.
+discussed with the help of sequence charts.
 %After that and with the help of sequence charts,
 %the protocols are implemented between the communication components
 %of the software.
@@ -54,12 +54,12 @@ discussed with the help of sequence diagrams.
 Each software module that participates in the
 protocol implements
 its \emph{local} software role within the protocol.
-%Usually the process of implementing the local specifications
-%may follow different possible solutions that are not directly
-%visible or are even omitted from the sequence diagram, due
-%to the complexity they will introduce. \sg{I'm not sure what this means.}
+Usually the process of implementing the local specifications
+may follow different possible solutions that are not directly
+visible or are even omitted from the sequence chart, due
+to the complexity they will introduce. \sg{I'm not sure what this means.}
 %\dk{what is hidden? - overall structure of the protocol, logic on choices}
-A limitation of sequence diagrams is the inability to deal with complex
+Another limitation of sequence charts is the inability to deal with complex
 communication protocols, such as the case where one role
 can make a choice that affects the subsequent communication behaviour
 of the entire protocol.
@@ -79,15 +79,15 @@ Structured types are used to describe data structures.
 When types are structured as input/output requirements they
 are used to describe functionality.
 The combination of functionality and data structures give rise
-to the \emph{object-oriented} concepts of classes and interfaces. % of objects.
+to the \emph{object oriented} concepts of classes and interfaces.% of objects.
 %
 A session type extends %the above approaches of
 the notion of a type to capture the communication behaviour in concurrent systems.
 % definition of session types
 {\em A session type is a type structure that describes communication
 	behaviour in terms of a series of send and receive %message passing
-	interactions between a set of communicating entities.}  %, and it is used
-%	to characterise data structures that are used to implement communication.} \sg{I'm not sure what we mean by characterising data structures. Is it just that the data type of each message is defined?}
+	interactions between a set of communicating entities, and it is used
+	to characterise data structures that are used to implement communication.} \sg{I'm not sure what we mean by characterising data structures. Is it just that the data type of each message is defined?}
 
 The formal nature of session types enables rigorous
 reasoning about the communication properties of a system.
@@ -99,15 +99,14 @@ Session types particularly focus on the following properties:
 	\begin{itemize}
 		\item	{\em Communication interaction match}:
 				Every send (resp., select) operation has a corresponding receive (resp., branch) operation.
-		\item	{\em Message type match}:
+		\item	{\em Message (\mybf{Payload?}) type match}:
 				The type of every message being sent matches the type of the message expected to be received.
 		\item	{\em Deadlock-freedom}:
 				Consequently, every message sent will eventually be received.
 	\end{itemize}
 	
-	\item	{\em Communication Progress}: If the protocol has not yet terminated, then there is a pair of components that can communicate safely, leading to a system state that again satisfies the safety and progress properties.
-%Every state of the system either represents a terminated protocol, or
-%			will {\em progress} to a state with safe communication behaviour. \sg{Maybe this can be clearer?}
+	\item	{\em Communication Progress}: Every state of the system either represents a terminated protocol, or
+			will {\em progress} to a state with safe communication behaviour. \sg{Maybe this can be clearer?}
 \end{enumerate}
 %
 In addition, the structured nature of session types enables
@@ -196,32 +195,30 @@ The reverse procedure to projection is called {\em synthesis},
 where a set of local protocols are composed together in a global
 protocol.
 
-
-
 \subsection{The Scribble Protocol Description Language}
 \label{sec:scribble}
 The notions explained above are supported by the
 Scribble protocol description language,
 which is a syntax used to express session type specifications.
 As an example,
-consider part of the session type protocol for the bookstore
+consider part of the session type protocol for the Book-store
 use-case as in \figref{scribble_bs}. 
 
 
 \input{figures/fig-scribble_bookstore}
 
 Line 1 of the upper protocol in \figref{scribble_bs} shows the
-Scribble definition of the global protocol. 
+Scribble definition of the global protocol for the Book-store use-case.
 The communication takes place
 among the roles \BuyerOne, \BuyerTwo and \Seller. Line 2 demonstrates
 the syntax of a message passing interaction; a message
 of type \code{title} labelled with label \code{book} is sent \lstinline|from|
-role \BuyerOne \lstinline|to| role \Seller. In Scribble, a message is
+role \BuyerOne \lstinline|to| role \Seller. In Scribble, messages are
 defined as a list of types annotated with a label.
 
 In line 5 of the protocol 
 %their properties
-there is a choice interaction,
+the usage of a choice interaction is presented,
 where role \BuyerTwo makes an internal decision and selects
 from two possibilities, that are
 expressed with the labels \code{agree} in line 5 or \code{quit} in line 6.
@@ -232,7 +229,7 @@ three roles will then synchronise on the same choice.
 
 Scribble also provides a looping construct, which is needed for more realistic protocols but is not used in this simple example.
 
-%\dk{describe the recursion construct?}
+\dk{describe the recursion construct?}
 
 Line 1 of the lower protocol defines the local protocol 
 for \BuyerOne of the Book-store protocol. Role \BuyerOne
@@ -241,13 +238,34 @@ the local protocol for role \BuyerOne is derived automatically
 by stripping out all the irrelevant information with respect
 to \BuyerOne from the global protocol.
 
-\subsection{Session Types as a Software Development Method}%: The Scribble Tool-chain}
+\subsection{Sessions as Software Development Method}%: The Scribble Tool-chain}
 \label{sec:sessions_integrate}
 
 In addition to a protocol description language,
 Scribble offers a tool-chain that 
 integrates session types into the software
-development process. \figref{diagram} illustrates the use of the Scribble tools. Rectangles
+development process.
+
+\input{figures/fig-sessions_software}
+
+%Below the term system is used to describe the whole concurrent
+%system and the term \dk{program} is used for communication module
+%inside the system. \textbf{Bellow the term system is used to describe whole local protocol
+%implementation as a set of communication modules it is composed of? }
+
+\dk{The formal nature of session types protocols
+	allow for rigorous manipulation of the communication behaviour.}
+
+\figref{diagram} clarifies the terminology
+developed previously by showing the
+\mybf{typical usage} of session types in software
+engineering.
+%design and development. 
+Furthermore, it distinguishes
+the desirable properties that are offered by 
+session types.
+
+In \figref{diagram} rectangles
 represent source code for either the software
 under development (white coloured) or for the definition
 of the session type protocols (grey coloured). 
@@ -264,27 +282,6 @@ for communication, where the communication
 operations can be identified by automated
 procedures.
 
-\input{figures/fig-sessions_software}
-
-%Below the term system is used to describe the whole concurrent
-%system and the term \dk{program} is used for communication module
-%inside the system. \textbf{Bellow the term system is used to describe whole local protocol
-%implementation as a set of communication modules it is composed of? }
-
-\dk{The formal nature of session types protocols
-	allow for rigorous manipulation of the communication behaviour.}
-
-%\figref{diagram} clarifies the terminology
-%developed previously by showing the
-%\mybf{typical usage} of session types in software
-%engineering.
-%%design and development. 
-%Furthermore, it distinguishes
-%the desirable properties that are offered by 
-%session types.
-
-
-
 In a typical top-down approach, a developer will first develop a global protocol
 %and express it syntactic form. 
 as syntax that expresses session type specifications.
@@ -293,7 +290,7 @@ using the Scribble protocol description language.
 The global protocol source code is shown
 on the top of \figref{diagram}.
 The next step is to run a procedure to verify the 
-global protocol's correctness: for example, checking that choices are communicated to all roles whose subsequent behaviour depends on them.
+global protocol correctness \dk{what does it verify?}.
 After the global protocol verification, a projection
 procedure takes place where a local protocol
 for each global protocol role is derived.
@@ -305,13 +302,13 @@ syntax are supported by the Scribble tool-chain.
 One way to use the set of local protocols is to ensure
 conformance between the source code of the
 software under development and the local protocols,
-by using a typechecking procedure.
+by using a type-checker procedure.
 %To achieve this there is the assumption that
 %the programming language used to develop the
 %software source code, makes use of a communication
 %interface that can be identified by a type-checker
 %procedure.
-The typechecker takes as an input
+The type-checker takes as an input
 %software module,
 source code that corresponds to a communicating process;
 it identifies its communication operations,
@@ -319,39 +316,39 @@ and derives the communication behaviour of
 the
 %module. 
 source code.
-The typechecker also takes as an input the
+The type-checker also takes as an input the
 corresponding syntax of the local protocol 
 and checks whether the 
 %software module
 software source code
 implements the corresponding role of the specified communication behaviour.
 Upon success, the result is verified software that
-enjoys the {\em communication safety} and {\em communication progress}
-properties of session types.
+enjoys the session types {\em communication safety} and {\em communication progress}
+properties.
 
 
 A second way to use the set of local protocols
 is for automatic code generation. The generated
 code might be in the form of APIs that implement
-communication behaviour, or in the form of program
+communication behaviour or in the form of programming
 templates that implement communication behaviour and
-need manual work by the developers to add
-computational logic.
-Scribble supports the generation of a Java API for
-each one of the set of Scribble local protocols.
+they further need attention by the developers for adding
+extra computational logic.
+Scribble supports the generation of a Java API out of
+every the set of Scribble local protocols.
 The generated API has a class for each state of the protocol
 that implements as methods all the available communication
-operations. A method call returns an object of the class
+operations. A call to method returns an object of the class
 that corresponds to the next state of the protocol. A dynamic
-check ensures that each object (i.e.~state) is used exactly once.
+check ensures that each object (i.e.~state) is used once.
 
 
-A third way of using the set of local protocols is
+Another way of using the set of local protocols is
 for monitoring the execution of the communication
 interaction inside a concurrent system.
 The local protocols are used to feed a set of local monitors.
-Essentially, a local monitor runs a state machine that is derived
-from the local protocol syntax.
+Essentially, the local monitors run a state machine that is derived
+out of the local protocol syntax.
 %The monitor platform also requires for
 %the concurrent software execution.
 It is assumed that the communication interaction
@@ -360,28 +357,38 @@ and monitored by the monitor interface.
 %The assumption to be made here is that
 %monitor platform implements the communication interface
 %on top of the monitoring interface. \textbf{I do not understand this sentence!}
-Scribble supports the procedure of deriving
-state machines from local protocol syntax.
+Scribble does support the procedure of deriving
+state machines out of local protocol syntax.
 
-\figref{diagram} also shows a bottom-up approach,
-where the communicating software source codes are developed independently.
+\figref{diagram} 
+%there is 
+presents the bottom-up approach as well,
+were the communicating 
+%modules of a concurrent software
+software source codes
+are developed independently.
 Then an inference  procedure identifies the communication behaviour
-of each component, resulting in a set of local protocols.
+of each
+%\textbf{Term module is never defined but used frequently. In previous
+%sentences you used source code. What is relation?}
+communication process that results in a set of local protocols.
 %\textbf{Here is not clear - if this is provided automatically?}.
-After that, an automatic synthesis procedure can be used,
+Then an automatic synthesis procedure can take place,
 where the derived local protocols are synthesised
-to create a global protocol. Successful synthesis of the global protocol guarantees that the
-software has the communication safety and progress properties.
+to create a global protocol. Upon success, the
+developed software is guaranteed to ensure
+the communication safety and progress.
 
 
-In any of the above methodologies, session types can be used as requirements 
+In any of the above methodologies for using session types,
+session types can be used as requirements by humans means
 to drive the software development process. In the top-down
-approach, local types can be used to give intuition and guide
+approach local types can be used to give intuition and guide
 developers when implementing code.
-In the bottom-up approach, more agile development teams
+Furthermore, the bottom-up approach more agile development teams
 can analyse and compare the obtained global and/or local protocols
 against the intended communication behaviour using human
-reasoning techniques.
+reading techniques.
 
 \dk{how about diagrammatic languages?}
 
@@ -427,9 +434,9 @@ and communication progress properties are ensured.
 As seen in \figref{diagram} Scribble and the procedures
 that manipulate session type protocols lie at the core
 of the software development process. This is also clarified
-by the experience of developing the usecases for the ABCD
+by the experience in developing the usecases for the ABCD
 online repository. The Scribble platform and its procedures
-have an independent status next to the plethora of technologies and
+has an independent status next to the plethora of technologies and
 programming paradigms used in the case studies.
 
 %\subsection{Session Types as Protocols: The Scribble Tool-chain}
@@ -503,10 +510,52 @@ programming paradigms used in the case studies.
 %to participant \lstinline|B|.
 
 
+\subsection{Technologies based on Session Types}
+\dk{Just presentation and references}
+
+Several technologies and tools based on session types have been used to implement the use-cases that we describe in Section~\ref{sec:usecases}.
+%
+\begin{enumerate}
+	\item	Session Java~\cite{HU07TYPE-SAFE} is an extension of Java with binary session types for communication channels, supported by a runtime library. The compiler statically checks session types. 
+
+	\item	Eventful Session Java~\cite{event} supports asynchronous, event-driven programming, using session types to track progress through individual sessions.
+
+	\item	Multiparty Session C~\cite{NYH12} supports programming in C with the MPI library. The compiler statically checks session types. 
+
+	\item	SPY~\cite{DBLP:conf/rv/NeykovaYH13} uses session types as the basis for runtime monitoring of communication protocols in Python.
+
+	\item	Two technologies apply session types to the actors paradigm:
+			\begin{itemize}
+				\item	An implementation that uses SPY to
+						monitor python threads that simulate actors~\cite{DBLP:conf/coordination/NeykovaY14}.
+				\item	A similar approach on monitoring session types is also used for the
+						Erlang programming language. %, which is a programming language for the Actors model.
+\sg{Is this Erlang system one of ours?}
+			\end{itemize}
+
+	\item	Pabble~\cite{DBLP:conf/pdp/NgY14} extends Scribble to express
+			communication structures that are parameterised by the number of roles.
+			Pabble protocols are implemented and typechecked for the C+MPI framework.
+
+	\item	Mungo~\cite{mungo} is a tool that integrates session types into the object-oriented
+			programming paradigm through the notion of typestate. Communication
+			operations on a channel are accessed via a state-dependent interface.
+			%Mungo uses a protocol description language for capturing typestate.
+			The Scribble to Mungo (StMungo) tool transforms Scribble
+			protocols into Mungo interfaces.
+
+
+	\item	GV:			A functional programming implementation of binary session types. \sg{Is there an implementation that has been used for any of our use-cases? What is the citation?}
+	\item	The web programming language Links \cite{} includes static typechecking of protocols, using the linear logic interpretation of session types \cite{}. 
+	\item	SILL:		Functional programming based on the linear dual intuitionistic interpretation of session types. \sg{Do we want to include this, as it's not one of our own use-cases?}
+
+	\item	A state pattern implementation as a library. Uses Scribble to automatically
+			create an API for state pattern programming and uses runtime checks to
+			cope with linearity requirements.
+
+\end{enumerate}
+
 \subsection{Fine/coarse grain representation}
 \dk{this should go as future work}
 
 {\em Concurrency patterns} e.g. network topology, client/server, race condition, etc. (maybe I am writing nonsense here)
-
-
-

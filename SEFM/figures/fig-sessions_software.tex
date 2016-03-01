@@ -58,7 +58,7 @@
 %		(\x2, \y3)	--	node[right]	{\scriptsize synthesis}	(\x2, \y1);
 
 	% Typecheck
-	\node[vertrec, left = 2cm of Local]			(Exec)					{};
+	\node[vertrec, left = 2.5cm of Local]			(Exec)					{};
 	\node[above = 0 of Exec]
 	{
 		\scriptsize
@@ -67,7 +67,7 @@
 			Source Code
 		\end{tabular}
 	};
-	\node[left = 2.35cm of Local]						(ExecC)				{\vdots};
+	\node[left = 2.85cm of Local]						(ExecC)				{\vdots};
 	\node[myshape, mycode, above= 0cm of ExecC]			(ExecT)				{};
 	\node[myshape, mycode, below= 0cm of ExecC]			(ExecB)				{};
 	
@@ -82,10 +82,10 @@
 							(Exec);
 
 	% Monitor
-	\node[vertrec, right = 2cm of Local]				(Monitor)			{};
+	\node[vertrec, right = 2.5cm of Local]				(Monitor)			{};
 	\node[above = 0cm of Monitor]											{ \scriptsize \begin{tabular}{c} monitor \end{tabular}};
 
-	\node[right = 2.35cm of Local]						(MonC)				{\vdots};
+	\node[right = 2.85cm of Local]						(MonC)				{\vdots};
 	\node[myshape, myscribble, above= 0cm of MonC]		(MonT)				{};
 	\node[myshape, myscribble, below= 0cm of MonC]		(MonB)				{};
 
@@ -131,7 +131,7 @@
 								node[left] {
 									\scriptsize
 									\begin{tabular}{c}
-										API\\
+										code\\
 										generation
 									\end{tabular}}
 								($(CodeLabel.north)- (0.2, 0)$);
@@ -146,9 +146,9 @@
 
 	% Legend
 
-	\node[draw, above= 1.2cm of monitorarrow, rounded corners, minimum width = 2.5cm, minimum height = 1.5cm]		(Legend) {};
-	\draw[myarrow, topdown]		($(Legend) + (-1.1, 0.3)$)	--	node[right=0.25cm]	{\scriptsize :Top Down}	($(Legend) + (-0.4, 0.3)$);
-	\draw[myarrow, bottomup]	($(Legend) + (-1.1, -0.3)$)	--	node[right=0.25cm]	{\scriptsize :Bottom Up} ($(Legend) + (-0.4, -0.3)$);
+%	\node[draw, above= 1.2cm of monitorarrow, rounded corners, minimum width = 2.5cm, minimum height = 1.5cm]		(Legend) {};
+%	\draw[myarrow, topdown]		($(Legend) + (-1.1, 0.3)$)	--	node[right=0.25cm]	{\scriptsize :Top Down}	($(Legend) + (-0.4, 0.3)$);
+%	\draw[myarrow, bottomup]	($(Legend) + (-1.1, -0.3)$)	--	node[right=0.25cm]	{\scriptsize :Bottom Up} ($(Legend) + (-0.4, -0.3)$);
 
 	% Static Runtime Division
 
@@ -159,7 +159,7 @@
 	%\node[right=2 of middlebottom]		{\scriptsize Runtime Verification};
 \end{tikzpicture}
 \end{center}
-%\vspace{-2mm}
+\vspace{-5mm}
 \caption{Use of Session Types in Software Development}
 \label{fig:diagram}
 \end{figure}
