@@ -4,12 +4,12 @@
 \label{sec:usecases}
 
 This section summarises the use-cases in
-the ABCD online repository~\cite{usecase_repository}. It also gives more detailed presentations of two particular use-cases: (1) the bookstore, which was introduced in Section~\ref{sec:session_types} and is a standard example of session types; (2) Simple Mail Transfer Protocol (SMTP), which is a standard network protocol. 
+the ABCD online repository~\cite{usecase_repository}. It also gives more detailed presentations of two particular use-cases: (1) the bookstore, which was introduced in Section~\ref{sec:session_types} and is a standard example of session types; (2) Simple Mail Transfer Protocol (SMTP), which is a standard network protocol.
 
 \input{figures/fig-usecases}
 
-Table~\ref{table:use_cases_all} lists the name of each use-case, its original source, and the language(s) and/or tool(s) that have been used to implement it. Full source code, 
-running examples and and detailed descriptiona of all of the use-cases can be found in the repository \cite{usecase_repository}. 
+Table~\ref{table:use_cases_all} lists the name of each use-case, its original source, and the language(s) and/or tool(s) that have been used to implement it. Full source code,
+running examples and and detailed descriptiona of all of the use-cases can be found in the repository \cite{usecase_repository}.
 The use-cases are organised into application domains and are intended to be representative examples for each domain.
 
 \subsection{Technologies based on Session Types}
@@ -18,11 +18,11 @@ The use-cases are organised into application domains and are intended to be repr
 Several technologies and tools based on session types have been used to implement the use-cases that we describe in Section~\ref{sec:usecases}.
 %
 \begin{enumerate}
-	\item	Session Java~\cite{HU07TYPE-SAFE} is an extension of Java with binary session types for communication channels, supported by a runtime library. The compiler statically checks session types. 
+	\item	Session Java~\cite{HU07TYPE-SAFE} is an extension of Java with binary session types for communication channels, supported by a runtime library. The compiler statically checks session types.
 
 	\item	Eventful Session Java~\cite{event} supports asynchronous, event-driven programming, using session types to track progress through individual sessions.
 
-	\item	Multiparty Session C~\cite{NYH12} supports programming in C with the MPI library. The compiler statically checks session types. 
+	\item	Multiparty Session C~\cite{NYH12} supports programming in C with the MPI library. The compiler statically checks session types.
 
 	\item	SPY~\cite{DBLP:conf/rv/NeykovaYH13} uses session types as the basis for runtime monitoring of communication protocols in Python.
 
@@ -48,7 +48,7 @@ Several technologies and tools based on session types have been used to implemen
 
 
 	\item	GV:			A functional programming implementation of binary session types. \sg{Refer to Phil's paper.}
-	\item	The web programming language Links \cite{} includes static typechecking of protocols, using the linear logic interpretation of session types \cite{}. 
+	\item	The web programming language Links \cite{} includes static typechecking of protocols, using the linear logic interpretation of session types \cite{}.
 	\item	SILL:		Functional programming based on the linear dual intuitionistic interpretation of session types. \sg{Separate this from the repository --- say something elsewhere.}
 
 	\item	A state pattern implementation as a library. Uses Scribble to automatically
@@ -62,7 +62,7 @@ Several technologies and tools based on session types have been used to implemen
 The use-cases are drawn from a wide range of
 application domains, in order to demonstrate that
 session types can capture
-a broad area of communication specifications. 
+a broad area of communication specifications.
 %For the implementation of the usecases in the online
 %repository different technologies that integrate
 %session types in different programming paradigms were used.
@@ -86,7 +86,7 @@ a broad area of communication specifications.
 			The first is the online bookstore,
 			which was discussed
 			in Section~\ref{sec:session_types}. It is a standard use-case demonstrating
-			the basic features of session types. The communication protocol represents the execution logic of the application. The implementation of this use-case follows a top-down design approach, in which the global protocol is projected to local protocols. There are several versions of the bookstore, using different implementation languages: Session Java 
+			the basic features of session types. The communication protocol represents the execution logic of the application. The implementation of this use-case follows a top-down design approach, in which the global protocol is projected to local protocols. There are several versions of the bookstore, using different implementation languages: Session Java
 
 			The bookstore usecase is implemented following a
 			communication protocol that embeds an execution logic
@@ -104,7 +104,7 @@ a broad area of communication specifications.
 
 			\mybf{- Chat-Server: Implement a server/client architecture, design an application protocol for the servers,
 				client implementations should conform to the protocol, Erlang monitoring implementation cite S. Fowler's Master Thesis.}
-		
+
 
 %			is implemented in different technologies
 
@@ -113,7 +113,7 @@ a broad area of communication specifications.
 %	A protocol given in a session type structure, apart from the
 %	specification of the communication of the application, will
 %	reveal a kind of business logic for the application.
-	
+
 	\item	{\em Network Protocols}.
 	Session types can be used to describe standard and non-standard network protocols.
 	Typically a standard network protocol should conform to
@@ -126,9 +126,9 @@ a broad area of communication specifications.
 			assume different types for each request/response header (not just a text header)
 			request-response sequences can give a further structure
 			of interaction, it would be nice if we have a client to stream tree-structured data.
-			automatically generated API from the Scribble tool-chain} 
+			automatically generated API from the Scribble tool-chain}
 
-	\mybf{- SMTP: Stateful standard RFC protocol. Expresses request/respond, 
+	\mybf{- SMTP: Stateful standard RFC protocol. Expresses request/respond,
 				Expresses specific data-structures streaming such as the data-structure
 				of an email,
 				need for translate between RFC text format to/from message/payload types
@@ -137,15 +137,15 @@ a broad area of communication specifications.
 				verify that the state of the code follows the state of the protocol. }
 
 	\mybf{- Domain Name System: }
-	
-	
+
+
 	\item	{\em Systems/Applications}.
 	A session type may be used to describe the communication
 	specifics of an application that uses multiple resources
 	inside a computing machine.
 
 	\mybf{- Do we have a system to describe }
-	
+
 	\item	{\em Operating System}.
 	Another domain where session types can be applied to
 	is the description of the communication specifics
@@ -160,10 +160,10 @@ a broad area of communication specifications.
 	\mybf{- Concurrency Algorithms: Classic concurrency problems expressed in Session types.
 		Implementing in the python monitored actors framework.}
         \rumi{
-% We have implemented well-known synchronisation problems.   
-%We address a classical concurrency problems. 
-Classic concurrency problems require correct coordination among multiple components to avoid starvation and deadlock. 
-Preserving the causalities between the interactions is challenging since the communication often involves complex patterns, combining long sequence of interactions with recursive behaviour and nested choice branches. 
+% We have implemented well-known synchronisation problems.
+%We address a classical concurrency problems.
+Classic concurrency problems require correct coordination among multiple components to avoid starvation and deadlock.
+Preserving the causalities between the interactions is challenging since the communication often involves complex patterns, combining long sequence of interactions with recursive behaviour and nested choice branches.
 Often precise message sequence should be followed. Moreover, it is not obvious if the components can be safely composed. Sending the wrong message type, sending to the wrong role or not sending in the correct message sequence may lead to deadlocks, errors which initial cause is hard to be identified or wrong computation results.
 Modelling the interactions between the components with session types ensures correct synchronisation and prevents deadlocks, unexpected termination and orphan messages.  \\
 
@@ -189,12 +189,12 @@ through all the smokers notifying them to exit). \\
 %three components, room, barber,and customer. A barber waits for customers in his shop, sleeping when there is nobody to serve. When a customer enters in the shop, he goes through a waiting room with n chairs: if all chairs are taken, he leaves; otherwise, he sits. If the barber is sleeping, he wakes up, serves all sitting customers (one a time), and sleeps again when nobody is waiting. We model this scenario with three components: the customer, the shop and the barber.
 
 % and is the key to achieving deadlock free communication.
-%To guarantee a valid synchronisation, precise message sequence should be followed. 
-%The communication structure these protocols requires long sequence of interactions, combined with recursive behaviour and multiple nested choice branches.  
+%To guarantee a valid synchronisation, precise message sequence should be followed.
+%The communication structure these protocols requires long sequence of interactions, combined with recursive behaviour and multiple nested choice branches.
 
-%While the use cases so far demonstrated succinct recursion and request-reply patterns, interleaved together, this one demonstrates a communication structure with long sequence of interactions, where preserving the causalities is the key to achieving deadlock free communication. The use of session types prevents potential deadlock, unexpected termination and orphan messages.    		
+%While the use cases so far demonstrated succinct recursion and request-reply patterns, interleaved together, this one demonstrates a communication structure with long sequence of interactions, where preserving the causalities is the key to achieving deadlock free communication. The use of session types prevents potential deadlock, unexpected termination and orphan messages.
 		}
-	
+
 	\item	{\em Data Structures and Algorithms}.
 	The above layers are using data structures and algorithms.
 	Session types can express the communication
@@ -236,111 +236,3 @@ applications while being reasonably divorced from individual implementations. Th
 \end{enumerate}
 
 
-%%%%%%%%%%%% SMTP 
-
-\subsection{The Simple Mail Transfer Protocol}
-
-The SMTP is an internet standard for electronic
-mail transfer. It originally followed 
-RFC 821~\cite{SMTP-rfc} and was later extended 
-in RFC 5321~\cite{ESMTP-rfc}, which is the version consider here.
-SMTP is an application layer protocol, that typically runs on
-a TCP/IP connection.
-
-\paragraph{Motivation:}
-The session typed implementation of the STMP has to offer
-a number of motivations for using session types for software
-development.
-Firstly, it demonstrates how {\em natural} it is
-to describe of a widely used standard protocol in session types.
-Secondly, and in contrast with the HTTP, it is
-a rather state-full protocol (\mybf{see state machine diagram below}),
-i.e.~ it requires implementation of a sequence of communication states.
-The complexity of states adds to the effort of 
-developing SMTP. With the use of session typed
-support that effort can be reduced.
-Thirdly, the SMTP implies streaming a tree
-data-structure that corresponds to the structure
-of an email.
-It is thus, shown how session types can describe
-the streaming of tree data-structures.
-
-
-%This section gives a more detailed presentation of the SMTP
-%usecase. SMTP is considered an important implementation for
-%session types since it incorporates challenges that in principle
-%software engineers face.
-%
-%The SMTP is a protocol that, in contrast with the HTTP, requires handling
-%communication through a number of distinct states ,
-%which adds a degree of complexity to the implementation.
-%With the help of session types and the methods and procedures
-%session types support developers can reduce the effort
-%needed to handle the complexity.
-%
-%Furthermore, SMTP introduces a structure on an email,
-%which is composed by subject, main part and attachments
-%as well as meta-data for the email. Streaming such 
-%tree-structured data types over the network is a task that
-%can be rigorously handled and ensured by session types,
-%due to its structured natured. Transforming
-%network data-structures (e.g.~text headers)
-%to/from session types structures is an important
-%procedure to understand when applying session types. 
-
-%%In this report we describe the implementation of
-%%an application layer communication protocol.
-
-\paragraph{Implementation:}
-An SMTP interaction consists of an exchange of text-based {commands}
-between the client and the server.
-For example, the client sends the
-\lstinline|EHLO| command to identify itself and open the connection with
-the server.
-%
-The commands \lstinline|MAIL FROM| : $<$address$>$ and \lstinline|RCPT TO| : $<$address$>$
-specify the e-mail address of the sender and the
-receiver of the e-mail.
-%
-The \lstinline|DATA| command allows the client to specify the text of
-the e-mail. The \lstinline|QUIT| command is used to terminate the
-session and close the connection. The responses from the server have the
-following format: three digits followed by an optional dash ``-'', such
-as \lstinline|250-|, and then some text, like OK. The server might reply
-to \lstinline|EHLO| with \lstinline|250| $<$text$>$ or to
-\lstinline|MAIL FROM| or \lstinline|RCPT TO| with \lstinline|250| OK.
-
-
-The implementation of the protocol implements an interaction between
-a Simple Mail Transfer Protocol (SMTP) client and a \lstinline|gmail| server.
-
-
-The global protocol for the SMTP is defined in Scribble, 
-based on Hu's work~\cite{HuR:smtp}.
-
-\input{figures/fig-smtp_global}
-
-The above Scribble protocol formally specifies
-the description in \secref{sec: smtp_description}.
-The global protocol \lstinline|SMTP| specifies
-an interaction between two roles being the client ant the server of the protocol.
-The protocol is then projected to the
-individual communication specifications of each 
-of the participant roles.
-
-%%
-The global protocol is used to project the communication
-behaviour of roles \lstinline|C| and \lstinline|S|.
-The focus is on the projection of the client
-since the interest is on interacting with a real server.
-
-This part of SMTP describes a loop (\lstinline|rec Z1|) where the client chooses
-among the messages \lstinline|SUBJECT|, to send the subject,
-\lstinline|DATALINE|, to send a line of text, or \lstinline|ATAD| to terminate the e-mail by sending a dot.
-
-\input{figures/fig-smtp_local}
-
-The local type can be represented as a state
-machine:
-
-\input{figures/fig-state_machine}
