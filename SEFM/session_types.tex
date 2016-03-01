@@ -98,7 +98,11 @@ Session types particularly focus on the following properties:
 	%	
 	\begin{itemize}
 		\item	{\em Communication interaction match}:
-				Every send (resp., select) operation has a corresponding receive (resp., branch) operation.
+				Every send
+				%(resp., select)
+				operation has a corresponding receive
+				%(resp., branch)
+				operation.
 		\item	{\em Message type match}:
 				The type of every message being sent matches the type of the message expected to be received.
 		\item	{\em Deadlock-freedom}:
@@ -126,7 +130,7 @@ section introduces the main terminology for session types
 and, whenever appropriate, it presents these notions
 using the Scribble tool-chain.
 
-\subsection{Sessions as Protocols}%: The Scribble Protocol Description Language}
+\subsection{Sessions Types as Protocols}%: The Scribble Protocol Description Language}
 \label{sec:sessions_scribble}
 
 %The Scribble tool-chain~\cite{scribble} is a tool that indents
@@ -241,7 +245,7 @@ the local protocol for role \BuyerOne is derived automatically
 by stripping out all the irrelevant information with respect
 to \BuyerOne from the global protocol.
 
-\subsection{Session Types as a Software Development Method}%: The Scribble Tool-chain}
+\subsection{Integrating Session Types into Software Development}%: The Scribble Tool-chain}
 \label{sec:sessions_integrate}
 
 In addition to a protocol description language,

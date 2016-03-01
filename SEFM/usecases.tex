@@ -235,42 +235,63 @@ applications while being reasonably divorced from individual implementations. Th
 			be careful in the description because it is a reference to other people.}
 \end{enumerate}
 
+
+%%%%%%%%%%%% SMTP 
+
 \subsection{The Simple Mail Transfer Protocol}
 
-This section gives a more detailed presentation of the SMTP
-usecase. SMTP is considered an important implementation for
-session types since it incorporates challenges that in principle
-software engineers face.
+The SMTP is an internet standard for electronic
+mail transfer. It originally followed 
+RFC 821~\cite{SMTP-rfc} and was later extended 
+in RFC 5321~\cite{ESMTP-rfc}, which is the version consider here.
+SMTP is an application layer protocol, that typically runs on
+a TCP/IP connection.
 
-The SMTP is a protocol that, in contrast with the HTTP, requires handling
-communication through a number of distinct states (\mybf{see state machine diagram below}),
-which adds a degree of complexity to the implementation.
-With the help of session types and the methods and procedures
-session types support developers can reduce the effort
-needed to handle the complexity.
-
-Furthermore, SMTP introduces a structure on an email,
-which is composed by subject, main part and attachments
-as well as meta-data for the email. Streaming such 
-tree-structured data types over the network is a task that
-can be rigorously handled and ensured by session types,
-due to its structured natured. Transforming
-network data-structures (e.g.~text headers)
-to/from session types structures is an important
-procedure to understand when applying session types. 
-
-%In this report we describe the implementation of
-%an application layer communication protocol.
-
-SMTP is an application layer protocol.
-{SMTP} is an internet standard
-electronic mail transfer protocol which typically runs over a TCP
-(Transmission Control Protocol) connection.
-It was first defined in RFC
-821~\cite{SMTP-rfc} and later extended in RFC 5321~\cite{ESMTP-rfc},
-which is the version we consider here.
+\paragraph{Motivation:}
+The session typed implementation of the STMP has to offer
+a number of motivations for using session types for software
+development.
+Firstly, it demonstrates how {\em natural} it is
+to describe of a widely used standard protocol in session types.
+Secondly, and in contrast with the HTTP, it is
+a rather state-full protocol (\mybf{see state machine diagram below}),
+i.e.~ it requires implementation of a sequence of communication states.
+The complexity of states adds to the effort of 
+developing SMTP. With the use of session typed
+support that effort can be reduced.
+Thirdly, the SMTP implies streaming a tree
+data-structure that corresponds to the structure
+of an email.
+It is thus, shown how session types can describe
+the streaming of tree data-structures.
 
 
+%This section gives a more detailed presentation of the SMTP
+%usecase. SMTP is considered an important implementation for
+%session types since it incorporates challenges that in principle
+%software engineers face.
+%
+%The SMTP is a protocol that, in contrast with the HTTP, requires handling
+%communication through a number of distinct states ,
+%which adds a degree of complexity to the implementation.
+%With the help of session types and the methods and procedures
+%session types support developers can reduce the effort
+%needed to handle the complexity.
+%
+%Furthermore, SMTP introduces a structure on an email,
+%which is composed by subject, main part and attachments
+%as well as meta-data for the email. Streaming such 
+%tree-structured data types over the network is a task that
+%can be rigorously handled and ensured by session types,
+%due to its structured natured. Transforming
+%network data-structures (e.g.~text headers)
+%to/from session types structures is an important
+%procedure to understand when applying session types. 
+
+%%In this report we describe the implementation of
+%%an application layer communication protocol.
+
+\paragraph{Implementation:}
 An SMTP interaction consists of an exchange of text-based {commands}
 between the client and the server.
 For example, the client sends the
