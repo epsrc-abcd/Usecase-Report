@@ -53,66 +53,89 @@ the streaming of tree data-structures.
 %%In this report we describe the implementation of
 %%an application layer communication protocol.
 
-\paragraph{Implementation:}
+\paragraph{Sessio Type Specification}
 The implementation of the SMTP starts with
-the definition of a global protocol that describes
-the interaction between a client and the server.
-The global protocol can be found in \appref{}.
-
+the definition a Scribble global protocol~\cite{HuR:smtp}
+that describes the interaction between a client and the server.
+Part of the global protocol can be found in
+\appref{smtp_global}.
+The global specification involves a number of interactions
+that include nested recursion and choices, thus the SMTP
+is a rather state-full protocol.
+%
 An SMTP interaction is an exchange of text-based {commands}
 between a client and the server.
-For example, the client may send the
-\lstinline|EHLO| 
-
-An SMTP interaction consists of an exchange of text-based {commands}
-between the client and the server.
-For example, the client sends the
-\lstinline|EHLO| command to identify itself and open the connection with
-the server.
 %
-The commands \lstinline|MAIL FROM| : $<$address$>$ and \lstinline|RCPT TO| : $<$address$>$
-specify the e-mail address of the sender and the
-receiver of the e-mail.
+For example, in line 4 the client may send the
+\lstinline|EHLO| command to identify itself and open a server connection.
+Responses from the server have follow  the format:
+three digits followed by an optional dash ``-'', and then some text,
+e.g.~in line 8 the server might reply to \lstinline|EHLO| with \lstinline|_250 <text>| \mybf{check here}.
 %
-The \lstinline|DATA| command allows the client to specify the text of
-the e-mail. The \lstinline|QUIT| command is used to terminate the
-session and close the connection. The responses from the server have the
-following format: three digits followed by an optional dash ``-'', such
-as \lstinline|250-|, and then some text, like OK. The server might reply
-to \lstinline|EHLO| with \lstinline|250| $<$text$>$ or to
-\lstinline|MAIL FROM| or \lstinline|RCPT TO| with \lstinline|250| OK.
+%Commands \lstinline|MAIL FROM: <address>| and \lstinline|RCPT TO: <address>|
+%specify the e-mail address of the sender and the receiver of the e-mail.
+%
+%The \lstinline|DATA| command allows the client to specify the text of
+%the e-mail. The \lstinline|QUIT| command is used to terminate the
+%session and close the connection.
+%Responses from the server have the following format:
+%three digits followed by an optional dash ``-'', such
+%as \lstinline|250-|, and then some text, e.g.~OK.
+%The server might reply to \lstinline|EHLO| with \lstinline|250 <text>|
+%or to \lstinline|MAIL FROM| or \lstinline|RCPT TO| with \lstinline|250 OK|.
+%
+Lines 18-23 there is a loop that allows the client to construct
+and stream a tree data structure that contains the email information
+to the server. Specifically, in line 19 the client streams the subject of the
+email to the server and then performs iteration to stream email data lines,
+as in line 20. The streaming finishes in line 21 and 22 when the
+\lstinline|atad| message is sent and the server replies to the client.
 
-
-The implementation of the protocol implements an interaction between
-a Simple Mail Transfer Protocol (SMTP) client and a \lstinline|gmail| server.
-
-
-The global protocol for the SMTP is defined in Scribble,
-based on Hu's work~\cite{HuR:smtp}.
-
-\input{figures/fig-smtp_global}
-
-The above Scribble protocol formally specifies
-the description in \secref{sec: smtp_description}.
-The global protocol \lstinline|SMTP| specifies
-an interaction between two roles being the client ant the server of the protocol.
-The protocol is then projected to the
-individual communication specifications of each
-of the participant roles.
-
+The protocol is then projected to the local specifications
+of the roles server and client. Part of the local protocol
+of the client can be found in \appref{smtp_local}.
+Local protocols can be represented as state machines. The state
+machine for the client protocol can be found in \appref{state_machine}.
 %%
-The global protocol is used to project the communication
-behaviour of roles \lstinline|C| and \lstinline|S|.
-The focus is on the projection of the client
-since the interest is on interacting with a real server.
+%The global protocol is used to project the communication
+%behaviour of roles \lstinline|C| and \lstinline|S|.
+%The focus is on the projection of the client
+%since the interest is on interacting with a real server.
 
-This part of SMTP describes a loop (\lstinline|rec Z1|) where the client chooses
-among the messages \lstinline|SUBJECT|, to send the subject,
-\lstinline|DATALINE|, to send a line of text, or \lstinline|ATAD| to terminate the e-mail by sending a dot.
+%This part of SMTP describes a loop (\lstinline|rec Z1|) where the client chooses
+%among the messages \lstinline|SUBJECT|, to send the subject,
+%\lstinline|DATALINE|, to send a line of text, or \lstinline|ATAD| to terminate the e-mail by sending a dot.
 
-\input{figures/fig-smtp_local}
+%\input{figures/fig-smtp_local}
 
-The local type can be represented as a state
-machine:
 
-\input{figures/fig-state_machine}
+%\input{figures/fig-state_machine}
+
+\paragraph{Implementation}
+The above session protocol drive the implementations:
+(i) of an SMTP client in Mungo via StMungo,
+(ii) the SMTP client and server in LINKS, and
+(iii) the generation of a Java API that can be used
+for implementing SMTP servers and clients.
+
+The Mungo implementation of the protocol
+implements an interaction between an SMTP client
+and the \lstinline|gmail| server. It uses the StMungo
+tool to translate the client local protocols into Mungo
+typestate specifications. StMungo also generates template
+code that implements the communication functionality of the client.
+The final implementation is type-checked by the Mungo tool against
+the generated typestate specification.
+
+LINKS implements SMTP server and client by first translating
+the local protocols into LINK channel types. The programmer
+is then responsible to develop code that uses a client (resp, server)
+channel according to its type.
+
+Finally, Scribble offers the possibility of generating a Java API;
+each protocol state corresponds to a generated class, with each
+class implementing as methods the communication operations available
+in each state. Method calls return an object corresponding to the next state.
+A runtime check ensures that each object/state is used only once.
+The Java API can guide the developer in order to implement a variety
+of SMTP clients and servers.
