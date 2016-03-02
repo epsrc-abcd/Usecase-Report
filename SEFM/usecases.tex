@@ -18,25 +18,30 @@ The use-cases are organised into application domains and are intended to be repr
 Several technologies and tools based on session types have been used to implement the use-cases that we describe in Section~\ref{sec:usecases}.
 %
 \begin{enumerate}
-	\item	Session Java~\cite{HU07TYPE-SAFE} is an extension of Java with binary session types for communication channels, supported by a runtime library. The compiler statically checks session types.
+	\item	Session Java~\cite{HU07TYPE-SAFE} is a Java extension
+			that statically checks binary session types for communication channels
+			that are implemented as an API.
+			%of Java with binary session types for communication channels, supported by a runtime library. The compiler statically checks session types.
 
 	\item	Eventful Session Java~\cite{event} supports asynchronous, event-driven programming, using session types to track progress through individual sessions.
 
 	\item	Multiparty Session C~\cite{NYH12} supports programming in C with the MPI library. The compiler statically checks session types.
 
-	\item	SPY~\cite{DBLP:conf/rv/NeykovaYH13} uses session types as the basis for runtime monitoring of communication protocols in Python.
+	\item	SPY~\cite{DBLP:conf/rv/NeykovaYH13} uses session types for runtime monitoring of communication protocols in Python.
 
 	\item	Two technologies apply session types to the actors paradigm:
 			\begin{itemize}
-				\item	An implementation that uses SPY to
-						monitor python threads that simulate actors~\cite{DBLP:conf/coordination/NeykovaY14}.
-				\item	A similar approach on monitoring session types is also used for the
-						Erlang programming language. %, which is a programming language for the Actors model.
-\sg{Is this Erlang system one of ours? Simon Fowler's MSc}
+				\item	SPY is used to monitor Python threads that simulate actors~\cite{DBLP:conf/coordination/NeykovaY14}.
+%				\item	An implementation that uses SPY to
+%						monitor python threads that simulate actors~\cite{DBLP:conf/coordination/NeykovaY14}.
+				\item	Session type monitoring is also used for Erlang actors~\cite{SF15}.
+%				\item	A similar approach on monitoring session types is also used for the
+%						Erlang programming language. %, which is a programming language for the Actors model.
+%						\sg{Is this Erlang system one of ours? Simon Fowler's MSc}
 			\end{itemize}
 
 	\item	Pabble~\cite{DBLP:conf/pdp/NgY14} extends Scribble to express
-			communication structures that are parameterised by the number of roles.
+			communication structures that are parametrised by the number of roles.
 			Pabble protocols are implemented and typechecked for the C+MPI framework.
 
 	\item	Mungo~\cite{mungo} is a tool that integrates session types into the object-oriented
@@ -47,13 +52,18 @@ Several technologies and tools based on session types have been used to implemen
 			protocols into Mungo interfaces.
 
 
-	\item	GV:			A functional programming implementation of binary session types. \sg{Refer to Phil's paper.}
-	\item	The web programming language Links \cite{} includes static typechecking of protocols, using the linear logic interpretation of session types \cite{}.
+	\item	GV:	A functional programming implementation of binary session types~\cite{DBLP:journals/jfp/Wadler14}.
+
+	\item	The web programming language LINKS~\cite{citation_needed}
+			uses the linear logic interpretation of session types~\cite{DBLP:journals/jfp/Wadler14}
+			to statically type-check protocols.
+
+	\item	The Scribble API generator, automatically creates an API for protocols,
+			where it describes each protocol state as a class equipped with
+			communication methods. Runtime checks ensure state linearity.
+
 	\item	SILL:		Functional programming based on the linear dual intuitionistic interpretation of session types. \sg{Separate this from the repository --- say something elsewhere.}
 
-	\item	A state pattern implementation as a library. Uses Scribble to automatically
-			create an API for state pattern programming and uses runtime checks to
-			cope with linearity requirements.
 
 \end{enumerate}
 
