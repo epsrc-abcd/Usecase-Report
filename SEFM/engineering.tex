@@ -6,20 +6,80 @@
 
 Support the text later with the discussion of section 2 and the results of Section 3.}
 
+The use-cases presented in \secref{usecases} exhibit a diversity
+in domains, paradigms and technologies.
+Despite this diversity, there are common elements on how software
+is engineered using session types.
 
-Session types is a formal method that belongs to the class of type systems.
-On the one hand, types is a static analysis technique applied directly
+Firstly, a session protocol can be seen as a way for specifying
+communication {\em requirements}. For example, in the case of web service applications
+the global protocol describes a logic of interaction between participant,
+whereas in internet protocol the session specification gives
+an intuition for understanding the overall protocol. 
+Protocols can also be expressed using diagrammatic languages,
+that can be used to communicate a system specifications.
+For example, the state machine for the SMTP client local protoco (\mybf{see appendix}).
+%Global protocols can be expressed as
+%petri-nets~\cite{DBLP:conf/tgc/FossatiHY14}, communicating
+%finite state machines~\cite{Denielou:2012:MST:2259248.2259258}
+%and BPMN choreographies~\cite{LTY2015}.
+
+Secondly, a global protocol may drive the {\em design} and
+{\em implementation} of a software.
+Automated code generation in the case of SMTP and HTTP
+gives code with a specific design.
+Also type-checking is used in many occasions to ensure
+software with no communication errors.
+
+Thirdly, whenever session fidelity is ensured, either
+using type-checking, code generation, or even the
+inference/synthesis approach (\dk{there is inference/synthesis usecase})
+it is ensured that the communication properties of the
+software are {\em validated}.
+
+Finally, runtime monitoring is not only used to ensure
+correct communication at runtime. Monitoring can also
+be used to {\em test} whether an implementation
+is correct or not.
+This is the case for concurrency problems, DNS and
+chat application use-cases.
+
+Overall, session types can drive the software development
+process due to their formal and structured nature.
+The main effort in developing of the use-cases for the repository
+was focused in the development of the session protocol.
+Given that a protocol captures the desirable software requirements
+then code development needs less effort and resources.
+ 
+As a formal method session types belong to the class of type systems,
+which are a static analysis technique applied directly
 on the source code in order to verify a set of predefined properties.
 In the case of session types these properties derive
 from the fundamentals of {\em good} communication.
-On the other hand, types are subject to a syntax,
+Also, types are subject to a syntax,
 and possibly a semantics, that describes an implementation structure.
-These two facts allow for the integration of session types both in-depth
-and in-breadth in the software development process. Furthermore,
-this integration is supported by automated procedures.
-Consequently, session types can drive the entire process of
-software development. The latter claim is supported by the
-experience gained from the repository presented in \secref{usecases}.
+%%These two facts allow for the integration of session types both in-depth
+%%and in-breadth in the software development process.
+Consequently, session types can provide automated support throughout
+the entire process of software development. 
+
+
+
+%In any of the above methodologies, session types can be used as
+%requirements  to drive the software development process.
+%In the top-down approach, local types can be used to give intuition
+%and guide developers when implementing code.
+%In the bottom-up approach, more agile development teams
+%can analyse and compare the obtained global and/or local protocols
+%against the intended communication behaviour using human
+%reasoning techniques. Protocols can also be expressed
+%as diagram. For example, a local protocol is a syntactic form
+%of a state machine. Global protocols can be expressed as
+%petri-nets~\cite{DBLP:conf/tgc/FossatiHY14}, communicating
+%finite state machines~\cite{Denielou:2012:MST:2259248.2259258}
+%and BPMN choreographies~\cite{LTY2015}.
+
+
 
 \mybf{Hint how session types can be used in the software life-cycle. e.g.
 	in a top-down approach:
