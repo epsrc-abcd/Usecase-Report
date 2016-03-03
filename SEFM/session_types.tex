@@ -385,16 +385,20 @@ to create a global protocol. Successful synthesis of the global protocol guarant
 software has the communication safety and progress properties.
 
 
-In any of the above methodologies, session types can be used as requirements 
-to drive the software development process. In the top-down
-approach, local types can be used to give intuition and guide
-developers when implementing code.
+In any of the above methodologies, session types can be used as
+requirements  to drive the software development process.
+In the top-down approach, local types can be used to give intuition
+and guide developers when implementing code.
 In the bottom-up approach, more agile development teams
 can analyse and compare the obtained global and/or local protocols
 against the intended communication behaviour using human
-reasoning techniques.
+reasoning techniques. Protocols can also be expressed
+as diagram. For example, a local protocol is a syntactic form
+of a state machine. Global protocols can be expressed as
+petri-nets~\cite{DBLP:conf/tgc/FossatiHY14}, communicating
+finite state machines~\cite{Denielou:2012:MST:2259248.2259258}
+and BPMN choreographies~\cite{LTY2015}.
 
-\dk{how about diagrammatic languages?}
 
 
 
@@ -515,10 +519,10 @@ programming paradigms used in the case studies.
 %to participant \lstinline|B|.
 
 
-\subsection{Fine/coarse grain representation}
-\dk{this should go as future work}
+%\subsection{Fine/coarse grain representation}
+%\dk{this should go as future work}
 
-{\em Concurrency patterns} e.g. network topology, client/server, race condition, etc. (maybe I am writing nonsense here)
+%{\em Concurrency patterns} e.g. network topology, client/server, race  condition, etc. (maybe I am writing nonsense here)
 
 
 
