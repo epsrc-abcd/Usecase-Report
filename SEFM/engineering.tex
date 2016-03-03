@@ -2,13 +2,29 @@
 \label{sec:session_engineeering}
 
 
-\mybf{Write here about the main parts of software life-cycle (requirements, specification, design, implementation, verification, testing, maintenance), and software management and organisation.
+%\mybf{Write here about the main parts of software life-cycle 
+%(requirements, specification, design, implementation, verification, 
+%testing, maintenance), and software management and organisation.
 
-Support the text later with the discussion of section 2 and the results of Section 3.}
+%Support the text later with the discussion of section 2 and the results of 
+%Section 3.}
 
-The use-cases presented in \secref{usecases} exhibit a diversity
-in domains, paradigms and technologies.
-Despite this diversity, there are common elements on how software
+As a formal method session types belong to the class of type systems,
+which are a static analysis technique applied directly
+on the source code in order to verify a set of predefined properties.
+In the case of session types these properties derive
+from the fundamentals of {\em good} communication.
+Also, types are subject to a syntax,
+and possibly a semantics, that describes an implementation structure.
+%%These two facts allow for the integration of session types both in-depth
+%%and in-breadth in the software development process.
+Consequently, session types can provide automated support throughout
+the entire process of software development. 
+
+This last claim can be supported by the experience gained
+in developing the use-cases in \secref{usecases}.
+Despite the diversity on domains, paradigms, and technologies,
+there are common elements on how software in the on-line repository
 is engineered using session types.
 
 Firstly, a session protocol can be seen as a way for specifying
@@ -18,7 +34,7 @@ whereas in internet protocol the session specification gives
 an intuition for understanding the overall protocol. 
 Protocols can also be expressed using diagrammatic languages,
 that can be used to communicate a system specifications.
-For example, the state machine for the SMTP client local protoco (\mybf{see appendix}).
+For example, the state machine for the SMTP client local protocol (\mybf{see appendix}).
 %Global protocols can be expressed as
 %petri-nets~\cite{DBLP:conf/tgc/FossatiHY14}, communicating
 %finite state machines~\cite{Denielou:2012:MST:2259248.2259258}
@@ -51,17 +67,6 @@ was focused in the development of the session protocol.
 Given that a protocol captures the desirable software requirements
 then code development needs less effort and resources.
  
-As a formal method session types belong to the class of type systems,
-which are a static analysis technique applied directly
-on the source code in order to verify a set of predefined properties.
-In the case of session types these properties derive
-from the fundamentals of {\em good} communication.
-Also, types are subject to a syntax,
-and possibly a semantics, that describes an implementation structure.
-%%These two facts allow for the integration of session types both in-depth
-%%and in-breadth in the software development process.
-Consequently, session types can provide automated support throughout
-the entire process of software development. 
 
 
 
@@ -81,18 +86,18 @@ the entire process of software development.
 
 
 
-\mybf{Hint how session types can be used in the software life-cycle. e.g.
-	in a top-down approach:
-	specify communication requirements and build prototypes,
-	use session types to describe software structure,
-	type-checker/code generators/monitors can be used in implementation.
-	bottom-up approach:
-	design structures,
-	infer specification,
-	synthesis as a verification technique, etc...
-	}
+%\mybf{Hint how session types can be used in the software life-cycle. e.g.
+%	in a top-down approach:
+%	specify communication requirements and build prototypes,
+%	use session types to describe software structure,
+%	type-checker/code generators/monitors can be used in implementation.
+%	bottom-up approach:
+%	design structures,
+%	infer specification,
+%	synthesis as a verification technique, etc...
+%	}
 
-In contrast other formal methods, have restricted applications
+\mybf{In contrast other formal methods, have restricted applications
 in specific software development phases.
 For example, model checking
 narrows down to verification/testing phase of software development.
@@ -103,7 +108,7 @@ Often in the case of error detection, results are hard to analyse
 and developers need to re-iterate through previous phases
 to fix errors.
 Another example is the usage of formal specification languages
-that do not find any usage after the specification phase.
+that do not find any usage after the specification phase.}
 
 
 %\begin{itemize}
