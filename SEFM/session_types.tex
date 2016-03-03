@@ -5,11 +5,11 @@
 \label{sec:session_types}
 
 
-This section introduces session types through 
+This section introduces session types through
 a discussion of the need for them in
 software engineering.
 This section takes the approach to identify and define
-a clear and distinctive terminology 
+a clear and distinctive terminology
 for transferring the basic ideas of session types to a wider audience.
 It also presents the Scribble~\cite{scribble} protocol
 description language, which is a formal language for describing
@@ -22,7 +22,7 @@ protocols using the principles of session types.
 
 Communication \emph{protocols} in software engineering
 are usually described and communicated among humans
-by using the most intuitive graphical form of sequence diagrams 
+by using the most intuitive graphical form of sequence diagrams
 %(\figref{seqchart}).
 Sequence diagrams are used to depict a communication flow as an ordered
 sequence of \emph{message passing} among communicating
@@ -63,7 +63,7 @@ communication protocols, such as the case where one role
 can make a choice that affects the subsequent communication behaviour
 of the entire protocol.
 
-Communication complexity can be managed by 
+Communication complexity can be managed by
 introducing \emph{structure} within the communication protocol.
 Session types describe communication in a structured and rigorous fashion,
 and aim to define concepts for structured communication
@@ -94,7 +94,7 @@ Session types particularly focus on the following properties:
 %
 \begin{enumerate}[label=$\bullet$]
 	\item	{\em Communication Safety}: Every execution state of the system has {\em safe} communication behaviour:
-	%	
+	%
 	\begin{itemize}
 		\item	{\em Communication interaction match}:
 				Every send
@@ -107,7 +107,7 @@ Session types particularly focus on the following properties:
 		\item	{\em Deadlock-freedom}:
 				Consequently, every message sent will eventually be received.
 	\end{itemize}
-	
+
 	\item	{\em Communication Progress}: If the protocol has not yet terminated, then there is a pair of components that can communicate safely, leading to a system state that again satisfies the safety and progress properties.
 %Every state of the system either represents a terminated protocol, or
 %			will {\em progress} to a state with safe communication behaviour. \sg{Maybe this can be clearer?}
@@ -175,7 +175,7 @@ a sequence diagram.
 
 Session types assume a {\em global} protocol that describes the
 communication interaction of all the roles inside a concurrent system.
-A global type enables a view of a system as a whole, instead of the 
+A global type enables a view of a system as a whole, instead of the
 approach that a concurrent system is a set of communicating modules.
 The perspective of a global protocol through a single role
 is called {\em local} protocol. The local protocol describes
@@ -208,13 +208,13 @@ Scribble protocol description language,
 which is a syntax used to express session type specifications.
 As an example,
 consider part of the session type protocol for the book-store
-use-case as in \figref{scribble_bs}. 
+use-case as in \figref{scribble_bs}.
 
 
 \input{figures/fig-scribble_bookstore}
 
 Line 1 of the upper protocol in \figref{scribble_bs} shows the
-Scribble definition of the global protocol. 
+Scribble definition of the global protocol.
 The communication takes place
 among the roles \BuyerOne, \BuyerTwo and \Seller. Line 2 demonstrates
 the syntax of a message passing interaction; a message
@@ -222,7 +222,7 @@ of type \Code{title} labelled with label \Code{book} is sent \lstinline|from|
 role \BuyerOne \lstinline|to| role \Seller. In Scribble, a message is
 defined as a list of types annotated with a label.
 
-In line 5 of the protocol 
+In line 5 of the protocol
 %their properties
 there is a choice interaction,
 where role \BuyerTwo makes an internal decision and selects
@@ -237,7 +237,7 @@ Scribble also provides a looping construct, which is needed for more realistic p
 
 %\dk{describe the recursion construct?}
 
-Line 1 of the lower protocol defines the local protocol 
+Line 1 of the lower protocol defines the local protocol
 for \BuyerOne of the Book-store protocol. Role \BuyerOne
 interacts with roles \BuyerTwo and \Seller. In essence,
 the local protocol for role \BuyerOne is derived automatically
@@ -254,7 +254,7 @@ types in software engineering, that follows procedures derived out of the rigoro
 nature of session types. In \figref{diagram} rectangles
 represent source code for either the software
 under development (white coloured) or for the definition
-of the session type protocols (grey coloured). 
+of the session type protocols (grey coloured).
 The arrows
 represent automated procedures that ensure
 the desirable properties of session types
@@ -286,20 +286,20 @@ described in \figref{diagram}.
 %developed previously by showing the
 %\mybf{typical usage} of session types in software
 %engineering.
-%%design and development. 
+%%design and development.
 %Furthermore, it distinguishes
-%the desirable properties that are offered by 
+%the desirable properties that are offered by
 %session types.
 
 
 In a typical top-down approach, a developer will first develop a global protocol
-%and express it syntactic form. 
+%and express it syntactic form.
 as syntax that expresses session type specifications.
 This for example can be done
 using the Scribble protocol description language.
 The global protocol source code is shown
 on the top of \figref{diagram}.
-The next step is to run a procedure to verify the 
+The next step is to run a procedure to verify the
 global protocol's correctness: for example, checking that choices
 are communicated to all roles whose subsequent behaviour depends on them.
 After the global protocol verification, a projection
@@ -326,11 +326,11 @@ source code that corresponds to a communicating process;
 it identifies its communication operations,
 and derives the communication behaviour of
 the
-%module. 
+%module.
 source code.
 The typechecker also takes as an input the
-corresponding syntax of the local protocol 
-and checks whether the 
+corresponding syntax of the local protocol
+and checks whether the
 %software module
 software source code
 implements the corresponding role of the specified communication behaviour.
@@ -403,8 +403,8 @@ and BPMN choreographies~\cite{LTY2015}.
 
 
 
-%\textbf{Furthermore, thus obtained global protocol can be compared 
-%to the specifications of intended communication behaviour, 
+%\textbf{Furthermore, thus obtained global protocol can be compared
+%to the specifications of intended communication behaviour,
 %formally with tools or informally with human reading technique.}
 
 %Typically, a protocol is first expressed globally and then
@@ -419,7 +419,7 @@ and BPMN choreographies~\cite{LTY2015}.
 \myparagraph{Session fidelity:}
 The case where the implementation of all the communication
 processes inside a system conforms to the corresponding
-local protocols of all the roles in a global protocol 
+local protocols of all the roles in a global protocol
 %are implemented by the corresponding communicating modules of
 is called {\em session fidelity}.
 When session fidelity is ensured then the communication safety
@@ -429,13 +429,13 @@ and communication progress properties are ensured.
 %%
 %\begin{enumerate}[label=$\bullet$]
 %	\item	Every execution state of the system has {\em safe} communication behaviour:
-%	%	
+%	%
 %	\begin{itemize}
 %		\item	{\em Communication interaction match}: Every send (resp., select) operation has a corresponding receive (resp., branch) operation.
 %		\item	{\em Message (\mybf{Payload?}) type match}: The type of every message being send matches the type of the message expected to be receive.
 %		\item	{\em Deadlock-freedom}: Consequently, every message send will be eventually received.
 %	\end{itemize}
-%	
+%
 %	\item	Every state of the system conforms to a terminated protocol, or
 %			it will {\em progress} to a state with a safe communication behaviour.
 %\end{enumerate}
@@ -466,10 +466,10 @@ programming paradigms used in the case studies.
 %In \figref{scribble_bs}, uses the Scribble protocol for the
 %Bookstore usecase in the online repository~\cite{usecase_repository},
 %to present the Scribble syntax.
-%Line 1 defines the 
+%Line 1 defines the
 %of global protocol \lstinline|Bookstore| between
 %roles \lstinline|Buyer1|, \lstinline|Buyer2| and \lstinline|Seller|.
-%%The communication structure is expressed 
+%%The communication structure is expressed
 %%as a sequence of {\em endpoint} to endpoint message passing
 %%interactions between the roles of the protocol.
 %%Messages are described in terms of a message type,
@@ -487,7 +487,7 @@ programming paradigms used in the case studies.
 
 %Line 5 of the protocol clarifies the choice interaction, where
 %role \lstinline|Buyer2| selects a choice from two possible outcomes,
-%expressed with the labels \lstinline|agree| or \lstinline|quit|. In 
+%expressed with the labels \lstinline|agree| or \lstinline|quit|. In
 %both cases roles \lstinline|Buyer1| and \lstinline|Seller| offer
 %alternative branches.
 
@@ -523,6 +523,63 @@ programming paradigms used in the case studies.
 %\dk{this should go as future work}
 
 %{\em Concurrency patterns} e.g. network topology, client/server, race  condition, etc. (maybe I am writing nonsense here)
+
+
+
+\subsection{Technologies based on Session Types}
+
+We describe a selection of practical languages, frameworks and tools, based on the range of session types engineering methodologies described above, that we have used to implement the use-cases (describe in Section~\ref{sec:usecases}).
+%
+\begin{enumerate}
+	\item	Session Java~\cite{HU07TYPE-SAFE} is a Java extension
+			that statically checks binary session types for communication channels
+			that are implemented as an API.
+			%of Java with binary session types for communication channels, supported by a runtime library. The compiler statically checks session types.
+
+	\item	Eventful Session Java~\cite{event} supports asynchronous, event-driven programming, using session types to track progress through individual sessions.
+
+	\item	Multiparty Session C~\cite{NYH12} supports programming in C with the MPI library. The compiler statically checks session types.
+
+	\item	SPY~\cite{DBLP:conf/rv/NeykovaYH13} uses session types for runtime monitoring of communication protocols in Python.
+
+	\item	Two technologies apply session types to the actors paradigm:
+			\begin{itemize}
+				\item	SPY is used to monitor Python threads that simulate actors~\cite{DBLP:conf/coordination/NeykovaY14}.
+%				\item	An implementation that uses SPY to
+%						monitor python threads that simulate actors~\cite{DBLP:conf/coordination/NeykovaY14}.
+				\item	Session type monitoring is also used for Erlang actors~\cite{SF15}.
+%				\item	A similar approach on monitoring session types is also used for the
+%						Erlang programming language. %, which is a programming language for the Actors model.
+%						\sg{Is this Erlang system one of ours? Simon Fowler's MSc}
+			\end{itemize}
+
+	\item	Pabble~\cite{DBLP:conf/pdp/NgY14} extends Scribble to express
+			communication structures that are parametrised by the number of roles.
+			Pabble protocols are implemented and typechecked for the C+MPI framework.
+
+	\item	Mungo~\cite{mungo} is a tool that integrates session types into the object-oriented
+%			programming
+			paradigm through the notion of typestate. Communication
+			operations on a channel are accessed via a state-dependent interface.
+			%Mungo uses a protocol description language for capturing typestate.
+			The Scribble to Mungo (StMungo) tool transforms Scribble
+			protocols into Mungo interfaces.
+
+
+	\item	GV:	A functional programming implementation of binary session types~\cite{DBLP:journals/jfp/Wadler14}.
+
+	\item	The web programming language LINKS~\cite{citation_needed}
+			uses the linear logic interpretation of session types~\cite{DBLP:journals/jfp/Wadler14}
+			to statically type-check protocols.
+
+	\item	The Scribble API generator, automatically creates an API for protocols,
+			where it describes each protocol state as a class equipped with
+			communication methods. Runtime checks ensure state linearity.
+
+	\item	SILL:		Functional programming based on the linear dual intuitionistic interpretation of session types. \sg{Separate this from the repository --- say something elsewhere.}
+
+\end{enumerate}
+
 
 
 
