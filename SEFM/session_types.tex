@@ -310,7 +310,7 @@ syntactically as session type specifications.
 Verification, projection and local specification
 syntax are supported by the Scribble tool-chain.
 
-{\em Type-check/Verification:}
+\myparagraph{Type-check/Verification:}
 One way to use the set of local protocols is to ensure
 conformance between the source code of the
 software under development and the local protocols,
@@ -338,7 +338,7 @@ Upon success, the result is verified software that
 enjoys the {\em communication safety} and {\em communication progress}
 properties of session types.
 
-{\em Code generation:}
+\myparagraph{Code generation:}
 A second way to use the set of local protocols
 is for automatic code generation. The generated
 code might be in the form of APIs that implement
@@ -355,7 +355,7 @@ that corresponds to the next state of the protocol. A dynamic
 check ensures that each object (i.e.~state) is used exactly once.
 
 
-{\em Monitoring:}
+\myparagraph{Monitoring:}
 A third way of using the set of local protocols is
 for monitoring the execution of the communication
 interaction inside a concurrent system.
@@ -373,7 +373,7 @@ and monitored by the monitor interface.
 Scribble supports the procedure of deriving
 state machines from local protocol syntax.
 
-{\em Inference/Synthesis:}
+\myparagraph{Inference/Synthesis:}
 \figref{diagram} also shows a bottom-up approach,
 where the communicating software source codes are developed independently.
 Then an inference  procedure identifies the communication behaviour
@@ -412,7 +412,7 @@ reasoning techniques.
 %corresponding role. Session fidelity can be checked mechanically,
 %through techniques like type-checking and monitoring.
 
-{\em Session fidelity:}
+\myparagraph{Session fidelity:}
 The case where the implementation of all the communication
 processes inside a system conforms to the corresponding
 local protocols of all the roles in a global protocol 
