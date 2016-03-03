@@ -73,7 +73,7 @@ The use-cases are drawn from a wide range of
 application domains, in order to demonstrate that
 session types can capture
 a broad area of communication specifications.
-The goal is also to cover a wide variety of patterns which allows comparison of features available in the session-based frameworks being evaluated. 
+The presented use cases cover a wide variety of patterns which allows comparison of features available in the session-based frameworks being evaluated. 
 %For the implementation of the usecases in the online
 %repository different technologies that integrate
 %session types in different programming paradigms were used.
@@ -91,44 +91,65 @@ The goal is also to cover a wide variety of patterns which allows comparison of 
 
 \newcommand{\myparagraph}[1]{\paragraph{\noindent\textit{\bf #1\ }}}
 
+\rumi{For each domain explain (1) What are the challenges when implementing Internet Application Protocols?
+(2) How Session Types overcome these challenges.  
+}
+
 \myparagraph{Internet Application protocols}
-What are the challenges when implementing Internet Application Protocols?
-How Session Types overcome these challenges.  
-This set (domain) is the first step towards more realistic (real-world) applications. 
-protocols in this domain share 
-The challenge of implementing protocols in this domain are three-fold: (1) programs should be interropable (2) often the interaction involves untrusted components (3) error-prone specifications. 
+This set of use cases is the first step towards more realistic (real-world) applications. 
+Implementing Internet application protocols 
+The motivation to apply session types verification techniques to Internet Application Protocol is three-fold. 
+%: (1) programs should be interropable (2) it may involve untrusted components (3) error-prone specifications. 
  
-An Internet Application protocol should conform to an informal RFC (request for comments specification). 
-RFCs are long, tedious and error-prone to write. In addition, client and server implementations are heterogeneous  and are developed independently, and inherently involve untrusted components. Moreover, complex state makes implementation difficult. 
-Session Types to the rescue: session types remove a burden from the developer because they automatically verify that the state of the code follows the state of the protocol. Expresses specific data-structures streaming such as the data-structure of an email,need for translate between RFC text format to/from message/payload types. 
+First, an Internet Application protocol should conform to a semi-informal RFC (request for comments specification). 
+RFCs are written in an english prose. As a result specifications are tedious  and error-prone to implement. Second,  the aim of the specification is to enable interaction between heterogeneous systems. Third, implementations often involve untrusted components. 
+
+Session types remove a burden from the developer because they automatically verify that the state of the code follows the state of the protocol. 
+Moreover, applying runtime monitor helps protecting the implemented components from interactions with untrusted parties. For example, the SMTP client implementations implemented in Java can interact with any (none session-based) SMTP server implementation.   
+
+%Expresses specific data-structures streaming such as the data-structure of an email,need for translate between RFC text format to/from message/payload types. 
 
 %Benefits of ST usage: interoperability, interaction with non-verified components. Motivation for dynamic monitoring, 
 %as well as static verification. They are low-level protocols and thus inherently binary. 
  
 \myparagraph{Web Service Application}
-Demonstrate the usage for multi-party protocols. The first two are taken from the the W3C working group.  
-In web services, applications make
-an extensive use of communications among components and services through the
-standardised format. Business transactions using web services
-are often termed business protocols because each of them obeys an agreed-upon conversation structure. 
-A protocol expresses an execution logic for the application. This is a practical indication
-that session types can be used to describe the behavioural logic of an application. The current development the usecase follows a top-down design approach, where the projection of the global protocol is used by different
+Internet Application protocols are often binary. The aim of the use cases presented in this domain is to demonstrate the usage of multi-party protocols. In web services, applications make an extensive use of communications among multiple components and services through a standardised format. Business transactions using web services
+are often termed \textit{business protocols} because each of them obeys an agreed-upon conversation structure.
+Therefore, a protocol expresses an execution logic for the application. The first two use cases are taken from the specification repository of an official W3C working group set up to establish a domain-specific language for specifying business protocols. 
+ 
+This set of use cases is a practical indication that session types can be used to describe the behavioural logic of an application. The current development of the usecases follows a top-down design approach, where the projection of the global protocol is used by different
 implementing technologies.
 
 \myparagraph{Network Topologies and Parallel Algorithms}
-Topologies are scalable and thus parametrised. Topologies are reusable, limited set of patterns. 
-Computation and communication are separated. A common source of errors (Rank 1) is communication mismatch.  
- Parallel algorithms require threads that communicate. Session types can use describe the necessary underlying communication between threads that implement parallel algorithms.	 Pabble is an extension to Scribble that allows us to describe and cope with parametrised protocols. Pattern-based structured parallel programming. Pabble can express all structured patterns in the HPC (High Performance Computing) Dwarf benchmark suit which capture common pattern of communication and computation.  A dwarf is an algorithmic method that captures a pattern of computation and communication. The Seven Dwarfs, constitute equivalence classes where membership in a class is defined by similarity in computation and data movement. The dwarfs are specified at a high level of abstraction to allow reasoning about their behavior across a broad range of applications. Programs that are members of a particular class can be implemented differently and the underlying numerical methods may change over time, but the claim is that the underlying patterns have persisted through generations of changes and will remain important into the future. The dwarfs present a method for capturing the common requirements of classes of
-applications while being reasonably divorced from individual implementations. The dwarfs present a method for capturing the common requirements of classes of applications while being reasonably divorced from individual implementations.Helps productivity, less LOC, clear description. Results show that our workflow saves development and debugging efforts for MPI parallel applications, especially for novice parallel programmers 
-Basic MPST is a fixed topology, extended to flexible topologies.  
+The highlights of this domain are: (1) computation and communication are often separated, (2) topologies are scalable and thus parametrised and (3) topologies are reusable, comprising limited set of patterns. 
+
+%X suggests that the goal of computer science should be making parallel computing productive, efficient, correct, portable, and scalable. 
+Issues with High Performance Computing (HPC) programmers productivity and programs correctness has long been recognised. A survey among MPI (the de facto standard programming model for HPC) programmers \cite{MPIErrors} ranks \textit{communication mismatches} as the most common errors. Communication mismatches include: (1) Send/receive inconsistency caused by an error in program execution flow) and (2) Send/receive inconsistency caused by incorrect sender and/or receiver specified for a message. 
+
+%Parallel algorithms require threads that communicate. Session types can use describe the necessary underlying communication between threads that implement parallel algorithms.	 
+
+So far we have examined use cases, where the number of interacting parties is fixed. Network Topologies, however, often involve unknown number of participants. 
+% Pattern-based structured parallel programming motivates the need for specifications of flexible topologies.  
+Pabble is an extension of Scribble with parameterised roles, thus enabling expressing flexible topologies with unknown number of participants. We evaluate the applicability and usability of session types on a well-known set of patterns for parallel programming. Pabble can express all structured patterns in the HPC (High Performance Computing) Dwarf benchmark suit. Dwarf suit captures common patterns of communication and computation. %The Seven Dwarfs, constitute equivalence classes where membership in a class is defined by similarity in computation and data movement. 
+The dwarfs are specified at a high level of abstraction to allow reasoning about their behavior across a broad range of applications. Programs that are members of a particular class can be implemented differently and the underlying numerical methods may change over time, but the claim is that the underlying patterns have persisted through generations of changes and will remain important into the future. 
+%The dwarfs present a method for capturing the common requirements of classes of applications while being reasonably divorced from individual implementations. 
+
+Applying session types  workflow, in particular generating MPI code form well-established patterns, has shown to improve developer productivity. It saves development and debugging efforts for MPI parallel applications, especially for novice parallel programmers.  
 
 \myparagraph{Classic Concurrency Problems}
-A common source of errors in actor programs is the lack of common specification language for interactions \cite{}. 
+%A common source of errors in actor programs is the lack of common specification language for interactions \cite{}. 
+
+Coordination of processes is a challenging problem when implementing concurrent systems. 
+A study in \cite{ActorCoordinationStudy} points out that "the property of no shared space and asynchronous
+communication can make implementing coordination protocols harder and providing a language
+for coordinating protocols is needed". The problem is best exemplified when implementing classic concurrency problems. 
+
 Classic concurrency problems require correct coordination among multiple components to avoid starvation and deadlock. Preserving the causalities between the interactions is challenging since the communication often involves complex patterns, combining long sequence of interactions with recursive behaviour and nested choice branches.
 Often precise message sequence should be followed. Moreover, it is not obvious if the components can be safely composed. Sending the wrong message type, sending to the wrong role or not sending in the correct message sequence may lead to deadlocks, errors which initial cause is hard to be identified or wrong computation results.
-Modelling the interactions between the components with session types ensures correct synchronisation and prevents deadlocks, unexpected termination and orphan messages. 
-(Thoughts: Message-passing vs shared memory. Educational.)
 
+%The paper reveals that the coordination of processes is a challenging problem when implementing, and especially when scaling up concurrent systems. 
+
+Modelling interactions between components with session types ensures correct synchronisation and prevents deadlocks, unexpected termination and orphan messages. 
 
 %\myparagraph{Other Domains}
 %
