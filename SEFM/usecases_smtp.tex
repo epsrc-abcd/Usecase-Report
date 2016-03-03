@@ -9,7 +9,7 @@ in RFC 5321~\cite{ESMTP-rfc}, which is the version consider here.
 SMTP is an application layer protocol, that typically runs on
 a TCP/IP connection.
 
-\paragraph{Motivation:}
+\myparagraph{Motivation:}
 The session typed implementation of the STMP has to offer
 a number of motivations for using session types for software
 development.
@@ -53,7 +53,7 @@ the streaming of tree data-structures.
 %%In this report we describe the implementation of
 %%an application layer communication protocol.
 
-\paragraph{Sessio Type Specification}
+\myparagraph{Session Type Specification}
 The implementation of the SMTP starts with
 the definition a Scribble global protocol~\cite{HuR:smtp}
 that describes the interaction between a client and the server.
@@ -111,12 +111,20 @@ machine for the client protocol can be found in \appref{state_machine}.
 
 %\input{figures/fig-state_machine}
 
-\paragraph{Implementation}
-The above session protocol drive the implementations:
+\myparagraph{Implementation}
+The above session protocol drives the implementations:
 (i) of an SMTP client in Mungo via StMungo,
 (ii) the SMTP client and server in LINKS, and
 (iii) the generation of a Java API that can be used
 for implementing SMTP servers and clients.
+In all the above technologies,
+the implementation of the SMTP protocol was
+aided by automated procedures that can handle
+the communication structure of a program. Furthermore,
+the implementation need not to be validated for
+communication correctness, since if the session protocol
+is correct and session fidelity is ensured then
+the implementation is correct.
 
 The Mungo implementation of the protocol
 implements an interaction between an SMTP client
@@ -129,8 +137,8 @@ the generated typestate specification.
 
 LINKS implements SMTP server and client by first translating
 the local protocols into LINK channel types. The programmer
-is then responsible to develop code that uses a client (resp, server)
-channel according to its type.
+then develops the client (resp., server) as a session typed
+channel, used to exchange information with the server (resp., client).
 
 Finally, Scribble offers the possibility of generating a Java API;
 each protocol state corresponds to a generated class, with each
