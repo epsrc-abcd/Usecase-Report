@@ -10,8 +10,8 @@
 %Section 3.}
 
 As a formal method session types belong to the class of type systems,
-which are a static analysis technique applied directly
-on the source code in order to verify a set of predefined properties.
+which are a analysis technique applied directly
+on the software code in order to verify a set of predefined properties.
 In the case of session types these properties derive
 from the fundamentals of {\em good} communication.
 Also, types are subject to a syntax,
@@ -24,14 +24,16 @@ the entire process of software development.
 This last claim can be supported by the experience gained
 in developing the use-cases in \secref{usecases}.
 Despite the diversity on domains, paradigms, and technologies,
-there are common elements on how software in the on-line repository
-is engineered using session types.
+there are common engineering patterns on the software in \secref{usecases}.
 
 Firstly, a session protocol can be seen as a way for specifying
-communication {\em requirements}. For example, in the case of web service applications
-the global protocol describes a logic of interaction between participant,
-whereas in internet protocol the session specification gives
-an intuition for understanding the overall protocol. 
+communication {\em requirements}. For example, in the case of web service applications a global protocol describes a
+logic of interaction between participants;
+the sequence of message passing and choice interactions can
+provide intuition about the requirements of the software.
+Similarly, the session specification for internet protocol
+gives a global and a local intuition for understanding
+the overall network interaction. 
 Protocols can also be expressed using diagrammatic languages,
 that can be used to communicate a system specifications.
 For example, the state machine for the SMTP client local protocol (\mybf{see appendix}).
