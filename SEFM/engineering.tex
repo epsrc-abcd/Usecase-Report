@@ -1,6 +1,39 @@
-\section{Session types and Software Engineering}
+\section{Use-Case Repository Analysis}
 \label{sec:session_engineeering}
 
+
+This section does an overall discussion on the
+results, experience gained and possible future work
+derived from the application
+of session types for the implementation of the
+repository presented in \secref{usecases}.
+The discussion focuses on the technical lessons
+learned, as well as an informal discussion
+on the engineering perspective of the software
+developed.
+
+subsection{Technical Lessons Learned}
+Session types exhibit robustness in a wide range of
+use-cases and domains. All the scenarios demonstrated
+are structured on the message passing,
+choice interactions and recursion. 
+However, there are communication patterns 
+in use-case scenarios that remain as open
+questions, such as the interaction of a role with two
+other roles in parallel, or the case where a signal
+can interrupt the communication between two roles.
+
+
+\begin{itemize}
+	\item
+	types features: parallel (``race conditions''), interruptible, ...more
+	
+	\item
+	type system and endpoint language features: event-driven sessions, CPS actors (Akka/Scala), ...more
+	
+	\item
+	runtime: transport-independent sessions, ST-cFSM correspondence from monitoring, implementing asynchronous distributed delegation, ...more
+\end{itemize}
 
 %\mybf{Write here about the main parts of software life-cycle 
 %(requirements, specification, design, implementation, verification, 
@@ -8,7 +41,7 @@
 
 %Support the text later with the discussion of section 2 and the results of 
 %Section 3.}
-
+\subsection{Software Engineering}
 As already discussed in \secref{sessions_integrate},
 due to their formal and structured nature,
 session types can provide support throughout the
@@ -29,13 +62,13 @@ the reader a clear understanding of the interaction logic of
 the problem. Furthermore, the fact that session protocols
 can be expressed in diagrammatic languages, help
 the process of transferring the requirements of a software,
-e.g.~the SMTP client state machine in \figref{put_figure}.
+e.g.~the SMTP client state machine in \appref{state_machine}.
 
 A second observation is that the main effort for each use-case
 is focused on the development of a protocol.
 Session specifications need to be capture the exact
 and valid communication {\em requirements} of a system.
-For example the SMTP global protocol (\figref{put_figure}) (resp., HTTP)
+For example, the SMTP global protocol (\appref{smtp_global}) (resp., HTTP)
 had a significant amount of time invested in its development,
 due to the study of RFC 5321 (resp., RFC ????).
 During the development process the Scribble validating tool
@@ -57,43 +90,26 @@ This approach was used in the development of the DNS and
 the chat Server. Errors in the monitoring phase
 lead to an iteration for redevelopment of the session protocol.
 
+A problem with the above discussion is the lack of metrics
+for an accurate understanding on the cost and effectiveness
+of the application of session types in software engineering.
+A possible new area of research in session types could
+be to quantify their effectiveness when it comes to software development,
+in terms of bugs, line of code, performance, development time and cost.
 
-\mybf{
-	Future (Maybe this can go as section 5)
-\begin{itemize}
-	\item	There is no evaluation of the bottom
-			up technique due to the current lack of technologies.
-			Nevertheless, this work is a strong indicator 
-			that whenever session fidelity is ensured, either
-			using type-checking, code generation, or even the
-			inference/synthesis approach
-			it is ensured that the communication properties of the
-			software are {\em validated}.
-			This can help more agile development teams in
-			the process of exchange requirements and co-ordinating
-			software development.
+The use-case repository lacks a use-case developed using the
+bottom up technique presented in \figref{diagram}, due to
+the current lack of technologies. Nevertheless, this work
+is a strong indicator to drive similar research towards
+that direction as well.
+
+%Finally, session types have the ability to capture the
+%communication specifics of a system as whole through the
+%global protocol, and at the same time provide a local
+%understanding for the system as a set of interacting
+%entities. 
 
 
-	\item	A whole new research challenge for software development and
-			session types.
-	
-	\item	Specific research in the benefits of session types
-			in software engineering
-
-	\item	Development time, Bugs, Lines of code, performance
-	
-	\item	cost
-	
-	\item	Session types have the ability to capture the
-			communication inside a system as a whole and then project it to
-			a local level.
-			They further provide support through the different phases of
-			software abstractions.
-			It would be useful to research whether session types can capture
-			the communication in software that requires more complicate
-			structures and more level of abstraction.
-\end{itemize}
-}
 %Overall, session types can drive the software development
 %process due to their formal and structured nature.
 %The main effort in developing of the use-cases for the repository
@@ -189,20 +205,6 @@ lead to an iteration for redevelopment of the session protocol.
 %\end{itemize}
 
 
-\subsection{...lessons learned...}
-
-\paragraph{``technical''}
-
-\begin{itemize}
-\item
-types features: parallel (``race conditions''), interruptible, ...more
-
-\item
-type system and endpoint language features: event-driven sessions, CPS actors (Akka/Scala), ...more
-
-\item
-runtime: transport-independent sessions, ST-cFSM correspondence from monitoring, implementing asynchronous distributed delegation, ...more
-\end{itemize}
 
 
 \paragraph{``engineering''}

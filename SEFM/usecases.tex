@@ -146,12 +146,44 @@ Applying session types workflow, in particular generating MPI code form well-est
 
 \subsection{``Use-Case highlights''}
 
+\paragraph{Book-Store}
+
+The book-store is a canonical example for demonstrating 
+session types. Its global and \BuyerOne local protocol
+can be found in~\figref{scribble_bookstore}. Two
+Buyer roles, \BuyerOne and \BuyerTwo, interact with a \Seller
+role to buy a book. \BuyerOne request a quote for a book.
+The \Seller replies with a price and then \BuyerOne asks
+\BuyerTwo for a contribution. \BuyerTwo then makes a choice:
+i) \BuyerTwo can agree to contribute and informs both \BuyerOne
+and the \Seller, with the price transferring interactions taking
+place; ii) \BuyerTwo does not agree and ends the interaction
+informing both \BuyerOne and \Seller.
+
+The Book-store protocol reveals a logic interaction between participants.
+
+It is implemented in Mungo using the automatic code generation of
+StMungo. The effort of the programmer was focused on filling the
+decision logic for the values exchanged on the message interactions.
+
+\mybf{put more}
+
+\paragraph{SMTP}
+
+\mybf{put SMTP here}
+
 \paragraph{HTTP.}
 
-...basic http is effectively request-response, but with practical session types (scribble) the protocol can be specified many different ways: e.g. request-response interaction with ``large'' request/respond message types, or by simple data types (field value types) with ``richer interaction structure'' (basically the message structure grammar)...
-
+Despite, the fact that HTTP is a basic request-response protocol,
+its global specification can be defined in many different ways:
+e.g.~a request/response pattern with large message types. The approach
+taken here is to construct a request (resp., response) header as
+a stream of simpler messages passed that construct the overall
+request (resp., response) header. 
 
 \paragraph{Travel Agency.}
+
+
 
 ...W3C CDL working group Web services use case, initially specified as binary sessions between multiparty roles (not a single multiparty session), features delegation...
 
@@ -164,6 +196,35 @@ Applying session types workflow, in particular generating MPI code form well-est
 \paragraph{..OOI python use cass...}
 
 ...TODO: add use cases? (e.g., negotiation, resource access control)... ...python: run-time monitoring motivation...
+
+
+\paragraph{Collection Data-Structure and File Access}
+
+These two use-cases demonstrate the interaction
+of a stack (resp., file) client with a distributed
+stack data-structure (resp., file),
+where the client needs to check whether the stack (resp., file)
+is empty before acquiring an element.
+In the case of the stack, pushing an element in the
+stack is always possible.
+This use-case demonstrates that interaction with
+distributed data-structures can be refined,
+structured, and ultimately controlled
+using session types.
+
+\paragraph{Concurrent Fibonacci}
+
+Concurrent Fibonacci is an example that shows the
+underlying communication pattern needed by an
+a parallel algorithm. The algorithm assumes
+two nodes that store consecutive Fibonacci
+numbers. An exchange in numbers allows for
+the calculation of the next Fibonacci number.
+
+In contrast with network topologies this algorithm
+is defined on a fixed number of nodes and ensures
+no errors in the communication process of the parallel
+algorithm.
 
 
 \paragraph{others?}
