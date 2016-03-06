@@ -15,19 +15,20 @@ Table~\ref{table:use_cases_all} lists the name of each use-case, its original so
 The use-cases are drawn from a wide range of
 application domains, in order to demonstrate that
 session types can capture
-a broad area of communication specifications and a wide variety of patterns. 
+a broad area of communication specifications and a wide variety of patterns. On  one hand, applying session types to diversity of use cases demonstrates a range of features and extension in the tools. 
+
+On the other  hand, each domain offers appreciation of session types from a different perspective. We explain the specific challenges tackled by session types when applied to a specific domain.   %In this section we demonstrate that depending on the domain the properties are important to a various degree. 
+%Each domain has its own challenges and although session types provide multiple guarantees, the motivation to apply session types to a specific domain is slightly different.   
+Communication safety guarantees are essential when programming in an error-prone environment (as in High Performance Computing). Session fidelity guarantee is essential when protocols are specified in a semi-formal format (as in Internet Application Protocols). Ensuring progress is challenging when a complex coordination of multiple parties is required (as is Web Services) and compositionality is not apparent (as in Classic Concurrency Problems).
+
 %As we have already explained, session types ensure multiple properties. Here we review session types properties wrt. thir importance when implementing use cases in different domains. 
 %We have identified domains that offer a different viewpoint and appreciation of the properties. 
-We witness how each domain offers appreciation of session types from a different perspective. %In this section we demonstrate that depending on the domain the properties are important to a various degree. 
-Each domain has its own challenges and although session types provide multiple guarantees, the motivation to apply session types to a specific domain is slightly different.   
-Session types guarantee communication safety, which is essential when programming in an error-prone environment (as is the case with High Performance Computing). They guarantee session fidelity, which is essential when protocols are specified in a semi-formal format (as is the case with Internet Application Protocols). They guarantee progress, which is essential  when use cases involve coordination of multiple parties (as is the case with Web Services) and compositionality is not apparent and is a common source of errors (as is the case with Classic Concurrency Problems).
 %This is essential when dealing with concurrent algorithms where. 
 %Describing the specification in terms of a formal description language gives clarity and reduces the programming errors: 
 %(1) Internet application protocols require thorough understanding of long and tedious semi-formal specifications. 
 %(2) communication safety. In cases when the communication mismatches and synchronisation of messages is a common source of errors 
 %(3) when use cases involve large number of participants and coordination between the participants becomes challenging. Large number of participants. 
  
-In addition to the general motivation for applying session types, which is communication safety, we emphasise the specific challenges tackled by session types when applied to the specific domain.  
 %Covering a wide variety of patterns which allows comparison of features available in the session-based frameworks being evaluated.
 %For the implementation of the usecases in the online
 %repository different technologies that integrate
@@ -86,25 +87,24 @@ Internet Application Protocols are low level protocols, as such they often speci
 %are often termed \textit{business protocols} because each of them
 obeys an agreed-upon protocol structure. The protocol stipulates the business logic to be implemented by the application.
 
-To show the applicability of session types to this domain we implemented use cases (Book Store, Travel Agency) taken from the specification repository of an official W3C working group set up to establish a domain-specific language for specifying business protocols.
+To show the applicability of session types to this domain we implemented use cases (Book Store, Travel Agency) designed
+by the WS-CDL Working Group \cite{W3C}, intended to represent general concepts common to many applications of web services
 
 This set of use cases is a practical indication that session types can be used to describe the behavioural logic of an application. The current development of the usecases follows a top-down design approach, where the projection of the global protocol is used by different
 implementing technologies.
 
 \ray{...multiparty, ``richer'' data types (XML, SOAP, etc), delegation...}
+is an interaction scenario designed
+by the WS-CDL Working Group [13], intended to represent general concepts
+common to many applications of web services
 
+\myparagraph{Network Topologies} Issues with High Performance Computing (HPC) programmers productivity and programs correctness have long been recognised. A survey among MPI (the de facto standard programming model for HPC) programmers \cite{MPIErrors} ranks \textit{communication mismatches} as the most common errors. Communication mismatches include: (1) send/receive inconsistency caused by an error in program execution flow) and (2) send/receive inconsistency caused by incorrect sender and/or receiver specified for a message. These are precisely the type of errors prevented with session types verification. We have implemented multiple parallel algorithms in MPI (Jacobi, Monte Carlo), where the lack of communication errors is guaranteed statically.    
 
-\myparagraph{Network Topologies and Parallel Algorithms}
+%Parallel algorithms require threads that communicate. Session types can use describe the necessary underlying communication between threads that implement parallel algorithms.
 %\rumi{The highlights of this domain are: (1) computation and communication are often separated, (2) topologies are scalable and thus parametrised and (3) topologies are reusable, comprising limited set of patterns.}
 
 %X suggests that the goal of computer science should be making parallel computing productive, efficient, correct, portable, and scalable.
-Issues with High Performance Computing (HPC) programmers productivity and programs correctness have long been recognised. A survey among MPI (the de facto standard programming model for HPC) programmers \cite{MPIErrors} ranks \textit{communication mismatches} as the most common errors. Communication mismatches include: (1) send/receive inconsistency caused by an error in program execution flow) and (2) send/receive inconsistency caused by incorrect sender and/or receiver specified for a message. These are precisely the type of errors prevented with session types verification. We have implemented multiple parallel algorithms in MPI (Jacobi, monte carlo), where the lack of communication errors is guaranteed statically.    
-
-%Parallel algorithms require threads that communicate. Session types can use describe the necessary underlying communication between threads that implement parallel algorithms.
-
-%We evaluate the applicability and usability of session types on a well-known set of patterns for parallel programming.
-In addition to specific parallel algorithms we also evaluate session types on a set of patterns for parallel programming. 
-The Dwarf benchmark suit is a popular benchmark suit that captures common patterns of communication and computation. %The Seven Dwarfs, constitute equivalence classes where membership in a class is defined by similarity in computation and data movement.
+\myparagraph{Parallel Algorithms} In addition to specific parallel algorithms we also evaluate session types on a set of patterns for parallel programming.  The Dwarf benchmark suit \cite{BerkleyPar} is a popular benchmark suit that captures common patterns of communication and computation. %The Seven Dwarfs, constitute equivalence classes where membership in a class is defined by similarity in computation and data movement.
 The dwarfs are specified at a high level of abstraction to allow reasoning about their behavior across a broad range of applications.
 The previously presented use cases in our repository involved a fixed number of interacting parties. The parallel patterns, however, often involve unknown number of participants. To overcome this problem, we use the protocol description language Pabble. 
 % Pattern-based structured parallel programming motivates the need for specifications of flexible topologies.
@@ -113,9 +113,7 @@ Pabble is an extension of Scribble with parameterised roles, thus enabling expre
 %The dwarfs are specified at a high level of abstraction to allow reasoning about their behavior across a broad range of applications. %Programs that are members of a particular class can be implemented differently and the underlying numerical methods may change over time, but the claim is that the underlying patterns have persisted through generations of changes and will remain important into the future.
 %The dwarfs present a method for capturing the common requirements of classes of applications while being reasonably divorced from individual implementations.
 
-Applying session types workflow, in particular generating MPI code form well-established patterns, has shown to improve developers productivity. It saves development and debugging efforts for MPI parallel applications, especially for novice parallel programmers.
-
-\ray{: distinguish parameterised topology examples (ring, butterfly, etc) from specific parallel algorithms (e.g. concurrent fibo, Jacobi, monte carlo)...}
+Applying session types workflow, in particular generating MPI code form well-established patterns, has shown to improve developers productivity \cite{NCY2015}. It saves development and debugging efforts for MPI parallel applications, especially for novice parallel programmers.
 
 %\myparagraph{Other Domains}
 %
