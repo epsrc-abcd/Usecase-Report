@@ -25,9 +25,10 @@
 \newcommand{\Seller}{\rolefont{Seller}}
 
 
+\newcounter{dkcounter}
 
 \newcommand{\mybf}[1]{{\color{blue} #1}}
-\newcommand{\dk}[1]{\marginpar{{\color{blue} #1}}}
+\newcommand{\dk}[1]{\stepcounter{dkcounter} {\color{blue}\arabic{dkcounter}}  \marginpar{{\color{blue} \arabic{dkcounter} #1}}}
 \newcommand{\sg}[1]{{\color{blue} #1}}
 
 

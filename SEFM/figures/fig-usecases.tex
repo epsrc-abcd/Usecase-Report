@@ -1,5 +1,3 @@
-
-
 \begin{table}
 \begin{center}
 \begin{tabular}{|l|l|l|l|}
@@ -10,22 +8,6 @@
 
 	\hline
 	\hline
-	\multicolumn{4}{|l|}{ \textbf{Internet Application Protocols}}
-	\\
-	\hline
-	SMTP & \cite{RFC} & \JavaAPI, \TypeState, \Links & 
-	\\
-	HTTP & \cite{RFC} & \JavaAPI & 
-	\\
-	DNS & \cite{RFC} & \Erlang &
-	\\
-	POP3 & \cite{RFC} & \TypeState & 
-	\\
-%	PAXOS & \cite{POP3} & \TypeState & \\
-%	OATH & \cite{OATH} & \JavaAPI \\
-
-	\hline
-	\hline
 	\multicolumn{4}{|l|}{ \textbf{Web Service Applications}}
 	\\
 	\hline
@@ -33,36 +15,25 @@
 	\\
 	Travel Agency & \cite{W3C} & \SJ &
 	\\
-	Chat Application & \cite{citation_needed} & \Erlang &
+	Chat Application & \cite{Fowler15} & \Erlang &
 	\\
+
 	\hline
 	\hline
-	\multicolumn{4}{|l|}{ \textbf{Network Topologies}}
+	\multicolumn{4}{|l|}{ \textbf{Internet Application Protocols}}
 	\\
 	\hline
-	Ring & \cite{BerkleyPar} & \MPI &
+	SMTP & \cite{RFC} & \JavaAPI, \TypeState, \Links & stateful interaction
 	\\
-	Butterfly & \cite{BerkleyPar} & \MPI &
+	HTTP & \cite{RFC} & \JavaAPI &	stateless request/response
 	\\
-	All to All & \cite{BerkleyPar} & \MPI &
+	DNS & \cite{RFC,Fowler15} & \Erlang &
 	\\
-	Stencil & \cite{BerkleyPar} & \MPI &
+	POP3 & \cite{RFC} & \TypeState & stateful interaction
 	\\
-	Farm (Master-Worker) & \cite{BerkleyPar} & \MPI &
-	\\
-	Map Reduce & \cite{BerkleyPar} & \MPI &
-	\\
-	\hline
-	\hline
-	\multicolumn{4}{|l|}{ \textbf{Parallel Algorithms}}
-	\\
-	\hline
-	Concurrent Fibonacci & \cite{citation_needed} & \Mungo & parallel impl. 
-	\\
-	Monte Carlo & \cite{citation_needed} & \MPI &
-	\\
-	Jacoby & \cite{citation_needed} & \MPI &
-	\\
+%	PAXOS & \cite{POP3} & \TypeState & \\
+%	OATH & \cite{OATH} & \JavaAPI \\
+
 	\hline
 	\hline
 	\multicolumn{4}{|l|}{ \textbf{Classic Concurrency Problems}}
@@ -74,16 +45,40 @@
 	\\
 	Cigarette Smoker & \cite{Savina} & \SPython & race conditions
 	\\
-%	Big & \cite{Savina} & \SPython & many-to-many interactions\\
-	Peano Numbers & \cite{citation_needed} & \GV, \Links &
-%	\\
-%	Add Server & \cite{} & \GV, \Links &
-%	\\
-%	Concurrent Fibonacci & \cite{Fibonacci} & \SPython, \TypeState & \rumi{Check impl.}
+	%	Big & \cite{Savina} & \SPython & many-to-many interactions\\
+	
+	\hline
+	\hline
+	\multicolumn{4}{|l|}{ \textbf{Parallel Algorithms}}
 	\\
 	\hline
-	\hline
+	Concurrent Fibonacci & \cite{citation_needed} & \Mungo & parallel algorithm
+	\\
+	Monte Carlo & \cite{citation_needed} & \MPI & parallel algorithm
+	\\
+	Jacoby & \cite{citation_needed} & \MPI & parallel algorithm
+	\\
+		
 
+	\hline
+	\hline
+	\multicolumn{4}{|l|}{ \textbf{Network Topologies}}
+	\\
+	\hline
+	Ring & \cite{BerkleyPar} & \MPI & parametrised
+	\\
+	Butterfly & \cite{BerkleyPar} & \MPI & parametrised
+	\\
+	All to All & \cite{BerkleyPar} & \MPI & parametrised
+	\\
+	Stencil & \cite{BerkleyPar} & \MPI & parametrised
+	\\
+	Farm (Master-Worker) & \cite{BerkleyPar} & \MPI & parametrised
+	\\
+	Map Reduce & \cite{BerkleyPar} & \MPI & parametrised
+	\\
+	
+	\hline
 	\hline
 	\multicolumn{4}{|l|}{ \textbf{Data Structures}}
 	\\
@@ -93,6 +88,10 @@
 	\\
 	File Access & \cite{citation_needed} & \TypeState & file access client
 	\\
+	Peano Numbers & \cite{citation_needed} & \GV, \Links &
+	\\
+	%	Add Server & \cite{} & \GV, \Links &
+	%\\	
 %	\multicolumn{4}{|l|}{\textbf{Operating Systems}}
 %	\\
 %	\hline %\hline
