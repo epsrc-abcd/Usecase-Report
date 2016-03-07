@@ -289,7 +289,9 @@ of the Scribble language featuring parametrised
 roles.
 % Pattern-based structured parallel programming motivates the need for specifications of flexible topologies.
 Pabble can express all structured patterns in the
-HPC (High Performance Computing) Dwarf benchmark suit~\cite{BerkleyPar} (i.e. algorithmic methods that capture common pattern of communication and computation), 
+HPC category of the Dwarf benchmark
+suit~\cite{BerkleyPar} (i.e.~algorithmic methods that capture common pattern of
+communication and computation),
 %In addition to specific parallel algorithms we also evaluate
 %session types on a set of patterns for parallel programming.
 %which is a popular benchmark suit that captures
@@ -312,7 +314,7 @@ HPC (High Performance Computing) Dwarf benchmark suit~\cite{BerkleyPar} (i.e. al
 We provide an implementation for each pattern (topology) from the table using a tool for automatic MPI code generation
 from reusable Pabble specifications. Note that one parallel algorithm can be implemented using multiple network topologies. Thus, this use-cases set is a generalisation of the parallel algorithm use-cases. For example, the repository contains implementations of the Monte-Carlo $\pi$ simulation with two different patterns, scatter-gather and master-worker (the former uses collective operations and all processes are involved in the main calculation, whereas with the latter
 workers are coordinated by a central master process by P2P communication that does not perform the main calculation).
-The benchmark results in ~\cite{NCY2015} shown that the practise
+The benchmark results in~\cite{NCY2015} shown that the practise
 of code generation from Pabble specifications improves developers
 productivity in terms of development and debugging efforts.
 
