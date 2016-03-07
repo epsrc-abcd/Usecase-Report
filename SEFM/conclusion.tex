@@ -1,66 +1,86 @@
+% !TeX root = main.tex
+
 \section{Conclusion}
 \label{sec:conclusion}
 
-This paper draws motivation from the need
-of integrating session types in the software
-development process. The main problem towards
-this direction is the difficulty of accessing
+This paper is motivated by the desire
+to integrate session types into the software
+development process. The main obstacle for this goal is the difficulty of accessing
 session types, in order to initiate a process
-of knowledge exchange between session types
+of knowledge exchange between 
 experts and a wider academic and industrial
-audience. This paper, uses as common ground
-the experience gained by implementing
-the on-line session types use-case
-repository~\cite{usecase_repository}, developed for the
-requirements of the ABCD project~\cite{ABCD},
-to bridge the above gap. For the purposes of
-the presentation of the repository the session terminology
-and method is explained in using non-mathematical
+audience. We have attempted to bridge this gap by presenting the experience gained from implementing
+the ABCD project's repository of use-cases for session types. For maximum accessibility we have explained the terminology and methodology of session types in the form of non-mathematical
 definitions.
+
+
+%This paper draws motivation from the need
+%of integrating session types in the software
+%development process. The main problem towards
+%this direction is the difficulty of accessing
+%session types, in order to initiate a process
+%of knowledge exchange between session types
+%experts and a wider academic and industrial
+%audience. This paper, uses as common ground
+%the experience gained by implementing
+%the on-line session types use-case
+%repository~\cite{usecase_repository}, developed for the
+%requirements of the ABCD project~\cite{ABCD},
+%to bridge the above gap. For the purposes of
+%the presentation of the repository the session terminology
+%and method is explained in using non-mathematical
+%definitions.
 
 The ABCD repository contains a 
 diverse set of use-cases, in terms of domains,
 programming paradigms, and technologies.
-In the domain of web-services session types
+In the domain of web-services, session types
 demonstrate how to specify and implement
 the interaction logic between network components.
 Session types can be used to implement internet
-application protocols, where a session protocol
-is used to specify a standard RFC. Network topologies
-require a definition which is parametric on the number
-of participants. Classic Concurrency problem demonstrate
-how session types can offer solutions to problems
-that control access to resources. The final domain
-of data structures and parallel algorithms demonstrates
-solutions on data structure clients and furthermore,
-how session types can cope with the underlying communication
-requirements of parallel algorithms.
+application protocols, by formalising standard RFCs as types. Network topologies
+take advantage of definition which are parametric in the number
+of participants. Classic concurrency problems demonstrate
+the use of session types to control access to resources. The domain
+of data structures shows the use of session types to express usage protocols for structures such as stacks. Finally, the implementation of several parallel algorithms shows that session types can capture common algorithmic communication patterns. 
+
+
+
+%The ABCD repository contains a 
+%diverse set of use-cases, in terms of domains,
+%programming paradigms, and technologies.
+%In the domain of web-services session types
+%demonstrate how to specify and implement
+%the interaction logic between network components.
+%Session types can be used to implement internet
+%application protocols, where a session protocol
+%is used to specify a standard RFC. Network topologies
+%require a definition which is parametric on the number
+%of participants. Classic Concurrency problem demonstrate
+%how session types can offer solutions to problems
+%that control access to resources. The final domain
+%of data structures and parallel algorithms demonstrates
+%solutions on data structure clients and furthermore,
+%how session types can cope with the underlying communication
+%requirements of parallel algorithms.
 
 The formal and structured nature of session types
-can offer a well studied method for applying 
-session types in the software development method.
-The Scribble platform is a tool based on the
-theory of session types and it is used as
-a core tool 
-for the implementation of the uses-cases in the
-ABCD repository.
+offers a principled foundation for the systematic design and validation of the communication behaviour of software. 
+The Scribble platform, a tool-set based on the
+theory of session types, lies at the heart of the languages and technologies demonstrated in the ABCD use-case repository.
 
-The main conclusions derived in this paper are: the feasibility,
-the robustness and the diversity of session type solutions.
-The integration of session types in the software development
-process goes beyond the theory and can now be presented
-in practical terms.
-
-Furthermore, a wide opportunity of future research arises
-in the wider area of applying session types in real software.
-The immediate objective is to continue developing technology,
-and enriching the repository with a more diverse set of
-use-cases.
-Furthermore, a new area of research may arise that has to
-do with: i) measure the cost/effectiveness of the
-application of session types in
-the software development process, in order to provide
-more accurate ; ii) research session type solutions for
-further needs of in the software development area, especially
-in the areas that need formal support in order to reduce
-complexity and effort.
+Our main conclusion is that it is now feasible and practical to use session types in the development of a range of communication-oriented software. Having said that, there are still broad opportunities for further research and development in order to implement session types in more languages and extend the range of use-cases. Quantitative research on the effectiveness of session typesin software development would also be welcome.
+ 
+%Furthermore, a wide opportunity of future research arises
+%in the wider area of applying session types in real software.
+%The immediate objective is to continue developing technology,
+%and enriching the repository with a more diverse set of
+%use-cases.
+%Furthermore, a new area of research may arise that has to
+%do with: i) measure the cost/effectiveness of the
+%application of session types in
+%the software development process, in order to provide
+%more accurate ; ii) research session type solutions for
+%further needs of in the software development area, especially
+%in the areas that need formal support in order to reduce
+%complexity and effort.
