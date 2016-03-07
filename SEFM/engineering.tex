@@ -1,47 +1,56 @@
-\section{Use-Case Repository Analysis and Future Work}
+% !TeX root = main.tex
+
+\section{Analysis of the Use-Case Repository}
 \label{sec:session_engineeering}
 
+We now discuss the experience gained from our work on the use-case repository, the possibilities for session types in software engineering, and directions for future research.
 
-This section does an overall discussion on the
-results, experience gained and possible future work
-derived from the application
-of session types for the implementation of the
-repository presented in \secref{usecases}.
-The discussion focuses on the technical lessons
-learned, as well as an informal discussion
-on the engineering perspective of the software
-developed.
+%This section does an overall discussion on the
+%results, experience gained and possible future work
+%derived from the application
+%of session types for the implementation of the
+%repository presented in \secref{usecases}.
+%The discussion focuses on the technical lessons
+%learned, as well as an informal discussion
+%on the engineering perspective of the software
+%developed.
 
 %subsection{Technical Lessons Learned}
 
-Session types exhibit robustness in a wide range of
-use-cases and domains. All the demonstrated scenarios
-are structured on the message passing,
-choice interactions and recursion. 
-However, there are communication patterns 
-in concurrent software that remain open
-questions, such as the interaction of a role with two
-other roles in parallel, or the case where a signal
-can interrupt the communication between two roles.
+We have demonstrated that session types are applicable to a range of use-cases in a range of application domains. All of the scenarios in the repository are structured around message-passing, choice, and recursion, which are well-supported by session-typed languages and tools. However, there are communication patterns in concurrent software that have not yet been addressed by session types. Examples are the interaction of a role with two other roles in parallel, or situations in which a signal can interrupt the communication between two roles. Further research will extend the scope of session types in these directions. 
 
-Session types can also be embedded in different
-programming paradigms. The use-cases in this paper
-use imperative, object-oriented, functional, and
-actors programming.
-In addition, there are use-cases
-using session types on the MPI.
-Future work involves embedding session types
-in different paradigms, e.g.~continuation passing
-style actor, like Scala.
+%Session types exhibit robustness in a wide range of
+%use-cases and domains. All the demonstrated scenarios
+%are structured on the message passing,
+%choice interactions and recursion. 
+%However, there are communication patterns 
+%in concurrent software that remain open
+%questions, such as the interaction of a role with two
+%other roles in parallel, or the case where a signal
+%can interrupt the communication between two roles.
 
-There are numerous technologies used to developed use-cases
-in the repository. However, there is still need to continue
-developing technologies to fully utilise the capabilities
-of session types.
-For example, the use-case repository lacks a
-scenario developed using the bottom up technique
-presented in \figref{diagram}, due to
-the current lack of technologies.
+The use-case repository contains examples of session types in a range of programming paradigms: imperative, object-oriented, functional, and actor-based. It also shows the use of session types with the MPI framework. Further research and development will extend implementations to cover more points in the language/paradigm space; for example, one current project is targeting the Akka framework in Scala.
+
+%Session types can also be embedded in different
+%programming paradigms. The use-cases in this paper
+%use imperative, object-oriented, functional, and
+%actors programming.
+%In addition, there are use-cases
+%using session types on the MPI.
+%Future work involves embedding session types
+%in different paradigms, e.g.~continuation passing
+%style actor, like Scala.
+
+Several implementation technologies have been applied to the use-cases in the repository. However, there is still a need for more implementation work in order to realise all of the capabilities of session types as practical tools. In particular, the bottom-up techniques of type inference and synthesis (the red arrows in \figref{diagram}) have not yet been implemented to the same extent as the top-down techniques.
+
+%There are numerous technologies used to developed use-cases
+%in the repository. However, there is still need to continue
+%developing technologies to fully utilise the capabilities
+%of session types.
+%For example, the use-case repository lacks a
+%scenario developed using the bottom up technique
+%presented in \figref{diagram}, due to
+%the current lack of technologies.
 %Nevertheless, this work
 %is a strong indicator to drive similar research towards
 %that direction as well.
@@ -66,38 +75,39 @@ the current lack of technologies.
 
 %Support the text later with the discussion of section 2 and the results of 
 %Section 3.}
+
 \myparagraph{Session Types in Software Engineering}
 As already discussed in \secref{sessions_integrate},
 due to their formal and structured nature,
 session types can provide support throughout the
 entire process of software development.
-The results in \secref{usecases} come to support
-the ability of session types in offering solutions
-to software development.
+The results in \secref{usecases} provide evidence for this claim.
+%come to support
+%the ability of session types in offering solutions
+%to software development.
 %
-Despite the diversity on domains, paradigms,
-and technologies, common engineering patterns
-can be found in the software developed in \secref{usecases}.
+Despite the diversity of domains, paradigms,
+and technologies, the use-cases exemplify common engineering patterns.
+%can be found in the software developed in \secref{usecases}.
 
 A first observation is the use of session protocols
-as means for understanding the software communication
-{\em requirements}. For example, the book-store
+as a way of understanding software communication
+{\em requirements}. For example, the bookstore
 session protocol (\figref{scribble_bs}) can give
 the reader a clear understanding of the interaction logic of
 the problem. Furthermore, the fact that session protocols
-can be expressed in diagrammatic languages, help
-the process of transferring the requirements of a software,
+can be expressed in diagrammatic languages, helps
+the process of transferring requirements into software,
 e.g.~the SMTP client state machine in \appref{state_machine}.
 
 A second observation is that the main effort for each use-case
 is focused on the development of a protocol.
-Session specifications need to be capture the exact
+Session specifications need to capture the exact
 and valid communication {\em requirements} of a system.
-For example, the SMTP global protocol (\appref{smtp_global}) (resp., HTTP)
-had a significant amount of time invested in its development,
-due to the study of RFC 5321 (resp., RFC ????).
+For example, the SMTP global protocol (\appref{smtp_global}) %(resp., HTTP)
+needed a significant time investment in the study of RFC 5321. %(resp., RFC 2616).
 During the development process the Scribble validating tool
-help the programmer develop a valid protocol for SMTP.
+helped the programmer develop a valid protocol for SMTP.
 
 Thirdly, a session protocol can be seen as an approximation
 of the software under development that can be used to drive
@@ -107,22 +117,22 @@ SMTP and HTTP decreased the development time. Furthermore,
 automatic type-checkers removed the burden of further
 {\em validating} the software.
 
-Finally monitoring is not used only for ensuring
+Finally, monitoring is not used only for ensuring
 correct runtime communication.
-It also be used to {\em test} the communication
+It can also be used to {\em test} the communication
 against test cases that resemble arbitrary software clients.
 This approach was used in the development of the DNS and
-the chat Server. Errors in the monitoring phase
+Chat use-cases. Errors in the monitoring phase
 lead to an iteration for redevelopment of the session protocol.
 
-A problem with the above discussion is the lack of metrics
-for an accurate understanding on the cost and effectiveness
+The above discussion lacks metrics
+for an accurate understanding of the cost and effectiveness
 of the application of session types in software engineering.
 The only set of use-cases that have such support is network
-topologies~\cite{NCY2015}.
-A possible new area of research in session types could
-be to quantify their effectiveness when it comes to software development,
-in terms of bugs, line of code, performance, development time and cost.
+topologies~\cite{NCY2015}. 
+A valuable new area of research in session types would
+be to quantify their effectiveness for software development,
+in terms of bugs, lines of code, performance, development time and cost.
 
 %Finally, session types have the ability to capture the
 %communication specifics of a system as whole through the
