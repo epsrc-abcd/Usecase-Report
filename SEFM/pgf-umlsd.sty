@@ -250,7 +250,7 @@ Sequence Diagrams.]
     \setlength{\unitlength}{1cm}
     \tikzstyle{sequence}=[coordinate]
     \tikzstyle{inststyle}=[rectangle, draw, anchor=west, minimum
-    height=0.8cm, minimum width=1.6cm, fill=white, 
+    height=0.5cm, minimum width=1.6cm, fill=white, 
     drop shadow={opacity=1,fill=black}]
     \ifpgfumlsdroundedcorners
     \tikzstyle{inststyle}+=[rounded corners=3mm]
@@ -276,12 +276,12 @@ Sequence Diagrams.]
   \begin{pgfonlayer}{background}
     \ifnum\c@instnum > 0
     \foreach \t [evaluate=\t] in {1,...,\theinstnum}{
-      \draw[dotted] (inst\t) -- ++(0,-\theseqlevel*\unitfactor-2.2*\unitfactor);
+      \draw[dotted] (inst\t) -- ++(0,-\theseqlevel*\unitfactor-0.1*\unitfactor);
     }
     \fi
     \ifnum\c@threadnum > 0
     \foreach \t [evaluate=\t] in {1,...,\thethreadnum}{
-      \path (thread\t)+(0,-\theseqlevel*\unitfactor-0.1*\unitfactor) node (threadend) {};
+      \path (thread\t)+(0,-\theseqlevel*\unitfactor+0.5*\unitfactor) node (threadend) {};
       \tikzstyle{threadstyle}+=[threadcolor\t]
       \drawthread{thread\t}{threadend}
     }
