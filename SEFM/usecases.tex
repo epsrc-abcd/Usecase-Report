@@ -220,10 +220,19 @@ errors which initial cause is hard to be identified or wrong computation results
 
 Modelling interactions between components with session types ensures
 correct synchronisation and prevents deadlocks,
-unexpected termination and orphan messages as demonstrated by the implemented use cases. The repository includes correct Scribble protocols and verified endpoint implementations in Python for classic problems of dining philosophers, sleeping barber, and
-cigarette smoker. The sleeping barber problem is also implemented in Session Scala. The problem is modelled with three components: the customer, the shop and the barber, using session types to formalise their expected interactions such that the customer and/or the barber are always synchronised on the number of waiting customers in the shop. The implementation shows how multiple concurrent sessions (one per customer) can be handled by single-threaded programs (the shop and the barber). It also shows how to address the problem with session delegation, by leveraging higher-order session types. 
-
-Both Scala and Python implementations rely on a custom session types libraries and do not require language extensions. The Scala library provides static verification, while the Python library uses runtime monitors.  
+unexpected termination and orphan messages as demonstrated by the implemented use cases.
+The repository includes correct Scribble protocols and verified endpoint implementations in Python
+for classic problems of dining philosophers, sleeping barber, and
+cigarette smoker.
+%The sleeping barber problem is also implemented in Session Scala.
+%The problem is modelled with three components: the customer, the shop and the barber,
+%using session types to formalise their expected interactions such that the customer and/or
+%the barber are always synchronised on the number of waiting customers in the shop.
+%The implementation shows how multiple concurrent sessions (one per customer) can be handled
+%by single-threaded programs (the shop and the barber).
+%It also shows how to address the problem with session delegation, by leveraging higher-order session types. 
+%
+%Both Scala and Python implementations rely on a custom session types libraries and do not require language extensions. The Scala library provides static %verification, while the Python library uses runtime monitors.  
 
 %Expresses specific data-structures streaming such as the data-structure of an email,need for translate between RFC text format to/from message/payload types.
 
