@@ -33,15 +33,16 @@ protocol.
 in the ABCD online repository~\cite{usecase_repository}.
 The bookstore protocol specifies an interaction between two online Buyer roles
 that invoke a process of buying a book from an online Seller role, while
-sharing the expense.
-In the sequence diagram, each role is represented by a vertical line and
-communication messages are represented by horizontal arrows
-indicating the direction of communication flow.
-Intuitively, the communication progress proceeds downwards.
+sharing the expense. Intuitively the communication (horizontal lines) among
+roles (vertical lines) proceeds downwards.
+%In the sequence diagram, each role is represented by a vertical line and
+%communication messages are represented by horizontal arrows
+%indicating the direction of communication flow.
+%Intuitively, the communication progress proceeds downwards.
 Thus the protocol's behaviour is represented visually within the diagram.
 However, sequence diagrams are not considered as formal tools because
 protocols described in this way cannot be verified as being complete or unambiguous.
-
+%
 In industrial practice, communication protocols for
 distributed software are usually described in natural language and
 discussed with the help of sequence diagrams.
@@ -70,27 +71,39 @@ and aim to define concepts for structured communication
 that should enable better control of communication complexity.
 
 %describing communication protocols
+Typically, a type is broadly understood as a concept used
+to describe a class of data. Structured types describe
+data-structures. When types structure input/output requirements
+they can describe functionality. Combination of functionality
+and data structure give rise to object-oriented concepts.
+A session type extends
+the notion of a type to capture the communication behaviour.% in concurrent systems.
+{\em A session type is a type structure that describes communication
+	behaviour in terms of a series of send and receive
+	interactions between a set of communicating entities.} 
 
 %Session types can be seen as types that describe behaviour.
-Typically, a type is broadly understood
-as a meta-information concept, that is used to describe a class of data.
-Structured types are used to describe data structures.
-When types are structured as input/output requirements they
-are used to describe functionality.
-The combination of functionality and data structures give rise
-to the \emph{object-oriented} concepts of classes and interfaces. % of objects.
-%
-A session type extends %the above approaches of
-the notion of a type to capture the communication behaviour in concurrent systems.
-% definition of session types
-{\em A session type is a type structure that describes communication
-	behaviour in terms of a series of send and receive %message passing
-	interactions between a set of communicating entities.}  %, and it is used
-%	to characterise data structures that are used to implement communication.} \sg{I'm not sure what we mean by characterising data structures. Is it just that the data type of each message is defined?}
+%Typically, a type is broadly understood
+%as a meta-information concept, that is used to describe a class of data.
+%Structured types are used to describe data structures.
+%When types are structured as input/output requirements they
+%are used to describe functionality.
+%The combination of functionality and data structures give rise
+%to the \emph{object-oriented} concepts of classes and interfaces. % of objects.
+%%
+%A session type extends %the above approaches of
+%the notion of a type to capture the communication behaviour in concurrent systems.
+%% definition of session types
+%{\em A session type is a type structure that describes communication
+%	behaviour in terms of a series of send and receive %message passing
+%	interactions between a set of communicating entities.}  %, and it is used
+%%	to characterise data structures that are used to implement communication.} \sg{I'm not sure what we mean by characterising data structures. Is it just that the data type of each message is defined?}
 
 The formal nature of session types enables rigorous
 reasoning about the communication properties of a system.
-Session types particularly focus on the following properties:
+Session types %particularly
+focus on the %following
+properties:
 %
 \begin{enumerate}[label=$\bullet$]
 	\item	{\em Communication Safety}: Every execution state of the system has {\em safe} communication behaviour:
@@ -105,7 +118,8 @@ Session types particularly focus on the following properties:
 		\item	{\em Message type match}:
 				The type of every message being sent matches the type of the message expected to be received.
 		\item	{\em Deadlock-freedom}:
-				Consequently, every message sent will eventually be received.
+				%Consequently,
+				Every message sent will eventually be received.
 	\end{itemize}
 
 	\item	{\em Communication Progress}: If the protocol has not yet terminated, then there is a pair of components that can communicate safely, leading to a system state that again satisfies the safety and progress properties.
@@ -113,8 +127,8 @@ Session types particularly focus on the following properties:
 %			will {\em progress} to a state with safe communication behaviour. \sg{Maybe this can be clearer?}
 \end{enumerate}
 %
-In addition, the structured nature of session types enables
-a methodology for integrating session types in software development.
+%In addition, the structured nature of session types enables
+%a methodology for integrating session types in software development.
 
 %\dk{make clear that it is a syntactic/static technique - in contrast to model checking}
 
@@ -127,6 +141,11 @@ as identified through rigorous study. The rest of this
 section introduces the main terminology for session types
 and, whenever appropriate, it presents these notions
 using the Scribble tool-chain.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Session Types as Protocol
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \subsection{Sessions Types as Protocols}%: The Scribble Protocol Description Language}
 \label{sec:sessions_scribble}
@@ -144,7 +163,7 @@ Practically, a session type can be seen as a formal
 {\em specification} of a communication {\em protocol} among communicating {\em roles}.
 The syntax for session types is defined on pairs of operations:
 (i) the {\em send} and {\em receive} operation give rise to
-the {\em message passing} interaction; and
+{\em message passing}; and
 (ii) the {\em select} and {\em branch} operators enable the
 {\em choice} interaction.
 
@@ -195,10 +214,10 @@ given the global protocol and a role, projection
 returns as a local protocol only the
 interactions of the global protocol that are concerned with
 the role.
-
+%
 The reverse procedure to projection is called {\em synthesis},
-where a set of local protocols are composed together in a global
-protocol.
+where a set of local protocols are composed %together
+in a global protocol.
 
 
 \subsection{The Scribble Protocol Description Language}
@@ -219,8 +238,8 @@ The communication takes place
 among the roles \BuyerOne, \BuyerTwo and \Seller. Line 2 demonstrates
 the syntax of a message passing interaction; a message
 of type \Code{title} labelled with label \Code{book} is sent \lstinline|from|
-role \BuyerOne \lstinline|to| role \Seller. In Scribble, a message is
-defined as a list of types annotated with a label.
+role \BuyerOne \lstinline|to| role \Seller. Scribble, defines a message 
+as a list of types annotated with a label.
 
 In line 5 of the protocol
 %their properties
@@ -244,14 +263,21 @@ the local protocol for role \BuyerOne is derived automatically
 by stripping out all the irrelevant information with respect
 to \BuyerOne from the global protocol.
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Integrating Session Types
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Integrating Session Types into Software Development}%: The Scribble Tool-chain}
 \label{sec:sessions_integrate}
 
 %The formal nature of session types allow for a rigorous manipulation
 %of the communication behaviour inside a software.
 \figref{diagram} illustrates a holistic approach to the integration of session
-types in software engineering, that follows procedures derived out of the rigorous
-nature of session types. In \figref{diagram} rectangles
+types in software engineering.
+%, that follows procedures derived out of the rigorous
+%nature of session types.
+In \figref{diagram} rectangles
 represent source code for either the software
 under development (white coloured) or for the definition
 of the session type protocols (grey coloured).
@@ -261,16 +287,14 @@ the desirable properties of session types
 in the development process. Blue arrows represent
 a top-down view of the diagram while red arrows take
 the bottom-up approach.
-The Scribble
-tool-chain supports many of these automated
-procedures.
+%The Scribble tool-chain supports many of these automated procedures.
 An important assumption
 is that the software source code in the
 bottom of \figref{diagram} uses an interface
 for communication, where the communication
 operations can be identified by automated
 procedures.
-
+%
 Furthermore and in addition to a protocol description language,
 Scribble offers a tool-chain that implements most of the procedures
 described in \figref{diagram}.
@@ -532,59 +556,102 @@ programming paradigms used in the case studies.
 \subsection{Technologies based on Session Types}
 
 We describe a selection of practical languages, frameworks and tools, based on the range of session types engineering methodologies described above, that we have used to implement the use-cases (describe in Section~\ref{sec:usecases}).
+%%
+%\begin{enumerate}
+%	\item	Session Java~\cite{HU07TYPE-SAFE} is a Java extension
+%			that statically checks binary session types for communication channels
+%			that are implemented as an API.
+%			%of Java with binary session types for communication channels, supported by a runtime library. The compiler statically checks session types.
 %
-\begin{enumerate}
-	\item	Session Java~\cite{HU07TYPE-SAFE} is a Java extension
-			that statically checks binary session types for communication channels
-			that are implemented as an API.
-			%of Java with binary session types for communication channels, supported by a runtime library. The compiler statically checks session types.
+%%	\item	Eventful Session Java~\cite{event} supports asynchronous, event-driven programming, using session types to track progress through individual sessions.
+%
+%	\item	Multiparty Session C~\cite{NYH12} supports programming in C with the MPI library. The compiler statically checks session types.
+%
+%	\item	SPY~\cite{DBLP:conf/rv/NeykovaYH13} uses session types for runtime monitoring of %communication
+%			protocols in Python.
+%
+%	\item	Two technologies apply session types to the actors paradigm:
+%			\begin{itemize}
+%				\item	SPY is used to monitor Python threads that simulate actors~\cite{DBLP:conf/coordination/NeykovaY14}.
+%%				\item	An implementation that uses SPY to
+%%						monitor python threads that simulate actors~\cite{DBLP:conf/coordination/NeykovaY14}.
+%				\item	Session type monitoring is also used for Erlang actors~\cite{SF15}.
+%%				\item	A similar approach on monitoring session types is also used for the
+%%						Erlang programming language. %, which is a programming language for the Actors model.
+%%						\sg{Is this Erlang system one of ours? Simon Fowler's MSc}
+%			\end{itemize}
+%
+%	\item	Pabble~\cite{DBLP:conf/pdp/NgY14} extends Scribble to express
+%			communication structures that are parametrised by the number of roles.
+%			Pabble protocols are implemented and typechecked for the C+MPI framework.
+%
+%	\item	Mungo~\cite{mungo} is a tool that integrates session types into the object-oriented
+%%			programming
+%			paradigm through the notion of typestate. Communication
+%			operations on a channel are accessed via a state-dependent interface.
+%			%Mungo uses a protocol description language for capturing typestate.
+%			The Scribble to Mungo (StMungo) tool transforms Scribble
+%			protocols into Mungo interfaces.
+%
+%
+%	\item	GV:	A functional programming implementation of binary session types~\cite{DBLP:journals/jfp/Wadler14}.
+%
+%	\item	The web programming language LINKS~\cite{citation_needed}
+%			uses the linear logic interpretation of session types~\cite{DBLP:journals/jfp/Wadler14}
+%			to statically type-check protocols.
+%
+%	\item	The Scribble API generator, automatically creates an API for protocols,
+%			where it describes each protocol state as a class equipped with
+%			communication methods. Runtime checks ensure state linearity.
+%
+%%	\item	SILL: Functional programming based on the linear
+%%			dual intuitionistic interpretation of
+%%			session types. \sg{Separate this from the
+%%			repository --- say something elsewhere.}
+%
+%\end{enumerate}
 
-	\item	Eventful Session Java~\cite{event} supports asynchronous, event-driven programming, using session types to track progress through individual sessions.
 
-	\item	Multiparty Session C~\cite{NYH12} supports programming in C with the MPI library. The compiler statically checks session types.
+%
+{\em Session Java}~\cite{HU07TYPE-SAFE}
+a Java extension that statically checks binary session types for communication channels
+that are implemented as an API.
 
-	\item	SPY~\cite{DBLP:conf/rv/NeykovaYH13} uses session types for runtime monitoring of communication protocols in Python.
+{\em Multiparty Session C}~\cite{NYH12} supports programming in C with the MPI library. The compiler statically checks session types.
 
-	\item	Two technologies apply session types to the actors paradigm:
-			\begin{itemize}
-				\item	SPY is used to monitor Python threads that simulate actors~\cite{DBLP:conf/coordination/NeykovaY14}.
-%				\item	An implementation that uses SPY to
-%						monitor python threads that simulate actors~\cite{DBLP:conf/coordination/NeykovaY14}.
-				\item	Session type monitoring is also used for Erlang actors~\cite{SF15}.
-%				\item	A similar approach on monitoring session types is also used for the
-%						Erlang programming language. %, which is a programming language for the Actors model.
-%						\sg{Is this Erlang system one of ours? Simon Fowler's MSc}
-			\end{itemize}
+{\em SPY}~\cite{DBLP:conf/rv/NeykovaYH13} uses session types for runtime monitoring of %communication
+protocols in Python.
 
-	\item	Pabble~\cite{DBLP:conf/pdp/NgY14} extends Scribble to express
-			communication structures that are parametrised by the number of roles.
-			Pabble protocols are implemented and typechecked for the C+MPI framework.
+Two technologies apply session types to the {\em actors} paradigm:
+(i) SPY is used to monitor Python threads that simulate actors~\cite{DBLP:conf/coordination/NeykovaY14}; and
+(ii)	Session type monitoring is also used for Erlang actors~\cite{SF15}.
 
-	\item	Mungo~\cite{mungo} is a tool that integrates session types into the object-oriented
-%			programming
-			paradigm through the notion of typestate. Communication
-			operations on a channel are accessed via a state-dependent interface.
-			%Mungo uses a protocol description language for capturing typestate.
-			The Scribble to Mungo (StMungo) tool transforms Scribble
-			protocols into Mungo interfaces.
+{\em Pabble}~\cite{DBLP:conf/pdp/NgY14} extends Scribble to express
+communication structures that are parametrised by the number of roles.
+Pabble protocols are implemented and typechecked for the C+MPI framework.
+
+{\em Mungo}~\cite{mungo} is a tool that integrates session types into the object-oriented
+paradigm through the notion of typestate. Communication
+operations on a channel are accessed via a state-dependent interface.
+The Scribble to Mungo (StMungo) tool transforms Scribble
+protocols into Mungo interfaces.
 
 
-	\item	GV:	A functional programming implementation of binary session types~\cite{DBLP:journals/jfp/Wadler14}.
+{\em GV} is functional programming implementation of binary session types~\cite{DBLP:journals/jfp/Wadler14}.
 
-	\item	The web programming language LINKS~\cite{citation_needed}
-			uses the linear logic interpretation of session types~\cite{DBLP:journals/jfp/Wadler14}
-			to statically type-check protocols.
+The web programming language {\em LINKS}~\cite{citation_needed}
+uses the linear logic interpretation of session types~\cite{DBLP:journals/jfp/Wadler14}
+to statically type-check protocols.
 
-	\item	The Scribble API generator, automatically creates an API for protocols,
-			where it describes each protocol state as a class equipped with
-			communication methods. Runtime checks ensure state linearity.
+The {\em Scribble API generator}~\cite{citation_needed}, automatically creates an API for protocols,
+where it describes each protocol state as a class equipped with
+communication methods. Runtime checks ensure state linearity.
 
-	\item	SILL: Functional programming based on the linear
-			dual intuitionistic interpretation of
-			session types. \sg{Separate this from the
-			repository --- say something elsewhere.}
+%	\item	SILL: Functional programming based on the linear
+%			dual intuitionistic interpretation of
+%			session types. \sg{Separate this from the
+%			repository --- say something elsewhere.}
 
-\end{enumerate}
 
 
 
