@@ -4,29 +4,30 @@
 \label{sec:smtp}
 
 The SMTP is an internet standard for electronic
-mail transfer. It originally followed
-RFC 821~\cite{SMTP-rfc} and was later extended
-in RFC 5321~\cite{ESMTP-rfc}, which is the version consider here.
+mail transfer, that follows the RFC 5321\footnote{Extended Simple Mail Transfer Protocol, RFC 5321,
+\url{https://tools.ietf.org/html/rfc5321}}.
+%It originally followed
+%RFC 821~\cite{SMTP-rfc} and was later extended
+%in RFC 5321~\cite{ESMTP-rfc}, which is the version consider here.
 SMTP is an application layer protocol, that typically runs on
 a TCP/IP connection.
 
 \myparagraph{Motivation:}
 The session typed implementation of the SMTP has to offer
 a number of motivations for using session types for software
-development.
-Firstly, it demonstrates how {\em natural} it is
-to describe of a widely used standard protocol in session types.
-Secondly, and in contrast with the HTTP, it is
-a rather state-full protocol (\appref{global_smtp}),
+development:
+(1) it demonstrates how {\em natural} it is
+to describe of a widely used standard protocol in session types; and
+(2) it is a rather stateful protocol (\appref{smtp_global}),
 i.e.~ it requires implementation of a sequence of communication states.
 The complexity of states adds to the effort of
 developing SMTP. With the use of session typed
 support that effort can be reduced.
-Thirdly, the SMTP implies streaming a tree
-data-structure that corresponds to the structure
-of an email.
-It is thus, shown how session types can describe
-the streaming of tree data-structures.
+%Thirdly, the SMTP implies streaming a tree
+%data-structure that corresponds to the structure
+%of an email.
+%It is thus, shown how session types can describe
+%the streaming of tree data-structures.
 
 
 %This section gives a more detailed presentation of the SMTP
@@ -58,8 +59,7 @@ the streaming of tree data-structures.
 The implementation of the SMTP starts with
 the definition a Scribble global protocol~\cite{HuR:smtp}
 that describes the interaction between a client and the server.
-Part of the global protocol can be found in
-\appref{smtp_global}.
+Part of the global protocol can be found in \appref{smtp_global}.
 The global specification involves a number of interactions
 that include nested recursion and choices, thus the SMTP
 is a rather state-full protocol.
@@ -114,9 +114,9 @@ machine for the client protocol can be found in \appref{state_machine}.
 
 \myparagraph{Implementation}
 The above session protocol drives the implementations:
-(i) of an SMTP client in Mungo via StMungo,
-(ii) the SMTP client and server in LINKS, and
-(iii) the generation of a Java API that can be used
+(1) of an SMTP client in Mungo via StMungo;
+(2) the SMTP client and server in LINKS; and
+(3) the generation of a Java API that can be used
 for implementing SMTP servers and clients.
 In all the above technologies,
 the implementation of the SMTP protocol was

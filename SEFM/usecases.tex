@@ -13,7 +13,8 @@ the outline details of a selection of individual
 use-case is given. The discussion goes
 into more depth on two particular canonical
 use-cases:
-(1) the bookstore, a standard session types example introduced
+(1) the bookstore, %a standard session types example
+already introduced
 in Section~\ref{sec:session_types};
 % commonly found in the literature;
 and
@@ -21,12 +22,14 @@ and
 a standardised Internet application protocol.
 
 Table~\ref{table:use_cases_all} lists the name of each use-case,
-its original source, and the language(s) and tool(s) that have been
-used to implement it. Full source code, running examples and detailed
+its original source, and the technologies
+%language(s) and tool(s) that have been
+used to implement it. Full source code, running examples and %detailed
 description of all of the use-cases can be found in~\cite{usecase_repository}. 
 Use-cases are organised into application domains and are intended
-to be representative examples for each domain. Some of the use-cases
-were presented independently in the bibliography.
+to be representative examples for each domain.
+%Some of the use-cases
+%were presented independently in the bibliography.
 
 \subsection{Application Domains Covered by the Use-Cases}
 
@@ -104,11 +107,11 @@ through a standardised format and agreed-upon protocol structure.
 %obey an agreed-upon protocol structure.
 The protocol stipulates the business logic to
 be implemented by the application.
-
+%
 To show the applicability of session types to
 this domain we implemented use cases
 (Book Store, Travel Agency) designed by the WS-CDL Working Group \cite{W3C},
-intended to represent general concepts common to many applications of web services
+intended to represent common concepts to many applications of web services
 
 The book-store is a canonical example for demonstrating 
 business logic interaction.
@@ -123,10 +126,10 @@ and the \Seller, with the price transferring interactions taking
 place afterwards; ii) \BuyerTwo does not agree and ends the interaction
 informing both \BuyerOne and \Seller.
 %
-It is implemented in Mungo using the automatic code generation of
-StMungo. The effort of the programmer was focused on filling the
-decision logic for the values exchanged on the message interactions.
-\dk{put the other implementations}
+%It is implemented in Mungo using the automatic code generation of
+%StMungo. The effort of the programmer was focused on filling the
+%decision logic for the values exchanged on the message interactions.
+%\dk{put the other implementations}
 
 %\cut{The web-services set of use cases is a practical indication that session
 %types can be used to describe the behavioural logic of an application.
@@ -172,10 +175,10 @@ is implemented in monitored Erlang but it can interact with any
 %\cut{Monitoring ensures correct communication behaviour with
 %	untrusted or erroneous components.}
 
-Another widely used internet protocol implemented in the repository is HTTP.
+A widely used internet protocol implemented in the repository is HTTP.
 Despite, the fact that HTTP is a basic request-response protocol,
 it has a number of different commands that require attention.
-HTTP's global specification can be defined in many different ways:
+HTTP's global specification can be defined in different ways:
 e.g.~a request/response pattern with large message types. The approach
 taken here is to construct a request (resp., response) header as
 a stream of simpler messages passed that construct the overall
@@ -183,9 +186,68 @@ request (resp., response) header. The implementation in the online
 repository first describes the HTTP in Scribble and then automatically
 generates a Java API.
 %
-The SMTP is also implemented as a use-case in the repository.
-A detailed description of SMTP can be found in \secref{smtp}.
 
+The SMTP is an internet standard for email
+%electronic mail
+transfer, that follows the RFC 5321\footnote{Extended Simple Mail Transfer Protocol, RFC 5321,
+\url{https://tools.ietf.org/html/rfc5321}}.
+SMTP is an application layer protocol, that typically runs on
+TCP/IP.
+% connection.
+
+The session typed implementation of the SMTP has to offer
+a number of motivations for using session types for software
+development:
+(1) it demonstrates how {\em natural} it is
+to describe of a widely used standard protocol in session types; and
+(2) it is a rather stateful protocol (\appref{smtp_global}),
+i.e.~ it requires implementation of a sequence of communication states.
+The complexity of states adds to the effort of
+developing SMTP. With the use of session typed
+support that effort can be reduced.
+
+The implementation of the SMTP starts with
+the definition a Scribble global protocol~\cite{HuR:smtp}
+that describes the interaction between a client and the server.
+Part of the global protocol can be found in \appref{smtp_global}.
+The global specification involves a number of interactions
+that include nested recursion and choices, thus the SMTP
+is a rather state-full protocol.
+%
+An SMTP interaction is an exchange of text-based {commands}
+between a client and the server.
+%
+For example, in line 4 the client may send the
+\lstinline|EHLO| command to identify itself and open a server connection.
+Responses from the server have follow  the format:
+three digits followed by an optional dash ``-'', and then some text,
+e.g.~in line 8 the server might reply to \lstinline|EHLO| with \lstinline|_250 <text>| %\mybf{check here}.
+Lines 18-23 there is a loop that allows the client to construct
+and stream a tree data structure that contains the email information
+to the server. Specifically, in line 19 the client streams the subject of the
+email to the server and then performs iteration to stream email data lines,
+as in line 20. The streaming finishes in line 21 and 22 when the
+\lstinline|atad| message is sent and the server replies to the client.
+
+The protocol is then projected to the local specifications
+of the roles server and client. Part of the local protocol
+of the client can be found in \appref{smtp_local}.
+Local protocols can be represented as state machines. The state
+machine for the client protocol can be found in \appref{state_machine}.
+
+The SMTP session protocol is used to implement:
+(1) an SMTP client in Mungo via StMungo code generation;
+(2) the SMTP client and server in LINKS, where the client
+and the server are abstracted as typed channels; and
+(3) a Java API that can be further used for implementing SMTP servers and clients.
+In all the above technologies,
+the implementation of the SMTP protocol was
+aided by automated procedures that can handle
+the communication structure of a program. Furthermore,
+the implementation need not to be validated for
+communication correctness, since if the session protocol
+is correct and session fidelity is ensured then
+the implementation is correct.
 
 %\cut{\ray{...binary (thin abstraction layer over TCP session),
 %can have ``rich'' interaction structure (e.g. SMTP, POP3 conversations),
