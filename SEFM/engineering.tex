@@ -12,28 +12,53 @@ learned, as well as an informal discussion
 on the engineering perspective of the software
 developed.
 
-subsection{Technical Lessons Learned}
+%subsection{Technical Lessons Learned}
+
 Session types exhibit robustness in a wide range of
-use-cases and domains. All the scenarios demonstrated
+use-cases and domains. All the demonstrated scenarios
 are structured on the message passing,
 choice interactions and recursion. 
 However, there are communication patterns 
-in use-case scenarios that remain as open
+in concurrent software that remain open
 questions, such as the interaction of a role with two
 other roles in parallel, or the case where a signal
 can interrupt the communication between two roles.
 
+Session types can also be embedded in different
+programming paradigms. The use-cases in this paper
+use imperative, object-oriented, functional, and
+actors programming.
+In addition, there are use-cases
+using session types on the MPI.
+Future work involves embedding session types
+in different paradigms, e.g.~continuation passing
+style actor, like Scala.
 
-\begin{itemize}
-	\item
-	types features: parallel (``race conditions''), interruptible, ...more
-	
-	\item
-	type system and endpoint language features: event-driven sessions, CPS actors (Akka/Scala), ...more
-	
-	\item
-	runtime: transport-independent sessions, ST-cFSM correspondence from monitoring, implementing asynchronous distributed delegation, ...more
-\end{itemize}
+There are numerous technologies used to developed use-cases
+in the repository. However, there is still need to continue
+developing technologies to fully utilise the capabilities
+of session types.
+For example, the use-case repository lacks a
+scenario developed using the bottom up technique
+presented in \figref{diagram}, due to
+the current lack of technologies.
+%Nevertheless, this work
+%is a strong indicator to drive similar research towards
+%that direction as well.
+
+
+%\begin{itemize}
+%	\item
+%	types features: parallel (``race conditions''), interruptible, ...more
+%	
+%	\item
+%	type system and endpoint language features: event-driven sessions, CPS actors
+%	(Akka/Scala), ...more
+%	
+%	\item
+%	runtime: transport-independent sessions, ST-cFSM correspondence
+%	from monitoring, implementing asynchronous distributed delegation, ...more
+%\end{itemize}
 
 %\mybf{Write here about the main parts of software life-cycle 
 %(requirements, specification, design, implementation, verification, 
@@ -41,7 +66,7 @@ can interrupt the communication between two roles.
 
 %Support the text later with the discussion of section 2 and the results of 
 %Section 3.}
-\subsection{Software Engineering}
+\myparagraph{Session Types in Software Engineering}
 As already discussed in \secref{sessions_integrate},
 due to their formal and structured nature,
 session types can provide support throughout the
@@ -98,12 +123,6 @@ topologies~\cite{NCY2015}.
 A possible new area of research in session types could
 be to quantify their effectiveness when it comes to software development,
 in terms of bugs, line of code, performance, development time and cost.
-
-The use-case repository lacks a use-case developed using the
-bottom up technique presented in \figref{diagram}, due to
-the current lack of technologies. Nevertheless, this work
-is a strong indicator to drive similar research towards
-that direction as well.
 
 %Finally, session types have the ability to capture the
 %communication specifics of a system as whole through the
@@ -205,11 +224,4 @@ that direction as well.
 %				\item	state machines \cite{citation_needed}
 %			\end{itemize}
 %\end{itemize}
-
-
-
-
-\paragraph{``engineering''}
-
-...
 
