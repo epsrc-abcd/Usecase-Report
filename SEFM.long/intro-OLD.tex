@@ -1,0 +1,435 @@
+% !TeX root = main.tex
+
+\section{Introduction}
+
+Session types are formal descriptions of communication protocols.
+By incorporating session types into programming languages and tools,
+the technology of typechecking can be used to verify the dynamic
+structure of communication as well as the static structure of data.
+Since the introduction of session types by Honda et al.\
+\cite{honda.vasconcelos.kubo:language-primitives}
+more than twenty years ago, there has been a broad research effort to study
+their properties and apply their principles to a range of computational models
+and programming paradigms.
+Current research is converging towards the development of tools and technologies
+that use session types as part of the software development process.
+In order to take full advantage of the possibilities of session types,
+it is important to start a programme of technology transfer so that they can
+be integrated into broader approaches to software engineering.
+
+There are numerous formal approaches (\mybf{for example?}) proposed for describing communication protocols,
+in software development.
+Because of their ability to define clear and verifiable solutions, formal
+method for the description of communication are implemented within programming languages. (\mybf{What does this mean? Are we saying that programming languages already include formal methods for the description of communication?})
+Some programming languages are even standardised for specifying telecommunication systems,
+e.g.~the set of languages standardised for telecommunication systems within the
+ISO ITU-T Z.100 series.
+In the telecommunication (\mybf{complex system}) domain, many of the requirements
+usually limit the use of formal methods.
+Furthermore, there is an unexplored area on how to balance the use of formal methods
+and the complexity in industrial software systems. (\mybf{SG: I think we need to clarify what this paragraph is saying.})
+Research in session types exhibits some promising results that can
+help explore and fill in this gap.
+In addition, the problem of weak adoption of formal methods
+by the industry has been extensively studied.
+The main barriers recognised can be found in the lack
+of education, tool support and the cost of formal methods~\cite{Davis2013}.
+But even if these barriers are removed, there comes the importance of a 
+well defined improvement strategy, that managers within a software
+organisation have to follow while adopting formal methods~\cite{Ponsard2013}.
+It is therefore necessary for a wider engagement of software engineers 
+with formal method and formal method experts.
+
+
+%Because of their power to defining clear and verifiable solutions some formal methods are implemented within the languages that are even standardized for specifying and describing communication systems such are for example set of languages standardized for telecommunication systems within ISO ITU-T Z.100 series. In telecommunication domain, variety of requirements that complex telecommunication systems provide is usually limiting the use of formal methods and still, there is a huge unclear area, how to balance the use of formal methods and complexity of industrial software systems. Research of session types is exactly trying to find solutions to fill this gap.
+%Moreover, the problem of weak adoption of formal methods in industry has been extensively studied. The main barriers recognised are in lack of education, tool support and the cost of formal methods (cite: Study on the barriers to the industrial adoption of formal methods). Furthermore, even if these barriers are removed, the importance of well defined improvement strategy the managers within software organisations have to follow while adopting formal methods is stressed by some authors (cite: High-Level Guidance for Managers Deploying Formal Methods in Their Organisation). Therefore, a wider engagement of software engineering experts in formal method research and stronger collaboration among formal methods experts and software engineers are needed.
+
+
+%The session types discipline emerged during the last
+%two decades, as a framework for enforcing a number
+%of {\em good} and desirable properties in concurrent
+%programs.
+%Since their original inception in the the seminal paper by
+%Honda et.~al.~\cite{honda.vasconcelos.kubo:language-primitives},
+%there has been a broad research effort to study the properties
+%of session types and to apply the principles of session types
+%to different computational models and programming paradigms. 
+%At the moment, there is a research effort converging towards
+%the the development of tools and technologies that use session
+%types as part of the software development process.
+%It is therefore important to initiate a process that will
+%integrate the principles of session types in the broader context
+%of software and system development.
+
+Research on session types is mainly driven by the need to demonstrate that realistic,
+general patterns of concurrency and communication can be described.
+A typical research paper identifies a problem in terms of a real-world use-case and 
+proposes a session-typed framework, expressed in a strict mathematical form, 
+that applies the principles of session types to the solution of the problem.
+The development of session-typed tools and technologies is a consequence of this
+research process: tools are developed following the theory and are applied to real-world use-cases.
+
+%i.e.~concurrency patterns that are not artificial and restricted
+%to a narrow set of cases.
+%A typical research paper on session types identifies a problem
+%in terms of a real world usecase and proposes a session typed
+%framework, expressed in a strict mathematical form, that applies
+%the principles of session types for the solution of the problem.
+%The development of session typed tools and technologies is a
+%consequence of the above research process; tools are developed
+%following following the theory and are used to solve real
+%world usecases.
+
+This approach to presenting results about session types,
+although successful within the session types community,
+presents difficulties for the process of knowledge exchange
+between experts and interested practitioners.
+
+%The above standard of presenting results on session types,
+%although successful within the session types community,
+%it presents difficulties in the knowledge exchange process between 
+%session types experts and someone, not necessarily academic, interested
+%in session types. The difficulties are summarised in the points
+%below:
+%
+\begin{enumerate}
+	\item	There is a huge volume of research information about session types.
+			Interested individuals need to invest substantial effort to find
+			and study a large and diverse literature.
+
+	\item	There is no uniform approach or terminology
+			in the presentation of research results.
+			Due to the diversity of session types,
+			there are many terms that derive from different
+			disciplines and are extended to refer to
+			the same concepts within session types.
+			This may lead to confusion among less
+			expert readers.
+
+			\mybf{An example is the use of the terms \emph{typestate},
+			\emph{session type} and \emph{protocol} for essentially the same concept
+			in the context of object-oriented programming.}
+
+	\item	Individual results about session types are often presented in
+			isolation and not placed in the context of the whole field.
+			Obtaining a broader understanding of the subject requires a systematic
+			literature search, which may be off-putting for non-experts.
+
+%	\item	Session type results are often presented in
+%			isolation with respect to other results.
+%			A researcher will have to perform research
+%			following a series of publications and
+%			technical reports in order to have a broader
+%			understanding of the subject.
+
+	\item	The majority of results are tightly coupled
+			with a high level of formal technicality, making the
+			comprehension of session types by people without
+			a formal background even more difficult.
+\end{enumerate}
+%
+Summarising this discussion, we conclude that a wider
+audience would need to study a large series of partial
+results and at the same time filter out a huge amount
+of unnecessary technical detail in order to achieve a satisfying
+level of understanding session types. This situation is an obstacle for
+the adoption of session types as part of practical software development.
+
+%A conclusion on the above discussion is that a wider
+%audience would need to study a large series of partial
+%results and at the same time filter out a huge amount
+%of unnecessary technical details in order to achieve a satisfying
+%level of understanding session types.
+%The problems identified above, are not just difficulties
+%to a newcomer, they might also discourage his or her
+%efforts in understanding session types.
+
+Motivated by the goal of integrating session types into
+the software development process, this paper identifies the problem of accessibility
+of session types to a wider academic and industrial audience. 
+Our aims are:
+(i) to demonstrate session types in a comprehensive way and in
+terms that are easier to understand by non-experts; and
+(ii) to enable a process that will
+integrate session types into a broader context in computing.
+
+A way to meet these objectives is to establish a common
+ground that can be used for knowledge exchange between researchers.
+This paper identifies as a common means of communication the demonstration
+of practical scenarios from a broad area of application in computer science.
+Use-cases can bridge the communication gap between researchers and can help
+the wider promotion of the principles of session types.
+
+Furthermore, the current research directions on session types are
+pushing towards a dialectic between session types and disciplines
+like software engineering, and system design and implementation.
+Evidence on this direction comes from the he research experience
+gained by working on the project
+``From Data Types to Session Types: A Basis for Concurrency and Distribution''
+(ABCD for short)~\cite{ABCD}.
+Part of the requirements of the ABCD project is to (i)
+work with industrial partners towards integrating
+session types in real world use-cases; and (ii)
+compile a set of usecases
+for session types that can be used for current and future research on
+the design and development of frameworks and technologies.
+%
+More concretely, the aims of this paper are to:
+%
+\begin{enumerate}
+	\item	Describe in non-technical language, and develop common terminology
+			for, the mathematical terms currently used in the theory of
+			session types (\secref{sessions_software} and \secref{sessions_scribble}).
+%			The terminology is then used to describe the practical use-cases
+%			that are exhibited in the paper.
+
+	\item	Demonstrate the methods that are currently used to present,
+			analyse, and express an application in terms of session types
+			(\secref{sessions_integrate}).
+			The paper includes a discussion on their possible adoption by
+			software engineers in the software development process
+			(\secref{sessions_integrate} and \secref{needed}).
+
+%			These methods include the Scribble~\cite{scribble}
+%			protocol description language and tool chain and different
+%			diagrammatic languages. \sg{But are we really presenting these diagrams as part of the session types approach?}
+
+	\item	Demonstrate the robustness, functionality, and overall applicability
+			of session types through a diverse overview of use-cases (\secref{usecases})
+			that cover:
+			(i) different domains that exhibit different computational needs;
+			(ii) different interpretations of session types in different
+			programming paradigms that are used to implement a usecase; and
+			(iii) current tools and technologies that integrate session types
+			in the software development process.
+	%
+%			\begin{enumerate}[label=$\bullet$]
+%
+%				\item	Different domains that exhibit different computational needs.
+%
+%				\item	Different interpretations of session types
+%						depending on the underlying programming paradigm used to implement a use-case.
+%						This would help realise the perspective of applying session types to
+%						further programming paradigms.
+%
+%						\dk{Communication based programming, events, typestate-OO, functional
+%						programming}
+%
+%				\item	Current tools and
+%						technologies that use session types in the software development
+%						process.
+%			\end{enumerate}
+
+%	\item	Demonstrate software design and development techniques that
+%			are derived from the principles of session types. Engineers and
+%			developers should be able to appreciate the usage of session types
+%			in the software development process.
+		
+%	\item	Share the experience of using session types for the
+%			implementation of different use-case scenarios. This
+%			is the first paper to exhibit diverse practical results
+%			and can be used as a reference point for future work.
+\end{enumerate}
+
+
+%\begin{enumerate}
+%	\item	Describe in non-technical language, and develop common terminology
+%			for, the mathematical terms currently used in the theory of
+%			session types.
+%			The terminology is then used to describe the practical use-cases
+%			that are exhibited in the paper.
+%
+%	\item	Demonstrate the methods that are currently used to present,
+%			analyse, and express an application in terms of session types.
+%			These methods include the Scribble~\cite{scribble}
+%			protocol description language and tool chain and different
+%			diagrammatic languages. \sg{But are we really presenting these diagrams as part of the session types approach?}
+%
+%	\item	Demonstrate the robustness, functionality, and overall applicability
+%			of session types through a diverse overview of use-cases that cover:
+%	%
+%			\begin{enumerate}[label=$\bullet$]
+%
+%				\item	Different domains that exhibit different computational needs.
+%
+%				\item	Different interpretations of session types
+%						depending on the underlying programming paradigm used to implement a use-case.
+%						This would help realise the perspective of applying session types to
+%						further programming paradigms.
+%
+%						\dk{Communication based programming, events, typestate-OO, functional
+%						programming}
+%
+%				\item	Current tools and
+%						technologies that use session types in the software development
+%						process.
+%			\end{enumerate}
+%
+%	\item	Demonstrate software design and development techniques that
+%			are derived from the principles of session types. Engineers and
+%			developers should be able to appreciate the usage of session types
+%			in the software development process.
+%		
+%	\item	Share the experience of using session types for the
+%			implementation of different use-case scenarios. This
+%			is the first paper to exhibit diverse practical results
+%			and can be used as a reference point for future work.
+%\end{enumerate}
+
+
+Overall this paper can be used by experts and non-experts
+to exchange knowledge about the overall discipline of session types,
+and to enable future work on the application of session types.
+
+
+\begin{comment}
+\subsection{Overview of the paper}
+
+The paper begins in \secref{preliminaries}
+with the definition of the basic terms and notions
+that are used throughout the paper for the exhibition of the usecase
+results.
+
+The usecases that are presented in the paper are compiled by the researchers
+working on the ABCD project and can be found in the ABCD online repository~\cite{usecase_repository}.
+In \secref{usecases} there is a summary presentation
+of the usecases in the online repository that gives an overview
+for each usecase and discusses its design and implementation specifics
+as well as the features that are being demonstrated.
+
+In \secref{presentation} there is the selection of two
+usecases from the online repository in order to demonstrate
+some of the basic notions of the application of session types.
+The first example is an example of an online book-store,
+where two buyers want to share the expenses to buy a book.
+The online book-store is consider in the bibliography as the
+standard example for the presentation session types.
+It first demonstrates the basic send receive operations
+between multiple entities in a concurrent protocol. A second
+feature is the fact that it demonstrate in a comprehensive
+way the interaction logic between the entities.
+The implementation of the book-store usecase using different
+technologies gives a further insight to the applicability of
+session types.
+The second usecase presented in full is the design and implementation
+of the Simple Mail Transfer Protocol~\cite{citation_needed} (SMTP),
+as a way to demonstrate how session types cope with real network
+protocols. SMTP is a protocol based on states. The increased complexity
+of states makes the design and implementation of the SMTP a demanding
+procedure. The paper claims that the use of session types can reduce
+the demands of the implementation of SMTP.
+
+\secref{engineering} makes a summary of the software engineering
+practices that are identified... \dk{put more}
+\end{comment}
+
+
+\begin{comment}
+
+Session types exhibit robustness in a diverse universe of applications.
+We start from the rigorous analysis techniques that are developed theoretically,
+and ensure a number of desirable properties in concurrent programs and we go
+to the interpretation of session types into different programming paradigms
+and to the usage of session types as design techniques.
+The way session types can be presented plays an important role in their
+overall understanding by different groups of people and the information
+community in general. Below we give some basic perspective on what
+is a session type.
+
+\paragraph{Session types as protocols}
+The simplest view on what is a session type is the view of a
+structured protocol, that describes the communication between
+a system of multiple participants.
+The structure of a protocol offers an understanding of the
+communication specification of the entire system.
+In this paper all of the usecases we present are describe
+in terms of a structure protocol using Scribble~\cite{scribble}
+as the protocol language. We believe that Scribble plays a
+central role in the applicability of session types, due
+to the fact that it bridges the gap between a communication
+specification and the implementation of the specification.
+
+
+\paragraph{Session types as a software design technique}
+A session type can also be seen as a technique for designing
+software, no matter if this is a top down or a bottom up approach.
+
+
+\paragraph{Session types as an software analysis technique}
+Another approach to session types is to be used for the analysis
+of properties inside a module of software.
+
+\end{comment}
+
+%The entire research process for the session types discipline
+%covered a broad spectrum of approaches.
+%Historically, session types as a field of research was emerged
+%with the definition~\cite[Honda.Vasconcelos.Kubo]
+%binary session types in terms of process calculi.
+%The fact that session types were defined in process calculi terms,
+%which is a strict mathematical tool, enabled for the rigorous
+%study of the properties of session types that followed~\cite{Gay.Hole,Yoshida.Vasconcelos}.
+%The study of the properties of session types properties, in turn
+%enabled a wide research on disciplines that respect session type
+%principles and attempt to lift any limitations that were present.
+%So we witnessed the definition of multiparty session types~\cite{Honda.Yoshida.Carbone},
+%parametric session types~\cite{blah}, dynamic session types~\cite{Denieloy-Yoshida}
+%eventful session types~\cite{Kouzapas.et.al}.
+%In parallel with this research procedure there was the effort to provide
+%experimental implementations SJ, ESJ, Pabble, 
+
+\begin{comment}
+Then there was the encoding of session types in other paradigms
+Actors
+Objects/Typestate
+Logical interpretations/Functional
+MPI
+
+
+
+And then there was implementation of tools: SJ, LINKS, Mungo, Monitors, Scribble, Erlang
+
+The whole research procedure was strongly motivated and driven by the need
+of demonstrating that session types principles can capture different
+patterns of concurrency that are applied to different actual usecases.
+
+
+Following this long line of session types literature, we identify
+a further need to perform a comprehensive study on the ways
+session types can describe and cope with different patterns
+of concurrency. In fact, today we are in a position to have
+an empirical demonstration of session types.
+
+
+This paper attempts to present a set of usecases from the general world
+of concurrency that are expressible in session types.
+This presentation achieves a two axes objective:
+i) It provides with an empirical evaluation of the expressiveness of
+session types inside general concurrency.
+ii) Through the experience of implementation session types
+can be presented in more practical terms. Different tools, paradigms, frameworks
+can be presented. At the same time we identify different session type patterns
+used to solve concurrency problems of different nature.
+
+
+
+__________________________
+
+
+\begin{itemize}
+	\item	Two decades research.
+	\item	Started with binary session types - identify the principles of session types.
+	\item	The study of properties followed.
+	\item	The need for using session types in general concurrency gave a strong motivation and drove
+			more research.
+	\item	More theoretical frameworks.
+	\item	In parallel experimental implementations that use session types.
+	\item	Encodings of session types -> other well studied disciplines
+	\item	More implementations/frameworks
+	\item	Usecases
+	\item	One is presenting that usecases from general concurrency can indeed be expressed
+	\item	Two is presenting session types tools and techniques and how they can be used to express usecases.
+
+	\item	Session types and software engineering
+\end{itemize}
+\end{comment}

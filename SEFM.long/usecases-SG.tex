@@ -1,0 +1,383 @@
+% !TeX root = main.tex
+
+\section{Use-Cases}
+\label{sec:usecases}
+
+This section summarises the use-cases in
+the ABCD online repository~\cite{usecase_repository}. It also gives more detailed presentations of two particular use-cases: (1) the bookstore, which was introduced in Section~\ref{sec:session_types} and is a standard example of session types; (2) Simple Mail Transfer Protocol (SMTP), which is a standard network protocol. 
+
+\input{figures/fig-usecases}
+
+Table~\ref{table:use_cases_all} lists the name of each use-case, its original source, and the language(s) and/or tool(s) that have been used to implement it. Full source code, 
+running examples and and detailed descriptiona of all of the use-cases can be found in the repository \cite{usecase_repository}. 
+The use-cases are organised into application domains and are intended to be representative examples for each domain.
+
+\subsection{Application Domains Covered by the Use-Cases}
+
+The use-cases are drawn from a wide range of
+application domains, in order to demonstrate that
+session types can capture
+a broad area of communication specifications. 
+%For the implementation of the usecases in the online
+%repository different technologies that integrate
+%session types in different programming paradigms were used.
+
+%A taxonomy of domains are presented below with the main
+%characteristic that each domain is using technologies from the
+%previous domains in the taxonomy. This taxonomy also implies
+%a stratification of the application of session types in different
+%computation layers.
+%%One of the goals of this paper is to present a diversity
+%%of application of session types from different domains, as
+%%part of our aim to demonstrate the robustness, functionality
+%%and adaptability of session types. Here we present the particular
+%%communication characteristics for every domain.
+
+\begin{enumerate}
+	\item	\emph{Network Application / Business Logic}.
+			The first two applications in Table~\ref{table:use_cases_all}
+			come from the domain of network applications.
+
+			The first is the online bookstore,
+			which was discussed
+			in Section~\ref{sec:session_types}. It is a standard use-case demonstrating
+			the basic features of session types. The communication protocol represents the execution logic of the application. The implementation of this use-case follows a top-down design approach, in which the global protocol is projected to local protocols. There are several versions of the bookstore, using different implementation languages: Session Java 
+
+			The bookstore usecase is implemented following a
+			communication protocol that embeds an execution logic
+			for the application. This is a practical indication
+			that session types can be used to describe the
+			behavioural logic of an application.
+			The current development the usecase follows a
+			top-down design approach, where the projection
+			of the global protocol is used by different
+			implementing technologies.
+			The book-store is implemented in Session Java and Mungo.
+			\dk{need LINKS and the hybrid implementation}
+
+			\mybf{- Book-store: Standard example, Communication Interaction shows business logic}
+
+			\mybf{- Chat-Server: Implement a server/client architecture, design an application protocol for the servers,
+				client implementations should conform to the protocol, Erlang monitoring implementation cite S. Fowler's Master Thesis.}
+		
+
+%			is implemented in different technologies
+
+%	Session types can be used to develop protocols for applications
+%	that run inside a network.
+%	A protocol given in a session type structure, apart from the
+%	specification of the communication of the application, will
+%	reveal a kind of business logic for the application.
+	
+	\item	{\em Network Protocols}.
+	Session types can be used to describe standard and non-standard network protocols.
+	Typically a standard network protocol should conform to
+	an informal RFC (request for comments specification. Session types
+	can present a network protocol formally its manipulation easier
+	by both engineers and machines.
+	Non-standard network protocols can also be developed.
+
+	\mybf{- HTTP: Request response standard RFC protocol, stateless,
+			assume different types for each request/response header (not just a text header)
+			request-response sequences can give a further structure
+			of interaction, it would be nice if we have a client to stream tree-structured data.
+			automatically generated API from the Scribble tool-chain} 
+
+	\mybf{- SMTP: Stateful standard RFC protocol. Expresses request/respond, 
+				Expresses specific data-structures streaming such as the data-structure
+				of an email,
+				need for translate between RFC text format to/from message/payload types
+				Complex state makes implementation difficult - session types
+				remove a burden from the developer because they automatically
+				verify that the state of the code follows the state of the protocol. }
+
+	\mybf{- Domain Name System: }
+	
+	
+	\item	{\em Systems/Applications}.
+	A session type may be used to describe the communication
+	specifics of an application that uses multiple resources
+	inside a computing machine.
+
+	\mybf{- Do we have a system to describe }
+	
+	\item	{\em Operating System}.
+	Another domain where session types can be applied to
+	is the description of the communication specifics
+	of operating system algorithms and routines, that
+	co-ordinate the usage of hardware resources.
+
+	\mybf{- Locks: Basic OS structure basic for achieving resource utilisation. Its
+		usage implies race conditions that in turn imply asynchronous
+		and reactive communication. The implementation of locks in the
+		eventful session Java shows that session types can express deadlocks.}
+
+	\mybf{- Concurrency Algorithms: Classic concurrency problems expressed in Session types.
+		Implementing in the python monitored actors framework.}
+        \rumi{
+% We have implemented well-known synchronisation problems.   
+%We address a classical concurrency problems. 
+Classic concurrency problems require correct coordination among multiple components to avoid starvation and deadlock. 
+Preserving the causalities between the interactions is challenging since the communication often involves complex patterns, combining long sequence of interactions with recursive behaviour and nested choice branches. 
+Often precise message sequence should be followed. Moreover, it is not obvious if the components can be safely composed. Sending the wrong message type, sending to the wrong role or not sending in the correct message sequence may lead to deadlocks, errors which initial cause is hard to be identified or wrong computation results.
+Modelling the interactions between the components with session types ensures correct synchronisation and prevents deadlocks, unexpected termination and orphan messages.  \\
+
+Sleeping barber: A barber is waiting for customers to cut their hair. When there are no customers the barber sleeps. When a customer arrives, he wakes the barber or sits in one of the waiting chairs in the waiting room. If all chairs are occupied, the customer leaves. Customers repeatedly visit the barber shop until they get a
+haircut. The key element of the solution is to make sure that whenever a customer or a barber checks the state of the waiting room, they always see a valid state. The problem can be implemented using an additional Selector role that decides which is the next customer. \\
+
+Dining Philosophers: In this use case N philosophers are competing to eat while sitting
+around a round table. There is one fork between each two philosophers and a philosopher needs
+two forks to eat. The challenge is to avoid deadlock, where no one can eat, because everyone
+is possessing exactly one fork. The problem can be implemented with additional role Arbitrator. \\
+
+Cigarette Smoker: This problem involves N smokers and one arbiter. The arbiter puts resources
+on the table and smokers pick them. A smoker needs to collect k resources to start smoking. The
+challenge is to avoid deadlock by disallowing a competition between smokers from picking up
+resources. This is done by delegating the control to the arbiter, who decides (in a random manner)
+which smoker to send the resource to. The session types for this use case combines round-robin
+pattern, sending a random smoker a message to smoke, with multicast, iterating
+through all the smokers notifying them to exit). \\
+
+\mybf{Concurrent Fibonacci: Parallel algorithms require threads that communicate. Session
+		types can use describe the necessary underlying communication between threads that implement
+		parallel algorithms.}
+%three components, room, barber,and customer. A barber waits for customers in his shop, sleeping when there is nobody to serve. When a customer enters in the shop, he goes through a waiting room with n chairs: if all chairs are taken, he leaves; otherwise, he sits. If the barber is sleeping, he wakes up, serves all sitting customers (one a time), and sleeps again when nobody is waiting. We model this scenario with three components: the customer, the shop and the barber.
+
+% and is the key to achieving deadlock free communication.
+%To guarantee a valid synchronisation, precise message sequence should be followed. 
+%The communication structure these protocols requires long sequence of interactions, combined with recursive behaviour and multiple nested choice branches.  
+
+%While the use cases so far demonstrated succinct recursion and request-reply patterns, interleaved together, this one demonstrates a communication structure with long sequence of interactions, where preserving the causalities is the key to achieving deadlock free communication. The use of session types prevents potential deadlock, unexpected termination and orphan messages.    		
+		}
+	
+	\item	{\em Data Structures and Algorithms}.
+	The above layers are using data structures and algorithms.
+	Session types can express the communication
+	concurrent algorithms are using. Furthermore, session types
+	can express the interaction with data structures.
+
+	\mybf{- Collection: A stack client protocol. Used to control the put, get access
+		to a collection structure - when the stack is empty there is not get.
+		Session types describe the logic/properties that a data structure can have.}
+
+	\mybf{- File Access: Similarly used to control the access on a file. Cannot
+		read from a file if the file is not open first and if the file is empty.
+		The protocols ends by closing the file. Again access to resources
+		can be described using session types.}
+
+	\mybf{- Concurrent Fibonacci: Parallel algorithms require threads that communicate. Session
+		types can use describe the necessary underlying communication between threads that implement
+		parallel algorithms.}
+
+	\mybf{- Network Topologies: Topologies are scalable and thus parametrised. Pabble is
+		an extension to Scribble that allows us to describe and cope with parametrised protocols.}
+
+
+	\item	{\em Hardware}.
+	Hardware mechanisms complete the stratification of domains.
+	The communication of hardware modules may also be expressed
+	using session types.
+
+	\mybf{- Memory Coherency: Hardware components communicate, here we have two memories
+		that need to be consistent with each other on a hardware level. Session types can
+		describe the hardware (signals/messages) interaction between hardware components.}
+
+	\item	\mybf{\em Security}.
+	Session types can also find applications in the security domain,
+	which is a domain that supports all other domains in the above list.
+
+	\mybf{- There are some security protocols in the SILL repository. We need to
+			be careful in the description because it is a reference to other people.}
+\end{enumerate}
+
+\subsection{The Simple Mail Transfer Protocol}
+
+This section gives a more detailed presentation of the SMTP
+usecase. SMTP is considered an important implementation for
+session types since it incorporates challenges that in principle
+software engineers face.
+
+The SMTP is a protocol that, in contrast with the HTTP, requires handling
+communication through a number of distinct states (\mybf{see state machine diagram below}),
+which adds a degree of complexity to the implementation.
+With the help of session types and the methods and procedures
+session types support developers can reduce the effort
+needed to handle the complexity.
+
+Furthermore, SMTP introduces a structure on an email,
+which is composed by subject, main part and attachments
+as well as meta-data for the email. Streaming such 
+tree-structured data types over the network is a task that
+can be rigorously handled and ensured by session types,
+due to its structured natured. Transforming
+network data-structures (e.g.~text headers)
+to/from session types structures is an important
+procedure to understand when applying session types. 
+
+%In this report we describe the implementation of
+%an application layer communication protocol.
+
+SMTP is an application layer protocol.
+{SMTP} is an internet standard
+electronic mail transfer protocol which typically runs over a TCP
+(Transmission Control Protocol) connection.
+It was first defined in RFC
+821~\cite{SMTP-rfc} and later extended in RFC 5321~\cite{ESMTP-rfc},
+which is the version we consider here.
+
+
+An SMTP interaction consists of an exchange of text-based {commands}
+between the client and the server.
+For example, the client sends the
+\lstinline|EHLO| command to identify itself and open the connection with
+the server.
+%
+The commands \lstinline|MAIL FROM| : $<$address$>$ and \lstinline|RCPT TO| : $<$address$>$
+specify the e-mail address of the sender and the
+receiver of the e-mail.
+%
+The \lstinline|DATA| command allows the client to specify the text of
+the e-mail. The \lstinline|QUIT| command is used to terminate the
+session and close the connection. The responses from the server have the
+following format: three digits followed by an optional dash ``-'', such
+as \lstinline|250-|, and then some text, like OK. The server might reply
+to \lstinline|EHLO| with \lstinline|250| $<$text$>$ or to
+\lstinline|MAIL FROM| or \lstinline|RCPT TO| with \lstinline|250| OK.
+
+
+The implementation of the protocol implements an interaction between
+a Simple Mail Transfer Protocol (SMTP) client and a \lstinline|gmail| server.
+
+
+The global protocol for the SMTP is defined in Scribble, 
+based on Hu's work~\cite{HuR:smtp}.
+
+\begin{lstlisting}[numbers=left]
+global protocol SMTP(role S, role C) {
+ // Global interaction between server and client.
+  _220(String) from S to C;
+   choice at C {
+    ehlo(String) from C to S;
+    rec X {
+      choice at S {
+        _250dash(String) from S to C;
+         continue X;
+      } or {
+       _250(String) from S to C;
+        choice at C {
+         ...
+         rec X1 {
+           ...
+           choice at S {
+             _250dash(String) from S to C;
+             continue X1;
+          } or {
+            250(String) from S to C;
+            ...
+            rec Z1 {
+              ...
+              data(String) to S;
+              ...
+              rec Z3 {
+                choice at C {
+                  subject(String) from C to S;
+                  continue Z3;
+                } or {
+                  dataline(String) form C to S;
+                  continue Z3;
+                } or {
+                  atad(String) from C to S;
+                  _250(String) from S to C;
+                  continue Z1; }
+                }
+              }   ...  
+           }  
+           ... 
+        }
+      }
+    }
+  }
+ } or  { quit(String) from C to S; }
+}
+\end{lstlisting}
+
+
+The above Scribble protocol formally specifies
+the description in \secref{sec: smtp_description}.
+The global protocol \lstinline|SMTP| specifies
+an interaction between two roles being the client ant the server of the protocol.
+The protocol is then projected to the
+individual communication specifications of each 
+of the participant roles.
+
+%%
+The global protocol is used to project the communication
+behaviour of roles \lstinline|C| and \lstinline|S|.
+The focus is on the projection of the client
+since the interest is on interacting with a real server.
+
+This part of SMTP describes a loop (\lstinline|rec Z1|) where the client chooses
+among the messages \lstinline|SUBJECT|, to send the subject,
+\lstinline|DATALINE|, to send a line of text, or \lstinline|ATAD| to terminate the e-mail by sending a dot.
+
+\begin{lstlisting}[numbers=left]
+local protocol SMTP_C(role S, self C) {
+  _220(String) from S;
+  choice at C{
+    ehlo(String) to S;
+    ...
+    rec Z1 {
+      ...
+      data(String) to S;
+      ...
+      rec Z3 {
+        choice at C {
+          subject(String) to S;
+          continue Z3;
+        } or {
+          dataline(String) to S;
+          continue Z3;
+        } or {
+          atad(String) to S;
+          _250(String) from S;
+          continue Z1; }}}
+      ...
+  } or { quit(String) to S; }
+}
+\end{lstlisting}
+%
+
+The local type can be represented as a state
+machine:
+
+\begin{statemachine}[node distance=6cm, scale=0.5]
+	\node[initial,state]		(S0)							{\lstinline|State0|};
+	\node[state]				(S1)[right of=S0]				{\lstinline|State1|};
+	\node[state]				(S2)[below =2cm of S1]			{\lstinline|State2|};
+	\node[state]				(S3)[left of=S2]				{\lstinline|State3|};
+	\node[state]				(S29)[below = 2cm of S3]		{\lstinline|State29|};
+	\node[state]				(S30)[right of= S29]		{\lstinline|State30|};
+	\node[state]				(S32)[left = 3cm of S29]		{\lstinline|State32|};
+	\node[state]				(S31)[below = 2cm of S29]		{\lstinline|State31|};
+
+%	\node[state]				(S39)[right = 9cm of S31]		{\lstinline|State39|};
+	\node[state]				(S39)[above = 2cm of S32]		{\lstinline|State39|};
+%	\node[state,accepting]		(END)[below =2cm of S39]		{\lstinline|END|};
+	\node[state,accepting]		(END)[above =2cm of S39]		{\lstinline|END|};
+	\node[state]				(SX)[below = 2cm of S31]		{\lstinline|Other States|};
+
+	\path	(S0)		edgenode		{\lstinline|String receive_220StringFromS()|}	(S1)
+			(S1)		edgenode[left]	{\lstinline|void send_EHLOToS()|}	(S2)
+						edgenode[below= 0.4cm]	{\lstinline|void send_QUITToS()|}	(S39)
+			(S2)		edgenode		{\lstinline|void send_ehloStringToS(String)|}	(S3)
+			(S3)		edgenode		{\lstinline|...|}	(S29)
+			(S29)		edgenode 		{\lstinline|void send_SUBJECTToS()|}	(S30)
+						edgenode		{\lstinline|void send_DATALINEToS()|}	(S31)
+						edgenode[above]	{\lstinline|void send_ATADToS()|}	(S32)
+			(S32)		edgenode		{\lstinline|...|}	(SX)
+			(S31)		edgenode		{\lstinline|...|}	(SX)
+			(S30)		edgenode		{\lstinline|...|}	(SX)
+			(S39)		edgenode[right]	{\lstinline|void send_quitStringToS(String)|}	(END);
+\end{statemachine}
+%%
+

@@ -1,0 +1,39 @@
+\subsection{Global Protocol for SMTP}
+\label{app:smtp_global}
+
+\begin{lstlisting}[numbers=left]
+global protocol SMTP(role S, role C) {
+  _220(String) from S to C;
+  choice at C {
+    ehlo(String) from C to S;
+    rec X {
+      choice at S { _250dash(String) from S to C; continue X; }
+      or {
+        _250(String) from S to C;
+        choice at C {
+          ...
+          rec X1 {
+            ...
+            choice at S { _250dash(String) from S to C; continue X1; }
+            or {
+              250(String) from S to C; ...
+              rec Z1 {
+                ... data(String) to S; ...
+                rec Z3 {
+                  choice at C { subject(String) from C to S; continue Z3;  }
+                  or          { dataline(String) form C to S; continue Z3; }
+                  or          { atad(String) from C to S;
+                                _250(String) from S to C; continue Z1;     }
+                }
+              }
+              ...  
+            }  
+            ... 
+          }
+        }
+      }
+    }
+  } or  { quit(String) from C to S; }
+}
+\end{lstlisting}
+

@@ -1,0 +1,216 @@
+\begin{table}[!h]
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+%\begin{longtable}{|l|l|l|l|}
+	\hline
+	Use Case Name & Source & Implementation & Remark
+	\\
+
+	\hline
+	\hline
+	\multicolumn{4}{|l|}{ \textbf{Web Service Applications}}
+	\\
+	\hline
+	Book Strore & \cite{W3C} & \SJ, \Mungo, \JavaAPI  & interaction logic
+	\\
+	Travel Agency & \cite{W3C} & \SJ &
+	\\
+	Chat Application & \cite{SF15} & \Erlang &
+	\\
+
+	\hline
+	\hline
+	\multicolumn{4}{|l|}{ \textbf{Internet Application Protocols}}
+	\\
+	\hline
+	SMTP & \cite{RFC} & \JavaAPI, \TypeState, \Links & stateful interaction
+	\\
+	HTTP & \cite{RFC} & \JavaAPI &	stateless request/response
+	\\
+	DNS & \cite{RFC,SF15} & \Erlang &
+	\\
+	POP3 & \cite{RFC} & \TypeState & stateful interaction
+	\\
+%	PAXOS & \cite{POP3} & \TypeState & \\
+%	OATH & \cite{OATH} & \JavaAPI \\
+
+	\hline
+	\hline
+	\multicolumn{4}{|l|}{ \textbf{Classic Concurrency Problems}}
+	\\
+	\hline
+	Dining Philosophers & \cite{Savina} & \SPython  & synchronisation
+	\\
+	Sleeping Barber & \cite{Savina} & \SPython, \SScala &
+	\\
+	Cigarette Smoker & \cite{Savina} & \SPython & race conditions
+	\\
+	%	Big & \cite{Savina} & \SPython & many-to-many interactions\\
+	
+	\hline
+	\hline
+	\multicolumn{4}{|l|}{ \textbf{Parallel Algorithms}}
+	\\
+	\hline
+	Concurrent Fibonacci &  & \Mungo & parallel algorithm
+	\\
+	Monte Carlo & \cite{citation_needed} & \MPI & parallel algorithm
+	\\
+	Jacoby & \cite{citation_needed} & \MPI & parallel algorithm
+	\\
+		
+
+	\hline
+	\hline
+	\multicolumn{4}{|l|}{ \textbf{Network Topologies}}
+	\\
+	\hline
+	Ring & \cite{BerkleyPar} & \MPI & parametrised
+	\\
+	Butterfly & \cite{BerkleyPar} & \MPI & parametrised
+	\\
+	All to All & \cite{BerkleyPar} & \MPI & parametrised
+	\\
+	Stencil & \cite{BerkleyPar} & \MPI & parametrised
+	\\
+	Farm (Master-Worker) & \cite{BerkleyPar} & \MPI & parametrised
+	\\
+	Map Reduce & \cite{BerkleyPar} & \MPI & parametrised
+	\\
+	
+	\hline
+	\hline
+	\multicolumn{4}{|l|}{ \textbf{Data Structures}}
+	\\
+	\hline
+	%Queue & \cite{Queue} & \Sill &
+	Collections & \cite{mungo} & \TypeState  & a stack client
+	\\
+	File Access & \cite{mungo} & \TypeState & file access client
+	\\
+	Peano Numbers & \cite{citation_needed} & \GV, \Links &
+	\\
+	%	Add Server & \cite{} & \GV, \Links &
+	%\\	
+%	\multicolumn{4}{|l|}{\textbf{Operating Systems}}
+%	\\
+%	\hline %\hline
+%	Memory Coherence & \cite{memoryCoherence} & \TypeState &
+%	\\
+%	Lock & \cite{Lock} & \ESJ & race conditions
+%	\\
+	\hline
+%\end{longtable}
+\end{tabular}
+\end{center}
+\caption{Overview of the use-case repository \mybf{(Add papers summarising the results)}}
+\label{table:use_cases_all}
+\end{table}
+
+%
+%\begin{figure}[t]
+%	\begin{longtable}{| c | p{3cm} | p{3cm} | p{2.5cm} | p{2.5cm} | }
+%		\hline
+%			&	\multicolumn{1}{c|}{Usecase}
+%							&	\multicolumn{1}{c|}{Domain}
+%														&	\multicolumn{1}{c|}{Technologies/Tools}
+%																					&	\multicolumn{1}{c|}{Description}
+%		\\
+%		\hline
+%		1.	&	Book Store	&	Business Application	&	Mungo,
+%															Scribble API
+%																					&	Interaction Logic
+%		\\
+%
+%		\hline
+%		2.	&	Chat Server	&	Network Application		&	Erlang					&	Application Logic
+%		\\
+%
+%		\hline
+%		3.	&	HTTP %Hyper-Text Transfer Protocol
+%							&	Network Protocol		&	Scribble API			&	Request/Response %pattern
+%		\\
+%
+%		\hline
+%		4.	&	Simple Mail Transfer Protocol
+%							&	Network Protocol		&	Mungo, Scribble API, LINKS
+%																					&	Stateful protocol
+%		\\
+%		\hline
+%		5.	&	DNS Server
+%							&	Network Protocol 		&	Erlang
+%																					&
+%		\\
+%		\hline
+%		6.	&	Concurrency
+%				\parbox{3cm}{
+%					$\bullet$	Din. Philosophers\\
+%					$\bullet$	Sleeping Barber\\
+%					$\bullet$	Cigarette Smokers
+%				}
+%				%\begin{enumerate}[label=$\bullet$]
+%				%	\item	Dinning Philosophers
+%				%	\item	Sleeping Barber
+%				%	\item	Cigarette Smokers
+%				%\end{enumerate}
+%							&	Operating Systems		&	Python Actors			&	Race conditions
+%		\\
+%		\hline
+%		7.	&	Lock		&	Operating Systems		&	Eventful SJ				&	Race conditions
+%		\\
+%
+%		\hline
+%		8.	&	Collection	&	Data Structures			&	Mungo					&	Stack client
+%		\\
+%
+%		\hline
+%		9.	&	File Access	&	Data Structures			&	Mungo					&	File Access client
+%		\\
+%
+%		\hline
+%		10.	&	Fibonacci
+%						&	Parallel Algorithms			&	Mungo					&
+%		\\
+%		\hline
+%		11.	&	Network Topologies
+%				\parbox{3cm}{
+%					$\bullet$	Ring\\
+%					$\bullet$	Ring\\
+%					$\bullet$	Butterfly\\
+%					$\bullet$	All to All\\
+%					$\bullet$	Stencil\\
+%					$\bullet$	Master-Worker\\
+%					$\bullet$	Map Reduce
+%				}
+%%				\begin{enumerate}[label=$\bullet$]
+%%					\item	Ring
+%%					\item	Butterfly
+%%					\item	All to All
+%%					\item	Stencil
+%%					\item	Farm (Master-Worker)
+%%					\item	Map Reduce
+%%				\end{enumerate}
+%						&	Parallel Algorithms		&	Pabble and MPI				&	Parametrised algorithms
+%		\\
+%		\hline
+%		12.	&	Functional Algor.
+%				\parbox{3cm}{
+%					$\bullet$	Peano Numbers\\
+%					$\bullet$	Add Server
+%				}
+%
+%%				\begin{enumerate}[label=$\bullet$]
+%%					\item	Peano Numbers
+%%					\item	Add Server
+%%				\end{enumerate}
+%						&	Parallel Algorithms		&	Links, GV					&
+%		\\
+%		\hline
+%		13.	&	Memory Coherence
+%						&	Systems, Hardware		&	Mungo						&
+%		\\
+%		\hline
+%	\end{longtable}
+%	\caption{Usecases in the ABCD online repository}
+%	\label{fig:usecases}
+%\end{figure}

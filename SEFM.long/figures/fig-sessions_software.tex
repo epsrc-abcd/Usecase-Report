@@ -1,0 +1,165 @@
+\begin{figure}[t]
+\begin{center}
+\begin{tikzpicture}
+%	\draw[dotted, help lines]		(0,0) grid (12, 8);
+
+	\tikzset{myarrowstyle/.style={line width=1.2}}
+	\tikzset{myarrow/.style={->, myarrowstyle}}
+	\tikzset{mybiarrow/.style={<->, myarrowstyle}}
+
+	\tikzset{topdown/.style={draw=blue}}
+	\tikzset{bottomup/.style={draw=red}}
+
+	\tikzset{mycode/.style={fill=white}}
+	\tikzset{myscribble/.style={fill=gray}}
+
+	\tikzset{myshape/.style={draw, rounded corners, minimum width = 0.7cm, minimum height = 0.5cm}}
+%	\tikzset{myshape/.style={draw, circle, minimum size = 0.5cm}}
+	\tikzset{vertrec/.style={minimum width = 1cm,minimum height =2cm}}
+	\coordinate (top)	at (6, 8);
+
+	% Global protocol
+	\node[myshape, myscribble]					(ScribbleIn)	at	(top)	{};
+	\node[above = 0cm of ScribbleIn]			(ScribbleLabel)				{\scriptsize Global Protocol};
+
+	% Verify
+	\node[myshape, myscribble, below = 1cm of ScribbleIn]		(Verify)				{};
+	\node[above = 0 of Verify]					(VerifyLabel)				{\scriptsize Verified Global Protocol};
+	\draw[myarrow, topdown]		(ScribbleIn) -- node[left] {\scriptsize verification} (VerifyLabel);
+
+	% Local Protocols
+	\node[below = 1.2cm of Verify]						(LocalC)			{\dots};
+	\node[myshape, myscribble, left = 0cm of LocalC]	(LocalL)			{};
+	\node[myshape, myscribble, right = 0cm of LocalC]	(LocalR)			{};
+
+	\node[below = 1.05cm of Verify, minimum width = 2.4cm, minimum height = 0.5cm]	(Local)	{};
+	\node[above = 0 of Local]							(LocalLabel)		{\scriptsize Local Protocols};
+	
+	\draw[myarrow, topdown]	($(Verify.south) - (0.2, 0)$)	--
+							node[left]	{\scriptsize projection}
+							($(LocalLabel.north) - (0.2, 0)$);
+					
+	\draw[myarrow, bottomup]	($(LocalLabel.north) + (0.2, 0)$)	--
+								node[right]	{\scriptsize synthesis}
+								($(Verify.south) + (0.2, 0)$);
+
+%	\draw[->] let
+%		\p1	=	(LocalL.north),
+%		\p2	=	(Verify.west),
+%		\p3	=	(Verify.south)
+%	in
+%		(\x2, \y3)	--	node[left]	{\scriptsize project}	(\x2, \y1);
+%		
+%	\draw[<-] let
+%		\p1	=	(LocalR.north),
+%		\p2	=	(Verify.east),
+%		\p3	=	(Verify.south)
+%	in
+%		(\x2, \y3)	--	node[right]	{\scriptsize synthesis}	(\x2, \y1);
+
+	% Typecheck
+	\node[vertrec, left = 2.5cm of Local]			(Exec)					{};
+	\node[above = 0 of Exec]
+	{
+		\scriptsize
+		\begin{tabular}{c}
+			Verified\\
+			Source Code
+		\end{tabular}
+	};
+	\node[left = 2.85cm of Local]						(ExecC)				{\vdots};
+	\node[myshape, mycode, above= 0cm of ExecC]			(ExecT)				{};
+	\node[myshape, mycode, below= 0cm of ExecC]			(ExecB)				{};
+	
+	\draw[myarrow, topdown]	(Local)	--
+							node[above]  (TLabel) {
+										\scriptsize
+										\begin{tabular}{c}
+											type-check/ \\
+											verification
+										\end{tabular}
+										}
+							(Exec);
+
+	% Monitor
+	\node[vertrec, right = 2.5cm of Local]				(Monitor)			{};
+	\node[above = 0cm of Monitor]											{ \scriptsize monitor };
+
+	\node[right = 2.85cm of Local]						(MonC)				{\vdots};
+	\node[myshape, myscribble, above= 0cm of MonC]		(MonT)				{};
+	\node[myshape, myscribble, below= 0cm of MonC]		(MonB)				{};
+
+	\draw[myarrow, topdown]	(Local)	--
+							node[above] {
+								\scriptsize
+								\begin{tabular}{c}
+									state machine\\
+									generation
+								\end{tabular}
+							}
+							(Monitor.west);	
+
+	% Execute
+	\node[vertrec, right = 0.25cm of Monitor]			(Run)				{};
+	\node[above = 0cm of Run]												{ \scriptsize execute };
+
+	\node[right = 0.95cm of MonC]						(RunC)				{\vdots};
+	\node[myshape, mycode, above= 0cm of RunC]			(RunT)				{};
+	\node[myshape, mycode, below= 0cm of RunC]			(RunB)				{};
+
+%	\draw[<->]	(MonC) -- (RunC);
+	\draw[mybiarrow]	(MonT) -- node (monitorarrow) {} (RunT);
+	\draw[mybiarrow]	(MonB) -- (RunB);
+
+
+%	\node[above = 0.55cm of monitorarrow]
+%			{
+%				\scriptsize
+%				\begin{tabular}{c}
+%					Runtime Monitor
+%				\end{tabular}
+%			};
+
+	% Code
+	\node[below = 1.2cm of Local]						(Code)					{\dots};
+	\node[myshape, mycode, left = 0cm of Code]			(CodeL)					{};
+	\node[myshape, mycode, right = 0cm of Code]			(CodeR)					{};
+	\node[above = 0.1 of Code]							(CodeLabel)				{\scriptsize Source Code};
+
+	\draw[myarrow, bottomup]	($(CodeLabel.north) + (0.2, 0)$) -- node[right] {\scriptsize inference} ($(Local.south) + (0.2, 0)$);
+	\draw[myarrow, topdown]		($(Local.south) - (0.2, 0)$) --
+								node[left] {
+									\scriptsize
+									\begin{tabular}{c}
+										code\\
+										generation
+									\end{tabular}}
+								($(CodeLabel.north)- (0.2, 0)$);
+
+	\draw[myarrow]	(CodeL)	-|	(TLabel);
+
+	\draw[myarrow]	let
+		\p1	=	(CodeR),
+		\p2	=	(Run)
+	in
+		(CodeR)	--	node[above]	{\scriptsize compilation} (\x2, \y1) --	(Run);
+
+	% Legend
+
+%	\node[draw, above= 1.2cm of monitorarrow, rounded corners, minimum width = 2.5cm, minimum height = 1.5cm]		(Legend) {};
+%	\draw[myarrow, topdown]		($(Legend) + (-1.1, 0.3)$)	--	node[right=0.25cm]	{\scriptsize :Top Down}	($(Legend) + (-0.4, 0.3)$);
+%	\draw[myarrow, bottomup]	($(Legend) + (-1.1, -0.3)$)	--	node[right=0.25cm]	{\scriptsize :Bottom Up} ($(Legend) + (-0.4, -0.3)$);
+
+	% Static Runtime Division
+
+	%\coordinate[below=0.4 of Code.south]	(middlebottom)	;
+	%\draw[dotted]		(ScribbleLabel.north)	--	(middlebottom);
+
+	%\node[left=2 of middlebottom]		{\scriptsize Static Verification};
+	%\node[right=2 of middlebottom]		{\scriptsize Runtime Verification};
+\end{tikzpicture}
+\end{center}
+\vspace{-5mm}
+\caption{Use of Session Types in Software Development}
+\label{fig:diagram}
+\end{figure}

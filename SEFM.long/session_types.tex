@@ -1,0 +1,591 @@
+% !TeX root = main.tex
+
+\section{Session Types}
+%\label{sec:preliminaries}
+\label{sec:session_types}
+
+
+This section introduces session types through
+a discussion of the need for them in
+software engineering.
+This section takes the approach to identify and define
+a clear and distinctive terminology
+for transferring the basic ideas of session types to a wider audience.
+It also presents the Scribble~\cite{scribble} protocol
+description language, which is a formal language for describing
+protocols using the principles of session types.
+
+\subsection{Session Types and Software Engineering}%: Notions and Terminology}
+\label{sec:sessions_software}
+
+\input{figures/fig-sequence_diagram}
+
+Communication \emph{protocols} in software engineering
+are usually described and communicated among humans
+by using the most intuitive graphical form of sequence diagrams
+%(\figref{seqchart}).
+Sequence diagrams are used to depict a communication flow as an ordered
+sequence of \emph{message passing} among communicating
+participants that represent particular \emph{roles} in a communication
+protocol.
+
+\figref{seqchart} illustrates the bookstore protocol, which is a use-case
+in the ABCD online repository~\cite{usecase_repository}.
+The bookstore protocol specifies an interaction between two online Buyer roles
+that invoke a process of buying a book from an online Seller role, while
+sharing the expense.
+In the sequence diagram, each role is represented by a vertical line and
+communication messages are represented by horizontal arrows
+indicating the direction of communication flow.
+Intuitively, the communication progress proceeds downwards.
+Thus the protocol's behaviour is represented visually within the diagram.
+However, sequence diagrams are not considered as formal tools because
+protocols described in this way cannot be verified as being complete or unambiguous.
+
+In industrial practice, communication protocols for
+distributed software are usually described in natural language and
+discussed with the help of sequence diagrams.
+%After that and with the help of sequence charts,
+%the protocols are implemented between the communication components
+%of the software.
+%within the distributed software
+%with specified communication protocol.
+Each software module that participates in the
+protocol implements
+its \emph{local} software role within the protocol.
+%Usually the process of implementing the local specifications
+%may follow different possible solutions that are not directly
+%visible or are even omitted from the sequence diagram, due
+%to the complexity they will introduce. \sg{I'm not sure what this means.}
+%\dk{what is hidden? - overall structure of the protocol, logic on choices}
+A limitation of sequence diagrams is the inability to deal with complex
+communication protocols, such as the case where one role
+can make a choice that affects the subsequent communication behaviour
+of the entire protocol.
+
+Communication complexity can be managed by
+introducing \emph{structure} within the communication protocol.
+Session types describe communication in a structured and rigorous fashion,
+and aim to define concepts for structured communication
+that should enable better control of communication complexity.
+
+%describing communication protocols
+
+%Session types can be seen as types that describe behaviour.
+Typically, a type is broadly understood
+as a meta-information concept, that is used to describe a class of data.
+Structured types are used to describe data structures.
+When types are structured as input/output requirements they
+are used to describe functionality.
+The combination of functionality and data structures give rise
+to the \emph{object-oriented} concepts of classes and interfaces. % of objects.
+%
+A session type extends %the above approaches of
+the notion of a type to capture the communication behaviour in concurrent systems.
+% definition of session types
+{\em A session type is a type structure that describes communication
+	behaviour in terms of a series of send and receive %message passing
+	interactions between a set of communicating entities.}  %, and it is used
+%	to characterise data structures that are used to implement communication.} \sg{I'm not sure what we mean by characterising data structures. Is it just that the data type of each message is defined?}
+
+The formal nature of session types enables rigorous
+reasoning about the communication properties of a system.
+Session types particularly focus on the following properties:
+%
+\begin{enumerate}[label=$\bullet$]
+	\item	{\em Communication Safety}: Every execution state of the system has {\em safe} communication behaviour:
+	%
+	\begin{itemize}
+		\item	{\em Communication interaction match}:
+				Every send
+				%(resp., select)
+				operation has a corresponding receive
+				%(resp., branch)
+				operation.
+		\item	{\em Message type match}:
+				The type of every message being sent matches the type of the message expected to be received.
+		\item	{\em Deadlock-freedom}:
+				Consequently, every message sent will eventually be received.
+	\end{itemize}
+
+	\item	{\em Communication Progress}: If the protocol has not yet terminated, then there is a pair of components that can communicate safely, leading to a system state that again satisfies the safety and progress properties.
+%Every state of the system either represents a terminated protocol, or
+%			will {\em progress} to a state with safe communication behaviour. \sg{Maybe this can be clearer?}
+\end{enumerate}
+%
+In addition, the structured nature of session types enables
+a methodology for integrating session types in software development.
+
+%\dk{make clear that it is a syntactic/static technique - in contrast to model checking}
+
+Furthermore, the Scribble tool-chain~\cite{scribble} is a platform
+that intends to serve as a core element in the process
+of integrating the practical aspects of session types
+in software engineering. The design of Scribble
+draws directly from the principles and properties of session types,
+as identified through rigorous study. The rest of this
+section introduces the main terminology for session types
+and, whenever appropriate, it presents these notions
+using the Scribble tool-chain.
+
+\subsection{Sessions Types as Protocols}%: The Scribble Protocol Description Language}
+\label{sec:sessions_scribble}
+
+%The Scribble tool-chain~\cite{scribble} is a tool that indents
+%to serve as a core element in the process of integrating
+%the practical aspects of session types in software engineering.
+%The basic module of the Scribble
+%tool-chain is the Scribble protocol description language,
+%which is a syntax that expresses session type specifications.
+%The design of the Scribble language draws directly from
+%the principles of session types.
+
+Practically, a session type can be seen as a formal
+{\em specification} of a communication {\em protocol} among communicating {\em roles}.
+The syntax for session types is defined on pairs of operations:
+(i) the {\em send} and {\em receive} operation give rise to
+the {\em message passing} interaction; and
+(ii) the {\em select} and {\em branch} operators enable the
+{\em choice} interaction.
+
+Message passing is used for sending data from one role to another.
+The data that are passed are described in terms of their type. Session
+types can also support the case of {\em session delegation}
+where a session-typed value, i.e.~a structure that implements communication,
+is passed as a message.
+Choice requires a role to use a value called a {\em label}
+to select a communication behaviour among
+a set of behaviours, called {\em branch}, offered by another role.
+The choice interaction enables formal specifications that can
+cover a more complex structure of communication and describe all possible
+cases that may happen, in contrast to the limiting structure of
+a sequence diagram.
+%The syntax for session types is defined on {\em send} and {\em receive},
+%and {\em select} and {\em branch} operators.
+%Sending and receiving data gives rise to the notion of {\em message passing}.
+%In a session type messages are described via their types.
+%The case where a session typed value is passed as a message is called {\em session delegation}.
+%The interaction of select and branch defines the {\em choice} interaction.
+%Choice requires for a role to use a value called {\em label}
+%to select a communication behaviour out of a set of behaviours, called {\em branch},
+%offered by another role.
+%\textbf{Important is to note that branch and choice elements within the formal specification force
+%the user to think among all possible cases that may happen within an session type.
+%Comparing to sequence charts which are not formal and thus more error prone.}
+
+Session types assume a {\em global} protocol that describes the
+communication interaction of all the roles inside a concurrent system.
+A global type enables a view of a system as a whole, instead of the
+approach that a concurrent system is a set of communicating modules.
+The perspective of a global protocol through a single role
+is called {\em local} protocol. The local protocol describes
+the communication interaction of a single role with all other roles
+in the system. Local protocols can also be seen as syntactic
+representations of state machines, where each state machine edge
+depicts a communication operation.
+
+The relation between a global protocol and the
+local protocols of its roles, is expressed
+through the {\em projection} procedure;
+% called {\em projection}.
+%Projection to a role
+%is a procedure that can be done
+%can be done automatically;
+given the global protocol and a role, projection
+returns as a local protocol only the
+interactions of the global protocol that are concerned with
+the role.
+
+The reverse procedure to projection is called {\em synthesis},
+where a set of local protocols are composed together in a global
+protocol.
+
+
+\subsection{The Scribble Protocol Description Language}
+\label{sec:scribble}
+The notions explained above are supported by the
+Scribble protocol description language,
+which is a syntax used to express session type specifications.
+As an example,
+consider part of the session type protocol for the book-store
+use-case as in \figref{scribble_bs}.
+
+
+\input{figures/fig-scribble_bookstore}
+
+Line 1 of the upper protocol in \figref{scribble_bs} shows the
+Scribble definition of the global protocol.
+The communication takes place
+among the roles \BuyerOne, \BuyerTwo and \Seller. Line 2 demonstrates
+the syntax of a message passing interaction; a message
+of type \Code{title} labelled with label \Code{book} is sent \lstinline|from|
+role \BuyerOne \lstinline|to| role \Seller. In Scribble, a message is
+defined as a list of types annotated with a label.
+
+In line 5 of the protocol
+%their properties
+there is a choice interaction,
+where role \BuyerTwo makes an internal decision and selects
+from two possibilities, that are
+expressed with the labels \Code{agree} in line 5 or \Code{quit} in line 6.
+In  both cases roles \BuyerOne and \Seller respectively offer
+alternative branches. The choice interaction requires that
+Role \BuyerTwo informs roles \BuyerOne and role \Seller. All
+three roles will then synchronise on the same choice.
+
+Scribble also provides a looping construct, which is needed for more realistic protocols but is not used in this simple example.
+
+%\dk{describe the recursion construct?}
+
+Line 1 of the lower protocol defines the local protocol
+for \BuyerOne of the Book-store protocol. Role \BuyerOne
+interacts with roles \BuyerTwo and \Seller. In essence,
+the local protocol for role \BuyerOne is derived automatically
+by stripping out all the irrelevant information with respect
+to \BuyerOne from the global protocol.
+
+\subsection{Integrating Session Types into Software Development}%: The Scribble Tool-chain}
+\label{sec:sessions_integrate}
+
+%The formal nature of session types allow for a rigorous manipulation
+%of the communication behaviour inside a software.
+\figref{diagram} illustrates a holistic approach to the integration of session
+types in software engineering, that follows procedures derived out of the rigorous
+nature of session types. In \figref{diagram} rectangles
+represent source code for either the software
+under development (white coloured) or for the definition
+of the session type protocols (grey coloured).
+The arrows
+represent automated procedures that ensure
+the desirable properties of session types
+in the development process. Blue arrows represent
+a top-down view of the diagram while red arrows take
+the bottom-up approach.
+The Scribble
+tool-chain supports many of these automated
+procedures.
+An important assumption
+is that the software source code in the
+bottom of \figref{diagram} uses an interface
+for communication, where the communication
+operations can be identified by automated
+procedures.
+
+Furthermore and in addition to a protocol description language,
+Scribble offers a tool-chain that implements most of the procedures
+described in \figref{diagram}.
+
+\input{figures/fig-sessions_software}
+
+%Below the term system is used to describe the whole concurrent
+%system and the term \dk{program} is used for communication module
+%inside the system. \textbf{Bellow the term system is used to describe whole local protocol
+%implementation as a set of communication modules it is composed of? }
+
+%\dk{The formal nature of session types protocols
+%	allow for rigorous manipulation of the communication behaviour.}
+
+%\figref{diagram} clarifies the terminology
+%developed previously by showing the
+%\mybf{typical usage} of session types in software
+%engineering.
+%%design and development.
+%Furthermore, it distinguishes
+%the desirable properties that are offered by
+%session types.
+
+
+In a typical top-down approach, a developer will first develop a global protocol
+%and express it syntactic form.
+as syntax that expresses session type specifications.
+This for example can be done
+using the Scribble protocol description language.
+The global protocol source code is shown
+on the top of \figref{diagram}.
+The next step is to run a procedure to verify the
+global protocol's correctness: for example, checking that choices
+are communicated to all roles whose subsequent behaviour depends on them.
+After the global protocol verification, a projection
+procedure takes place where a local protocol
+for each global protocol role is derived.
+The obtained local protocols are also expressed
+syntactically as session type specifications.
+Verification, projection and local specification
+syntax are supported by the Scribble tool-chain.
+
+\myparagraph{Type-check/Verification:}
+One way to use the set of local protocols is to ensure
+conformance between the source code of the
+software under development and the local protocols,
+by using a typechecking procedure.
+%To achieve this there is the assumption that
+%the programming language used to develop the
+%software source code, makes use of a communication
+%interface that can be identified by a type-checker
+%procedure.
+The typechecker takes as an input
+%software module,
+source code that corresponds to a communicating process;
+it identifies its communication operations,
+and derives the communication behaviour of
+the
+%module.
+source code.
+The typechecker also takes as an input the
+corresponding syntax of the local protocol
+and checks whether the
+%software module
+software source code
+implements the corresponding role of the specified communication behaviour.
+Upon success, the result is verified software that
+enjoys the {\em communication safety} and {\em communication progress}
+properties of session types.
+
+\myparagraph{Code generation:}
+A second way to use the set of local protocols
+is for automatic code generation. The generated
+code might be in the form of APIs that implement
+communication behaviour, or in the form of program
+templates that implement communication behaviour and
+need manual work by the developers to add
+computational logic.
+Scribble supports the generation of a Java API for
+each one of the set of Scribble local protocols.
+The generated API has a class for each state of the protocol
+that implements as methods all the available communication
+operations. A method call returns an object of the class
+that corresponds to the next state of the protocol. A dynamic
+check ensures that each object (i.e.~state) is used exactly once.
+
+
+\myparagraph{Monitoring:}
+A third way of using the set of local protocols is
+for monitoring the execution of the communication
+interaction inside a concurrent system.
+The local protocols are used to feed a set of local monitors.
+Essentially, a local monitor runs a state machine that is derived
+from the local protocol syntax.
+%The monitor platform also requires for
+%the concurrent software execution.
+It is assumed that the communication interaction
+of the software under execution can be recognised
+and monitored by the monitor interface.
+%The assumption to be made here is that
+%monitor platform implements the communication interface
+%on top of the monitoring interface. \textbf{I do not understand this sentence!}
+Scribble supports the procedure of deriving
+state machines from local protocol syntax.
+
+\myparagraph{Inference/Synthesis:}
+\figref{diagram} also shows a bottom-up approach,
+where the communicating software source codes are developed independently.
+Then an inference  procedure identifies the communication behaviour
+of each component, resulting in a set of local protocols.
+%\textbf{Here is not clear - if this is provided automatically?}.
+After that, an automatic synthesis procedure can be used,
+where the derived local protocols are synthesised
+to create a global protocol. Successful synthesis of the global protocol guarantees that the
+software has the communication safety and progress properties.
+
+
+In any of the above methodologies, session types can be used as
+requirements  to drive the software development process.
+In the top-down approach, local types can be used to give intuition
+and guide developers when implementing code.
+In the bottom-up approach, more agile development teams
+can analyse and compare the obtained global and/or local protocols
+against the intended communication behaviour using human
+reasoning techniques. Protocols can also be expressed
+as diagram. For example, a local protocol is a syntactic form
+of a state machine. Global protocols can be expressed as
+petri-nets~\cite{DBLP:conf/tgc/FossatiHY14}, communicating
+finite state machines~\cite{Denielou:2012:MST:2259248.2259258}
+and BPMN choreographies~\cite{LTY2015}.
+
+
+
+
+
+%\textbf{Furthermore, thus obtained global protocol can be compared
+%to the specifications of intended communication behaviour,
+%formally with tools or informally with human reading technique.}
+
+%Typically, a protocol is first expressed globally and then
+%projected locally \textbf{on each protocol role, projecting one local protocol specification per each protocol role.}
+%Local specifications are then implemented by the corresponding
+%\mybf{programs}.
+%The term {\em session fidelity} is used to express
+%the conformance of a \mybf{program}, to the local protocol of the
+%corresponding role. Session fidelity can be checked mechanically,
+%through techniques like type-checking and monitoring.
+
+\myparagraph{Session fidelity:}
+The case where the implementation of all the communication
+processes inside a system conforms to the corresponding
+local protocols of all the roles in a global protocol
+%are implemented by the corresponding communicating modules of
+is called {\em session fidelity}.
+When session fidelity is ensured then the communication safety
+and communication progress properties are ensured.
+%then a number of communication properties can be guaranteed
+%for the concurrent software:
+%%
+%\begin{enumerate}[label=$\bullet$]
+%	\item	Every execution state of the system has {\em safe} communication behaviour:
+%	%
+%	\begin{itemize}
+%		\item	{\em Communication interaction match}: Every send (resp., select) operation has a corresponding receive (resp., branch) operation.
+%		\item	{\em Message (\mybf{Payload?}) type match}: The type of every message being send matches the type of the message expected to be receive.
+%		\item	{\em Deadlock-freedom}: Consequently, every message send will be eventually received.
+%	\end{itemize}
+%
+%	\item	Every state of the system conforms to a terminated protocol, or
+%			it will {\em progress} to a state with a safe communication behaviour.
+%\end{enumerate}
+
+As seen in \figref{diagram} Scribble and the procedures
+that manipulate session type protocols lie at the core
+of the software development process. This is also clarified
+by the experience of developing the usecases for the ABCD
+online repository. The Scribble platform and its procedures
+have an independent status next to the plethora of technologies and
+programming paradigms used in the case studies.
+
+%\subsection{Session Types as Protocols: The Scribble Tool-chain}
+%
+%This section presents the Scribble~\cite{scribble} tool-chain
+%as the core tool for the application of session types.
+%This section also uses Scribble to clarify the terminology
+%developed in the previous section.
+
+%The basic module of the Scribble tool-chain is the
+%Scribble protocol description language,
+%which is a syntax that expresses session type specifications.
+%The design of the Scribble language draws directly from
+%the principles of session types.
+
+%\input{figures/fig-scribble_global_bookstore}
+
+%In \figref{scribble_bs}, uses the Scribble protocol for the
+%Bookstore usecase in the online repository~\cite{usecase_repository},
+%to present the Scribble syntax.
+%Line 1 defines the
+%of global protocol \lstinline|Bookstore| between
+%roles \lstinline|Buyer1|, \lstinline|Buyer2| and \lstinline|Seller|.
+%%The communication structure is expressed
+%%as a sequence of {\em endpoint} to endpoint message passing
+%%interactions between the roles of the protocol.
+%%Messages are described in terms of a message type,
+%%where  a label is used to annotate a list
+%%of types.
+%Line 2 gives an example of the simplest endpoint-to-endpoint
+%message passing interaction,
+%where a message with
+%label \lstinline|book| and type \lstinline|title| (notation \lstinline|book(title)|)
+%is send from (keyword \lstinline|from|) role \lstinline|Buyer1| to (keyword \lstinline|to|)
+%role \lstinline{Seller}.
+%In Scribble messages are described as a type structure
+%consisted of a label and a list of message types.
+
+
+%Line 5 of the protocol clarifies the choice interaction, where
+%role \lstinline|Buyer2| selects a choice from two possible outcomes,
+%expressed with the labels \lstinline|agree| or \lstinline|quit|. In
+%both cases roles \lstinline|Buyer1| and \lstinline|Seller| offer
+%alternative branches.
+
+
+%\input{figures/fig-scribble_local_bookstore}
+
+%We use the term {\em local} protocol to describe
+%the communication structure at the level of a single participant.
+%As session types is a type discipline with the requirement to
+%be enforced on a program, we may sometimes refer to a session type
+%protocol as communication {\em specification}.
+
+%For example Scribble code:
+%%
+%\begin{lstlisting}
+%  msg(int) from A to B;
+%\end{lstlisting}
+%%
+%describes the global protocol between role \lstinline|A| and \lstinline|B|,
+%where participant \lstinline|A| sends message of type \lstinline|msg(int)|
+%to participant \lstinline|B|. From the local perspective of participant
+%\lstinline|A| the protocol would be:
+%%
+%\begin{lstlisting}
+%  msg(int) to B;
+%\end{lstlisting}
+%%
+%where it describes the sending of message \lstinline|msg(int)|
+%to participant \lstinline|B|.
+
+
+%\subsection{Fine/coarse grain representation}
+%\dk{this should go as future work}
+
+%{\em Concurrency patterns} e.g. network topology, client/server, race  condition, etc. (maybe I am writing nonsense here)
+
+
+
+\subsection{Technologies based on Session Types}
+
+We describe a selection of practical languages, frameworks and tools, based on the range of session types engineering methodologies described above, that we have used to implement the use-cases (describe in Section~\ref{sec:usecases}).
+%
+\begin{enumerate}
+	\item	Session Java~\cite{HU07TYPE-SAFE} is a Java extension
+			that statically checks binary session types for communication channels
+			that are implemented as an API.
+			%of Java with binary session types for communication channels, supported by a runtime library. The compiler statically checks session types.
+
+	\item	Eventful Session Java~\cite{event} supports asynchronous, event-driven programming, using session types to track progress through individual sessions.
+
+	\item	Multiparty Session C~\cite{NYH12} supports programming in C with the MPI library. The compiler statically checks session types.
+
+	\item	SPY~\cite{DBLP:conf/rv/NeykovaYH13} uses session types for runtime monitoring of communication protocols in Python.
+
+	\item	Two technologies apply session types to the actors paradigm:
+			\begin{itemize}
+				\item	SPY is used to monitor Python threads that simulate actors~\cite{DBLP:conf/coordination/NeykovaY14}.
+%				\item	An implementation that uses SPY to
+%						monitor python threads that simulate actors~\cite{DBLP:conf/coordination/NeykovaY14}.
+				\item	Session type monitoring is also used for Erlang actors~\cite{SF15}.
+%				\item	A similar approach on monitoring session types is also used for the
+%						Erlang programming language. %, which is a programming language for the Actors model.
+%						\sg{Is this Erlang system one of ours? Simon Fowler's MSc}
+			\end{itemize}
+
+	\item	Pabble~\cite{DBLP:conf/pdp/NgY14} extends Scribble to express
+			communication structures that are parametrised by the number of roles.
+			Pabble protocols are implemented and typechecked for the C+MPI framework.
+
+	\item	Mungo~\cite{mungo} is a tool that integrates session types into the object-oriented
+%			programming
+			paradigm through the notion of typestate. Communication
+			operations on a channel are accessed via a state-dependent interface.
+			%Mungo uses a protocol description language for capturing typestate.
+			The Scribble to Mungo (StMungo) tool transforms Scribble
+			protocols into Mungo interfaces.
+
+
+	\item	GV:	A functional programming implementation of binary session types~\cite{DBLP:journals/jfp/Wadler14}.
+
+	\item	The web programming language LINKS~\cite{citation_needed}
+			uses the linear logic interpretation of session types~\cite{DBLP:journals/jfp/Wadler14}
+			to statically type-check protocols.
+
+	\item	The Scribble API generator, automatically creates an API for protocols,
+			where it describes each protocol state as a class equipped with
+			communication methods. Runtime checks ensure state linearity.
+
+	\item	SILL: Functional programming based on the linear
+			dual intuitionistic interpretation of
+			session types. \sg{Separate this from the
+			repository --- say something elsewhere.}
+
+\end{enumerate}
+
+
+
+

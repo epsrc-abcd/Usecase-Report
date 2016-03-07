@@ -1,0 +1,65 @@
+\usepackage{xcolor}
+\usepackage{listings}
+
+%\newcommand*\lstnumberstyle{\ttfamily\scriptsize\textcolor{lightgray}}
+%\lstset{
+%        emph={
+%        local, global, protocol, choice, or, at, role, from, to, self,
+%                typestate, enum, end
+%        },
+%        emphstyle={\color{blue}},
+%        numberstyle=\lstnumberstyle,
+%        basicstyle=\footnotesize\ttfamily,
+%        keywordstyle=\color{blue},
+%        breaklines=false,
+%        commentstyle=\color{purple}\ttfamily,
+%        language=Java,
+%        numbers=left,
+%        captionpos=b,
+%        numbersep=4pt,
+%        mathescape=true
+%}%
+
+\newcommand{\BuyerOne}{\rolefont{Buyer1}}
+\newcommand{\BuyerTwo}{\rolefont{Buyer2}}
+\newcommand{\Seller}{\rolefont{Seller}}
+
+
+\newcounter{dkcounter}
+
+\newcommand{\mybf}[1]{{\color{blue} #1}}
+\newcommand{\dk}[1]{\stepcounter{dkcounter} {\color{blue}\arabic{dkcounter}}  \marginpar{{\color{blue} \arabic{dkcounter} #1}}}
+\newcommand{\sg}[1]{{\color{blue} #1}}
+
+
+%\newcommand{\figref}[1]{Figure~\ref{fig:#1}}
+%\newcommand{\secref}[1]{Section~\ref{sec:#1}}
+
+
+%%%%
+%
+%\newcommand{\myparagraph}[1]{\paragraph{\noindent\textit{\bf #1\ }}}
+\newcommand{\myparagraph}[1]{\noindent\textit{\bf #1\ }}
+%\newcommand{\myparagraph}[1]{\noi {\em #1}}
+
+%%%%%
+%
+%
+\newcommand{\rumi}[1]{$\mathbf{RN}$ {\color{red} #1} }
+\newcommand{\ray}[1]{$\mathbf{Ray}$ {\color{blue} #1} }
+
+\newcommand{\cut}[1]{$\mathbf{CUT:}$ {\color{orange} #1} }
+
+
+\newcommand{\JavaAPI}{Java API}
+\newcommand{\Erlang}{Erlang}
+\newcommand{\SJ}{SJ}
+\newcommand{\SPython}{SPython}
+\newcommand{\SScala}{SScala}
+\newcommand{\TypeState}{Mungo}
+\newcommand{\MPI}{MPI}
+\newcommand{\Sill}{Sill}
+\newcommand{\GV}{GV}
+\newcommand{\Links}{Links}
+\newcommand{\ESJ}{Eventful Session Java}
+
