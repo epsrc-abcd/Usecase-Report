@@ -92,7 +92,7 @@ of session types from a different perspective.
 %%% Web Service Applications
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\myparagraph{Web Service Application}
+\myparagraph{Web Service Applications:}
 %Internet Application Protocols are low level protocols,
 %as such they often specify a protocol between two
 %parties (a client and a server).
@@ -143,7 +143,7 @@ informing both \BuyerOne and \Seller.
 % Internet Application Protocols
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\myparagraph{Internet Application protocols}
+\myparagraph{Internet Application protocols:}
 This set of use cases is the first step towards
 more realistic (real-world) applications.
 The motivation to apply session types verification
@@ -218,16 +218,16 @@ An SMTP interaction is an exchange of text-based {commands}
 between a client and the server.
 %
 For example, in line 4 the client may send the
-\lstinline|EHLO| command to identify itself and open a server connection.
+\Code{EHLO} command to identify itself and open a server connection.
 Responses from the server have follow  the format:
 three digits followed by an optional dash ``-'', and then some text,
-e.g.~in line 8 the server might reply to \lstinline|EHLO| with \lstinline|_250 <text>| %\mybf{check here}.
+e.g.~in line 8 the server might reply to \Code{EHLO} with \Code{\_250 <text>}. %\mybf{check here}.
 Lines 18-23 there is a loop that allows the client to construct
 and stream a tree data structure that contains the email information
 to the server. Specifically, in line 19 the client streams the subject of the
 email to the server and then performs iteration to stream email data lines,
 as in line 20. The streaming finishes in line 21 and 22 when the
-\lstinline|atad| message is sent and the server replies to the client.
+\Code{atad} message is sent and the server replies to the client.
 
 The protocol is then projected to the local specifications
 of the roles server and client. Part of the local protocol
@@ -260,7 +260,7 @@ the implementation is correct.
 % Classic Concurrency Problems
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\myparagraph{Classic Concurrency Problems}
+\myparagraph{Classic Concurrency Problems:}
 Coordination of processes is a challenging problem
 when implementing concurrent systems.
 A study in \cite{ActorCoordinationStudy} points out that
@@ -305,7 +305,7 @@ cigarette smoker.
 % Parallel Algorithms
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\myparagraph{Parallel Algorithms}
+\myparagraph{Parallel Algorithms:}
 Issues with High Performance Computing (HPC)
 programmers productivity and programs correctness
 have long been recognised.
@@ -342,7 +342,7 @@ next Fibonacci number.
 % Network Topologies
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\myparagraph{Network Topologies}
+\myparagraph{Network Topologies:}
 The previously presented use-cases in the repository
 involved a fixed number of interacting parties.
 Network topologies, however, often express indexed and grouped processes interaction patterns with unknown number of participants. To overcome this problem, the protocol description
@@ -382,7 +382,7 @@ productivity in terms of development and debugging efforts.
 
 %It improves productivity of parallel application development with reusable patterns.
 
-\myparagraph{Data Structures}
+\myparagraph{Data Structures:}
 The last domain of use-cases describes the behaviour of
 clients accessing data-structures that are implemented
 concurrently. The main feature here are:
