@@ -40,24 +40,24 @@ demonstrates a range of features and extensions in the tools.
 On the other  hand, each domain offers appreciation
 of session types from a different perspective.
 
-\cut{We explain the specific challenges tackled by session types
-when applied to a specific domain.
-%In this section we demonstrate that depending on the domain
-%the properties are important to a various degree. 
-%Each domain has its own challenges and although session
-%types provide multiple guarantees, the motivation to apply
-%session types to a specific domain is slightly different.
-Communication safety guarantees are essential when
-programming in an error-prone environment
-(as in High Performance Computing).
-Session fidelity guarantee is essential when protocols
-are specified in a semi-formal format
-(as in Internet Application Protocols).
-Ensuring progress is challenging when a complex
-coordination of multiple parties is required (as is Web Services)
-and compositionality is not apparent
-(as in Classic Concurrency Problems).
-\dk{do we need this long paragraph}}
+%\cut{We explain the specific challenges tackled by session types
+%when applied to a specific domain.
+%%In this section we demonstrate that depending on the domain
+%%the properties are important to a various degree. 
+%%Each domain has its own challenges and although session
+%%types provide multiple guarantees, the motivation to apply
+%%session types to a specific domain is slightly different.
+%Communication safety guarantees are essential when
+%programming in an error-prone environment
+%(as in High Performance Computing).
+%Session fidelity guarantee is essential when protocols
+%are specified in a semi-formal format
+%(as in Internet Application Protocols).
+%Ensuring progress is challenging when a complex
+%coordination of multiple parties is required (as is Web Services)
+%and compositionality is not apparent
+%(as in Classic Concurrency Problems).
+%\dk{do we need this long paragraph}}
 
 \input{figures/fig-usecases}
 
@@ -168,9 +168,9 @@ messages of a component are verified, thus protecting the
 implemented components from interactions with untrusted parties.
 For example, the DNS implementation in the repository
 is implemented in monitored Erlang but it can interact with any
-(none session-based) server implementations. \cut{Monitoring ensures
-correct communication behaviour with untrusted or erroneous
-components.}
+(none session-based) server implementations.
+\cut{Monitoring ensures correct communication behaviour with
+	untrusted or erroneous components.}
 
 Another widely used internet protocol implemented in the repository is HTTP.
 Despite, the fact that HTTP is a basic request-response protocol,
@@ -182,14 +182,14 @@ a stream of simpler messages passed that construct the overall
 request (resp., response) header. The implementation in the online
 repository first describes the HTTP in Scribble and then automatically
 generates a Java API.
-
+%
 The SMTP is also implemented as a use-case in the repository.
 A detailed description of SMTP can be found in \secref{smtp}.
 
 
-\cut{\ray{...binary (thin abstraction layer over TCP session), can have ``rich'' interaction structure (e.g. SMTP, POP3 conversations), simple data types (ASCII text)...}}
-
-
+%\cut{\ray{...binary (thin abstraction layer over TCP session),
+%can have ``rich'' interaction structure (e.g. SMTP, POP3 conversations),
+%simple data types (ASCII text)...}}
 
 %\rumi{For each domain explain (1) What are the challenges when implementing the use cases in that particular domain?
 %(2) How Session Types overcome these challenges (currently this is not well explained).}
