@@ -11,13 +11,13 @@ SMTP is an application layer protocol, that typically runs on
 a TCP/IP connection.
 
 \myparagraph{Motivation:}
-The session typed implementation of the STMP has to offer
+The session typed implementation of the SMTP has to offer
 a number of motivations for using session types for software
 development.
 Firstly, it demonstrates how {\em natural} it is
 to describe of a widely used standard protocol in session types.
 Secondly, and in contrast with the HTTP, it is
-a rather state-full protocol (\mybf{see state machine diagram below}),
+a rather state-full protocol (\appref{global_smtp}),
 i.e.~ it requires implementation of a sequence of communication states.
 The complexity of states adds to the effort of
 developing SMTP. With the use of session typed
