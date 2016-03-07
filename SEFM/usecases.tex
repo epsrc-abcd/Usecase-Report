@@ -274,34 +274,40 @@ next Fibonacci number.
 \myparagraph{Network Topologies}
 The previously presented use-cases in the repository
 involved a fixed number of interacting parties.
-Parallel patterns, however, often involve unknown
-number of participants.
-To overcome this problem, the protocol description
+Network topologies, however, often express indexed and grouped processes interaction patterns with unknown number of participants. To overcome this problem, the protocol description
 language Pabble is used, which is an extension
-of the Scribble language that features parametrised
-roles, thus enabling the expression of flexible topologies
-with unknown number of participants.
+of the Scribble language featuring parametrised
+roles.
 % Pattern-based structured parallel programming motivates the need for specifications of flexible topologies.
 Pabble can express all structured patterns in the
-HPC (High Performance Computing) Dwarf benchmark suit~\cite{BerkleyPar}, 
+HPC (High Performance Computing) Dwarf benchmark suit~\cite{BerkleyPar} (i.e. algorithmic methods that capture common pattern of communication and computation), 
 %In addition to specific parallel algorithms we also evaluate
 %session types on a set of patterns for parallel programming.
-which is a popular benchmark suit that captures
-common parametrised patterns of communication.
+%which is a popular benchmark suit that captures
+%common parametrised patterns of communication.
 %The Seven Dwarfs, constitute equivalence classes where
 %membership in a class is defined by similarity in computation
 %and data movement.
-The dwarfs are specified at a high level of abstraction to
-allow reasoning about their behaviour across a broad
-range of applications.
+%The dwarfs are specified at a high level of abstraction to
+%allow reasoning about their behaviour across a broad
+%range of applications.
 %Dwarf suit captures common patterns of communication and computation. %The Seven Dwarfs, constitute equivalence classes where membership in a class is defined by similarity in computation and data movement.
 %The dwarfs are specified at a high level of abstraction to allow reasoning about their behavior across a broad range of applications. %Programs that are members of a particular class can be implemented differently and the underlying numerical methods may change over time, but the claim is that the underlying patterns have persisted through generations of changes and will remain important into the future.
 %The dwarfs present a method for capturing the common requirements of classes of applications while being reasonably divorced from individual implementations.
 
-The benchmark suit was implemented using automatic code generation
-from Pabble specifications. Furthermore, it is shown that the practise
+%To exemplify the advantages of pattern programming –
+%common parallel patterns are collected and stored in our protocol repository, and
+%they are maintained separately from the implementations so new parallel applications
+%can be constructed by writing only the computations logic. 
+
+We provide an implementation for each pattern (topology) from the table using a tool for automatic MPI code generation
+from reusable Pabble specifications. Note that one parallel algorithm can be implemented using multiple network topologies. Thus, this use-cases set is a generalisation of the parallel algorithm use-cases. For example, the repository contains implementations of the Monte-Carlo $\pi$ simulation with two different patterns, scatter-gather and master-worker (the former uses collective operations and all processes are involved in the main calculation, whereas with the latter
+workers are coordinated by a central master process by P2P communication that does not perform the main calculation).
+The benchmark results in ~\cite{NCY2015} shown that the practise
 of code generation from Pabble specifications improves developers
-productivity in terms of development and debugging efforts~\cite{NCY2015}.
+productivity in terms of development and debugging efforts.
+
+%It improves productivity of parallel application development with reusable patterns.
 
 \myparagraph{Data Structures}
 The last domain of use-cases describes the behaviour of
@@ -390,11 +396,9 @@ Both use-cases are implemented in Mungo.
 %...W3C CDL working group Web services use case, initially specified as binary sessions
 %between multiparty roles (not a single multiparty session), features delegation...
 
-
 %\paragraph{Parallel algorithms.}
 %...shared memory as transport, integrating linearity for session typing into
 %language as general linearity/aliasing control for shared memory message passing optimisation...
-
 
 %\paragraph{..OOI python use cass...}
 %...TODO: add use cases? (e.g., negotiation, resource access control)... ...python: run-time monitoring motivation...
