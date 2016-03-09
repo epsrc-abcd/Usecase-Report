@@ -11,7 +11,7 @@
 This section takes the approach to identify and define
 a clear and distinctive terminology
 for transferring the basic ideas of session types to a wider audience.
-It also presents the Scribble~\cite{scribble}%\footnote{Scribble Project homepage, \url{www.scribble.org}"}
+It also presents the Scribble~\cite{scribble} %\footnote{Scribble Project homepage, \url{www.scribble.org}"}
 tool-chain, which is a platform used to implement
 software using the principles of session types.
 %protocol
@@ -133,13 +133,7 @@ properties:
 %In addition, the structured nature of session types enables
 %a methodology for integrating session types in software development.
 %
-The case where the implementation of all the communication
-processes inside a system conforms to the corresponding
-local protocols of all the roles in a global protocol
-%are implemented by the corresponding communicating modules of
-is called {\em session fidelity}.
-When session fidelity is ensured then the communication safety
-and communication progress properties are ensured.
+
 
 %\dk{make clear that it is a syntactic/static technique - in contrast to model checking}
 
@@ -231,6 +225,14 @@ the role.
 The reverse procedure to projection is called {\em synthesis},
 where a set of local protocols are composed %together
 in a global protocol.
+
+The case where the implementation of all the communicating
+processes inside a system conforms to the corresponding
+local protocols of all the roles in a global protocol
+%are implemented by the corresponding communicating modules of
+is called {\em session fidelity}.
+When session fidelity is ensured then the communication safety
+and communication progress properties are ensured.
 
 
 \noi {\bf The Scribble Protocol Description Language:}
@@ -343,7 +345,7 @@ e.g.\
 using the Scribble protocol description language.
 %The global protocol source code is shown
 %on the top of \figref{diagram}.
-The next step is to run a procedure to verify the
+The next step is to run a procedure to {\em verify} the
 global protocol's correctness: e.g, check that a choice
 is communicated to all the choice dependent roles.
 % whose subsequent behaviour depends on them.
@@ -361,13 +363,13 @@ Local protocols can be used
 to ensure
 conformance between the source code of the
 software under development and the local protocols,
-by using a typechecking procedure.
+by using a {\em type-check} procedure.
 %To achieve this there is the assumption that
 %the programming language used to develop the
 %software source code, makes use of a communication
 %interface that can be identified by a type-checker
 %procedure.
-The typechecker takes as an input
+The type-checker takes as an input
 %software module,
 source code that corresponds to a communicating process;
 it identifies its communication operations,
@@ -375,7 +377,7 @@ and derives the communication behaviour of
 the
 %module.
 source code.
-The typechecker also takes as an input the
+The type-checker also takes as an input the
 corresponding syntax of the local protocol
 and checks whether the
 %software module
@@ -389,7 +391,7 @@ enjoys session fidelity.
 \myparagraph{Code generation:}
 Local protocols can be used 
 %A second way to use the set of local protocols is
-for automatic code generation. The generated
+for automatic {\em code generation}. The generated
 code might be in the form of APIs that implement
 communication behaviour, or in the form of program
 templates that implement communication behaviour and
@@ -407,13 +409,13 @@ check ensures that each object (i.e.~state) is used exactly once.
 \myparagraph{Monitoring:}
 %A third way of using the set of
 Local protocols can
-monitor %the execution of
+{\em monitor} %the execution of
 the communication
 interaction inside a concurrent system.
 Local protocols are used to feed a set of local monitors,
 that
 %Essentially, a local monitor
-run a state machine, derived
+run a {\em state machine generated}
 from the
 %local
 protocol syntax.
@@ -432,10 +434,10 @@ state machines from local protocol syntax.
 \myparagraph{Inference/Synthesis:}
 \figref{diagram} also shows a bottom-up approach,
 where the communicating software source codes are developed independently.
-Then an inference  procedure identifies the communication behaviour
+Then an {\em inference}  procedure identifies the communication behaviour
 of each component, resulting in a set of local protocols.
 %\textbf{Here is not clear - if this is provided automatically?}.
-After that, an automatic synthesis procedure can be used,
+After that, an automatic {\em synthesis} procedure can be used,
 where the derived local protocols are synthesised
 to create a global protocol. Successful synthesis
 ensures session fidelity.
@@ -663,7 +665,7 @@ protocols into Mungo interfaces.
 
 {\em GV} is functional programming implementation of binary session types~\cite{DBLP:journals/jfp/Wadler14}.
 
-The web programming language {\em LINKS}~\cite{citation_needed}
+The web programming language {\em LINKS}
 uses the linear logic interpretation of session types~\cite{DBLP:journals/jfp/Wadler14}
 to statically type-check protocols.
 

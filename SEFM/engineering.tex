@@ -41,7 +41,8 @@ The use-case repository contains examples of session types in a range of program
 %in different paradigms, e.g.~continuation passing
 %style actor, like Scala.
 
-Several implementation technologies have been applied to the use-cases in the repository. However, there is still a need for more implementation work in order to realise all of the capabilities of session types as practical tools. In particular, the bottom-up techniques of type inference and synthesis (the red arrows in \figref{diagram}) have not yet been implemented to the same extent as the top-down techniques.
+Several %implementation
+technologies have been applied to the use-cases in the repository. However, there is still a need for more implementation work in order to realise all of the capabilities of session types as practical tools. For example, the bottom-up techniques of type inference and synthesis (the red arrows in \figref{diagram}) have not yet been implemented to the same extent as the top-down techniques.
 
 %There are numerous technologies used to developed use-cases
 %in the repository. However, there is still need to continue
@@ -127,14 +128,26 @@ This approach was used in the development of the DNS and
 Chat use-cases. Errors in the monitoring phase
 lead to an iteration for redevelopment of the session protocol.
 
-The above discussion lacks metrics
-for an accurate understanding of the cost and effectiveness
-of the application of session types in software engineering.
-The only set of use-cases that have such support is network
-topologies~\cite{NCY2015}. 
-A valuable new area of research in session types would
+%The above discussion lacks metrics
+%for an accurate understanding of the cost and effectiveness
+%of the application of session types in software engineering.
+%The only set of use-cases that have such support is network
+%topologies~\cite{NCY2015}. 
+%A valuable new area of research in session types would
+%be to quantify their effectiveness for software development,
+%in terms of bugs, lines of code, performance, development time and cost.
+
+Ng et al.~\cite{NCY2015} provide a quantitative analysis
+for the effectiveness of session type driven code generation in
+in network topologies, where programming effort is shown to
+be reduced by an overall of 39\%.
+A general quantitative analysis would provide an accurate understanding of the cost and effectiveness of the application of session types in software engineering.
+Thus, a valuable new area of research in session types would
 be to quantify their effectiveness for software development,
 in terms of bugs, lines of code, performance, development time and cost.
+
+%Finally, new research is needed to realise the applicability
+%of session types beyond the 
 
 %Finally, session types have the ability to capture the
 %communication specifics of a system as whole through the
