@@ -376,13 +376,15 @@ communication and computation).
 %they are maintained separately from the implementations so new parallel applications
 %can be constructed by writing only the computations logic. 
 
+<<<<<<< HEAD
 We provide an implementation for each pattern (topology) from the table using a tool for automatic MPI code generation
 from reusable Pabble specifications. Note that one parallel algorithm can be implemented using multiple network topologies.
 Thus, this use-cases set is a generalisation of the parallel algorithm use-cases.
 For example, different network topologies can be used to provide
 different parametrised implementations for the Monte-Carlo $\pi$ simulation.
 %For example, the repository contains implementations of the Monte-Carlo $\pi$ simulation with two different patterns, scatter-gather and master-worker (the former uses collective operations and all processes are involved in the main calculation, whereas with the latter
-workers are coordinated by a central master process by P2P communication that does not perform the main calculation).
+%workers are coordinated by a central master process by P2P
+%communication that does not perform the main calculation).
 The benchmark results in~\cite{NCY2015} shown that the practise
 of code generation from Pabble specifications improves developers
 productivity in terms of development and debugging efforts.
