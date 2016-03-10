@@ -195,15 +195,15 @@ SMTP is an application layer protocol, that typically runs on
 TCP/IP.
 % connection.
 
-The session typed implementation of the SMTP has to offer
+The SMTP implementation has to offer
 a number of motivations for using session types for software
 development:
 (1) it demonstrates how {\em natural} it is
 to describe of a widely used standard protocol in session types; and
 (2) it is a rather stateful protocol (\appref{smtp_global}),
 i.e.~ it requires implementation of a sequence of communication states.
-The complexity of states adds to the effort of
-developing SMTP. With the use of session typed
+The complexity of states adds to the development effort.
+With the use of session typed
 support that effort can be reduced.
 
 The implementation of the SMTP starts with
@@ -320,9 +320,12 @@ sender and/or receiver specified for a message.
 These are precisely the type of errors prevented with
 session types verification.
 
-The Jacobi and Monte Carlo algorithms are classic parallel algorithms
+The Jacobi and Monte Carlo simulation algorithms are classic parallel algorithms
 that require session types to ensure no errors in their
 concurrent implementation.
+The Monte Carlo $\pi$ simulation is implemented with two different patterns:
+(1) scatter-gather, that uses collective scatter and gather operations; and
+(2) master-worker, where a master process coordinates a set of worker processes.
 %
 In addition, concurrent Fibonacci is an
 example that shows the underlying communication
@@ -374,7 +377,11 @@ communication and computation).
 %can be constructed by writing only the computations logic. 
 
 We provide an implementation for each pattern (topology) from the table using a tool for automatic MPI code generation
-from reusable Pabble specifications. Note that one parallel algorithm can be implemented using multiple network topologies. Thus, this use-cases set is a generalisation of the parallel algorithm use-cases. For example, the repository contains implementations of the Monte-Carlo $\pi$ simulation with two different patterns, scatter-gather and master-worker (the former uses collective operations and all processes are involved in the main calculation, whereas with the latter
+from reusable Pabble specifications. Note that one parallel algorithm can be implemented using multiple network topologies.
+Thus, this use-cases set is a generalisation of the parallel algorithm use-cases.
+For example, different network topologies can be used to provide
+different parametrised implementations for the Monte-Carlo $\pi$ simulation.
+%For example, the repository contains implementations of the Monte-Carlo $\pi$ simulation with two different patterns, scatter-gather and master-worker (the former uses collective operations and all processes are involved in the main calculation, whereas with the latter
 workers are coordinated by a central master process by P2P communication that does not perform the main calculation).
 The benchmark results in~\cite{NCY2015} shown that the practise
 of code generation from Pabble specifications improves developers
